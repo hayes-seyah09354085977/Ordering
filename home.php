@@ -11,10 +11,10 @@
     width: 100%;
     height: 4%;
   }
-  .carousel-inner {
+  /* .carousel-inner {
     width: 50% !important;
     left: 25%;
-}
+} */
 .pcategories {
   text-align: center;
   padding: 25px 20px;
@@ -37,7 +37,7 @@
         <div id="main-slider" class="flexslider">
             <ul class="slides">
               <li>
-                <img src="<?php echo web_root; ?>plugins/home-plugins/img/slides/cover1.jpg" alt="" />
+                <img src="<?php echo web_root; ?>plugins/home-plugins/img/slides/cover3.jpg" alt="" />
                 <div class="flex-caption">
             <!--         <h3>innovation</h3> 
           <p>We create the opportunities</p>  -->
@@ -53,7 +53,7 @@
                 </div>
               </li>
               <li>
-                <img src="<?php echo web_root; ?>plugins/home-plugins/img/slides/cover3.jpg" alt="" />
+                <img src="<?php echo web_root; ?>plugins/home-plugins/img/slides/cover1.jpg" alt="" />
                 <!-- <div class="flex-caption">
                     <h3 class="pcatcolor">Specialize</h3> 
           <p class="pcatcolor">Toyo Knows Gshock</p> 
@@ -80,43 +80,38 @@
   </section>
   
   <section id="content">
-  
-  
-  <div class="container">
-        <div class="row">
-      <div class="col-md-12">
-        <div class="aligncenter"><h2 class="aligncenter">Store</h2><!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur aliquam, incidunt eius magni provident, doloribus omnis minus ovident, doloribus omnis minus temporibus perferendis nesciunt.. --></div>
-        <br/>
-      </div>
-    </div>
-
+    <div class="about home-about">
+          <div class="container">
+            <h2 style="text-align: center;">Newly Added Products</h2>
+              
+              <div class="row">
     <?php 
-     $sql = "SELECT * FROM `tblstore` s, `tblusers` u WHERE StoreID=UserID";
-      $mydb->setQuery($sql);
-      $comp = $mydb->loadResultList();
+            $sql ="SELECT * FROM tblproduct Order by ProductID DESC Limit 6";
+            $mydb->setQuery($sql);
+            $res = $mydb->loadResultList();
 
+            foreach ($res as $row) {
 
-      foreach ($comp as $company ) {
-        # code...
-    
     ?>
-            <div class="col-sm-4 info-blocks">
-              <!--   <i class="icon-info-blocks fa fa-building-o"></i> -->
-              <div class="stretch">
-                   <img src="<?php echo web_root.'admin/user/'.$company->PicLoc;?>">
-                 </div>
-                <div class="info-blocks-in">
-                    <h3><?php echo $company->StoreName;?></h3>
-                    <!-- <p><?php echo $company->COMPANYMISSION;?></p> -->
-                    <p>Address :<?php echo $company->StoreAddress;?></p>
-                    <p>Contact No. :<?php echo $company->ContactNo;?></p>
-                </div>
-            </div>
-
-    <?php } ?> 
-  </div>
+              <div class="col-sm-4 info-blocks">
+                <div class="stretch">
+                    <img src="<?php echo web_root.'admin/products/'.$row->Image1;?>">
+                  </div>
+                  <div class="info-blocks-in">
+                      <h3><?php echo $row->ProductName;?></h3>
+                      <p>Price :&nbsp; <?php echo $row->Price;?></p>
+                      <p>Description :&nbsp; <?php echo $row->Description;?></p>
+                  </div>
+              </div>
+    <?php
+            }
+    ?>
+              </div>
+        </div>
+      </div>
   </section>
   
+
   <section class="section-padding gray-bg">
     <div class="container">
       <div class="row">
@@ -149,20 +144,26 @@
   
     <div class="carousel-inner">
       <div class="item active"> 
-        <img src="<?php echo web_root; ?>plugins/home-plugins/img/slides/cover-tshirt.jpg" alt="Products" style="height: 350px;" >
+        <img src="<?php echo web_root; ?>plugins/home-plugins/img/slides/caro1.jpg" alt="Products" style="height: 350px;" >
+      </div>
+      <div class="item"> 
+        <img src="<?php echo web_root; ?>plugins/home-plugins/img/slides/caro2.jpg" alt="Products" style="height: 350px;" >
+      </div>
+      <div class="item"> 
+        <img src="<?php echo web_root; ?>plugins/home-plugins/img/slides/caro-necklace.png" alt="Products" style="height: 350px;" >
       </div>
 
      <?php 
-          $sql ="SELECT * FROM tblproduct";
-          $mydb->setQuery($sql);
-          $res = $mydb->loadResultList();
+          // $sql ="SELECT * FROM tblproduct";
+          // $mydb->setQuery($sql);
+          // $res = $mydb->loadResultList();
 
-          foreach ($res as $row) {
-          echo '<div class="item">
-                <img src="admin/products/'.$row->Image1.'" alt="'.$row->ProductName.'" style="height: 350px;"  >
-              </div>';
+          // foreach ($res as $row) {
+          // echo '<div class="item">
+          //       <img src="admin/products/'.$row->Image1.'" alt="'.$row->ProductName.'" style="height: 350px;"  >
+          //     </div>';
             
-          }
+          // }
       ?>
     </div>
 
@@ -178,34 +179,3 @@
   </div>
 </section>
   
-  <div class="about home-about">
-        <div class="container">
-          <h2 style="text-align: center;">Products</h2>
-            
-            <div class="row">
-  <?php 
-          $sql ="SELECT * FROM tblproduct";
-          $mydb->setQuery($sql);
-          $res = $mydb->loadResultList();
-
-          foreach ($res as $row) {
-
-  ?>
-        
-         <div class="col-md-4">
-                <!-- Heading and para -->
-                <div class="block-heading-two">
-                  <h3><span><a href="index.php?q=products&id=<?php echo $row->ProductID;?>"><?php echo $row->ProductName;?></a></span></h3>
-                </div>
-                <p><?php echo $row->Description;?></p>
-              </div>       
-  <?php
-          }
-  ?>
- 
-              
-            </div>
-             
-      </div>
-      
-    </div>
