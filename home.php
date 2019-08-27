@@ -96,7 +96,7 @@ p.currency {
             foreach ($res as $row) {
 
     ?>
-              <div class="col-sm-4 info-blocks">
+              <div class="col-sm-3 info-blocks">
                 <div class="stretch">
                     <img src="<?php echo web_root.'admin/products/'.$row->Image1;?>">
                   </div>
@@ -153,7 +153,7 @@ p.currency {
         <img src="<?php echo web_root; ?>plugins/home-plugins/img/slides/caro2.jpg" alt="Products" style="height: 350px;" >
       </div>
       <div class="item"> 
-        <img src="<?php echo web_root; ?>plugins/home-plugins/img/slides/caro-necklace.png" alt="Products" style="height: 350px;" >
+        <img src="<?php echo web_root; ?>plugins/home-plugins/img/slides/caro-necklace.jpg" alt="Products" style="height: 350px;" >
       </div>
 
      <?php 
