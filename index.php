@@ -22,6 +22,10 @@ switch ($view) {
 	case 'category' :
         $title='SEARCH FOR CATEGORY';	
 		$content='category.php';		
+		break;
+	case 'product-view' :
+		$title='View Product';	
+		$content='product-view.php';		
 		break;	
 	case 'checkout' :
         $title='Checkout';	

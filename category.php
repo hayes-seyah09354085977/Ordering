@@ -16,6 +16,15 @@ p.currency {
 .info-blocks{
   margin-top: 15px;
 }
+._catproducts,a{
+  color: black;
+  text-decoration: none !important;
+}
+._catproducts:hover{
+  color:#6694de !important;
+}
+
+
 </style>
   <?php
     if (isset($_GET['search'])) {
@@ -49,16 +58,21 @@ p.currency {
             foreach ($res as $row) {
 
     ?>
+          
               <div class="col-sm-3 info-blocks">
                 <div class="stretch">
-                    <img src="<?php echo web_root.'admin/products/'.$row->Image1;?>">
+                    <a href="index.php?q=product-view&search=<?php echo $category;?>&pid=<?php echo $row->ProductID;?>">
+                     <img src="<?php echo web_root.'admin/products/'.$row->Image1;?>">
+                    </a>
                   </div>
                   <div class="info-blocks-in">
-                      <h3><?php echo $row->ProductName;?></h3>
-                      <!-- <p>Description :&nbsp; <?php echo $row->Description;?></p> -->
+                    <a  href="index.php?q=product-view">
+                      <h3 class='_catproducts'><?php echo $row->ProductName;?></h3>
+                    </a>
                       <p class='currency'>₱<?php echo $row->Price;?></p>
                   </div>
               </div>
+
     <?php
             }
           }
