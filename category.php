@@ -6,6 +6,9 @@
  width: 100%;
  height: 50%;
 }
+section#inner-headline {
+    background: #37393c !important;
+}
 </style>
     <section id="content">
         <div class="container content">   
@@ -24,8 +27,16 @@
     $mydb->setQuery($sql);
     $cur = $mydb->loadResultList();
 
-
     foreach ($cur as $result) { 
+      if($result->Image1 =='photos/'){
+        $result->Image1 = 'photos/No-Photo-Available.jpg';
+      }
+      if($result->Image2 =='photos/'){
+        $result->Image2 = 'photos/No-Photo-Available.jpg';
+      }
+      if($result->Image3 =='photos/'){
+        $result->Image3 = 'photos/No-Photo-Available.jpg';
+      }
   ?>  
     <form class="" action="cartcontroller.php?action=add" method="POST">
           <div class="panel panel-primary">
@@ -63,12 +74,12 @@
                                     <button type="submit"  class="btn btn-main btn-next-tab"><i class="fa fa-shopping-cart"></i> Order Now !</button>
                              <div class="row stretch">
                                       <!-- <img src=" <?php echo web_root.'admin/products/'. $result->Image1 ?>"> -->
-                                       <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                       <div id="myCarousel<?php echo $result->ProductID ?>" class="carousel slide" data-ride="carousel">
                                   <!-- Indicators -->
                                   <ol class="carousel-indicators">
-                                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                                    <li data-target="#myCarousel<?php echo $result->ProductID ?>" data-slide-to="0" class="active"></li>
+                                    <li data-target="#myCarousel<?php echo $result->ProductID ?>" data-slide-to="1"></li>
+                                    <li data-target="#myCarousel<?php echo $result->ProductID ?>" data-slide-to="2"></li>
                                   </ol>
 
                                   <!-- Wrapper for slides -->
@@ -87,11 +98,11 @@
                                   </div>
 
                                   <!-- Left and right controls -->
-                                  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                                  <a class="left carousel-control" href="#myCarousel<?php echo $result->ProductID ?>" data-slide="prev">
                                     <span class="glyphicon glyphicon-chevron-left"></span>
                                     <span class="sr-only">Previous</span>
                                   </a>
-                                  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                                  <a class="right carousel-control" href="#myCarousel<?php echo $result->ProductID ?>" data-slide="next">
                                     <span class="glyphicon glyphicon-chevron-right"></span>
                                     <span class="sr-only">Next</span>
                                   </a>
@@ -107,10 +118,9 @@
 <?php  } ?>   
         </div>  
         <div class="col-md-6">
-
-          <div>Map</div>
-        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script><div style="overflow:hidden;height:auto;width:600px;"><div id="gmap_canvas" style="height:auto;width:600px;"></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style><a class="google-map-code" href="http://www.trivoo.net" id="get-map-data">trivoo</a></div><script type="text/javascript"> function init_map(){var myOptions = {zoom:14,center:new google.maps.LatLng(40.805478,-73.96522499999998),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById("gmap_canvas"), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(40.805478, -73.96522499999998)});infowindow = new google.maps.InfoWindow({content:"<b>The Breslin</b><br/>2880 Broadway<br/> New York" });google.maps.event.addListener(marker, "click", function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script> 
-        </div>   
+        
+      </div>   
+        
      
 
      </div>

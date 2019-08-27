@@ -11,6 +11,25 @@
     width: 100%;
     height: 4%;
   }
+  .carousel-inner {
+    width: 50% !important;
+    left: 25%;
+}
+.pcategories {
+  text-align: center;
+  padding: 25px 20px;
+  font-weight: bold;
+}
+.pcat{
+  background: linear-gradient(90deg, rgba(119,128,135,1) 0%, rgba(49,55,60,1) 48%, rgba(119,128,135,1) 100%);
+  border-radius: 25px;
+  margin-right: 15px;
+  margin-top: 10px;
+}
+.pcatcolor{
+  color:#f6f6f6 !important;
+}
+
 </style>
   <section id="banner">
    
@@ -35,11 +54,11 @@
               </li>
               <li>
                 <img src="<?php echo web_root; ?>plugins/home-plugins/img/slides/cover3.jpg" alt="" />
-                <div class="flex-caption">
-                    <h3>Specialize</h3> 
-          <p>Success depends on work</p> 
+                <!-- <div class="flex-caption">
+                    <h3 class="pcatcolor">Specialize</h3> 
+          <p class="pcatcolor">Toyo Knows Gshock</p> 
            
-                </div>
+                </div> -->
               </li>
             </ul>
         </div>
@@ -107,15 +126,15 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12 ">
+      <div class="row pcategories">
+        <div class="col-md-12">
           <?php 
             $sql = "SELECT * FROM `tblcategory`";
             $mydb->setQuery($sql);
             $cur = $mydb->loadResultList();
 
             foreach ($cur as $result) {
-              echo '<div class="col-md-3" style="font-size:15px;padding:5px">* <a href="'.web_root.'index.php?q=category&search='.$result->CategoryID.'">'.$result->Categories.'</a></div>';
+              echo '<div class="col-md-2 pcat" style="font-size:15px;padding:10px"> <a class="pcatcolor" href="'.web_root.'index.php?q=category&search='.$result->CategoryID.'">'.strtoupper($result->Categories).'</a></div>';
             }
 
           ?>
@@ -125,22 +144,14 @@
     </div>
   </section>    
   <section id="content-3-10" class="content-block data-section nopad content-3-10">
+    
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-   <!--  <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
- -->
-    <!-- Wrapper for slides -->
+  
     <div class="carousel-inner">
       <div class="item active"> 
-        <img src="<?php echo web_root; ?>plugins/home-plugins/img/slides/drug.png" alt="Los Angeles" style="height: 350px;" >
+        <img src="<?php echo web_root; ?>plugins/home-plugins/img/slides/cover-tshirt.jpg" alt="Products" style="height: 350px;" >
       </div>
 
-    
-    
      <?php 
           $sql ="SELECT * FROM tblproduct";
           $mydb->setQuery($sql);

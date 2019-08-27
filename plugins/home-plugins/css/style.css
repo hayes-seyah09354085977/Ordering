@@ -166,6 +166,7 @@ header .navbar {
 }
 .navbar-default .navbar-brand{
 color: #1891EC;
+margin-top: 25px;
 }
 
 header .navbar-collapse  ul.navbar-nav {
@@ -380,7 +381,7 @@ display: inline-block;
 }
 
 .content-3-10 {
-	padding: 0px;
+	padding: 50px;
 	position: relative;
 	overflow:hidden;
 }
@@ -814,8 +815,8 @@ form#commentform textarea {
 
 .about-text .btn {
 	margin-top: 20px;
-	//font-size: 15px;
-	//text-align: justify;
+	/* font-size: 15px; */
+	/* text-align: justify; */
 }
 
 .about-image img {
