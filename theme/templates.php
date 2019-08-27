@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Janobe / <?php echo $title;?></title>
+<title>Watch Ur Toyo / <?php echo $title;?></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="" />
 <meta name="author" content="http://webthemez.com" />
@@ -111,7 +111,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?php echo web_root; ?>index.php">Janobe<!-- <img src="<?php echo web_root; ?>plugins/home-plugins/img/logo.png" alt="logo"/> --></a>
+                    <a class="navbar-brand" href="<?php echo web_root; ?>index.php">Watch Ur Toyo<!-- <img src="<?php echo web_root; ?>plugins/home-plugins/img/logo.png" alt="logo"/> --></a>
                 </div>
                 <div class="navbar-collapse collapse ">
                     <ul class="nav navbar-nav">
@@ -203,7 +203,7 @@
            Pin-21542 NewYork US.</address>
           <p>
             <i class="icon-phone"></i> (123) 456-789 - 1255-12584 <br>
-            <i class="icon-envelope-alt"></i> jannopalacios@gmail.com
+            <i class="icon-envelope-alt"></i> watchurtoyo@gmail.com
           </p>
         </div>
       </div>
@@ -253,7 +253,7 @@
         <div class="col-lg-6">
           <div class="copyright">
             <p>
-              <span>&copy; Janno Palacios 2018 All right reserved.  
+              <span>&copy; Watch Ur Toyo 2019 All right reserved.  
             </p>
           </div>
         </div>
@@ -385,7 +385,7 @@ $('#HIREDDATE').inputmask({
 
 $('.date_picker').datetimepicker({
   format: 'mm/dd/yyyy',
-  startDate : '01/01/1950', 
+  startDate : '01/01/2019', 
   language:  'en',
   weekStart: 1,
   todayBtn:  1,

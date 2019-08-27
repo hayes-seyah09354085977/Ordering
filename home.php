@@ -18,7 +18,7 @@
         <div id="main-slider" class="flexslider">
             <ul class="slides">
               <li>
-                <img src="<?php echo web_root; ?>plugins/home-plugins/img/slides/Small-Rime.jpg" alt="" />
+                <img src="<?php echo web_root; ?>plugins/home-plugins/img/slides/cover1.jpg" alt="" />
                 <div class="flex-caption">
             <!--         <h3>innovation</h3> 
           <p>We create the opportunities</p>  -->
@@ -26,7 +26,15 @@
                 </div>
               </li>
               <li>
-                <img src="<?php echo web_root; ?>plugins/home-plugins/img/slides/maxresdefault.jpg" alt="" />
+                <img src="<?php echo web_root; ?>plugins/home-plugins/img/slides/cover2.jpg" alt="" />
+                <div class="flex-caption">
+            <!--         <h3>innovation</h3> 
+          <p>We create the opportunities</p>  -->
+           
+                </div>
+              </li>
+              <li>
+                <img src="<?php echo web_root; ?>plugins/home-plugins/img/slides/cover3.jpg" alt="" />
                 <div class="flex-caption">
                     <h3>Specialize</h3> 
           <p>Success depends on work</p> 
@@ -38,7 +46,7 @@
   <!-- end slider -->
  
   </section> 
-  <section id="call-to-action-2" style="background: #cf7d7d">
+  <section id="call-to-action-2" style="background: #37393c">
     <div class="container">
       <div class="row">
         <div class="col-md-10 col-sm-9">

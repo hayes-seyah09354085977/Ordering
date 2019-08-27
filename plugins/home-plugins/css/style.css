@@ -876,16 +876,16 @@ form#commentform textarea {
 
 #call-to-action-2 {
 	background-color: #0bcce4;
-	padding: 50px 0;
+	padding: 20px 0;
 }
 #call-to-action-2 h3 {
-	color: #37393c;
-	font-size: 26px;
+	color: #ffffff;
+	font-size: 35px;
 	/* font-weight: 600; */
 	/* text-transform: uppercase; */
 }
 #call-to-action-2 p {
-	color: #222;
+	color: #ffffff;
 	font-size: 15px;
 }
 #call-to-action-2 .btn-primary {
