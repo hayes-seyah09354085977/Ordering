@@ -13,14 +13,22 @@ p.currency {
     font-size: 20px !important;
     font-weight: bold;
 }
+.magnify{
+  border-radius: 50%;
+  border: 2px solid black;
+  position: absolute;
+  z-index: 20;
+  background-repeat: no-repeat;
+  background-color: white;
+  box-shadow: inset 0 0 20px rgba(0,0,0,.5);
+  display: none;
+  cursor: none;
+}
 </style>
 
 <section id="content">
         <div class="container content">  
-          <!-- <div class="row">
-          <div class="col-md-6"></div>  
-          <div class="col-md-6"> -->
-          
+            
            <?php
  if (isset($_GET['search'])&&isset($_GET['pid'])) {
      # code...
@@ -107,7 +115,7 @@ p.currency {
                                   <!-- Wrapper for slides -->
                                   <div class="carousel-inner">
                                     <div class="item active">
-                                    <img src=" <?php echo web_root.'admin/products/'. $result->Image1 ?>" style="height: 150px;" >
+                                    <img class='magnifiedImg' src=" <?php echo web_root.'admin/products/'. $result->Image1 ?>" style="height: 150px;" >
                                     </div>
 
                                     <div class="item">
@@ -149,3 +157,8 @@ $cnt+=1;
       </div>
      </div>
     </section>  
+<script src="<?php echo web_root; ?>plugins/home-plugins/js/jquery.js"></script>
+<script src="<?php echo web_root; ?>plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="<?php echo web_root; ?>plugins/jQueryUI/jquery-ui.js"></script>
+<script src="<?php echo web_root; ?>plugins/jQueryUI/jquery-ui.min.js"></script>
+<script src="<?php echo web_root; ?>plugins/Image-Magnify/Image-Magnify.js"></script>
