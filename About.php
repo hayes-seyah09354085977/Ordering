@@ -1,11 +1,18 @@
- 
+<style type="text/css">
+section#inner-headline {
+    background: #37393c !important;
+}
+img {
+    width: 65%;
+}
+</style> 
 
 <section id="content">
 	<section class="section-padding">
 		<div class="container">
 			<div class="row showcase-section">
 				<div class="col-md-6">
-					<img src="img/dev1.png" alt="showcase image">
+					<img src="<?php echo web_root; ?>Include/Img/logo.jpg" alt="Watch Ur Toyo">
 				</div>
 				<div class="col-md-6">
 					<div class="about-text">

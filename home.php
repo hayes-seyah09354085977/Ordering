@@ -29,7 +29,10 @@
 .pcatcolor{
   color:#f6f6f6 !important;
 }
-
+p.currency {
+    font-size: 25px !important;
+    font-weight: bold;
+}
 </style>
   <section id="banner">
    
@@ -99,8 +102,8 @@
                   </div>
                   <div class="info-blocks-in">
                       <h3><?php echo $row->ProductName;?></h3>
-                      <p>Price :&nbsp; <?php echo $row->Price;?></p>
-                      <p>Description :&nbsp; <?php echo $row->Description;?></p>
+                      <!-- <p>Description :&nbsp; <?php echo $row->Description;?></p> -->
+                      <p class='currency'>₱<?php echo $row->Price;?></p>
                   </div>
               </div>
     <?php

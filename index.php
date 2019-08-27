@@ -20,7 +20,7 @@ switch ($view) {
 		$content='map.php';		
 		break;		
 	case 'category' :
-        $title='Search for Category';	
+        $title='SEARCH FOR CATEGORY';	
 		$content='category.php';		
 		break;	
 	case 'checkout' :
@@ -45,11 +45,11 @@ switch ($view) {
 		$content='registerstore.php';		
 		break;
 	case 'Contact' :
-        $title='Contact Us';	
+        $title='CONTACT US';	
 		$content='Contact.php';		
 		break;	
 	case 'About' :
-        $title='About Us';	
+        $title='ABOUT US';	
 		$content='About.php';		
 		break;	
 	case 'advancesearch' :

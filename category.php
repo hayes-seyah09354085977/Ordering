@@ -9,10 +9,18 @@
 section#inner-headline {
     background: #37393c !important;
 }
+p.currency {
+    font-size: 20px !important;
+    font-weight: bold;
+}
 </style>
-    <section id="content">
-        <div class="container content">   
-        <div class="col-md-6">
+
+<section id="content">
+        <div class="container content">  
+          <!-- <div class="row">
+          <div class="col-md-6"></div>  
+          <div class="col-md-6"> -->
+          
            <?php
  if (isset($_GET['search'])) {
      # code...
@@ -23,10 +31,14 @@ section#inner-headline {
  }
 
     $sql = "SELECT * FROM tblinventory i,`tblstore` s,`tblproduct` p ,`tblcategory` c
-            WHERE i.ProductID=p.ProductID AND s.StoreID=p.StoreID AND p.CategoryID=c.CategoryID AND Remaining > 0 AND c.CategoryID=".$category ;
+            WHERE i.ProductID=p.ProductID 
+              AND s.StoreID=p.StoreID 
+              AND p.CategoryID=c.CategoryID 
+              AND Remaining > 0 AND c.CategoryID=$category
+            Order By p.ProductID Limit 10";
     $mydb->setQuery($sql);
     $cur = $mydb->loadResultList();
-
+    $cnt=0;
     foreach ($cur as $result) { 
       if($result->Image1 =='photos/'){
         $result->Image1 = 'photos/No-Photo-Available.jpg';
@@ -37,29 +49,38 @@ section#inner-headline {
       if($result->Image3 =='photos/'){
         $result->Image3 = 'photos/No-Photo-Available.jpg';
       }
+     if(($cnt%2)==1){
+       echo '<div class="row">';
+     }
+     
   ?>  
-    <form class="" action="cartcontroller.php?action=add" method="POST">
+     <div class="col-md-6">
+      <form class="" action="cartcontroller.php?action=add" method="POST">
           <div class="panel panel-primary">
-              <div class="panel-header">
-                   <div style="border-bottom: 1px solid #ddd;padding: 10px;font-size: 20px;font-weight: bold;color: #000;margin-bottom: 5px;"><a href="<?php echo web_root.'index.php?q=viewjob&search='.$result->JOBID;?>"><?php echo $result->Categories ;?></a> 
-                  </div> 
+                <div class="panel-header">
+                   <div style="border-bottom: 1px solid #ddd;padding: 10px;font-size: 20px;font-weight: bold;color: #000;margin-bottom: 5px;"><a href="<?php echo web_root.'index.php?q=viewjob&search='.$result->JOBID;?>"><?php echo $result->ProductName ;?></a> 
+                </div> 
               </div>
               <div class="panel-body contentbody">
                     <div class="col-sm-8"> 
+                      <div class="col-sm-12">
+                            <p>Category : &nbsp; <?php echo $result->Categories ;?></p>
+                        </div>
                         <div class="col-sm-12">
-                            <p>Store :</p>
-                             <ul style="list-style: none;"> 
-                                <li><?php echo $result->StoreName ;?></li> 
-                            </ul> 
+                            <p>Store : &nbsp; <?php echo $result->StoreName ;?></p>
                         </div>
                         <div class="col-sm-12"> 
                             <p>Product</p>
                             <ul style="list-style: none;"> 
                                  <li>Name : <?php echo $result->ProductName ;?></li> 
                                  <li>Description : <?php echo $result->Description ;?></li> 
-                                 <li>Price :<?php echo $result->Price ;?></li> 
-                                 <li>Expired Date : <?php echo date_format(date_create($result->DateExpire),'M d, Y'); ?></li>  
-                                 <li>Remaining Quantity :<?php echo $result->Remaining ;?></li> 
+                                 <!-- <li>Expired Date : <?php echo date_format(date_create($result->DateExpire),'M d, Y'); ?></li>   -->
+                                 <li>Remaining Stocks :<?php echo $result->Remaining ;?></li> 
+                            </ul> 
+                         </div>
+                         <div class="col-sm-12"> 
+                            <ul style="list-style: none;"> 
+                                 <li><p class="currency">Price :₱<?php echo $result->Price ;?></p></li> 
                             </ul> 
                          </div>
                         <div class="col-sm-12">
@@ -115,13 +136,15 @@ section#inner-headline {
               </div>
           </div> 
         </form>
-<?php  } ?>   
-        </div>  
-        <div class="col-md-6">
-        
-      </div>   
-        
-     
+      </div>
+<?php 
+if(($cnt%2)==1){
+  echo '</div>';
+}
+$cnt+=1;
+} ?>   
+        <!-- </div>   -->
 
+      </div>
      </div>
     </section>  
