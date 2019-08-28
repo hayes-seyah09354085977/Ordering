@@ -66,7 +66,7 @@ p.currency {
                     </a>
                   </div>
                   <div class="info-blocks-in">
-                    <a  href="index.php?q=product-view">
+                    <a  href="index.php?q=product-view&search=<?php echo $category;?>&pid=<?php echo $row->ProductID;?>">
                       <h3 class='_catproducts'><?php echo $row->ProductName;?></h3>
                     </a>
                       <p class='currency'>₱<?php echo $row->Price;?></p>
