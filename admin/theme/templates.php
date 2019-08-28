@@ -53,7 +53,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>Store</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Janobe</b></span>
+      <span class="logo-lg"><b>Watch Ur Toyo</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top" role="navigation">
@@ -157,7 +157,12 @@
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>  
           </a> 
         </li> 
-   <!--      <li class="<?php echo (currentpage() == 'store') ? "active" : false;?>" >
+        <li class="<?php echo (currentpage() == 'category') ? "active" : false;?>" > 
+          <a href="<?php echo web_root ;?>admin/category/">
+            <i class="fa fa-list"></i> <span>Category</span>  
+          </a>
+        </li> 
+        <!-- <li class="<?php echo (currentpage() == 'store') ? "active" : false;?>" >
           <a href="<?php echo web_root ;?>admin/store/">
             <i class="fa fa-building"></i> <span>Store</span> 
           </a>
@@ -172,20 +177,26 @@
             <i class="fa fa-th"></i> <span>Stock-in</span>  
           </a>
         </li> 
-        <li class="<?php echo (currentpage() == 'orders') ? "active" : false;?>" > 
-          <a href="<?php echo web_root ;?>admin/orders/">
-            <i class="fa fa-th-list"></i> <span>Orders</span>  
-          </a>
-        </li> 
+         
         <li class="<?php echo (currentpage() == 'inventory') ? "active" : false;?>">
           <a href="<?php echo web_root; ?>admin/inventory/">
             <i class="fa fa-list-alt"></i> <span>Inventory</span> </a>
         </li>
-        <li class="<?php echo (currentpage() == 'category') ? "active" : false;?>" > 
-          <a href="<?php echo web_root ;?>admin/category/">
-            <i class="fa fa-list"></i> <span>Category</span>  
+        <li class="<?php echo (currentpage() == 'orders') ? "active" : false;?>" > 
+          <a href="<?php echo web_root ;?>admin/orders/">
+            <i class="fa fa-th-list"></i> <span>Orders</span>  
           </a>
-        </li> 
+        </li>
+        <li class="<?php echo (currentpage() == 'orders') ? "active" : false;?>" > 
+          <a href="<?php echo web_root ;?>admin/orders/">
+            <i class="fa fa-th-list"></i> <span>Loan Structure</span>  
+          </a>
+        </li>
+        <li class="<?php echo (currentpage() == 'orders') ? "active" : false;?>" > 
+          <a href="<?php echo web_root ;?>admin/orders/">
+            <i class="fa fa-th-list"></i> <span>Terms And Condition</span>  
+          </a>
+        </li>
        <!-- <li class="treeview">
           <a href="#">
             <i class="fa fa-laptop"></i>
