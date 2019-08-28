@@ -89,7 +89,13 @@ p.currency {
               
               <div class="row">
     <?php 
-            $sql ="SELECT * FROM tblproduct Order by ProductID DESC Limit 6";
+            // $sql ="SELECT * FROM tblproduct Order by ProductID DESC Limit 6";
+            $sql = "SELECT * FROM tblinventory i,`tblstore` s,`tblproduct` p ,`tblcategory` c
+            WHERE i.ProductID=p.ProductID 
+              AND s.StoreID=p.StoreID 
+              AND p.CategoryID=c.CategoryID 
+              AND Remaining > 0 
+            Order By p.ProductID DESC Limit 8";
             $mydb->setQuery($sql);
             $res = $mydb->loadResultList();
 
@@ -98,10 +104,14 @@ p.currency {
     ?>
               <div class="col-sm-3 info-blocks">
                 <div class="stretch">
-                    <img src="<?php echo web_root.'admin/products/'.$row->Image1;?>">
+                    <a href="index.php?q=product-view&search=<?php echo $row->CategoryID;?>&pid=<?php echo $row->ProductID;?>">
+                     <img src="<?php echo web_root.'admin/products/'.$row->Image1;?>">
+                    </a>
                   </div>
                   <div class="info-blocks-in">
+                    <a href="index.php?q=product-view&search=<?php echo $row->CategoryID;?>&pid=<?php echo $row->ProductID;?>">
                       <h3><?php echo $row->ProductName;?></h3>
+                    </a>
                       <!-- <p>Description :&nbsp; <?php echo $row->Description;?></p> -->
                       <p class='currency'>₱<?php echo $row->Price;?></p>
                   </div>

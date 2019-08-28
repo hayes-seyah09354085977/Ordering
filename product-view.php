@@ -46,7 +46,7 @@ p.currency {
 .product-quantity *{display:inline-block;}
 
 #product-quantity-input{background-color: #eee;border: none; width:2.5em; text-align: center;}
-.product-quantity-subtract, .product-quantity-add{margin-left: 20px; padding-left:5px; padding-right: 5px;}
+.product-quantity-subtract, .product-quantity-add{cursor: pointer; margin-left: 20px; padding-left:5px; padding-right: 5px;}
 .product-quantity-subtract{margin-right:20px;}
 
 .product-title {
@@ -116,6 +116,7 @@ p.currency {
     <div class="col-sm-2"> </div>
     <div class="col-sm-5">
     <div class="product-right">
+      <form action="cartcontroller.php?action=add" method="POST">
               <div class="product-info">
                   <div class="product-manufacturer"><?php echo $result->StoreName ;?></div>
                   <div class="product-title"><?php echo strtoupper($result->ProductName) ;?></div>
@@ -129,7 +130,8 @@ p.currency {
                   <i class="fa fa-chevron-left"></i>
                 </div>
                 <div>
-                  <input type="text" id="product-quantity-input" placeholder="0" value="0" />
+                  <input type="hidden" name="ProductID" value="<?php echo  $result->ProductID ?>">
+                  <input id="product-quantity-input" type="text" min="1" max="<?php echo $result->Remaining ;?>" name="QTY<?php echo $result->ProductID ;?>" value=1 readonly />
                 </div>
                 <div class="product-quantity-add">
                   <i class="fa fa-chevron-right"></i>
@@ -147,14 +149,13 @@ p.currency {
                     </div>
                   </div>
               </div>
-              <div class="col-sm-6">
-              <div class="product-checkout-actions">
-              <button type="submit"  class="btn btn-main btn-next-tab"><i class="fa fa-shopping-cart"></i> Order Now !</button>
-              </div>
-              </div>
-            </div>
-              
-              
+                <div class="col-sm-6">
+                <div class="product-checkout-actions">
+                <button type="submit"  class="btn btn-main btn-next-tab"><i class="fa fa-shopping-cart"></i> Order Now !</button>
+                </div>
+                </div>
+            </form>
+          </div>
     </div>
 
   <?php 
@@ -171,3 +172,24 @@ $cnt+=1;
 <script src="<?php echo web_root; ?>plugins/jQueryUI/jquery-ui.js"></script>
 <script src="<?php echo web_root; ?>plugins/jQueryUI/jquery-ui.min.js"></script>
 <script src="<?php echo web_root; ?>plugins/Image-Magnify/Image-Magnify.js"></script>
+<script>
+$('.product-quantity-add, .product-quantity-subtract').click(function(){
+  var qty = $('#product-quantity-input'),
+    qtyMax=parseInt(qty.attr('max')),qtyVal = parseInt(qty.val()),
+    newVal
+    switch(this.className){
+      case 'product-quantity-add':
+          newVal=qtyVal+1
+          if(newVal <= qtyMax){
+            qty.val(newVal)
+          }
+        break;
+      case 'product-quantity-subtract':
+          newVal=qtyVal-1
+          if(newVal >= 1){
+            qty.val(newVal)
+          }
+        break;
+    }
+})
+</script>
