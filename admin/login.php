@@ -7,6 +7,7 @@ require_once("../include/initialize.php");
   if(isset($_SESSION['ADMIN_USERID'])){
     redirect(web_root."admin/index.php");
   }
+  // build/
   ?>
    
  <!DOCTYPE html>
@@ -14,78 +15,67 @@ require_once("../include/initialize.php");
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>MultiStore | Log in</title>
+  <title>Watch ur Toyo</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.5 -->
-  <link rel="stylesheet" href="<?php echo web_root;?>bootstrap/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?php echo web_root;?>plugins/font-awesome/css/font-awesome.min.css"> 
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<?php echo web_root;?>dist/css/AdminLTE.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="<?php echo web_root;?>plugins/iCheck/square/blue.css">
+  
+	<link rel="icon" type="image/png" href="build/images/icons/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="build/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="build/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="build/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="build/vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="build/vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="build/vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="build/vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="build/vendor/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="build/css/util.css">
+	<link rel="stylesheet" type="text/css" href="build/css/main.css">
 
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
 </head>
-<body class="hold-transition login-page">
-<div class="login-box">
-<!--   <div class="login-logo">
-    <a href="../../index2.html"><b>Admin</b>LTE</a>
-  </div> -->
-  <!-- /.login-logo -->
-  <div class="login-box-body" style="min-height: 400px;">
-    <h1 class="login-box-msg">Login to MultiStore</h1>
-    <hr/>
-    <p><?php check_message(); ?></p>
+<body style="background-color: #666666;">
 
-    <form action="" method="post">
-      <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Username" name="user_email">
-        <span class="glyphicon glyphicon-user form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password" name="user_pass">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-      </div>
-        <div class="row">
-        <!-- <div class="col-xs-8"> -->
-        <!--   <div class="checkbox icheck">
-            <label>
-              <input type="checkbox"> Remember Me
-            </label>
+<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+
+          <div>
+         
           </div>
-        </div>   -->
-        <!-- /.col -->
-        <div class="col-xs-4">
-          <button type="submit" name="btnLogin" class="btn btn-primary btn-block btn-flat">Sign In</button>
-        </div>
-      </div>
-        <!-- /.col -->
-      </div>
-    </form>
+          
+          <form  action="" method="post" class="login100-form validate-form">
+            <span class="login100-form-title p-b-43">
+            Login to Store
+            </span>
+            <p><?php check_message(); ?></p>
+            <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+              <input class="input100" type="text" placeholder="Username" name="user_email">
+              <span class="focus-input100"></span>
+            </div>
+            <div class="wrap-input100 validate-input" data-validate="Password is required">
+              <input class="input100" type="password" placeholder="Password"  name="user_pass">
+              <span class="focus-input100"></span>
+            </div>
+            <div class="container-login100-form-btn">
+              <button type="submit" name="btnLogin" class="login100-form-btn">
+                Login
+              </button>
+            </div>
+          </form>
 
-   <!--  <div class="social-auth-links text-center">
-      <p>- OR -</p>
-      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
-        Facebook</a>
-      <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
-        Google+</a>
-    </div> -->
-    <!-- /.social-auth-links -->
+				  <div class="login100-more" style="background-image: url('build/images/bg-01.jpg');"></div>
+			</div>
+		</div>
+	</div>
 
- <!--    <a href="#">I forgot my password</a><br>
-    <a href="register.html" class="text-center">Register a new membership</a> -->
 
-  </div>
-  <!-- /.login-box-body -->
-</div>
-<!-- /.login-box -->
+
+
+
+
+
+
+
 <?php 
 
 if(isset($_POST['btnLogin'])){
@@ -123,22 +113,25 @@ if(isset($_POST['btnLogin'])){
          redirect(web_root."admin/index.php");
       // } 
     }else{
-      message("Account does not exist! Please contact Administrator.", "error");
+      message("Account does not exist!", "error");
        redirect(web_root."admin/login.php"); 
     }
  }
  } 
  ?> 
+	<script src="build/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="build/vendor/animsition/js/animsition.min.js"></script>
+	<script src="build/vendor/bootstrap/js/popper.js"></script>
+	<script src="build/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="build/vendor/select2/select2.min.js"></script>
+	<script src="build/vendor/daterangepicker/moment.min.js"></script>
+	<script src="build/vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="build/vendor/countdowntime/countdowntime.js"></script>
+	<script src="build/js/main.js"></script>
 
-
-<!-- jQuery 2.1.4 -->
-<script src="<?php echo web_root;?>plugins/jQuery/jQuery-2.1.4.min.js"></script>
-<!-- Bootstrap 3.3.5 -->
-<script src="<?php echo web_root;?>bootstrap/js/bootstrap.min.js"></script>
-<!-- iCheck -->
-<script src="<?php echo web_root;?>plugins/iCheck/icheck.min.js"></script>
 <script>
   $(function () {
+    
     $('input').iCheck({
       checkboxClass: 'icheckbox_square-blue',
       radioClass: 'iradio_square-blue',

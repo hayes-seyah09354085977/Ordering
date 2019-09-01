@@ -20,6 +20,8 @@ require_once(LIB_PATH.DS."stores.php");
 require_once(LIB_PATH.DS."job.php");  
 require_once(LIB_PATH.DS."products.php");  
 require_once(LIB_PATH.DS."categories.php");  
+require_once(LIB_PATH.DS."terms.php");
+require_once(LIB_PATH.DS."loan.php");    
 // require_once(LIB_PATH.DS."orders.php");  
 require_once(LIB_PATH.DS."customers.php");  
   

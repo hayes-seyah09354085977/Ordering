@@ -187,16 +187,7 @@
             <i class="fa fa-th-list"></i> <span>Orders</span>  
           </a>
         </li>
-        <li class="<?php echo (currentpage() == 'orders') ? "active" : false;?>" > 
-          <a href="<?php echo web_root ;?>admin/orders/">
-            <i class="fa fa-th-list"></i> <span>Loan Structure</span>  
-          </a>
-        </li>
-        <li class="<?php echo (currentpage() == 'orders') ? "active" : false;?>" > 
-          <a href="<?php echo web_root ;?>admin/orders/">
-            <i class="fa fa-th-list"></i> <span>Terms And Condition</span>  
-          </a>
-        </li>
+        
        <!-- <li class="treeview">
           <a href="#">
             <i class="fa fa-laptop"></i>
@@ -213,6 +204,16 @@
           </ul>
         </li> --> 
         <?php if ($_SESSION['ADMIN_ROLE']=='Administrator') { ?> 
+          <li class="<?php echo (currentpage() == 'loans') ? "active" : false;?>" > 
+          <a href="<?php echo web_root ;?>admin/loans/">
+            <i class="fa fa-th-list"></i> <span>Loan Structure</span>  
+          </a>
+        </li>
+        <li class="<?php echo (currentpage() == 'terms') ? "active" : false;?>" > 
+          <a href="<?php echo web_root ;?>admin/terms/">
+            <i class="fa fa-th-list"></i> <span>Terms And Condition</span>  
+          </a>
+        </li>
           <li class="<?php echo (currentpage() == 'user') ? "active" : false;?>">
           <a href="<?php echo web_root; ?>admin/user/">
             <i class="fa fa-user"></i> <span>Manage Users</span> </a>
@@ -271,13 +272,7 @@
   <!-- /.content-wrapper -->
 
 
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 2.3.2
-    </div>
-    <strong>Copyright &copy; 2018 <a href="#">Janno Palacios</a>.</strong> All rights
-    reserved.
-  </footer>
+  
 
   
 
@@ -301,15 +296,7 @@
       <script type="text/javascript" language="javascript" src="<?php echo web_root; ?>plugins/select2/select2.full.min.js"></script> 
        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
-   <!--      <script src="<?php echo web_root; ?>admin/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo web_root; ?>admin/js/dataTables.bootstrap.min.js"></script>
- <script type="text/javascript" src="<?php echo web_root; ?>js/jquery-1.10.2.js"></script>       
-        <script type="text/javascript" src="<?php echo web_root; ?>js/jquery.mixitup.min.js" ></script>
-        <script type="text/javascript" src="<?php echo web_root; ?>js/main.js" ></script> 
-        <script type="text/javascript" src="<?php echo web_root; ?>js/janobe.js" ></script> 
-        <script src="<?php echo web_root; ?>admin/js/ekko-lightbox.js"></script>
-        <script src="<?php echo web_root; ?>admin/js/lightboxfunction.js"></script> 
-  -->
+
 <!-- jQuery 2.1.4 --> 
 
 <script> 
