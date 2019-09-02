@@ -93,6 +93,7 @@ p.currency {
     $mydb->setQuery($sql);
     $cur = $mydb->loadResultList();
     $cnt=0;
+    $productPrice = 0;
     foreach ($cur as $result) { 
       if($result->Image1 =='photos/'){
         $result->Image1 = 'photos/No-Photo-Available.jpg';
@@ -106,6 +107,7 @@ p.currency {
      if(($cnt%2)==1){
        echo '<div class="row">';
      }
+     $productPrice=$result->Price;
      
   ?>  
     <div class="col-sm-4">
@@ -123,6 +125,7 @@ p.currency {
               </div>
               <div class="product-description"><?php echo $result->Description ;?></div>
               <div class="product-price"> ₱<?php echo $result->Price ;?></div>
+              <div> In-Stocks: &nbsp; <?php echo $result->Remaining ;?></div>
              
               <div class="product-quantity">
                 <label for="product-quantity-input" class="product-quantity-label">Quantity</label>
@@ -144,7 +147,7 @@ p.currency {
                     Total Price
                     <div class="product-checkout-total">
                       <div class="product-checkout-total-amount">
-                        ₱320.00
+                        ₱<?php echo $productPrice;?>
                       </div>
                     </div>
                   </div>
@@ -176,18 +179,21 @@ $cnt+=1;
 $('.product-quantity-add, .product-quantity-subtract').click(function(){
   var qty = $('#product-quantity-input'),
     qtyMax=parseInt(qty.attr('max')),qtyVal = parseInt(qty.val()),
-    newVal
+    newVal;
+  var ProductPrice = "<?php echo $productPrice;?>";
     switch(this.className){
       case 'product-quantity-add':
           newVal=qtyVal+1
           if(newVal <= qtyMax){
             qty.val(newVal)
+            $('.product-checkout-total-amount').text('₱'+ProductPrice*newVal)
           }
         break;
       case 'product-quantity-subtract':
           newVal=qtyVal-1
           if(newVal >= 1){
             qty.val(newVal)
+            $('.product-checkout-total-amount').text('₱'+ProductPrice*newVal)
           }
         break;
     }
