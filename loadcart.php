@@ -68,11 +68,11 @@ if (isset($_POST['deleteCart'])) {
         <?php if ($count_cart > 0) { 
         	if (isset($_SESSION['CustomerID'])) {
 
-	        		    echo '<a href="index.php?q=checkout" class="btn btn-primary pull-right">Check Out <i class="fa fa-arrow-right"></i></a>';
+	        		    echo '<a href="index.php?q=paymentMethod" class="btn btn-primary pull-right">Proceed To Check Out <i class="fa fa-arrow-right"></i></a>';
 	        		# code...
 	        	}else{
 
-	        		    echo '<a data-target="#myModal" data-toggle="modal" href="" class="btn btn-primary pull-right">Check Out <i class="fa fa-arrow-right"></i></a>';
+	        		    echo '<a data-target="#myModal" data-toggle="modal" href="" class="btn btn-primary pull-right">Proceed To Check Out <i class="fa fa-arrow-right"></i></a>';
 
 	        	}
             }

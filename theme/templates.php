@@ -88,7 +88,7 @@
                     $showMsg = $mydb->loadSingleResult();
                     $msg =isset($showMsg->COUNT) ? $showMsg->COUNT : 0; 
 
-                    echo '<a title="View Message(s)" href="'.web_root.'customer/index.php?view=notification"> <i class="fa fa-bell-o"></i> <span class="label label-success">'.$msg.'</span></a> | <a title="View Profile" href="'.web_root.'customer/"> <i class="fa fa-user"></i> Howdy, '. $cus->CustomerName .' </a> | <a href="'.web_root.'logout.php">  <i class="fa fa-sign-out"> </i>Logout</a> ';
+                    echo '<a title="View Message(s)" href="'.web_root.'customer/index.php?view=notification"> <i class="fa fa-bell-o"></i> <span class="label label-success">'.$msg.'</span></a> | <a title="View Profile" href="'.web_root.'customer/"> <i class="fa fa-user"></i> Welcome, '. $cus->CustomerName .' </a> | <a href="'.web_root.'logout.php">  <i class="fa fa-sign-out"> </i>Logout</a> ';
 
                     }else{ ?> 
                       <!-- <p   class="login"><a href="index.php?q=register/store"> <i class="fa fa-building-o"></i> Register Store </a></p> | -->

@@ -1,3 +1,9 @@
+
+<style>
+section#inner-headline {
+    background: #37393c !important;
+}
+</style>
 <section id="content">
     <div class="container content">  
 		<div class="alert alert-success alert-dismissible clearfix">

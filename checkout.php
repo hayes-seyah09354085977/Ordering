@@ -1,8 +1,20 @@
+<style>
+section#inner-headline {
+    background: #37393c !important;
+}
+</style>
+
 <section id="content"> 
 <div class="container"> 
 <div class="row">
 	<div class="col-md-6">
 		<table>
+			<tr>
+				<td>Tracking No.  </td><td><b> : TR#201123</b></td>
+			</tr>
+			<tr>
+				<td>Order Type  </td><td><b> : Installment</b></td>
+			</tr>
 			<tr>
 				<td>Fullname  </td><td> : <?php echo $_SESSION['CustomerName'] ?></td>
 
@@ -13,6 +25,7 @@
 			<tr>
 				<td>Address  </td><td> : <?php echo $_SESSION['CustomerAddress'] ?></td>
 			</tr>
+			
 		</table>
 	</div>
  </div>
@@ -61,7 +74,7 @@
  </div>
  <div class="row">
  	<div class="col-md-12">
-	     <div><a href="cartcontroller.php?action=submitorder" class="btn btn-primary pull-right">Submit <i class="fa fa-arrow-right"></i></a></div></div>
+	     <div><a href="cartcontroller.php?action=submitorder" class="btn btn-primary pull-right">Place Order <i class="fa fa-arrow-right"></i></a></div></div>
  </div>
  </form> 
 </div>

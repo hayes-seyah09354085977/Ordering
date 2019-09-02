@@ -31,6 +31,10 @@ switch ($view) {
         $title='Checkout';	
 		$content='checkout.php';		
 		break; 
+	case 'paymentMethod':
+		$title='Payment Method';	
+		$content='payment.php';
+		break;
 
 	case 'products' :
         $title="Product Details";	
