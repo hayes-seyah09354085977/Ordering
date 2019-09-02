@@ -62,7 +62,7 @@ section#inner-headline {
 			 <div class="form-group">
 			  <div class="col-md-8">
 			    <label class="col-md-4 control-label" for=
-			    "CustomerContact">Contact No.:</label>
+			    "CustomerContact">Mobile No.:</label>
 
 			    <div class="col-md-8">
 			      
@@ -157,7 +157,7 @@ section#inner-headline {
 			});
 		}
 	setInputFilter(document.getElementById("CustomerContact"), function(value) {
-  	return /^\d*$/.test(value); });
+  	return /^\d{0,11}$/.test(value); });
 	//   button disabled if terms and condition not checked
 	document.getElementById("btnsubmit").disabled = true;
 	document.getElementById("btnsubmit").style.background='#000000';
