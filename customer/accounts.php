@@ -26,6 +26,19 @@
                   </div>
                 </div>
               </div> 
+
+              <div class="form-group">
+                <div class="col-md-7">
+                <label class="col-md-4 control-label" for=
+                  "Email">Email:</label>
+
+                  <div class="col-md-8">
+                     <input class="form-control input-sm" id="Email" name="Email" placeholder=
+                        "Email" type="text" value="<?php echo $cus->Email;?>" autocomplete="off">
+                  </div>
+                </div>
+              </div> 
+
               <div class="form-group">
                 <div class="col-md-7">
                   <label class="col-md-4 control-label" for=
@@ -93,7 +106,7 @@
                   "submit"></label>
 
                   <div class="col-md-8">
-                     <button class="btn btn-primary btn-sm" name="submit" type="submit" ><span class="fa fa-save"></span> Submit </button>
+                     <button class="btn btn-primary btn-sm" name="submit" type="submit" ><span class="fa fa-save"></span> Save Changes </button>
                     </div>
                 </div>
               </div>  

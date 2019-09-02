@@ -70,6 +70,34 @@ p.currency {
 .product-description,.product-quantity,.product-price {
   padding: 15px 15px 15px 0px;
 }
+#slider {
+    position: relative;
+    overflow: hidden;
+    margin: 20px auto 0 auto;
+    border-radius: 4px;
+}
+#slider ul {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    height: 200px;
+    list-style: none;
+}
+#slider ul li {
+    position: relative;
+    display: block;
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 80px;
+    height: 75px;
+    background: #ccc;
+    text-align: center;
+}
+.imgmini{
+  width:100%;
+  max-width:100px;
+}
 </style>
 
 <section id="content">
@@ -113,6 +141,14 @@ p.currency {
     <div class="col-sm-4">
               <div class="product-image magnifiedImg">
                 <img src="<?php echo web_root.'admin/products/'. $result->Image1 ?>" />
+              </div>
+              
+              <div id="slider">
+                  <ul>
+                      <li><img class="imgmini" src="<?php echo web_root.'admin/products/'. $result->Image1 ?>" /></li>
+                      <li><img class="imgmini" src="<?php echo web_root.'admin/products/'. $result->Image2 ?>" /></li>
+                      <li><img class="imgmini" src="<?php echo web_root.'admin/products/'. $result->Image3 ?>" /></li>
+                  </ul>
               </div>
     </div>
     <div class="col-sm-2"> </div>

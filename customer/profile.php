@@ -1,7 +1,11 @@
 <?php   
     $view = isset($_GET['view']) ? $_GET['view'] :"";  
 	  $cus = New Customer();
-	  $customer = $cus->single_customer($_SESSION['CustomerID']); 
+    $customer = $cus->single_customer($_SESSION['CustomerID']); 
+    $customerPhoto =  $customer->Customer_Photo;
+    if($customerPhoto == null){
+      $customerPhoto = 'photos/No-Photo-Available.jpg';
+    }
   ?>
   <style type="text/css">
 /*    #image-container {
@@ -32,7 +36,7 @@
            <div class="panel panel-default">            
             <div class="panel-body"> 
               <div  id="image-container">
-                <img title="profile image"  data-target="#myModal"  data-toggle="modal"  src="<?php echo web_root.'customer/'.$customer->Customer_Photo; ?>">  
+                <img title="profile image"  data-target="#myModal"  data-toggle="modal"  src="<?php echo web_root.'customer/'.$customerPhoto; ?>">  
               </div>
              </div>
           <ul class="list-group">
@@ -41,7 +45,7 @@
             <li class="list-group-item text-muted">Profile</li><!-- 
             <li class="list-group-item text-right"><span class="pull-left"><strong>Joined</strong></span> 2.13.2014</li>
             <li class="list-group-item text-right"><span class="pull-left"><strong>Last seen</strong></span> Yesterday</li> -->
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Real Name</strong></span> 
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Full Name</strong></span> 
              <?php echo $customer->CustomerName; ?> 
              </li>
             

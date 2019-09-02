@@ -100,12 +100,16 @@ p.currency {
             $res = $mydb->loadResultList();
 
             foreach ($res as $row) {
+              $productImage= $row->Image1;
+              if($productImage == null){
+                $productImage='photos/No-Photo-Available.jpg';
+              }
 
     ?>
               <div class="col-sm-3 info-blocks">
                 <div class="stretch">
                     <a href="index.php?q=product-view&search=<?php echo $row->CategoryID;?>&pid=<?php echo $row->ProductID;?>">
-                     <img src="<?php echo web_root.'admin/products/'.$row->Image1;?>">
+                     <img src="<?php echo web_root.'admin/products/'.$productImage;?>">
                     </a>
                   </div>
                   <div class="info-blocks-in">

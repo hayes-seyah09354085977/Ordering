@@ -30,6 +30,7 @@ switch ($action) {
 	 
 		$cus = new Customer(); 
 		$cus->CustomerName = $_POST['CustomerName'];
+		$cus->Email = $_POST['Email'];
 		$cus->CustomerAddress = $_POST['CustomerAddress']; 
 		$cus->Sex = $_POST['optionsRadios'];
 		$cus->CustomerContact = $_POST['CustomerContact']; 
