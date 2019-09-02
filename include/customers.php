@@ -19,7 +19,7 @@ class Customer {
 	} 
 	function CustomerAuthentication($U_USERNAME,$h_pass){
 		global $mydb;
-		$mydb->setQuery("SELECT * FROM `tblcustomer` WHERE `Customer_Username`='".$U_USERNAME."' AND `Customer_Password`='".$h_pass."'");
+		$mydb->setQuery("SELECT * FROM `tblcustomer` WHERE (`Customer_Username`='".$U_USERNAME."' OR Email = '".$U_USERNAME."') AND `Customer_Password`='".$h_pass."'");
 		$cur = $mydb->executeQuery();
 		if($cur==false){
 			die(mysql_error());
@@ -38,6 +38,21 @@ class Customer {
 		   return true;
 		 }else{
 		 	return false;
+		 }
+	}
+	function VerifyEmailExists($email){
+		global $mydb;
+		$mydb->setQuery("SELECT count(*) as cnt FROM `tblcustomer` WHERE `Email`='".$email."' ");
+		$cur = $mydb->executeQuery();
+		if($cur==false){
+			die(mysql_error());
+		}
+		// $row_count = $mydb->num_rows($cur);//get the number of count
+		$res = mysqli_fetch_assoc($cur);
+		 if ($res['cnt'] == 1){
+		   return '1';
+		 }else{
+		 	return '0';
 		 }
 	}
 

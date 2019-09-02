@@ -16,7 +16,7 @@
                     <div class="login-box"> 
                         <div class="login-box-body" style="border: solid 1px #ddd;padding: 35px;min-height: 350px;"> 
                             <div class="form-group has-feedback">
-                              <input type="text" class="form-control" placeholder="Username" name="user_email" id="user_email">
+                              <input type="text" class="form-control" placeholder="Email or Username" name="user_email" id="user_email">
                               <span class="fa fa-user form-control-feedback" style="margin-top: -22px;"></span>
                             </div>
                             <div class="form-group has-feedback">
