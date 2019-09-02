@@ -139,8 +139,8 @@ p.currency {
      
   ?>  
     <div class="col-sm-4">
-              <div class="product-image magnifiedImg">
-                <img src="<?php echo web_root.'admin/products/'. $result->Image1 ?>" />
+              <div class="product-image">
+                <img class="magnifiedImg" src="<?php echo web_root.'admin/products/'. $result->Image1 ?>" />
               </div>
               
               <div id="slider">
@@ -233,5 +233,9 @@ $('.product-quantity-add, .product-quantity-subtract').click(function(){
           }
         break;
     }
+})
+$('.imgmini').click(function(){
+  var frontsrc = $(this).attr('src')
+  $('.magnifiedImg').attr('src',frontsrc)
 })
 </script>

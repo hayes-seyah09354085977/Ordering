@@ -72,4 +72,4 @@ function magnifier() {
 }
 
 var magnify = new magnifier();
-magnify.magnifyImg('img', magnification, magnifierSize);
+magnify.magnifyImg('img.magnifiedImg', magnification, magnifierSize);
