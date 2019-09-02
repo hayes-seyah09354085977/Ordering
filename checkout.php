@@ -13,7 +13,7 @@ section#inner-headline {
 				<td>Tracking No.  </td><td><b> : TR#201123</b></td>
 			</tr>
 			<tr>
-				<td>Order Type  </td><td><b> : Installment</b></td>
+				<td>Order Type  </td><td><b> : Cash On Delivery</b></td>
 			</tr>
 			<tr>
 				<td>Fullname  </td><td> : <?php echo $_SESSION['CustomerName'] ?></td>
