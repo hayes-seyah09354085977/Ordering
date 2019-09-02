@@ -41,7 +41,7 @@ switch ($view) {
 		$content='success.php';		
 		break;
 	case 'register/customer' :
-        $title="Register New Member";	
+        $title="Register New Account";	
 		$content='register.php';		
 		break;
 	case 'register/store' :

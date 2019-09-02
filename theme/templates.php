@@ -94,7 +94,7 @@
                       <!-- <p   class="login"><a href="index.php?q=register/store"> <i class="fa fa-building-o"></i> Register Store </a></p> | -->
                       <p   class="login"><a href="index.php?q=register/customer"> <i class="fa fa-users"></i> Sign up </a></p>
                       |
-                      <p   class="login"><a data-target="#myModal" data-toggle="modal" href=""> <i class="fa fa-lock"></i> Login </a></p>
+                      <p   class="login"><a data-target="#myModal" data-toggle="modal" href=""> <i class="fa fa-lock"></i> Sign In </a></p>
                   
                 <?php } ?>
               </div>
