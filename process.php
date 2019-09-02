@@ -120,7 +120,7 @@ function doLogin(){
 	         redirect(web_root."admin/index.php");
 	      // } 
 	    }else{
-	      	echo "Account does not exist! Please contact Administrator.";
+	      	echo "Invalid Username or Password.";
 	        
 	    } 
     } 
