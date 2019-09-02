@@ -182,7 +182,6 @@ section#inner-headline {
 
 		}
 	});
-	
  
   </script>  
   <div  id="results" style="width: 990px; height: 500px;display: none;">

@@ -27,25 +27,32 @@ function doInsert() {
 			// $auto = $autonum->set_autonumber('APPLICANT');
 			 
 			 // `CustomerName`, `CustomerAddress`, `CustomerContact`, `Sex`, `Customer_Username`, `Customer_Password`
-			 switch($res){
-				 case '1':
-					message("Email is Already Taken","error");
-					redirect("index.php?q=register/customer");
-				 break;
-				 case '0':
-					$customer =New Customer(); 
-					$customer->CustomerName 		= $_POST['CustomerName']; 
-					$customer->Email 				= $_POST['Email'];
-					$customer->CustomerAddress 		= $_POST['CustomerAddress'];
-					$customer->Sex 					= $_POST['optionsRadios']; 
-					$customer->Customer_Username	= $_POST['Customer_Username'];
-					$customer->Customer_Password 	= sha1($_POST['Customer_Password']);
-					$customer->CustomerContact 		= $_POST['CustomerContact']; 
-					$customer->create(); 
-					message("You are successfully registered to the site. You can login now!","success");
-					redirect("index.php?q=success");
-				 break;
-			 }
+			 if (!filter_var($_POST['Email'], FILTER_VALIDATE_EMAIL)) {
+				// invalid emailaddress
+				message("Your Email Address is not Valid Please Try Again","error");
+				redirect("index.php?q=register/customer");
+			}else{
+				switch($res){
+					case '1':
+					   message("Email is Already Taken","error");
+					   redirect("index.php?q=register/customer");
+					break;
+					case '0':
+					   $customer =New Customer(); 
+					   $customer->CustomerName 		= $_POST['CustomerName']; 
+					   $customer->Email 				= $_POST['Email'];
+					   $customer->CustomerAddress 		= $_POST['CustomerAddress'];
+					   $customer->Sex 					= $_POST['optionsRadios']; 
+					   $customer->Customer_Username	= $_POST['Customer_Username'];
+					   $customer->Customer_Password 	= sha1($_POST['Customer_Password']);
+					   $customer->CustomerContact 		= $_POST['CustomerContact']; 
+					   $customer->create(); 
+					   message("You are successfully registered to the site. You can login now!","success");
+					   redirect("index.php?q=success");
+					break;
+				}
+			}
+			
 			// message("You are successfully registered to the site. You can login now!","success");
 			// redirect("index.php?q=success");
 }

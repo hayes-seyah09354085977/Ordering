@@ -5,6 +5,9 @@ section#inner-headline {
 img{
     width:100%;
 }
+.instOrRemit{
+  cursor:pointer;
+}
 </style>
 <section id="content">
 
@@ -23,7 +26,7 @@ img{
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary">Proceed</button>
       </div>
     </div>
   </div>
@@ -45,7 +48,7 @@ img{
         </div>
      </div>
 
-     <div class="col-sm-3 info-blocks " data-toggle="modal" data-target="#exampleModal">
+     <div class="col-sm-3 info-blocks instOrRemit" data-toggle="modal" data-target="#exampleModal">
         <div class="stretch">
         <img src="<?php echo web_root; ?>Include/Img/installment.png" alt="Watch Ur Toyo">
         </div>
@@ -54,7 +57,7 @@ img{
         </div>
      </div>
 
-     <div class="col-sm-3 info-blocks" data-toggle="modal" data-target="#exampleModal">
+     <div class="col-sm-3 info-blocks instOrRemit" data-toggle="modal" data-target="#exampleModal">
         <div class="stretch">
         <img src="<?php echo web_root; ?>Include/Img/remittance.png" alt="Watch Ur Toyo">
         </div>
