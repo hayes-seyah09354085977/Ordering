@@ -91,8 +91,8 @@
                     echo '<a title="View Message(s)" href="'.web_root.'customer/index.php?view=notification"> <i class="fa fa-bell-o"></i> <span class="label label-success">'.$msg.'</span></a> | <a title="View Profile" href="'.web_root.'customer/"> <i class="fa fa-user"></i> Howdy, '. $cus->CustomerName .' </a> | <a href="'.web_root.'logout.php">  <i class="fa fa-sign-out"> </i>Logout</a> ';
 
                     }else{ ?> 
-                      <p   class="login"><a href="index.php?q=register/store"> <i class="fa fa-building-o"></i> Register Store </a></p> |
-                      <p   class="login"><a href="index.php?q=register/customer"> <i class="fa fa-users"></i> Register Customer </a></p>
+                      <!-- <p   class="login"><a href="index.php?q=register/store"> <i class="fa fa-building-o"></i> Register Store </a></p> | -->
+                      <p   class="login"><a href="index.php?q=register/customer"> <i class="fa fa-users"></i> Sign up </a></p>
                       |
                       <p   class="login"><a data-target="#myModal" data-toggle="modal" href=""> <i class="fa fa-lock"></i> Login </a></p>
                   

@@ -1,3 +1,8 @@
+<style>
+section#inner-headline {
+    background: #37393c !important;
+}
+</style>
 <section id="content">
     <div class="container content">    
      <p> <?php check_message();?></p>      
@@ -96,7 +101,7 @@
 			      ""></label>  
 
 			      <div class="col-md-8"> 
-			      		<label><input type="checkbox"> By Sign up you are agree with our <a href="#">terms and condition</a></label>
+			      		<label><input id="terms" type="checkbox"> By Sign up you are agree with our <a href="#">terms and condition</a></label>
 			     </div>
 			    </div>
 			</div>    
@@ -106,7 +111,7 @@
 			      "idno"></label>  
 
 			      <div class="col-md-8">
-			         <button class="btn btn-primary btn-sm" name="btnRegister" type="submit" ><span class="fa fa-save fw-fa"></span> Save</button> 
+			         <button id='btnsubmit' class="btn btn-primary btn-sm" name="btnRegister" type="submit" ><span class="fa fa-save fw-fa"></span> Register</button> 
 			     
 			     </div>
 			    </div>
@@ -136,6 +141,36 @@
     $(document).ready(function() {
         initialize();
     });
+
+	function setInputFilter(textbox, inputFilter) {
+		["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
+			textbox.addEventListener(event, function() {
+					if (inputFilter(this.value)) {
+						this.oldValue = this.value;
+						this.oldSelectionStart = this.selectionStart;
+						this.oldSelectionEnd = this.selectionEnd;
+					} else if (this.hasOwnProperty("oldValue")) {
+						this.value = this.oldValue;
+						this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+					}
+				});
+			});
+		}
+	setInputFilter(document.getElementById("CustomerContact"), function(value) {
+  	return /^\d*$/.test(value); });
+	//   button disabled if terms and condition not checked
+	document.getElementById("btnsubmit").disabled = true;
+	document.getElementById("btnsubmit").style.background='#000000';
+	$("input#terms").change(function() {
+		if(this.checked) {
+			document.getElementById("btnsubmit").disabled = false;
+		}else{
+			document.getElementById("btnsubmit").disabled = true;
+			document.getElementById("btnsubmit").style.background='#000000';
+
+		}
+	});
+	
  
   </script>  
   <div  id="results" style="width: 990px; height: 500px;display: none;">
