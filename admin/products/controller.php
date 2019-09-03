@@ -40,6 +40,7 @@ switch ($action) {
 	}
    
 	function doInsert(){
+	
 		global $mydb;
 		if(isset($_POST['save'])){
  		    
@@ -67,20 +68,46 @@ switch ($action) {
 					$product->Image1			=  $Image1;
 					$product->Image2			=  $Image2;
 					$product->Image3			=  $Image3;
-					$product->create(); 
+					
+					
+					$checkProductName = checkExistingProduct($_POST['ProductName']);
+					switch($checkProductName){
+						case '0':
+							$product->create(); 
+							$productID = $mydb->insert_id();
+							$sql ="INSERT INTO `tblinventory` (`ProductID`) VALUES ('{$productID}')";
+							$mydb->setQuery($sql);
+							$mydb->executeQuery();
+		
+							message("New Product created successfully!", "success");
+							redirect("index.php");
+						break;
+						case '1':
+							message("Product Name Exist! Please Use Other Product Names.", "error");
+							redirect("index.php?view=add");
+						break;
 
-					$productID = $mydb->insert_id();
-
-					$sql ="INSERT INTO `tblinventory` (`ProductID`) VALUES ('{$productID}')";
-					$mydb->setQuery($sql);
-					$mydb->executeQuery();
- 
-
-					message("New Product created successfully!", "success");
-					redirect("index.php");
+					}
+					
  
 		 }
  } 
+ function checkExistingProduct($productName){
+	global $mydb;
+	$mydb->setQuery("SELECT count(*)as cnt FROM `tblproduct` WHERE `ProductName`='".$productName."'");
+	$cur = $mydb->executeQuery();
+	if($cur==false){
+		die(mysql_error());
+	}
+
+	$res = mysqli_fetch_assoc($cur);
+	if ($res['cnt'] == 1){
+		return '1';
+	}else{
+		return '0';
+	}
+	 
+ }
 
 
 	function doEdit(){
