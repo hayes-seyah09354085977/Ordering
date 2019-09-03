@@ -28,6 +28,27 @@ section#inner-headline {
 			
 		</table>
 	</div>
+	<div class="col-md-6">
+		<table>
+			<tr>
+				<td>Prdouct Interest</td><td><b> : 10%</b></td>
+			</tr>
+			<tr>
+				<td>Initial Payment  </td><td><b> : 1000</b></td>
+			</tr>
+			<tr>
+				<td>Months To Pay  </td><td> : 10</td>
+
+			</tr>
+			<tr>
+				<td>Monthly Payment  </td><td> : &#8369 293.35</td>
+			</tr>
+			<tr>
+				<td>Balance  </td><td> : &#8369 2520</td>
+			</tr>
+			
+		</table>
+	</div>
  </div>
  <div class="row">
  	<div class="col-md-12">
@@ -46,6 +67,11 @@ section#inner-headline {
               $cart = 0;
 			  $subtotal = 0;
 			  $count_cart=0;
+			  $monthlyPayment=0;
+			  if(isset($_GET['tp'])){
+				$subtotal = $_GET['tp'];
+				$monthlyPayment = $_GET['mp'];
+			  }
 
 
               if (!empty($_SESSION['gcCart'])){   
@@ -58,8 +84,10 @@ section#inner-headline {
                     				<td>'.$_SESSION['gcCart'][$i]['qty'].' </td>
                     				<td> '.$_SESSION['gcCart'][$i]['subtotal'].'</td> 
                         		</tr>';   
-                    			$cart += $_SESSION['gcCart'][$i]['qty'];
-                    			$subtotal += $_SESSION['gcCart'][$i]['subtotal'];
+								$cart += $_SESSION['gcCart'][$i]['qty'];
+								if(!isset($_GET['tp'])){
+									$subtotal += $_SESSION['gcCart'][$i]['subtotal'];
+								  }
                    } 
 
 
@@ -68,7 +96,8 @@ section#inner-headline {
             ?>
           </tbody> 
         </table>  
-        <div class="pull-right" style="font-size: 30px;"> &#8369 <?php echo $subtotal;?></div>
+        <div class="pull-right" style="font-size: 30px;">Total:&nbsp; &#8369 <?php echo $subtotal;?></div>
+		
 
  	</div>
  </div>

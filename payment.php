@@ -82,6 +82,18 @@ tr.monthpcker > td {
     position: absolute;
     width: 90%;
 }
+.modal-title {
+    font-size: 25px;
+    padding: 5px;
+    color:#fff;
+}
+.modal-header {
+    background: #0480be;
+}
+.btn {
+    background: #0480be;
+    border-color: #0480be;
+}
 </style>
 <?php 
 $subtotal = $_GET['st'];
@@ -104,8 +116,7 @@ $subtotal = $_GET['st'];
           <div class="row">
             <div class="col-md-6">
               <table>
-                <tr><td class="total_price" value="<?php echo $subtotal;?>"><h3>Total Price:&nbsp;₱<?php echo $subtotal;?> </h3></td></tr>
-                <tr><td class="quantity" value="2"><h4>Quantity:&nbsp;2</h4></td></tr>
+                <tr><td class="total_price" value="<?php echo $subtotal;?>"><h3>Total Ordered Price:&nbsp;₱<?php echo $subtotal;?> </h3></td></tr>
                 <tr><td class="product_interest" value="10"><h4>Product Interest:&nbsp;10%</h4></td></tr>
 
               </table>
@@ -141,7 +152,7 @@ $subtotal = $_GET['st'];
         </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Proceed</button>
+        <a class="proceed" href="index.php?q=checkout&tp=3000"><button type="button" class="btn btn-primary">Proceed</button></a>
       </div>
     </div>
   </div>
@@ -232,6 +243,7 @@ $.extend(Calc.prototype, {
 
     this.$resultTP = ((((this.$product_interest/100)*this.$total_price))+this.$total_price)-this.$initial_payment.val()
     this.$monthlypayment.text('Monthly Payment: ₱'+(this.$resultTP/this.$slider.val()).toFixed(2))
+    $('.proceed').attr('href','index.php?q=checkout&tp='+this.$resultTP +'&mp='+(this.$resultTP/this.$slider.val()).toFixed(2))
 
   },
   getInitPayment:function(){
@@ -241,6 +253,8 @@ $.extend(Calc.prototype, {
     this.$resultTP = ((((this.$product_interest/100)*this.$total_price))+this.$total_price)-this.$initial_payment.val()
     this.$totalpayment.text('Total Price: ₱'+this.$resultTP)
     this.$monthlypayment.text('Monthly Payment: ₱'+(this.$resultTP/this.$slider.val()).toFixed(2))
+
+    $('.proceed').attr('href','index.php?q=checkout&tp='+this.$resultTP +'&mp='+(this.$resultTP/this.$slider.val()).toFixed(2))
   }
   
 });
