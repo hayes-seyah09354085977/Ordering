@@ -29,25 +29,34 @@ section#inner-headline {
 		</table>
 	</div>
 	<div class="col-md-6">
+		<?php  if(isset($_GET['ct'])=='IR'){
+
+			?>
+			
 		<table>
 			<tr>
-				<td>Prdouct Interest</td><td><b> : 10%</b></td>
+				<td>Prdouct Interest</td><td><b> : <?php echo  $_SESSION['pi']; ?></b></td>
 			</tr>
 			<tr>
-				<td>Initial Payment  </td><td><b> : 1000</b></td>
+				<td>Initial Payment  </td><td><b> : <?php echo  $_SESSION['inp']; ?></b></td>
 			</tr>
 			<tr>
-				<td>Months To Pay  </td><td> : 10</td>
+				<td>Months To Pay  </td><td> : <?php echo  $_SESSION['mtp']; ?></td>
 
 			</tr>
 			<tr>
-				<td>Monthly Payment  </td><td> : &#8369 293.35</td>
+				<td>Total Payment  </td><td> : &#8369 <?php echo  $_SESSION['tp']; ?></td>
+			</tr>
+			<tr>
+				<td>Monthly Payment  </td><td> : &#8369 <?php echo  $_SESSION['mp']; ?></td>
 			</tr>
 			<tr>
 				<td>Balance  </td><td> : &#8369 2520</td>
 			</tr>
-			
 		</table>
+
+		<?php
+			}?>
 	</div>
  </div>
  <div class="row">
@@ -68,9 +77,10 @@ section#inner-headline {
 			  $subtotal = 0;
 			  $count_cart=0;
 			  $monthlyPayment=0;
-			  if(isset($_GET['tp'])){
-				$subtotal = $_GET['tp'];
-				$monthlyPayment = $_GET['mp'];
+			  if(isset($_GET['ct'])=='IR'){
+				$subtotal = $_SESSION['inp'];;
+				$monthlyPayment = $_SESSION['mp'];
+				// echo $subtotal;
 			  }
 
 
@@ -85,7 +95,7 @@ section#inner-headline {
                     				<td> '.$_SESSION['gcCart'][$i]['subtotal'].'</td> 
                         		</tr>';   
 								$cart += $_SESSION['gcCart'][$i]['qty'];
-								if(!isset($_GET['tp'])){
+								if(!isset($_GET['ct'])){
 									$subtotal += $_SESSION['gcCart'][$i]['subtotal'];
 								  }
                    } 

@@ -152,7 +152,7 @@ $subtotal = $_GET['st'];
         </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <a class="proceed" href="index.php?q=checkout&tp=3000"><button type="button" class="btn btn-primary">Proceed</button></a>
+        <a class="proceed" href="index.php?q=checkout&ct=IR"><button type="button" class="btn btn-primary">Proceed</button></a>
       </div>
     </div>
   </div>
@@ -227,6 +227,7 @@ $.extend(Calc.prototype, {
     this.$initial_payment =$('.initial_payment');
     this.$monthlypayment = $('.monthlypayment');
     this.$resultTP = 0;
+    this.$monthlyPayment = 0;
   },
   bind: function() {
     this.getMonths();
@@ -242,8 +243,17 @@ $.extend(Calc.prototype, {
     this.$rangeValue.text('Months To Pay: '+this.$slider.val());
 
     this.$resultTP = ((((this.$product_interest/100)*this.$total_price))+this.$total_price)-this.$initial_payment.val()
-    this.$monthlypayment.text('Monthly Payment: ₱'+(this.$resultTP/this.$slider.val()).toFixed(2))
-    $('.proceed').attr('href','index.php?q=checkout&tp='+this.$resultTP +'&mp='+(this.$resultTP/this.$slider.val()).toFixed(2))
+    this.$monthlyPayment = (this.$resultTP/this.$slider.val()).toFixed(2)
+    this.$monthlypayment.text('Monthly Payment: ₱'+this.$monthlyPayment)
+
+    $.ajax({
+           type: "POST",
+           url: "ajaxSession.php",
+           data: {tp:this.$resultTP,mtp:this.$slider.val(),mp:this.$monthlyPayment,pi:this.$product_interest,inp:this.$initial_payment.val()},
+           success: function(data){
+             console.log('success')
+           }
+         });
 
   },
   getInitPayment:function(){
@@ -252,14 +262,20 @@ $.extend(Calc.prototype, {
 
     this.$resultTP = ((((this.$product_interest/100)*this.$total_price))+this.$total_price)-this.$initial_payment.val()
     this.$totalpayment.text('Total Price: ₱'+this.$resultTP)
-    this.$monthlypayment.text('Monthly Payment: ₱'+(this.$resultTP/this.$slider.val()).toFixed(2))
-
-    $('.proceed').attr('href','index.php?q=checkout&tp='+this.$resultTP +'&mp='+(this.$resultTP/this.$slider.val()).toFixed(2))
+    this.$monthlyPayment = (this.$resultTP/this.$slider.val()).toFixed(2)
+    this.$monthlypayment.text('Monthly Payment: ₱'+this.$monthlyPayment)
+    
+    $.ajax({
+           type: "POST",
+           url: "ajaxSession.php",
+           data: {tp:this.$resultTP,mtp:this.$slider.val(),mp:this.$monthlyPayment,pi:this.$product_interest,inp:this.$initial_payment.val()},
+           success: function(data){
+             console.log('success')
+           }
+         });
   }
   
 });
-
-
 
 window.Calc = Calc;
 });
