@@ -111,8 +111,27 @@ $subtotal = $_GET['st'];
         </button> -->
       </div>
       <div class="modal-body">
+      <select class='remOpts'>
+        <option value="" Selected>-Select Payment-</option>
+        <option value="Full_Payment">Full Payment</option>
+        <option value="Installment_plan">Installment Plan</option>
+      </select>
+      <!-- Container for Full Paid -->
+      <div class="container FullPaid">
+          <div class="row">
+            <div class="col-md-6">
+              <table>
+                <tr><td class="total_price" value="<?php echo $subtotal;?>"><h3>Total Ordered Price:&nbsp;₱<?php echo $subtotal;?> </h3></td></tr>
+
+              </table>
+            </div>
+          </div>
+
+        </div>
+      <!-- Container end for Full Paid -->
+      
       <!-- Container -->
-        <div class="container">
+        <div class="container installment">
           <div class="row">
             <div class="col-md-6">
               <table>
@@ -174,14 +193,14 @@ $subtotal = $_GET['st'];
         </div>
      </div>
 
-     <div class="col-sm-3 info-blocks instOrRemit" data-toggle="modal" data-target="#exampleModal">
+     <!-- <div class="col-sm-3 info-blocks instOrRemit" data-toggle="modal" data-target="#exampleModal">
         <div class="stretch">
         <img src="<?php echo web_root; ?>Include/Img/installment.png" alt="Watch Ur Toyo">
         </div>
         <div class="info-blocks-in">
             <h3>Installment</h3>
         </div>
-     </div>
+     </div> -->
 
      <div class="col-sm-3 info-blocks instOrRemit" data-toggle="modal" data-target="#exampleModal">
         <div class="stretch">
@@ -230,6 +249,8 @@ $.extend(Calc.prototype, {
     this.$monthlyPayment = 0;
   },
   bind: function() {
+    $('.installment,.FullPaid').hide()
+    this.defaultModal();
     this.getMonths();
     this.getInitPayment()
     this.$slider.on('input', $.proxy(this.getMonths, this));
@@ -237,6 +258,27 @@ $.extend(Calc.prototype, {
     this.$resultTP= ((((this.$product_interest/100)*this.$total_price))+this.$total_price)-this.$initial_payment.val()
     this.$totalpayment.text('Total Price: ₱'+this.$resultTP)
 
+  },
+  defaultModal:function(){
+    $('.remOpts').change(function(){
+      var remittanceOptions = $('.remOpts').find(":selected").attr('value')
+      console.log(remittanceOptions)
+      switch(remittanceOptions){
+        case '':
+          $('.installment').hide()
+          $('.FullPaid').hide()
+          break;
+        case 'Full_Payment':
+        $('.installment').hide()
+          $('.FullPaid').show()
+          $('.proceed').attr('href','index.php?q=checkout&ct=RM')
+          break;
+        case 'Installment_plan':
+          $('.FullPaid').hide()
+          $('.installment').show()
+          break;
+      }
+    })
   },
   getMonths: function(){
     this.$slider.attr('max', this.months);
