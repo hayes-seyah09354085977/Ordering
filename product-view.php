@@ -101,6 +101,7 @@ p.currency {
 .imgmini{
   width:100%;
   max-width:100px;
+  height: 100%;
 }
 input.remqty {
     border: none;
