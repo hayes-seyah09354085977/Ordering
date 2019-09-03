@@ -9,13 +9,10 @@ img{
   cursor:pointer;
 }
 
-
-
 .slider {
   width: 200px;
   margin: 100px auto;
 }
-
 input[type="range"] {
   -webkit-appearance: none;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
@@ -30,29 +27,23 @@ input[type="range"] {
   -webkit-box-shadow: inset 0 1px 0 0 #0d0e0f, inset 0 -1px 0 0 #3a3d42;
   outline: none; /* no focus outline */
 }
-
 input[type="range"]::-moz-range-track {
   border: inherit;
   background: transparent;
 }
-
 input[type="range"]::-ms-track {
   border: inherit;
   color: transparent; /* don't drawn vertical reference line */
   background: transparent;
 }
-
 input[type="range"]::-ms-fill-lower,
 input[type="range"]::-ms-fill-upper {
   background: transparent;
 }
-
 input[type="range"]::-ms-tooltip {
   display: none;
 }
-
 /* thumb */
-
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 40px;
@@ -70,7 +61,6 @@ input[type="range"]::-moz-range-thumb {
   border-radius: 12px;
   background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%); /* W3C */
 }
-
 input[type="range"]::-ms-thumb {
   width: 40px;
   height: 18px;
@@ -94,6 +84,57 @@ tr.monthpcker > td {
     background: #0480be;
     border-color: #0480be;
 }
+/* select */
+select {
+background-color: white;
+border: thin solid blue;
+border-radius: 4px;
+display: inline-block;
+font: inherit;
+line-height: 1.5em;
+padding: 0.5em 3.5em 0.5em 1em;
+margin: 0;      
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+-webkit-appearance: none;
+-moz-appearance: none;
+}
+/* select arrows */
+select.classic {
+background-image:
+  linear-gradient(45deg, transparent 50%, blue 50%),
+  linear-gradient(135deg, blue 50%, transparent 50%),
+  linear-gradient(to right, skyblue, skyblue);
+background-position:
+  calc(100% - 20px) calc(1em + 2px),
+  calc(100% - 15px) calc(1em + 2px),
+  100% 0;
+background-size:
+  5px 5px,
+  5px 5px,
+  2.5em 2.5em;
+background-repeat: no-repeat;
+}
+
+select.classic:focus {
+background-image:
+  linear-gradient(45deg, white 50%, transparent 50%),
+  linear-gradient(135deg, transparent 50%, white 50%),
+  linear-gradient(to right, gray, gray);
+background-position:
+  calc(100% - 15px) 1em,
+  calc(100% - 20px) 1em,
+  100% 0;
+background-size:
+  5px 5px,
+  5px 5px,
+  2.5em 2.5em;
+background-repeat: no-repeat;
+border-color: grey;
+outline: 0;
+}
+
 </style>
 <?php 
 $subtotal = $_GET['st'];
@@ -111,7 +152,7 @@ $subtotal = $_GET['st'];
         </button> -->
       </div>
       <div class="modal-body">
-      <select class='remOpts'>
+      <select class='remOpts classic'>
         <option value="" Selected>-Select Payment-</option>
         <option value="Full_Payment">Full Payment</option>
         <option value="Installment_plan">Installment Plan</option>
@@ -171,7 +212,7 @@ $subtotal = $_GET['st'];
         </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <a class="proceed" href="index.php?q=checkout&ct=IR"><button type="button" class="btn btn-primary">Proceed</button></a>
+        <a class="proceed" href="#"><button type="button" class="btn btn-primary">Proceed</button></a>
       </div>
     </div>
   </div>
@@ -267,6 +308,7 @@ $.extend(Calc.prototype, {
         case '':
           $('.installment').hide()
           $('.FullPaid').hide()
+          $('.proceed').attr('href','#')
           break;
         case 'Full_Payment':
         $('.installment').hide()
@@ -276,6 +318,7 @@ $.extend(Calc.prototype, {
         case 'Installment_plan':
           $('.FullPaid').hide()
           $('.installment').show()
+          $('.proceed').attr('href','index.php?q=checkout&ct=IR')
           break;
       }
     })
