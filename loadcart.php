@@ -45,7 +45,7 @@ if (isset($_POST['deleteCart'])) {
                         	echo'<tr> 
                     				<td>'.$_SESSION['gcCart'][$i]['product'].'</td>
                     				<td>'.$_SESSION['gcCart'][$i]['price'].'</td>
-                    				<td><input style="height:25px;width:50px" type="number" name="qty" id="'.$_SESSION['gcCart'][$i]['productID'].'qty" required class="cartqty" min="1" data-id="'.$_SESSION['gcCart'][$i]['productID'].'"   value="'.$_SESSION['gcCart'][$i]['qty'].'" autocomplete="off" /> </td>
+                    				<td><input style="height:25px;width:50px; border:none;" type="number" name="qty" id="'.$_SESSION['gcCart'][$i]['productID'].'qty" required class="cartqty" min="1" data-id="'.$_SESSION['gcCart'][$i]['productID'].'"  readonly value="'.$_SESSION['gcCart'][$i]['qty'].'" autocomplete="off" /> </td>
                     				<td> <output id="Osubtot'.$_SESSION['gcCart'][$i]['productID'].'">'.$_SESSION['gcCart'][$i]['subtotal'].'</output></td>
                     				<td><a class="delCart btn btn-xs btn-danger" style="text-decoration:none;" href="#" data-id="'.$_SESSION['gcCart'][$i]['productID'].'">Remove</a></td>
                         		</tr>';   

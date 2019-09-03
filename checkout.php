@@ -49,7 +49,7 @@ if(isset($_GET['ct'])){
 			
 		<table>
 			<tr>
-				<td>Product Interest</td><td><b> : <?php echo  $_SESSION['pi']; ?></b></td>
+				<td>Product Interest</td><td><b> : <?php echo  $_SESSION['pi']; ?>%</b></td>
 			</tr>
 			<tr>
 				<td>Initial Payment  </td><td><b> : <?php echo  $_SESSION['inp']; ?></b></td>
