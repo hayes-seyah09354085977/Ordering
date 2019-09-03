@@ -92,7 +92,7 @@ p.currency {
     margin: 10px;
     padding: 0;
     width: 80px;
-    height: 75px;
+    height: 80px;
     background: #ccc;
     text-align: center;
     border: solid;
@@ -101,6 +101,9 @@ p.currency {
 .imgmini{
   width:100%;
   max-width:100px;
+}
+input.remqty {
+    border: none;
 }
 </style>
 
@@ -165,7 +168,7 @@ p.currency {
               </div>
               <div class="product-description"><?php echo $result->Description ;?></div>
               <div class="product-price"> ₱<?php echo $result->Price ;?></div>
-              <div> In-Stocks: &nbsp; <?php echo $result->Remaining ;?></div>
+              <div>In-Stocks: &nbsp;<input type="text" class="remqty" name="REMQTY<?php echo $result->ProductID ;?>" value="<?php echo $result->Remaining ;?>" readonly></div>
              
               <div class="product-quantity">
                 <label for="product-quantity-input" class="product-quantity-label">Quantity</label>

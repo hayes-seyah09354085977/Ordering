@@ -36,9 +36,10 @@ global $mydb;
 		$pid = $res->ProductID;
 		$product = $res->ProductName . ' | ' . $res->Description . ' | '.$res->Categories;
 		$price = $res->Price;
-	    $q = $_POST['QTY'.$pid];
+		$q = $_POST['QTY'.$pid];
+		$stocks = $_POST['REMQTY'.$pid];
 		$subtotal = $price * $q;
-		addtocart($pid,$product,$price,$q,$subtotal);
+		addtocart($pid,$product,$price,$q,$subtotal,$stocks);
 	}
 
 	redirect("index.php?q=cart");

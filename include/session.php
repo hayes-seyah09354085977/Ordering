@@ -153,7 +153,7 @@ function notifycheck(){
 }
 
  
-function product_exists($pid,$q){
+function product_exists($pid,$q,$stocks){
     // $pid=intval($pid); 
     $max=count($_SESSION['gcCart']);
     $flag=0;
@@ -162,7 +162,11 @@ function product_exists($pid,$q){
           if($q>0  && $q<=999){
             # code...
             $flag=1;
+            if(($_SESSION['gcCart'][$i]['qty']+ $q)>$stocks){
+              $_SESSION['gcCart'][$i]['qty']= $stocks;
+            }else{
              $_SESSION['gcCart'][$i]['qty']= $_SESSION['gcCart'][$i]['qty'] + $q;
+            }
              $_SESSION['gcCart'][$i]['subtotal']= $_SESSION['gcCart'][$i]['price'] * $_SESSION['gcCart'][$i]['qty'];
               message("{$q} Item added in the cart.","success");
               break;
@@ -176,14 +180,15 @@ function product_exists($pid,$q){
     }
     return $flag;
   }
- function addtocart($pid,$product,$price,$q,$subtotal){
+ function addtocart($pid,$product,$price,$q,$subtotal,$stocks){
     // if($pid<1 or $q<1) return;
     if($q<1) return;
     if (!empty($_SESSION['gcCart'])){
 
 
     if(is_array($_SESSION['gcCart'])){
-      if(product_exists($pid,$q)) return;
+      if(product_exists($pid,$q,$stocks)) return;
+
       $max=count($_SESSION['gcCart']);
       $_SESSION['gcCart'][$max]['productID']=$pid;
       $_SESSION['gcCart'][$max]['product']=$product;
