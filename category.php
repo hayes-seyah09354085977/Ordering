@@ -4,7 +4,11 @@
 }
 .stretch img{ 
  width: 100%;
- height: 50%;
+ height: 100% !important;
+ max-height: 250px;
+}
+.info-blocks .info-blocks-in {
+    padding: 20px 0px;
 }
 section#inner-headline {
     background: #37393c !important;
