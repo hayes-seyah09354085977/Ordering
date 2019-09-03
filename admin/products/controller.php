@@ -55,13 +55,13 @@ switch ($action) {
 
 
 
-					@$DateExpire = date_format(date_create($_POST['DateExpire']),'Y-m-d');
+					// @$DateExpire = date_format(date_create($_POST['DateExpire']),'Y-m-d');
 
 					$product = New Product(); 
 					$product->ProductName 		= $_POST['ProductName'];
 					$product->Description		= $_POST['Description']; 
 					$product->Price				= $_POST['Price'];  
-					$product->DateExpire		=  @$DateExpire;
+					// $product->DateExpire		=  @$DateExpire;
 					$product->CategoryID		= $_POST['CategoryID'];
 					$product->StoreID			= $_SESSION['ADMIN_USERID'];
 					$product->Image1			=  $Image1;

@@ -22,7 +22,7 @@
 									<th>Description</th>
 									<th>Price</th>
 									<th>Quantity</th>
-									<th>Expired Date</th> 
+									<!-- <th>Expired Date</th>  -->
 									<th>Categories</th>
 									<th>Status</th>
 									<th width="14%" >Action</th> 
@@ -50,7 +50,7 @@
 							  		echo '<td>' . $result->Description.'</a></td>';
 							  		echo '<td>' . $result->Price.'</a></td>'; 
 							  		echo '<td>'. $result->Remaining.'</td>'; 
-							  		echo '<td>'. $result->DateExpire.'</td>';
+							  		// echo '<td>'. $result->DateExpire.'</td>';
 							  		echo '<td>'. $result->Categories.'</td>';  
 
 									$expiry_date = $result->DateExpire;
