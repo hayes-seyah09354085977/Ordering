@@ -80,19 +80,24 @@ p.currency {
     position: relative;
     margin: 0;
     padding: 0;
-    height: 200px;
+    height: 150px;
     list-style: none;
+    border-top: solid;
+    border-color: #f5782d;  
 }
 #slider ul li {
     position: relative;
     display: block;
     float: left;
     margin: 0;
+    margin: 10px;
     padding: 0;
     width: 80px;
     height: 75px;
     background: #ccc;
     text-align: center;
+    border: solid;
+    border-color: #37393c;
 }
 .imgmini{
   width:100%;

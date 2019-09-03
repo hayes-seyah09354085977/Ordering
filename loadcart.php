@@ -68,7 +68,7 @@ if (isset($_POST['deleteCart'])) {
         <?php if ($count_cart > 0) { 
         	if (isset($_SESSION['CustomerID'])) {
 
-	        		    echo '<a href="index.php?q=paymentMethod" class="btn btn-primary pull-right">Proceed To Check Out <i class="fa fa-arrow-right"></i></a>';
+	        		    echo '<a href="index.php?q=paymentMethod&st='.$subtotal.'" class="btn btn-primary pull-right">Proceed To Check Out <i class="fa fa-arrow-right"></i></a>';
 	        		# code...
 	        	}else{
 

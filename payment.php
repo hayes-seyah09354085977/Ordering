@@ -10,71 +10,82 @@ img{
 }
 
 
-.slider{
+
+.slider {
+  width: 200px;
+  margin: 100px auto;
+}
+
+input[type="range"] {
   -webkit-appearance: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   width: 100%;
-  height: 10px;
-  background: #dbdbdb;
-  position: relative;
-  outline: none;
-  margin-bottom: 20px;
-}
-.slider-point{
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  background: #A7CB00;
-  position: absolute;
-  top: -5px;
-  -moz-transition: left 0.3s;
-  -webkit-transition: left 0.3s;
-  transition: left 0.3s;
+  height: 25px;
+  margin: 0;
+  border: none;
+  padding: 0px;
+  border-radius: 14px !important;
+  background: #232528;
+  box-shadow: inset 0 1px 0 0 #0d0e0f, inset 0 -1px 0 0 #3a3d42;
+  -webkit-box-shadow: inset 0 1px 0 0 #0d0e0f, inset 0 -1px 0 0 #3a3d42;
+  outline: none; /* no focus outline */
 }
 
+input[type="range"]::-moz-range-track {
+  border: inherit;
+  background: transparent;
+}
 
-.slider::-webkit-slider-thumb {
+input[type="range"]::-ms-track {
+  border: inherit;
+  color: transparent; /* don't drawn vertical reference line */
+  background: transparent;
+}
+
+input[type="range"]::-ms-fill-lower,
+input[type="range"]::-ms-fill-upper {
+  background: transparent;
+}
+
+input[type="range"]::-ms-tooltip {
+  display: none;
+}
+
+/* thumb */
+
+input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #A7CB00;
-  cursor: pointer;
-  -moz-transition: background .15s ease-in-out;
-  -webkit-transition: background .15s ease-in-out;
-  transition: background .15s ease-in-out;
+  width: 40px;
+  height: 18px;
+  border: none;
+  border-radius: 12px;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #529de1), color-stop(100%, #245e8f)); /* android <= 2.2 */
+  background-image: -webkit-linear-gradient(top , #529de1 0, #245e8f 100%); /* older mobile safari and android > 2.2 */;
+  background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%); /* W3C */
+}
+input[type="range"]::-moz-range-thumb {
+  width: 40px;
+  height: 18px;
+  border: none;
+  border-radius: 12px;
+  background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%); /* W3C */
 }
 
-.slider::-webkit-slider-thumb:hover {
-  background: #7B9500;
-}
-
-.slider:active::-webkit-slider-thumb {
-  background: #7B9500;
-}
-
-.slider::-moz-range-thumb {
-  width:20px;
-  height: 20px;
+input[type="range"]::-ms-thumb {
+  width: 40px;
+  height: 18px;
+  border-radius: 12px;
   border: 0;
-  border-radius: 50%;
-  background: #A7CB00;
-  cursor: pointer;
-  -moz-transition: background .15s ease-in-out;
-  -webkit-transition: background .15s ease-in-out;
-  transition: background .15s ease-in-out;
-}
-.slider::-moz-range-thumb:hover {
-  background: #7B9500;
-}
-
-.slider:active::-moz-range-thumb {
-  background: #7B9500;
+  background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%); /* W3C */
 }
 tr.monthpcker > td {
     position: absolute;
     width: 90%;
 }
 </style>
+<?php 
+$subtotal = $_GET['st'];
+?>
 <section id="content">
 
 <!-- Modal -->
@@ -91,28 +102,36 @@ tr.monthpcker > td {
       <!-- Container -->
         <div class="container">
           <div class="row">
-            <div class="col-sm-3">
+            <div class="col-md-6">
               <table>
-                <tr><td class="product_price" value="3200">Product Price:&nbsp; ₱3200</td></tr>
-                <tr><td class="quantity" value="2">Quantity:&nbsp;2</td></tr>
-                <tr><td class="total_price" value="6400">Total Price:&nbsp;₱6400 </td></tr>
-                <tr><td class="product_interest" value="10">Product Interest:&nbsp;10%</td></tr>
+                <tr><td class="total_price" value="<?php echo $subtotal;?>"><h3>Total Price:&nbsp;₱<?php echo $subtotal;?> </h3></td></tr>
+                <tr><td class="quantity" value="2"><h4>Quantity:&nbsp;2</h4></td></tr>
+                <tr><td class="product_interest" value="10"><h4>Product Interest:&nbsp;10%</h4></td></tr>
+
               </table>
             </div>
           </div>
           <div class="row">
-            <div class="col-sm-3">
+            <div class="col-md-6">
               <table>
-                <tr><td class="rangevalue">Months To Pay: 10</td></tr>
-                <tr class="monthpcker"><td> <input class="slider" type="range" min="1" max="36" value="10"></td></tr>
+                <tr><td><h4 class="payvalue">Initial Payment: 10</h4></td></tr>
+                <tr class="monthpcker"><td> <input class="slider initial_payment" type="range" min="1" max="3200" value="1"></td></tr>
+              </table>
+            </div>
+           </div>
+          <div class="row">
+            <div class="col-md-6">
+              <table>
+                <tr><td><h4 class="rangevalue">Months To Pay: 10</h4></td></tr>
+                <tr class="monthpcker"><td> <input class="slider monthpcr" type="range" min="1" max="36" value="10"></td></tr>
               </table>
             </div>
            </div>
            <div class="row">
-            <div class="col-sm-3">
+            <div class="col-md-6">
               <table>
-                <tr><td class="totalpayment">Total Payment: ₱3400</td></tr>
-                <tr><td class="monthlypayment">Monthly Payment: ₱300</td></tr>
+                <tr><td><h4 class="totalpayment">Total Payment: ₱3400</h4></td></tr>
+                <tr><td><h4 class="monthlypayment">Monthly Payment: ₱300</h4></td></tr>
               </table>
             </div>
           </div>
@@ -188,28 +207,40 @@ var Calc = function(options) {
 
 $.extend(Calc.prototype, {
   cache: function() {
-    this.$slider = $('.slider');
+    this.$slider = $('.monthpcr');
     this.$rangeValue = $('.rangevalue');
+    this.$payvalue = $('.payvalue');
     this.$total_price = parseInt($('.total_price').attr('value'));
     this.$product_interest = parseInt($('.product_interest').attr('value'));
     this.$totalpayment = $('.totalpayment');
+    this.$initial_payment =$('.initial_payment');
     this.$monthlypayment = $('.monthlypayment');
+    this.$resultTP = 0;
   },
   bind: function() {
     this.getMonths();
+    this.getInitPayment()
     this.$slider.on('input', $.proxy(this.getMonths, this));
-    var resultTP = (((this.$product_interest/100)*this.$total_price))+this.$total_price
-    this.$totalpayment.text('Total Price: ₱'+resultTP)
+    this.$initial_payment.on('input', $.proxy(this.getInitPayment, this));
+    this.$resultTP= ((((this.$product_interest/100)*this.$total_price))+this.$total_price)-this.$initial_payment.val()
+    this.$totalpayment.text('Total Price: ₱'+this.$resultTP)
 
   },
   getMonths: function(){
-    var result;
     this.$slider.attr('max', this.months);
     this.$rangeValue.text('Months To Pay: '+this.$slider.val());
 
-    var resultMonth = ((((this.$product_interest/100)*this.$total_price))+this.$total_price)
-    this.$monthlypayment.text('Total Price: ₱'+(resultMonth/this.$slider.val()).toFixed(2))
+    this.$resultTP = ((((this.$product_interest/100)*this.$total_price))+this.$total_price)-this.$initial_payment.val()
+    this.$monthlypayment.text('Monthly Payment: ₱'+(this.$resultTP/this.$slider.val()).toFixed(2))
 
+  },
+  getInitPayment:function(){
+    // this.$initial_payment.attr('max', this.months);
+    this.$payvalue.text('Initial Payment: '+this.$initial_payment.val());
+
+    this.$resultTP = ((((this.$product_interest/100)*this.$total_price))+this.$total_price)-this.$initial_payment.val()
+    this.$totalpayment.text('Total Price: ₱'+this.$resultTP)
+    this.$monthlypayment.text('Monthly Payment: ₱'+(this.$resultTP/this.$slider.val()).toFixed(2))
   }
   
 });
