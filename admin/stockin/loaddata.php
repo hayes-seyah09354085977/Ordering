@@ -50,7 +50,7 @@ $res = $mydb->loadSingleResult();
 	<div class="column-label">Price</div>
 	<div class="column-value">: <?php echo $res->Price; ?></div>
 	<div class="column-label">Quantity</div>
-	<div class="column-value"><input type="number" name="Quantity" class="form-control"></div>
+	<div class="column-value"><input type="number" name="Quantity" class="form-control" min="1"></div>
 </div> 
 <div class="row">
 	<input type="submit" name="btnSubmit" value="Save" class="btn-primary btn btn-md">
