@@ -126,7 +126,7 @@ $subtotal = $_GET['st'];
             <div class="col-md-6">
               <table>
                 <tr><td><h4 class="payvalue">Initial Payment: 10</h4></td></tr>
-                <tr class="monthpcker"><td> <input class="slider initial_payment" type="range" min="1" max="3200" value="1"></td></tr>
+                <tr class="monthpcker"><td> <input class="slider initial_payment" type="range" min="1" max="<?php echo $subtotal;?>" value="1"></td></tr>
               </table>
             </div>
            </div>
@@ -251,7 +251,7 @@ $.extend(Calc.prototype, {
            url: "ajaxSession.php",
            data: {tp:this.$resultTP,mtp:this.$slider.val(),mp:this.$monthlyPayment,pi:this.$product_interest,inp:this.$initial_payment.val()},
            success: function(data){
-             console.log('success')
+            //  console.log('success')
            }
          });
 
@@ -270,7 +270,7 @@ $.extend(Calc.prototype, {
            url: "ajaxSession.php",
            data: {tp:this.$resultTP,mtp:this.$slider.val(),mp:this.$monthlyPayment,pi:this.$product_interest,inp:this.$initial_payment.val()},
            success: function(data){
-             console.log('success')
+            //  console.log('success')
            }
          });
   }
