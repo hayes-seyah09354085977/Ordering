@@ -89,7 +89,6 @@ p.currency {
     position: relative;
     display: block;
     float: left;
-    margin: 0;
     margin: 10px;
     padding: 0;
     width: 80px;

@@ -25,7 +25,7 @@ input[type="range"] {
   border: none;
   padding: 0px;
   border-radius: 14px !important;
-  background: #232528;
+  background: #dee3ea;
   box-shadow: inset 0 1px 0 0 #0d0e0f, inset 0 -1px 0 0 #3a3d42;
   -webkit-box-shadow: inset 0 1px 0 0 #0d0e0f, inset 0 -1px 0 0 #3a3d42;
   outline: none; /* no focus outline */
