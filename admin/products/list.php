@@ -53,20 +53,20 @@
 							  		// echo '<td>'. $result->DateExpire.'</td>';
 							  		echo '<td>'. $result->Categories.'</td>';  
 
-									$expiry_date = $result->DateExpire;
-									$today = date('d-m-Y',time()); 
-									$exp = date('d-m-Y',strtotime($expiry_date));
-									$expDate =  date_create($exp);
-									$todayDate = date_create($today);
-									$diff =  date_diff($todayDate, $expDate);
-									if($diff->format("%R%a")>0){
-
-										$expStatus =  "active";
-									}else{
-										$expStatus =  "Expired";
-									}
+									// $expiry_date = $result->DateExpire;
+									// $today = date('d-m-Y',time()); 
+									// $exp = date('d-m-Y',strtotime($expiry_date));
+									// $expDate =  date_create($exp);
+									// $todayDate = date_create($today);
+									// $diff =  date_diff($todayDate, $expDate);
+									// if($diff->format("%R%a")>0){
+									// 	$expStatus =  "active";
+									// }else{
+									// 	$expStatus =  "Expired";
+									// }
 									// echo "Remaining Days ".$diff->format("%R%a days");
 
+									$expStatus="active";
 									echo '<td>'.$expStatus.'</td>';
 
 
