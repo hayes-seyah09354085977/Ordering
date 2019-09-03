@@ -36,15 +36,42 @@ switch ($action) {
 			$category = New Category();
 			$category->Categories	= $_POST['CATEGORY'];
 			$category->StoreID	= $_SESSION['ADMIN_USERID'];
-			$category->create();
 
-			message("New [". $_POST['CATEGORY'] ."] created successfully!", "success");
-			redirect("index.php");
+			$checkCategoryName = checkExistingCategory($_POST['CATEGORY']);
+			switch($checkCategoryName){
+				case '0':
+						$category->create();
+						message("New [". $_POST['CATEGORY'] ."] created successfully!", "success");
+						redirect("index.php");
+				break;
+				case '1':
+					message("Category Name Exist! Please Use Other Category Names.", "error");
+					redirect("index.php?view=add");
+				break;
+
+			}
+			
 			
 		}
 		}
 
 	}
+	function checkExistingCategory($categoryName){
+		global $mydb;
+		$mydb->setQuery("SELECT count(*)as cnt FROM `tblcategory` WHERE `Categories`='".$categoryName."'");
+		$cur = $mydb->executeQuery();
+		if($cur==false){
+			die(mysql_error());
+		}
+	
+		$res = mysqli_fetch_assoc($cur);
+		if ($res['cnt'] == 1){
+			return '1';
+		}else{
+			return '0';
+		}
+		 
+	 }
 
 	function doEdit(){
 		if(isset($_POST['save'])){
