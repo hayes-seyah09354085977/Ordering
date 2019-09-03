@@ -3,7 +3,21 @@ section#inner-headline {
     background: #37393c !important;
 }
 </style>
+<?php
+$orderType='Cash On Delivery';
+if(isset($_GET['ct'])){
+	$getCT = $_GET['ct'];
+	if($getCT=='IR'){
+		$orderType = 'Installment Plan';
+		echo 'trie';
+	}
+	if($getCT=='RM'){
+		$orderType= 'Remittance';
+		echo 'four';
+	}
+}
 
+?>
 <section id="content"> 
 <div class="container"> 
 <div class="row">
@@ -13,7 +27,7 @@ section#inner-headline {
 				<td>Tracking No.  </td><td><b> : TR#201123</b></td>
 			</tr>
 			<tr>
-				<td>Order Type  </td><td><b> : Cash On Delivery</b></td>
+				<td>Order Type  </td><td><b> : <?php echo $orderType; ?></b></td>
 			</tr>
 			<tr>
 				<td>Fullname  </td><td> : <?php echo $_SESSION['CustomerName'] ?></td>
@@ -105,9 +119,18 @@ section#inner-headline {
           
             ?>
           </tbody> 
-        </table>  
-        <div class="pull-right" style="font-size: 30px;">Total:&nbsp; &#8369 <?php echo $subtotal;?></div>
-		
+        </table> 
+		<?php 
+			if(isset($_GET['ct'])=='IR'){
+		?> 
+        	<div class="pull-right" style="font-size: 25px;">Initial Payment:&nbsp;<b> &#8369 <?php echo $subtotal;?></b></div>
+		<?php 
+			}else{
+		?>
+			<div class="pull-right" style="font-size: 25px;">Total:&nbsp;<b> &#8369 <?php echo $subtotal;?></b></div>
+		<?php 
+			}
+		?>
 
  	</div>
  </div>
