@@ -21,17 +21,21 @@
   font-weight: bold;
 }
 .pcat{
-  background: linear-gradient(90deg, rgba(119,128,135,1) 0%, rgba(49,55,60,1) 48%, rgba(119,128,135,1) 100%);
+  background: white;
+  border: 3px solid;
   border-radius: 25px;
   margin-right: 15px;
   margin-top: 10px;
 }
 .pcatcolor{
-  color:#f6f6f6 !important;
+  color:#000 !important;
 }
 p.currency {
     font-size: 25px !important;
     font-weight: bold;
+}
+.info-blocks .info-blocks-in {
+    height: 120px;
 }
 </style>
   <section id="banner">
@@ -113,11 +117,13 @@ p.currency {
                     </a>
                   </div>
                   <div class="info-blocks-in">
+                    <div>
                     <a href="index.php?q=product-view&search=<?php echo $row->CategoryID;?>&pid=<?php echo $row->ProductID;?>">
                       <h3><?php echo $row->ProductName;?></h3>
                     </a>
                       <!-- <p>Description :&nbsp; <?php echo $row->Description;?></p> -->
                       <p class='currency'>₱<?php echo $row->Price;?></p>
+                    </div>
                   </div>
               </div>
     <?php
