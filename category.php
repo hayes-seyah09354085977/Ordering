@@ -3,14 +3,12 @@
   margin-top: 5px;
 }
 .stretch img{ 
-  max-width: 100%;
-  max-height: 100%;
-  height: 260px;
-  padding: 10px;
+ width: 100%;
+ height: 100% !important;
+ max-height: 250px;
 }
 .info-blocks .info-blocks-in {
     padding: 20px 0px;
-    background: transparent !important;
 }
 section#inner-headline {
     background: #37393c !important;
@@ -19,7 +17,7 @@ p.currency {
     font-size: 20px !important;
     font-weight: bold;
 }
-.info-blocks {
+.info-blocks{
   margin-top: 15px;
 }
 ._catproducts,a{
@@ -29,11 +27,7 @@ p.currency {
 ._catproducts:hover{
   color:#6694de !important;
 }
-.info-blocks .info-blocks-in h3 {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+
 
 </style>
   <?php
