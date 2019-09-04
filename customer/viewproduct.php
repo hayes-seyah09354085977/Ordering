@@ -8,7 +8,7 @@ global $mydb;
 	
  	$totalamount = 0;
 
-	$sql = "SELECT * FROM tblcategory c,tblStore st,`tblproduct` p , `tblstockout` s WHERE c.CategoryID=p.CategoryID AND st.StoreID=p.StoreID AND p.`ProductID`=s.`ProductID` and `StockoutID`=" .$stockoutID;
+	$sql = "SELECT * FROM tblcategory c,tblStore st,`tblproduct` p , `tblstockout` s,tblcustomer cmer WHERE c.CategoryID=p.CategoryID AND st.StoreID=p.StoreID AND p.`ProductID`=s.`ProductID` AND cmer.`CustomerID`=s.`CustomerID`  and `StockoutID`=" .$stockoutID;
 	$mydb->setQuery($sql);
 	$res = $mydb->loadSingleResult();
 
@@ -63,20 +63,20 @@ global $mydb;
 	<div class="col-sm-6">
 		<ul>
             <li><i class="fp-ht-bed"></i>Description : <?php echo $res->Description; ?></li>
-            <li><i class="fp-ht-food"></i>Price : <?php echo number_format($res->Price,2);  ?></li>
+            <li><i class="fp-ht-food"></i>Price :&nbsp; &#8369; <?php echo number_format($res->Price,2);  ?></li>
             <li><i class="fa fa-sun-"></i>Quantity : <?php echo $res->Quantity; ?></li>
         </ul>
 	</div> 
 	<div class="col-sm-6">
 		<ul> 
-            <li><i class="fp-ht-tv"></i>Date Expired : <?php echo $res->DateExpire; ?></li>
+            <li><i class="fp-ht-tv"></i>Address : <?php echo $res->CustomerAddress; ?></li>
             <li><i class="fp-ht-computer"></i>Category : <?php echo $res->Categories; ?></li>
-            <li><i class="fp-ht-computer"></i>Status : <?php echo $res->Status; ?></li>
+            <li><i class="fp-ht-computer"></i>Status :<b> <?php echo $res->Status; ?></b></li>
         </ul>
 	</div>
 	<div class="col-sm-12">
-		<p>Total Amount : </p>   
-		<p style="margin-left: 15px;"><?php echo $totalamount;?></p>
+		<p>Total Amount :&nbsp; &#8369; <?php echo number_format($totalamount,2);?> </p>   
+		<p style="margin-left: 15px;"> 	</p>
 	</div> 
 	<div class="col-sm-12"> 
 		<p>Store : </p>

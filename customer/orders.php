@@ -1,3 +1,11 @@
+ <style>
+  i.fa.fa-eye, span.fa.fa-times.fw-fa {
+    font-size: 25px;
+  }
+  td.conf {
+    padding-right: 32px !important;
+  }
+ </style>
  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper"> 
     <!-- Main content -->
@@ -23,7 +31,7 @@
                     <th>Description</th>
                     <th>Price</th>
                     <th>Quantity</th>
-                    <th>Expired Date</th> 
+                    <th>Address</th> 
                     <th>Categories</th>
                     <th>Status</th>
 
@@ -46,17 +54,16 @@
                       echo '<td>' . $result->Description.'</a></td>';
                       echo '<td>' . $result->Price.'</a></td>'; 
                       echo '<td>'. $result->Quantity.'</td>'; 
-                      echo '<td>'. $result->DateExpire.'</td>';
+                      echo '<td>'. $result->CustomerAddress.'</td>';
                       echo '<td>'. $result->Categories.'</td>';  
                       echo '<td>'. $result->Status.'</td>';  
 
-                      if ($result->Status=="Cancelled") {
+                      if ($result->Status=="Cancelled" || $result->Status=="Confirmed") {
                         # code...
-                        echo '<td><a title="View" href="index.php?view=viewproduct&id='.$result->StockoutID.'" class="  ">  <span class="fa fa-edit fw-fa"></a></td>';
+                        echo '<td class="conf" align="center"><a title="View" href="index.php?view=viewproduct&id='.$result->StockoutID.'" class="  ">  <i class="fa fa-eye" aria-hidden="true"></i></a></td>';
                       }else{
-                      echo '<td align="center"><a title="View" href="index.php?view=viewproduct&id='.$result->StockoutID.'" class="  ">  <span class="fa fa-edit fw-fa"></a>
-                      <a title="Cancel" href="controller.php?action=cancel&id='.$result->StockoutID.'&ProductID='.$result->pid.'&TransQuantity='.$result->Quantity.'" class=" ">  <span class="fa  fa-times fw-fa "></a></td>';
-
+                        echo '<td align="center"><a title="View" href="index.php?view=viewproduct&id='.$result->StockoutID.'" class="  ">  <i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <a title="Cancel" href="controller.php?action=cancel&id='.$result->StockoutID.'&ProductID='.$result->pid.'&TransQuantity='.$result->Quantity.'" class=" ">  <span class="fa  fa-times fw-fa "></a></td>';
                       }
                       echo '</tr>';
                       } 
