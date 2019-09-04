@@ -1,7 +1,8 @@
 <style type="text/css">
-  .stretch img{
-    width: 100%;
-    height: 200px;
+.stretch img{
+    max-width: 100%;
+    height: 260px;
+    padding: 15px;
   }
   .slides > li > img {
     width: 100%;
@@ -24,8 +25,7 @@
   background: white;
   border: 3px solid;
   border-radius: 25px;
-  margin-right: 15px;
-  margin-top: 10px;
+  margin: 10px 10px;
 }
 .pcatcolor{
   color:#000 !important;
@@ -36,6 +36,18 @@ p.currency {
 }
 .info-blocks .info-blocks-in {
     height: 120px;
+    background: transparent !important; 
+}
+.info-blocks .info-blocks-in h3 {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.pcat:hover {
+    background: black;
+    color: white !important;
+    border: black;
+    transition: ease-in-out 0.3s;
 }
 </style>
   <section id="banner">
@@ -117,13 +129,11 @@ p.currency {
                     </a>
                   </div>
                   <div class="info-blocks-in">
-                    <div>
                     <a href="index.php?q=product-view&search=<?php echo $row->CategoryID;?>&pid=<?php echo $row->ProductID;?>">
                       <h3><?php echo $row->ProductName;?></h3>
                     </a>
                       <!-- <p>Description :&nbsp; <?php echo $row->Description;?></p> -->
                       <p class='currency'>₱<?php echo $row->Price;?></p>
-                    </div>
                   </div>
               </div>
     <?php
@@ -152,7 +162,7 @@ p.currency {
             $cur = $mydb->loadResultList();
 
             foreach ($cur as $result) {
-              echo '<div class="col-md-2 pcat" style="font-size:15px;padding:10px"> <a class="pcatcolor" href="'.web_root.'index.php?q=category&search='.$result->CategoryID.'">'.strtoupper($result->Categories).'</a></div>';
+              echo ' <a class="pcatcolor" href="'.web_root.'index.php?q=category&search='.$result->CategoryID.'"><div class="col-md-2 pcat" style="font-size:15px;padding:10px">'.strtoupper($result->Categories).'</div></a>';
             }
 
           ?>
