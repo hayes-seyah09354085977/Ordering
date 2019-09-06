@@ -2,6 +2,15 @@
 .modal-dialog {
     margin-top: 315px;
 }
+.modal-header {
+    background: #3c8dbc;
+}
+.modal-title {
+	color:#fff;
+    line-height: 2;
+	font-size: 24px;
+    text-indent: 13px;
+}
 </style>
 <?php
 	 if(!isset($_SESSION['ADMIN_USERID'])){
@@ -15,7 +24,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><b>Reason To Cancel Order</b></h5>
+        <h5 class="modal-title" id="exampleModalLabel"><b>Pending For Cancellation</b></h5>
       </div>
       <div class="modal-body">
         <div class="container">
@@ -117,7 +126,7 @@ function getMessage(id,pid,qty){
            success: function(data){
 			   var message = data.match(/w+|"[^"]+"/g)[1].replace(/"/g, ' ').replace(/\\n/,'').replace(/\\/,'')
 				// CKEDITOR.instances.editor1.setData(message)
-				$('.editor1').append(message)
+				$('.editor1').append(message.toUpperCase())
            }
 		 });
 
