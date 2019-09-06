@@ -16,6 +16,7 @@
         <h5 class="modal-title" id="exampleModalLabel">Reason To Cancel Order</h5>
       </div>
       <div class="modal-body">
+        <div class="alert-danger" style="height:30px;text-align:center;padding:5px;margin: 12px;">Please Add Reason To Cancel Order, Thank You.</div>
         <div class="container">
           <div class="row">
             <div class="col-md-6">
@@ -125,6 +126,10 @@
 <script>
   CKEDITOR.replace( 'editor1' );
 
+  $('.alert-danger').css({
+    'display':'none'
+  })
+
    function modifypath(id){
     //  $('.proceed').attr('href','controller.php?action=cancel&id='+id)
     $('.proceed').attr('data',id)
@@ -132,7 +137,12 @@
 
   $('.proceed').click(function(){
     var id = $('.proceed').attr('data')
-    $.ajax({
+    if(CKEDITOR.instances.editor1.getData()==""){
+      $('.alert-danger').css({
+    'display':'block'
+  })
+    }else{
+      $.ajax({
            type: "POST",
            dataType: 'json',
            url: "../ajaxSession.php",
@@ -141,7 +151,8 @@
               console.log(data)
            }
          });
-     $('.proceed').attr('href',"controller.php?action=cancel&id="+id);
+      $('.proceed').attr('href',"controller.php?action=cancel&id="+id);
+    }
   })
 </script>
  

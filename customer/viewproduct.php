@@ -1,21 +1,3 @@
-<?php 
-global $mydb;
-	$stockoutID = isset($_GET['id']) ? $_GET['id'] : '';
-
-	$sql = "UPDATE tblstockout SET HView=0 WHERE StockoutID='{$stockoutID}'";
-	$mydb->setQuery($sql);
-	$mydb->executeQuery();
-	
- 	$totalamount = 0;
-
-	$sql = "SELECT * FROM tblcategory c,tblStore st,`tblproduct` p , `tblstockout` s,tblcustomer cmer WHERE c.CategoryID=p.CategoryID AND st.StoreID=p.StoreID AND p.`ProductID`=s.`ProductID` AND cmer.`CustomerID`=s.`CustomerID`  and `StockoutID`=" .$stockoutID;
-	$mydb->setQuery($sql);
-	$res = $mydb->loadSingleResult();
-
-	$totalamount = $res->Price * $res->Quantity;
-
-
-?> 
 <style type="text/css">
 .content-header {
 	min-height: 50px;
@@ -53,12 +35,35 @@ global $mydb;
 	/*padding: 0;*/
 
 }
+
+/* tracker design */
+
+
+
 </style>
+<?php 
+global $mydb;
+	$stockoutID = isset($_GET['id']) ? $_GET['id'] : '';
+
+	$sql = "UPDATE tblstockout SET HView=0 WHERE StockoutID='{$stockoutID}'";
+	$mydb->setQuery($sql);
+	$mydb->executeQuery();
+	
+ 	$totalamount = 0;
+
+	$sql = "SELECT * FROM tblcategory c,tblStore st,`tblproduct` p , `tblstockout` s,tblcustomer cmer WHERE c.CategoryID=p.CategoryID AND st.StoreID=p.StoreID AND p.`ProductID`=s.`ProductID` AND cmer.`CustomerID`=s.`CustomerID`  and `StockoutID`=" .$stockoutID;
+	$mydb->setQuery($sql);
+	$res = $mydb->loadSingleResult();
+
+	$totalamount = $res->Price * $res->Quantity;
+
+
+?> 
+
 <form action="controller.php?action=approve" method="POST">
 <div class="col-sm-12 content-header" style="">Product Details</div>
 <div class="col-sm-12 content-body" >  
 	<h3><?php echo $res->ProductName; ?></h3>
-	<input type="hidden" name="JOBREGID" value="<?php echo $jobreg->REGISTRATIONID;?>">
 
 	<div class="col-sm-6">
 		<ul>
@@ -87,3 +92,4 @@ global $mydb;
 </div>
   
 </form>
+
