@@ -53,7 +53,7 @@ switch ($action) {
 			$mydb->setQuery($sql);
 			$mydb->executeQuery(); 
 			
-			message("Please for Verification from the store manager, Thank you.", "success");
+			message("Please wait for the store manager to verify your request, Thank you.", "success");
 			redirect("index.php");
 	}
    
