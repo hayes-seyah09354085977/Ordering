@@ -68,6 +68,10 @@ function doSubmitOrder(){
 				$remaining = $row->Remaining - $qty;
 				$sold = $row->Sold + $qty; 
 
+				$sqlupdate = "UPDATE `tblinventory` SET `Remaining` = $remaining WHERE `ProductID`='{$productID}'";
+				$mydb->setQuery($sqlupdate);
+				$mydb->executeQuery(); 
+
 
 				$sql = "INSERT INTO `tblstockout`  (`CustomerID`, `ProductID`, `Quantity`, `DateSold`,OrderNO,HView) VALUES('{$customerID}','{$productID}','{$qty}',Now(),'{$orderno}',1)";
 				$mydb->setQuery($sql);
@@ -88,7 +92,7 @@ function doSubmitOrder(){
 
 			message("Orders created successfully!", "success");
 
-			redirect("index.php");
+			redirect("customer/index.php");
 
 		}
 }

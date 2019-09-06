@@ -97,7 +97,7 @@ switch ($action) {
 			$mydb->setQuery($sql);
 			$mydb->executeQuery();
 
-			$sql ="UPDATE `tblinventory` SET  `Sold`='{$sold}', `Remaining`='{$remaining}'  WHERE `ProductID`='{$productID}'";
+			$sql ="UPDATE `tblinventory` SET  `Sold`='{$sold}'  WHERE `ProductID`='{$productID}'";
 			$mydb->setQuery($sql);
 			$mydb->executeQuery();
 
@@ -109,7 +109,21 @@ switch ($action) {
 
 	function doCancel(){
 			global $mydb;
+
 			$stockoutID = $_GET['id'];
+			$productID = $_GET['ProductID'];
+			$qty = $_GET['qty'];
+
+			$sql="SELECT * FROM `tblinventory` WHERE `ProductID`='{$productID}'"; 
+			$mydb->setQuery($sql);
+			$row = $mydb->loadSingleResult();
+
+			$remaining = $row->Remaining + $qty;
+
+			$sql ="UPDATE `tblinventory` SET  `Remaining`='{$remaining}'  WHERE `ProductID`='{$productID}'";
+			$mydb->setQuery($sql);
+			$mydb->executeQuery();
+
 			$sql = "UPDATE `tblstockout`  SET Status  = 'Cancelled' WHERE StockoutID='{$stockoutID}'";
 			$mydb->setQuery($sql);
 			$mydb->executeQuery(); 

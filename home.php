@@ -1,7 +1,12 @@
 <style type="text/css">
   .stretch img{
     width: 100%;
-    height: 200px;
+    height: 217px;
+  }
+    h3 {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
   }
   .slides > li > img {
     width: 100%;

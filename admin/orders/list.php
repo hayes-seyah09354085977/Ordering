@@ -54,7 +54,7 @@
 							echo '<td>None</td>';
 						}else{
 							echo '<td align="center"><a title="Confirm" href="controller.php?action=confirm&id='.$result->StockoutID.'&ProductID='.$result->pid.'&qty='.$result->Quantity.'" class="btn btn-primary btn-xs  ">  <span class="fa fa-check fw-fa">Confirm</a>
-							<a title="Delete" href="controller.php?action=cancel&id='.$result->StockoutID.'" class="btn btn-danger btn-xs  ">  <span class="fa  fa-times fw-fa ">Cancel</a></td>'; 
+							<a title="Delete" href="controller.php?action=cancel&id='.$result->StockoutID.'&ProductID='.$result->pid.'&qty='.$result->Quantity.'" class="btn btn-danger btn-xs  ">  <span class="fa  fa-times fw-fa ">Cancel</a></td>'; 
 						}
 						echo '</tr>';
 				  	} 
