@@ -6,7 +6,36 @@
     padding-right: 32px !important;
   }
  </style>
- <!-- Content Wrapper. Contains page content -->
+
+<script src="../plugins/ckeditor/ckeditor.js"></script>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Reason To Cancel Order</h5>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <textarea name="editor1" id="editor1" rows="10" cols="50"></textarea>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- End Container -->
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <a class="proceed" href="#"><button type="button" class="btn btn-primary">Submit</button></a>
+      </div>
+    </div>
+</div>
+<!-- end modal -->
+ <!-- Content Wrapper. Cont
+ ains page content -->
   <div class="content-wrapper"> 
     <!-- Main content -->
     <section class="content">
@@ -57,13 +86,15 @@
                       echo '<td>'. $result->CustomerAddress.'</td>';
                       echo '<td>'. $result->Categories.'</td>';  
                       echo '<td>'. $result->Status.'</td>';  
-
-                      if ($result->Status=="Cancelled" || $result->Status=="Confirmed") {
+                     
+                      if ($result->Status=="Cancelled" || $result->Status=="Confirmed" || $result->Status=="Pending for Cancellation") {
                         # code...
                         echo '<td class="conf" align="center"><a title="View" href="index.php?view=viewproduct&id='.$result->StockoutID.'" class="  ">  <i class="fa fa-eye" aria-hidden="true"></i></a></td>';
                       }else{
+                        // echo '<td align="center"><a title="View" href="index.php?view=viewproduct&id='.$result->StockoutID.'" class="  ">  <i class="fa fa-eye" aria-hidden="true"></i></a>
+                        // <a title="Cancel" href="controller.php?action=cancel&id='.$result->StockoutID.'&ProductID='.$result->pid.'&TransQuantity='.$result->Quantity.'" class=" ">  <span class="fa  fa-times fw-fa "></a></td>';
                         echo '<td align="center"><a title="View" href="index.php?view=viewproduct&id='.$result->StockoutID.'" class="  ">  <i class="fa fa-eye" aria-hidden="true"></i></a>
-                        <a title="Cancel" href="controller.php?action=cancel&id='.$result->StockoutID.'&ProductID='.$result->pid.'&TransQuantity='.$result->Quantity.'" class=" ">  <span class="fa  fa-times fw-fa "></a></td>';
+                        <a onclick="modifypath('.$result->StockoutID.')" title="Cancel"  data-toggle="modal" data-target="#exampleModal">  <span class="fa  fa-times fw-fa "></a></td>';
                       }
                       echo '</tr>';
                       } 
@@ -87,5 +118,30 @@
     </section>
     <!-- /.content -->
   </div>
-   
+<script src="<?php echo web_root; ?>plugins/home-plugins/js/jquery.js"></script>
+<script src="<?php echo web_root; ?>plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="<?php echo web_root; ?>plugins/jQueryUI/jquery-ui.js"></script>
+<script src="<?php echo web_root; ?>plugins/jQueryUI/jquery-ui.min.js"></script>
+<script>
+  CKEDITOR.replace( 'editor1' );
+
+   function modifypath(id){
+    //  $('.proceed').attr('href','controller.php?action=cancel&id='+id)
+    $('.proceed').attr('data',id)
+  }
+
+  $('.proceed').click(function(){
+    var id = $('.proceed').attr('data')
+    $.ajax({
+           type: "POST",
+           dataType: 'json',
+           url: "../ajaxSession.php",
+           data: {e:'orders',reason:CKEDITOR.instances.editor1.getData()},
+           success: function(data){
+              console.log(data)
+           }
+         });
+     $('.proceed').attr('href',"controller.php?action=cancel&id="+id);
+  })
+</script>
  

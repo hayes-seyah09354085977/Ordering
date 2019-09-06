@@ -334,7 +334,7 @@ $.extend(Calc.prototype, {
     $.ajax({
            type: "POST",
            url: "ajaxSession.php",
-           data: {tp:this.$resultTP,mtp:this.$slider.val(),mp:this.$monthlyPayment,pi:this.$product_interest,inp:this.$initial_payment.val()},
+           data: {e:'payment',tp:this.$resultTP,mtp:this.$slider.val(),mp:this.$monthlyPayment,pi:this.$product_interest,inp:this.$initial_payment.val()},
            success: function(data){
             //  console.log('success')
            }
@@ -353,7 +353,7 @@ $.extend(Calc.prototype, {
     $.ajax({
            type: "POST",
            url: "ajaxSession.php",
-           data: {tp:this.$resultTP,mtp:this.$slider.val(),mp:this.$monthlyPayment,pi:this.$product_interest,inp:this.$initial_payment.val()},
+           data: {e:'payment',tp:this.$resultTP,mtp:this.$slider.val(),mp:this.$monthlyPayment,pi:this.$product_interest,inp:this.$initial_payment.val()},
            success: function(data){
             //  console.log('success')
            }

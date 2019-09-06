@@ -42,14 +42,18 @@ switch ($action) {
 	}
 
 	function doCancel(){
+			// global $mydb;
+			// $stockoutID = $_GET['id'];
+			// $sql = "UPDATE `tblstockout`  SET Status  = 'Cancelled' WHERE StockoutID='{$stockoutID}'";
+			// $mydb->setQuery($sql);
+			// $mydb->executeQuery(); 
 			global $mydb;
 			$stockoutID = $_GET['id'];
-			$sql = "UPDATE `tblstockout`  SET Status  = 'Cancelled' WHERE StockoutID='{$stockoutID}'";
+			$sql = "UPDATE `tblstockout`  SET Status  = 'Pending for Cancellation',Remarks='".$_SESSION['reason']."' WHERE StockoutID='{$stockoutID}'";
 			$mydb->setQuery($sql);
 			$mydb->executeQuery(); 
-
-			message("Orders has been cancelled!", "success");
-			// redirect("index.php?view=view&id=".$_POST['EMPLOYEEID']);
+			
+			message("Please for Verification from the store manager, Thank you.", "success");
 			redirect("index.php");
 	}
    
