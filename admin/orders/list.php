@@ -1,3 +1,8 @@
+<style>
+.modal-dialog {
+    margin-top: 315px;
+}
+</style>
 <?php
 	 if(!isset($_SESSION['ADMIN_USERID'])){
       redirect(web_root."admin/index.php");
@@ -5,7 +10,6 @@
 
 ?> 
 
-<script src="../../plugins/ckeditor/ckeditor.js"></script>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -16,18 +20,19 @@
       <div class="modal-body">
         <div class="container">
           <div class="row">
-            <div class="col-md-6">
-              <textarea name="editor1" id="editor1" rows="10" cols="50"></textarea>
+            <div class="col-md-6 editor1">
+              <!-- <textarea name="editor1" id="editor1" rows="10" cols="50"></textarea> -->
+
             </div>
           </div>
         </div>
 
-      </div>
-      <!-- End Container -->
         </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <a class="proceed" href="#"><button type="button" class="btn btn-primary">Approve</button></a>
+      </div>
+      <!-- End Container -->
       </div>
     </div>
 </div>
@@ -102,19 +107,20 @@
 <script src="<?php echo web_root; ?>plugins/jQueryUI/jquery-ui.min.js"></script>
 
 <script>
-CKEDITOR.replace( 'editor1' );
 
 function getMessage(id,pid,qty){
+	$('.editor1').children().remove()
 	$.ajax({
            type: "POST",
            url: "../../ajaxSession.php",
            data: {e:'getMessage',id:id},
            success: function(data){
 			   var message = data.match(/w+|"[^"]+"/g)[1].replace(/"/g, ' ').replace(/\\n/,'').replace(/\\/,'')
-				CKEDITOR.instances.editor1.setData(message)
+				// CKEDITOR.instances.editor1.setData(message)
+				$('.editor1').append(message)
            }
 		 });
-		 
+
 	$('.proceed').attr('href','controller.php?action=cancel&id='+id+'&ProductID='+pid+'&qty='+qty);
 
 }
