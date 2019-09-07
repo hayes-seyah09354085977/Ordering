@@ -37,8 +37,73 @@
 }
 
 /* tracker design */
+.step{
+  padding   : 0;
+  margin    : 15px 0px 0px 0px;
+  width     : 100%;
+  color     : #CCC;
+}
 
+  .step ul{
+    list-style   : none;
+    padding      : 0;
+    text-align   : center;
+    counter-reset: step;
+    display      : flex;
+  }
 
+    .step ul li{
+      box-sizing : border-box;
+      width      : 25%;
+      text-align : center;
+      position   : relative;
+      padding-top: 40px;
+    }
+    
+    .step ul li.done{
+      color:#03b1c7;
+    }
+
+      .step ul li:before{
+        text-align        : center;
+        content           : counter( step);
+        counter-increment : step;
+        display           : block;
+        width             : 30px;
+        height            : 30px;
+        border            : 3px solid #f9fbfd;
+        border-radius     : 50%;
+        position          : absolute;
+        left              : 50%;
+        top               : 0;
+        transform         : translateX(-50%);
+        background-color  : #CCC;
+        color             : #FFF;
+      }
+
+      .step ul li.done:before{
+        background-color  : #03b1c7;
+      }
+
+      .step ul li:after{
+        content         : "";
+        display         : block;
+        width           : 100%;
+        height          : 5px;
+        background-color: #CCC;
+        top             : 15px;
+        position        : absolute;
+        z-index         : -1;
+        margin-left     : -50%;
+      }
+
+      .step ul li.done + li:after{
+        background-color  : #03b1c7;
+      }
+
+      .step ul li:first-child:after{
+        content:none;
+      }
 
 </style>
 <?php 
@@ -59,8 +124,23 @@ global $mydb;
 
 
 ?> 
+<div class="step">
+  <ul>
+    <li class="Processing done">Pending</li>
+    <li class="Confirmed">Confirmed</li>
+    <li class="Toship">To Ship</li>
+	<li class="Shipped">Shipped</li>
+	<li class="Todeliver">To Deliver</li>
+	<li class="Delivered">Delivered</li>
+</ul>
+</div>
 
-<form action="controller.php?action=approve" method="POST">
+
+<div class="container">
+<div class="col-sm-12 content-header" style="">Product Details</div>
+</div>
+
+<!-- 
 <div class="col-sm-12 content-header" style="">Product Details</div>
 <div class="col-sm-12 content-body" >  
 	<h3><?php echo $res->ProductName; ?></h3>
@@ -90,6 +170,7 @@ global $mydb;
 		<p style="margin-left: 15px;"><i class="fa fa-phone"></i> <?php echo $res->ContactNo ; ?></p>
 	</div>
 </div>
-  
-</form>
+   -->
+
+
 

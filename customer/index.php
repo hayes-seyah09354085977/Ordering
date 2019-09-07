@@ -25,7 +25,7 @@ switch ($view) {
 		break;
   
 	case 'viewproduct' : 
-	    $title="Profile";	
+	    $title="View Product";	
         $_SESSION['orders']	='active' ;
         $content ='Profile.php';
 		break;
