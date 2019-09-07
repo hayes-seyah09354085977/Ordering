@@ -190,8 +190,9 @@ global $mydb;
           <div class="product-manufacturer"><?php echo $res->StoreName ; ?></div>
           <div class="product-title"><?php echo $res->ProductName; ?></div>
       </div>
-      <div class="product-description"><?php echo $res->Description; ?></div>
-      <div class="product-price"> ₱<?php echo number_format($res->Price,2);?></div>
+      <div class="product-description"><?php echo $res->Description; ?></div> 
+      <div class="product-qty">Quantity: &nbsp; <?php echo $res->Quantity; ?></div>
+      <div class="product-price"> ₱<?php echo number_format($totalamount,2);?></div>
     </div>
     <div class="row">
       <div class="col-sm-12">
