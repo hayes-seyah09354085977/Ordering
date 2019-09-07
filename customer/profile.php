@@ -56,9 +56,9 @@
           <div class="box box-solid">  
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked"> 
-                <li class="<?php echo ($view=='orders' || $view=='') ? 'active': '';?>"><a href="<?php echo web_root.'customer/index.php?view=orders'; ?>"><i class="fa fa-list"></i> Orders
+                <li class="<?php echo ($view=='orders' || $view=='') ? 'active': '';?>"><a href="<?php echo web_root.'customer/index.php?view=orders'; ?>"><i class="fa fa-list"></i> My Orders
                    </a></li>
-                  <li class="<?php echo ($view=='accounts') ? 'active': '';?>"><a href="<?php echo web_root.'customer/index.php?view=accounts'; ?>"><i class="fa fa-user"></i> Accounts </a></li>
+                  <li class="<?php echo ($view=='accounts') ? 'active': '';?>"><a href="<?php echo web_root.'customer/index.php?view=accounts'; ?>"><i class="fa fa-user"></i> Account Settings </a></li>
               <!--   <li class="<?php echo ($view=='message') ? 'active': '';?>"><a href="<?php echo web_root.'customer/index.php?view=message'; ?>"><i class="fa fa-envelope-o"></i> Messages
                   <span class="label label-success pull-right"><?php echo isset($showMsg->COUNT) ? $showMsg->COUNT : 0;?></span></a></li> -->
               <!--      <li class="<?php echo ($view=='notification') ? 'active': '';?>"><a href="<?php echo web_root.'customer/index.php?view=notification'; ?>"><i class="fa fa-bell-o"></i> Notification

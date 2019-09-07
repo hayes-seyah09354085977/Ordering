@@ -10,7 +10,7 @@
 <form class="form-horizontal" method="POST" action="controller.php?action=edit">  
       <div class="container">  
             <div class="box-header with-border">
-              <h3 class="box-title">Accounts</h3>
+              <h3 class="box-title">Account Settings</h3>
  
               <!-- /.box-tools -->
             </div> 
