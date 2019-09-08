@@ -40,46 +40,61 @@ switch ($action) {
 	}
    
 	function doInsert(){
+	
 		global $mydb;
 		if(isset($_POST['save'])){
- 		    
-					$loanss = New Loan(); 
-					$loanss->loanname 			= $_POST['loanname'];
-					$loanss->loanpercent		= $_POST['loanpercent']; 
-					$loanss->loanMonth			= $_POST['loanmonth'];  
-					$loanss->loandescription	= $_POST['loandescription']; 
-					$loanss->create(); 
+ 		 
+					$product = New Variation(); 
+					$product->variation	= $_POST['Variation']; 
+					// $product->DateExpire		=  @$DateExpire;
+					$product->varcatid		= $_POST['CategoryID'];
+					$checkProductName = checkExistingProduct($_POST['CategoryID']);
+					switch($checkProductName){
+						case '0':
+							$product->create(); 				
+		
+							message("New Variation created successfully!", "success");
+							redirect("index.php");
+						break;
+						case '1':
+							message("Variation Category Already Used Create new Category or Use Another", "error");
+							redirect("index.php?view=add");
+						break;
 
-					$loanid = $mydb->insert_id();
-
-					// $sql ="INSERT INTO `tblinventory` (`ProductID`) VALUES ('{$productID}')";
-					// $mydb->setQuery($sql);
-					// $mydb->executeQuery();
- 
-
-					message("New Loan created successfully!", "success");
-					redirect("index.php");
+					}
+					
  
 		 }
  } 
+ function checkExistingProduct($productName){
+	global $mydb;
+	$mydb->setQuery("SELECT count(*)as cnt FROM `tblvariation` WHERE `varcatid`='".$productName."'");
+	$cur = $mydb->executeQuery();
+	if($cur==false){
+		die(mysql_error());
+	}
+
+	$res = mysqli_fetch_assoc($cur);
+	if ($res['cnt'] == 1){
+		return '1';
+	}else{
+		return '0';
+	}
+	 
+ }
 
 
 	function doEdit(){
 	if(isset($_POST['save'])){
 
-			$loanss = New Loan(); 
-			$loanss->loanname 			= $_POST['loanname'];
-			$loanss->loanpercent		= $_POST['loanpercent']; 
-			$loanss->loanMonth			= $_POST['loanmonth'];  
-			$loanss->loandescription	= $_POST['loandescription'];  
-			
+			$product = New Variation(); 
+			$product->varcatid 		= $_POST['CategoryID'];
+			$product->variation		= $_POST['Variation']; 
+			$product->update($_POST['ProductID']);
+echo"stop";
 
-			$loanss->update($_POST['loanid']);
-
-
-			message("Loan has been updated!", "success");
-			// redirect("index.php?view=view&id=".$_POST['EMPLOYEEID']);
-			redirect("index.php?view=edit&id=".$_POST['loanid']);
+			message("Variation has been updated!", "success");
+			redirect("index.php?view=edit&id=".$_POST['ProductID']);
 	     
   	
 	 
@@ -88,38 +103,11 @@ switch ($action) {
 } 
 	function doDelete(){
 		global $mydb;
-		
-		// if (isset($_POST['selector'])==''){
-		// message("Select the records first before you delete!","error");
-		// redirect('index.php');
-		// }else{
-
-		// $id = $_POST['selector'];
-		// $key = count($id);
-
-		// for($i=0;$i<$key;$i++){
-
-		// 	$subj = New Student();
-		// 	$subj->delete($id[$i]);
-
-		
-				$id = 	$_GET['id'];
-
-				$product = New Product();
-	 		 	$product->delete($id);
-
-	 		 	$sql = "DELETE FROM tblloan WHERE loanid=".$id;
-	 		 	$mydb->setQuery($sql);
-	 		 	$mydb->executeQuery();
-
-			 
-		
-		// }
-			message("Product already Deleted!","success");
+			$id = 	$_GET['id'];
+			$product = New Variation();
+	 		$product->delete($id);
+			message("Variation already Deleted!","success");
 			redirect('index.php');
-		// }
-
-		
 	}
 
 	function UploadImage($imgname=""){

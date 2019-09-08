@@ -162,6 +162,16 @@
             <i class="fa fa-list"></i> <span>Category</span>  
           </a>
         </li> 
+        <li class="<?php echo (currentpage() == 'variationcategory') ? "active" : false;?>" > 
+          <a href="<?php echo web_root ;?>admin/variationcategory/">
+            <i class="fa fa-list"></i> <span>Variation Category</span>  
+          </a>
+        </li>
+        <li class="<?php echo (currentpage() == 'variation') ? "active" : false;?>" > 
+          <a href="<?php echo web_root ;?>admin/variation/">
+            <i class="fa fa-list"></i> <span>Variation</span>  
+          </a>
+        </li>
         <!-- <li class="<?php echo (currentpage() == 'store') ? "active" : false;?>" >
           <a href="<?php echo web_root ;?>admin/store/">
             <i class="fa fa-building"></i> <span>Store</span> 
