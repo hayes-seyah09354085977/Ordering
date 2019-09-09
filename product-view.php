@@ -285,7 +285,7 @@ $.ajax({
           for(var x =0; x < data.length; x++){
             var y = data[x]['variation'].split(','),
             z='',
-            varname='<div class="col-sm-2 title"> '+data[x]['variationcat'].toUpperCase()+'</div>'
+            varname='<div class="col-sm-2 title"> '+data[x]['variationcat']+'</div>'
 
               for(var yy = 0; yy < y.length; yy++){
                 if(yy==0 ||(yy%4) > 0){
