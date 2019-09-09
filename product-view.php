@@ -120,6 +120,10 @@ input.remqty {
     background: #f5782d;
     color: white;
 }
+.activeOpts{
+  background:#f5782d;
+  color:#fff;
+}
 </style>
 
 <section id="content">
@@ -266,35 +270,41 @@ $('.imgmini').click(function(){
 })
     
 $.ajax({
-           type: "POST",
-           url: "ajaxSession.php",
-           dataType:'json',
-           data: {e:'getvariation'},
-           success: function(data){
-              console.log(data)
-              for(var x =0; x < data.length; x++){
-                var y = data[x]['variation'].split(','),
-                z='',
-                varname='<div class="col-sm-2"> '+data[x]['variationcat'].toUpperCase()+'</div>'
+      type: "POST",
+      url: "ajaxSession.php",
+      dataType:'json',
+      data: {e:'getvariation'},
+      success: function(data){
+          for(var x =0; x < data.length; x++){
+            var y = data[x]['variation'].split(','),
+            z='',
+            varname='<div class="col-sm-2"> '+data[x]['variationcat'].toUpperCase()+'</div>'
 
-                  for(var yy = 0; yy < y.length; yy++){
-                    console.log(yy)
-                    if(yy != 4){
-                       z+= '<div class="col-md-2 options"> '+y[yy]+' </div>'
-                    }else if (yy == 4){
-                      console.log('5 na sya')
-                      z+= ' </div><div class="row varcat"><div class="col-md-2 "></div><div class="col-md-2 options"> '+y[yy]+' </div>'
-                    }
-                  }
-                     $('.variation').append(`
-                <div class="row varcat">
-                `+varname+`
-                `+z+`
-                </div>
-                `)
+              for(var yy = 0; yy < y.length; yy++){
+                if(yy != 4){
+                  z+= '<div class="col-md-2 options '+data[x]["variationcat"].replace(/\s/g, '')+'"> '+y[yy]+' </div>'
+                }else if (yy == 4){
+                  z+= ' </div><div class="row"><div class="col-md-2 "></div><div class="col-md-2 options '+data[x]["variationcat"].replace(/\s/g, '')+'"> '+y[yy]+' </div>'
+                }
               }
-           }
-         });
+                $('.variation').append(`
+            <div class="row">
+            `+varname+`
+            `+z+`
+            </div>
+            `)
+          }
+          
+          $(".options").click(function() {
+            var opts = $(this),
+            vcat = opts.attr('class').split(' ')[2]
+            $("."+vcat).removeClass('activeOpts')
+            opts.addClass('activeOpts')
+          });
+      }
+  });
+
+
 
 
       
