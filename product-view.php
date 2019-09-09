@@ -295,7 +295,7 @@ $.ajax({
                 if(yy==0 ||(yy%4) > 0){
                   z+= '<div class="col-md-2 options '+data[x]["variationcat"].replace(/\s/g, '')+'">'+y[yy]+' </div>'
                 }else if (yy!= 0 &&(yy%4) == 0){
-                  z+= ' </div><div class="row"><div class="col-md-2 "></div><div class="col-md-2 options '+data[x]["variationcat"].replace(/\s/g, '')+'">'+y[yy]+' </div>'
+                  z+= '<div class="col-md-2 "></div><div class="col-md-2 options '+data[x]["variationcat"].replace(/\s/g, '')+'">'+y[yy]+' </div>'
                 }
               }
                 $('.variation').append(`
