@@ -111,10 +111,13 @@ input.remqty {
 }
 .options {
     border: 1px solid;
-    width: 100%;
-    max-width: 98px;
+    border-color:#b1b1b1;
+    width: 98px;
+    max-width: 100%;
     font-size: 12px;
+    text-align: center;
     cursor:pointer;
+    margin: 5px;
 }
 .options:hover {
     background: #f5782d;
@@ -178,7 +181,7 @@ input.remqty {
               </div>
     </div>
     <div class="col-sm-2"> </div>
-    <div class="col-sm-5">
+    <div class="col-sm-6">
     <div class="product-right">
       <form action="cartcontroller.php?action=add" method="POST">
               <div class="product-info">
@@ -281,9 +284,9 @@ $.ajax({
             varname='<div class="col-sm-2"> '+data[x]['variationcat'].toUpperCase()+'</div>'
 
               for(var yy = 0; yy < y.length; yy++){
-                if(yy != 4){
+                if((yy%4) > 0){
                   z+= '<div class="col-md-2 options '+data[x]["variationcat"].replace(/\s/g, '')+'"> '+y[yy]+' </div>'
-                }else if (yy == 4){
+                }else if ((yy%4) == 0){
                   z+= ' </div><div class="row"><div class="col-md-2 "></div><div class="col-md-2 options '+data[x]["variationcat"].replace(/\s/g, '')+'"> '+y[yy]+' </div>'
                 }
               }
@@ -294,7 +297,7 @@ $.ajax({
             </div>
             `)
           }
-          
+
           $(".options").click(function() {
             var opts = $(this),
             vcat = opts.attr('class').split(' ')[2]
