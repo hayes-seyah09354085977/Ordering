@@ -131,6 +131,10 @@ input.remqty {
   background:#f5782d;
   color:#fff;
 }
+.row {
+    margin-bottom: 15px !important;
+}
+
 </style>
 
 <section id="content">
