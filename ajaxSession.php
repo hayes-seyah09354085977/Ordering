@@ -33,6 +33,9 @@ switch($e){
             $res = $cur->fetch_all(MYSQLI_ASSOC);
         print_r(json_encode($res));
     break;
+    case 'productWithVariation':
+   
+    break;
 }
 
 

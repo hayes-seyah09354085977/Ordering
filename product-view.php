@@ -118,6 +118,7 @@ input.remqty {
     text-align: center;
     cursor:pointer;
     margin: 5px;
+    padding: 5px;
 }
 .options:hover {
     background: #f5782d;
@@ -284,17 +285,17 @@ $.ajax({
             varname='<div class="col-sm-2"> '+data[x]['variationcat'].toUpperCase()+'</div>'
 
               for(var yy = 0; yy < y.length; yy++){
-                if((yy%4) > 0){
+                if(yy==0 ||(yy%4) > 0){
                   z+= '<div class="col-md-2 options '+data[x]["variationcat"].replace(/\s/g, '')+'"> '+y[yy]+' </div>'
-                }else if ((yy%4) == 0){
+                }else if (yy!= 0 &&(yy%4) == 0){
                   z+= ' </div><div class="row"><div class="col-md-2 "></div><div class="col-md-2 options '+data[x]["variationcat"].replace(/\s/g, '')+'"> '+y[yy]+' </div>'
                 }
               }
                 $('.variation').append(`
-            <div class="row">
-            `+varname+`
-            `+z+`
-            </div>
+                <div class="row">
+                `+varname+`
+                `+z+`
+                </div>
             `)
           }
 
