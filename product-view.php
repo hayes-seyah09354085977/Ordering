@@ -106,6 +106,20 @@ p.currency {
 input.remqty {
     border: none;
 }
+.variation {
+    padding-top: 15px;
+}
+.options {
+    border: 1px solid;
+    width: 100%;
+    max-width: 98px;
+    font-size: 12px;
+    cursor:pointer;
+}
+.options:hover {
+    background: #f5782d;
+    color: white;
+}
 </style>
 
 <section id="content">
@@ -170,7 +184,10 @@ input.remqty {
               <div class="product-description"><?php echo $result->Description ;?></div>
               <div class="product-price"> ₱<?php echo $result->Price ;?></div>
               <div>In-Stocks: &nbsp;<input type="text" class="remqty" name="REMQTY<?php echo $result->ProductID ;?>" value="<?php echo $result->Remaining ;?>" readonly></div>
-             
+              <div class='variation'>
+
+              </div>
+
               <div class="product-quantity">
                 <label for="product-quantity-input" class="product-quantity-label">Quantity</label>
                 <div class="product-quantity-subtract">
@@ -185,6 +202,7 @@ input.remqty {
                 </div>
               </div>
             </div>
+
             <div class="row">
               <div class="col-sm-6">
                   <div class="product-checkout">
@@ -246,4 +264,40 @@ $('.imgmini').click(function(){
   var frontsrc = $(this).attr('src')
   $('.magnifiedImg').attr('src',frontsrc)
 })
+    
+$.ajax({
+           type: "POST",
+           url: "ajaxSession.php",
+           dataType:'json',
+           data: {e:'getvariation'},
+           success: function(data){
+              console.log(data)
+              for(var x =0; x < data.length; x++){
+                var y = data[x]['variation'].split(','),
+                z='',
+                varname='<div class="col-sm-2"> '+data[x]['variationcat'].toUpperCase()+'</div>'
+
+                  for(var yy = 0; yy < y.length; yy++){
+                    console.log(yy)
+                    if(yy != 4){
+                       z+= '<div class="col-md-2 options"> '+y[yy]+' </div>'
+                    }else if (yy == 4){
+                      console.log('5 na sya')
+                      z+= ' </div><div class="row varcat"><div class="col-md-2 "></div><div class="col-md-2 options"> '+y[yy]+' </div>'
+                    }
+                  }
+                     $('.variation').append(`
+                <div class="row varcat">
+                `+varname+`
+                `+z+`
+                </div>
+                `)
+              }
+           }
+         });
+
+
+      
 </script>
+
+
