@@ -289,9 +289,9 @@ $.ajax({
 
               for(var yy = 0; yy < y.length; yy++){
                 if(yy==0 ||(yy%4) > 0){
-                  z+= '<div class="col-md-2 options '+data[x]["variationcat"].replace(/\s/g, '')+'"> '+y[yy]+' </div>'
+                  z+= '<div class="col-md-2 options '+data[x]["variationcat"].replace(/\s/g, '')+'">'+y[yy]+' </div>'
                 }else if (yy!= 0 &&(yy%4) == 0){
-                  z+= ' </div><div class="row"><div class="col-md-2 "></div><div class="col-md-2 options '+data[x]["variationcat"].replace(/\s/g, '')+'"> '+y[yy]+' </div>'
+                  z+= ' </div><div class="row"><div class="col-md-2 "></div><div class="col-md-2 options '+data[x]["variationcat"].replace(/\s/g, '')+'">'+y[yy]+' </div>'
                 }
               }
                 $('.variation').append(`
@@ -304,9 +304,20 @@ $.ajax({
 
           $(".options").click(function() {
             var opts = $(this),
-            vcat = opts.attr('class').split(' ')[2]
+            vcat = opts.attr('class').split(' ')[2],a
             $("."+vcat).removeClass('activeOpts')
             opts.addClass('activeOpts')
+            a=$('.activeOpts').text()
+            console.log(a)
+              $.ajax({
+                type: "POST",
+                url: "ajaxSession.php",
+                dataType:'json',
+                data: {e:'productWithVariation',vr:a},
+                success: function(data){
+                  console.log(data)
+                }
+              })
           });
       }
   });

@@ -34,7 +34,8 @@ switch($e){
         print_r(json_encode($res));
     break;
     case 'productWithVariation':
-   
+        $_SESSION['varieties'] = $_POST['vr'];
+        echo $_SESSION['varieties'];
     break;
 }
 
