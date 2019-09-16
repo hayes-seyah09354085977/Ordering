@@ -1,5 +1,6 @@
 
 <?php
+error_reporting(0);
 require_once ("../../include/initialize.php");
  	 if (!isset($_SESSION['ADMIN_USERID'])){
       redirect(web_root."admin/index.php");
@@ -37,12 +38,32 @@ switch ($action) {
 		}else{	
 			$ProductID = $_POST['ProductID'];
 			$Quantity = $_POST['Quantity'];
+			$Bracket = $_POST['Variationbracket'];
+			$VarSwitch = $_POST['Variationbox'];
+			$ReserveSwitch = $_POST['Reservation'];
+			$ReserveID = $_POST['Reservationbracket'];
+			$VariationCategory = $_POST['VariationCategory'];
+
+			if($VarSwitch == "" ){
+				$VarSwitch = 'off';
+				$Bracket = 'empty';
+			}
+			if($ReserveSwitch == ""){
+				$ReserveSwitch = 'off';
+				$ReserveID = 'empty';
+			}
+			
+			// echo $Bracket.' '. $VarSwitch.' '.$Quantity.' '.$ProductID.'<br>';
+			// echo $product_quantity.' '.$total_quanity.' '.$ProductID;
 		 	
 			$sql = "SELECT  * FROM `tblinventory` WHERE `ProductID`='{$ProductID}'";
-		 	$mydb->setQuery($sql);
-		 	$cur = $mydb->executeQuery(); 
+			 $mydb->setQuery($sql);
+
+			 $cur = $mydb->executeQuery(); 
+			// print_r($cur);
 		 	$maxrow = $mydb->num_rows($cur);
 		 	if ($maxrow > 0) {
+				
 		 		$row  = $mydb->loadSingleResult();
 		 	    $total_quanity = $row->Stocks + $Quantity;
 		 		$product_quantity = $row->Remaining + $Quantity;
@@ -50,12 +71,10 @@ switch ($action) {
 				$sql = "UPDATE `tblinventory` SET `Stocks`= '{$product_quantity}', Remaining =  '{$total_quanity}' WHERE `ProductID`='{$ProductID}'";
 				$mydb->setQuery($sql);
 				$mydb->executeQuery(); 
-
-				$sql = "INSERT INTO `tblstockin` (`ProductID`, `Quantity`, `DateReceive`) 
-				VALUES ('{$ProductID}','{$Quantity}',Now())";
+				$sql = "INSERT INTO `tblstockin` (`ProductID`, `Quantity`, `DateReceive`,`VariationCategory`,`VariationBracket`,`Variation`,`Reservation`,`Reservevalue`) 
+				VALUES ($ProductID,$Quantity,Now(),'".$VariationCategory."','".$Bracket."','".$VarSwitch."','".$ReserveSwitch."','".$ReserveID."')";
 				$mydb->setQuery($sql);
 				$mydb->executeQuery();
-
 				message("New transaction created successfully!", "success");
 				redirect("index.php");
 		 	}
