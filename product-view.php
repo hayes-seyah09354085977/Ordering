@@ -234,11 +234,11 @@
                   <button type="submit"  class="btn btn-main btn-next-tab"><i class="fa fa-shopping-cart"></i> Order Now !</button>
                   </div>
                 </div>
-                <div class="col-sm-4">
+                <!-- <div class="col-sm-4">
                   <div class="product-checkout-actions">
                   <div class="btn btn-main btn-next-tab reserve"> Reserve Now !</div>
                   </div>
-                </div>
+                </div> -->
             </form>
           </div>
     </div>
@@ -300,10 +300,6 @@ $.ajax({
 
         var z='',varname='<div class="col-sm-2 title"> '+variationCategories+'</div>'
 
-          if(data[0]['Reservation'] == 'off'){
-            $('.reserve').remove()
-          }
-           
           for(var y = 0; y < variation.length; y++){
               if(y==0 ||(y%4) > 0){
                 if(y==0){

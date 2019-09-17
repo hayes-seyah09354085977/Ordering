@@ -27,18 +27,60 @@ switch ($action) {
 	}
 
 	function doEdit(){
-	 
-		$cus = new Customer(); 
-		$cus->CustomerName = $_POST['CustomerName'];
-		$cus->Email = $_POST['Email'];
-		$cus->CustomerAddress = $_POST['CustomerAddress']; 
-		$cus->Sex = $_POST['optionsRadios'];
-		$cus->CustomerContact = $_POST['CustomerContact']; 
-		$cus->Customer_Username = $_POST['Customer_Username']; 
-		$cus->update($_SESSION['CustomerID']);
+		//validID1
+		$errofile = $_FILES['valid1']['error'];
+		$type = $_FILES['valid1']['type'];
+		$temp = $_FILES['valid1']['tmp_name'];
+		$myfile =$_FILES['valid1']['name'];
+		$location="photos/".$myfile;
+		//validID2
+		$errofile2 = $_FILES['valid2']['error'];
+		$type2 = $_FILES['valid2']['type'];
+		$temp2 = $_FILES['valid2']['tmp_name'];
+		$myfile2 =$_FILES['valid2']['name'];
+		$location2="photos/".$myfile2;
 
-		message("Account has been updated!", "success");
-		redirect(web_root."customer/index.php?view=accounts"); 
+
+		if ( $errofile > 0 || $errofile2 > 0 ) {
+				message("No Image Selected!", "error");
+				redirect(web_root."customer/index.php?view=accounts"); 
+		}else{
+	
+				@$file=$_FILES['valid1']['tmp_name'];
+				@$image= addslashes(file_get_contents($_FILES['valid1']['tmp_name']));
+				@$image_name= addslashes($_FILES['valid1']['name']); 
+				@$image_size= getimagesize($_FILES['valid1']['tmp_name']);
+
+				@$file=$_FILES['valid2']['tmp_name'];
+				@$image= addslashes(file_get_contents($_FILES['valid2']['tmp_name']));
+				@$image_name= addslashes($_FILES['valid2']['name']); 
+				@$image_size= getimagesize($_FILES['valid2']['tmp_name']);
+
+			if ($image_size==FALSE ) {
+				message("Uploaded file is not an image!", "error");
+				redirect(web_root."customer/index.php?view=accounts"); 
+			}else{
+					move_uploaded_file($temp,"photos/" . $myfile);
+			
+						$cus = new Customer(); 
+						$cus->CustomerName = $_POST['CustomerName'];
+						$cus->Email = $_POST['Email'];
+						$cus->CustomerAddress = $_POST['CustomerAddress']; 
+						$cus->Sex = $_POST['optionsRadios'];
+						$cus->CustomerContact = $_POST['CustomerContact']; 
+						$cus->Customer_Username = $_POST['Customer_Username']; 
+						$cus->valid1 = $location;
+						$cus->valid2 = $location2;
+						$cus->update($_SESSION['CustomerID']);
+				
+						message("Account has been updated!", "success");
+						redirect(web_root."customer/index.php?view=accounts"); 
+							
+					}
+			}
+
+	 
+	
 	}
 
 	function doCancel(){
@@ -83,19 +125,15 @@ switch ($action) {
 					//uploading the file
 					move_uploaded_file($temp,"photos/" . $myfile);
 		 	
-					 
-
 						$customer = New Customer();
 						$customer->Customer_Photo	= $location;
 						$customer->update($_SESSION['CustomerID']);
 						redirect(web_root."customer/");
-						 
 							
 					}
 			}
 			 
 		}
-
 
  
 function UploadImage(){

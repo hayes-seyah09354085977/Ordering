@@ -62,7 +62,7 @@
                     <th>Price</th>
                     <th>Quantity</th>
                     <th>Address</th> 
-                    <th>Categories</th>
+                    <th>Order Type</th>
                     <th>Status</th>
 
                     <th width="14%" >Action</th> 
@@ -85,7 +85,7 @@
                       echo '<td>' . $result->Price.'</a></td>'; 
                       echo '<td>'. $result->Quantity.'</td>'; 
                       echo '<td>'. $result->CustomerAddress.'</td>';
-                      echo '<td>'. $result->Categories.'</td>';  
+                      echo '<td>'. $result->order_type.'</td>';  
                       echo '<td>'. $result->Status.'</td>';  
                      
                       if ($result->Status=="Cancelled" || $result->Status=="Confirmed" || $result->Status=="Pending for Cancellation") {

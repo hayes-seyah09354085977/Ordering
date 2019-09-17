@@ -7,7 +7,7 @@
       margin-bottom: 5px;
     }
   </style>
-<form class="form-horizontal" method="POST" action="controller.php?action=edit">  
+<form class="form-horizontal" method="POST" action="controller.php?action=edit" enctype="multipart/form-data">  
       <div class="container">  
             <div class="box-header with-border">
               <h3 class="box-title">Account Settings</h3>
@@ -96,6 +96,34 @@
                   <div class="col-md-8"> 
                     <input  class="form-control input-sm" id="Customer_Username" name="Customer_Username" placeholder=
                         "Username" value="<?php echo $cus->Customer_Username;?>"  autocomplete="off">
+                    </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-md-7">
+                  <label class="col-md-4 control-label" for=
+                  "valid_ID1">Valid ID 1:</label>
+
+                  <div class="col-md-8"> 
+                      <input type=
+                        "hidden" value="1000000"> <input id=
+                        "valid1" name="valid1" type=
+                        "file">
+                    </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-md-7">
+                  <label class="col-md-4 control-label" for=
+                  "Valid_ID2">Valid ID 2:</label>
+
+                  <div class="col-md-8"> 
+                        <input name="MAX_FILE_SIZE" type=
+                        "hidden" value="1000000"> <input id=
+                        "valid2" name="valid2" type=
+                        "file">
                     </div>
                 </div>
               </div>

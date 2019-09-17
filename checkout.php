@@ -4,16 +4,21 @@ section#inner-headline {
 }
 </style>
 <?php
-$orderType='Cash On Delivery';
+$_SESSION['orderType'] = 'Cash On Delivery';
+// $orderType='Cash On Delivery';
 if(isset($_GET['ct'])){
 	$getCT = $_GET['ct'];
 	if($getCT=='IR'){
-		$orderType = 'Installment Plan';
-		echo 'trie';
+		$_SESSION['orderType'] = 'Installment';
+		// echo 'trie';
 	}
 	if($getCT=='RM'){
-		$orderType= 'Remittance';
-		echo 'four';
+		$_SESSION['orderType']= 'Remittance-FullPayment';
+		// echo 'four';
+	}
+	if($getCT=='RS'){
+		$_SESSION['orderType']= 'Reservation';
+		// echo 'four';
 	}
 }
 
@@ -27,7 +32,7 @@ if(isset($_GET['ct'])){
 				<td>Tracking No.  </td><td><b> : TR#201123</b></td>
 			</tr>
 			<tr>
-				<td>Order Type  </td><td><b> : <?php echo $orderType; ?></b></td>
+				<td>Order Type  </td><td><b> : <?php echo $_SESSION['orderType']; ?></b></td>
 			</tr>
 			<tr>
 				<td>Fullname  </td><td> : <?php echo $_SESSION['CustomerName'] ?></td>

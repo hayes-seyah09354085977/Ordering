@@ -60,6 +60,7 @@ function doSubmitOrder(){
 			$customerID = $_SESSION['CustomerID'];
 			$productID = $_SESSION['gcCart'][$i]['productID'];
 			$qty = $_SESSION['gcCart'][$i]['qty']; 
+			$orderType = $_SESSION['orderType'];
 
 			$sql="SELECT * FROM `tblinventory` WHERE `ProductID`='{$productID}'";
 				$mydb->setQuery($sql);
@@ -73,7 +74,7 @@ function doSubmitOrder(){
 				$mydb->executeQuery(); 
 
 
-				$sql = "INSERT INTO `tblstockout`  (`CustomerID`, `ProductID`, `Quantity`, `DateSold`,OrderNO,HView) VALUES('{$customerID}','{$productID}','{$qty}',Now(),'{$orderno}',1)";
+				$sql = "INSERT INTO `tblstockout`  (`CustomerID`, `ProductID`, `Quantity`, `DateSold`,OrderNO,HView,order_type) VALUES('{$customerID}','{$productID}','{$qty}',Now(),'{$orderno}',1,'{$orderType}')";
 				$mydb->setQuery($sql);
 				$mydb->executeQuery(); 
 
