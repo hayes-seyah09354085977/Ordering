@@ -258,6 +258,9 @@ $cnt+=1;
 <script src="<?php echo web_root; ?>plugins/jQueryUI/jquery-ui.min.js"></script>
 <script src="<?php echo web_root; ?>plugins/Image-Magnify/Image-Magnify.js"></script>
 <script>
+var ProductID = '<?php echo $pid;?>',
+variationCategories,variation = [],variationQty=[];
+
 $('.product-quantity-add, .product-quantity-subtract').click(function(){
   var qty = $('#product-quantity-input'),
     qtyMax=parseInt(qty.attr('max')),qtyVal = parseInt(qty.val()),
@@ -284,43 +287,77 @@ $('.imgmini').click(function(){
   var frontsrc = $(this).attr('src')
   $('.magnifiedImg').attr('src',frontsrc)
 })
-    
+
 $.ajax({
       type: "POST",
       url: "ajaxSession.php",
       dataType:'json',
-      data: {e:'getvariation'},
+      data: {e:'getvariation',pid:ProductID},
       success: function(data){
-          for(var x =0; x < data.length; x++){
-            var y = data[x]['variation'].split(','),
-            z='',
-            varname='<div class="col-sm-2 title"> '+data[x]['variationcat']+'</div>'
-              for(var yy = 0; yy < y.length; yy++){
-                if(yy==0 ||(yy%4) > 0){
-                  if(yy==0){
-                    z+= '<div class="col-md-2 options '+data[x]["variationcat"].replace(/\s/g, '')+' activeOpts">'+y[yy]+' </div>'
-                  }else{
-                    z+= '<div class="col-md-2 options '+data[x]["variationcat"].replace(/\s/g, '')+'">'+y[yy]+' </div>'
-                  }
-                }else if (yy!= 0 &&(yy%4) == 0){
-                  z+= '<div class="col-md-2 "></div><div class="col-md-2 options '+data[x]["variationcat"].replace(/\s/g, '')+'">'+y[yy]+' </div>'
+        variationCategories = data[0]['variationcat']
+        variation = data[0]['variation'].split(',')
+        variationQty = data[0]['VariationBracket'].split(',')
+
+        var z='',varname='<div class="col-sm-2 title"> '+variationCategories+'</div>'
+
+          if(data[0]['Reservation'] == 'off'){
+            $('.reserve').remove()
+          }
+           
+          for(var y = 0; y < variation.length; y++){
+              if(y==0 ||(y%4) > 0){
+                if(y==0){
+                  z+= '<div class="col-md-2 options '+variationCategories.replace(/\s/g, '')+' '+y+' activeOpts">'+variation[y]+' </div>'
+                }else{
+                  z+= '<div class="col-md-2 options '+variationCategories.replace(/\s/g, '')+' '+y+'">'+variation[y]+' </div>'
                 }
+              }else if (y!= 0 &&(y%4) == 0){
+                z+= '<div class="col-md-2 "></div><div class="col-md-2 options '+variationCategories.replace(/\s/g, '')+' '+y+'">'+variation[y]+' </div>'
               }
-                $('.variation').append(`
+            }
+          $('.variation').append(`
                 <div class="row">
                 `+varname+`
                 `+z+`
                 </div>
-            `)
-          }
+                `)
+
+          // for(var x =0; x < data.length; x++){
+          //   var y = data[x]['variation'].split(','),
+          //   z='',
+          //   varname='<div class="col-sm-2 title"> '+data[x]['variationcat']+'</div>'
+          //     for(var yy = 0; yy < y.length; yy++){
+          //       if(yy==0 ||(yy%4) > 0){
+          //         if(yy==0){
+          //           z+= '<div class="col-md-2 options '+data[x]["variationcat"].replace(/\s/g, '')+' activeOpts">'+y[yy]+' </div>'
+          //         }else{
+          //           z+= '<div class="col-md-2 options '+data[x]["variationcat"].replace(/\s/g, '')+'">'+y[yy]+' </div>'
+          //         }
+          //       }else if (yy!= 0 &&(yy%4) == 0){
+          //         z+= '<div class="col-md-2 "></div><div class="col-md-2 options '+data[x]["variationcat"].replace(/\s/g, '')+'">'+y[yy]+' </div>'
+          //       }
+          //     }
+          //       $('.variation').append(`
+          //       <div class="row">
+          //       `+varname+`
+          //       `+z+`
+          //       </div>
+          //   `)
+          // }
 
           $(".options").click(function() {
             var opts = $(this),
-            vcat = opts.attr('class').split(' ')[2],a
+            vcat = opts.attr('class').split(' ')[2],
+            a,
+            vqty = opts.attr('class').split(' ')[3]
             $("."+vcat).removeClass('activeOpts')
             opts.addClass('activeOpts')
             a=$('.activeOpts').text()
-            console.log(a)
+
+            $('input.remqty').val(variationQty[vqty])
+            $('#product-quantity-input').attr('max',variationQty[vqty])
+            $('#product-quantity-input').val(1)
+
               $.ajax({
                 type: "POST",
                 url: "ajaxSession.php",

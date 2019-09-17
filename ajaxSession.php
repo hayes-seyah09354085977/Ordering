@@ -26,12 +26,19 @@ switch($e){
     break;
     case 'getvariation':
         global $mydb;
+        
+        $pid = $_POST['pid'];
 
-        $sql="SELECT * FROM `tblvarcat` vc  left join `tblvariation` vation on vc.varcatid = vation.varcatid"; 
+        // $sql="SELECT * FROM `tblvarcat` vc  left join `tblvariation` vation on vc.varcatid = vation.varcatid"; 
+            $sql = "SELECT * FROM `tblstockin` st
+            left join tblvarcat vc on vc.varcatid = st.VariationCategory
+            left join tblvariation vation on vation.varcatid = vc.varcatid
+            where st.ProductID=$pid and st.VariationCategory is not null";
+            
             $mydb->setQuery($sql);
             $cur = $mydb->executeQuery();
             $res = $cur->fetch_all(MYSQLI_ASSOC);
-        print_r(json_encode($res));
+            print_r(json_encode($res));
     break;
     case 'productWithVariation':
         $_SESSION['varieties'] = $_POST['vr'];
