@@ -41,6 +41,13 @@
         <!-- <link rel="stylesheet" href="<?php echo web_root;?>plugins/daterangepicker/daterangepicker-bs3.css"> -->
         <!-- bootstrap wysihtml5 - text editor -->
         <link rel="stylesheet" href="<?php echo web_root;?>plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"> 
+        
+
+
+  <!-- CSS INCLUDE -->        
+  <!-- <link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css"/> -->
+  <link rel="stylesheet" href="<?php echo web_root; ?>admin/dist/sweetalert2.css">
+  <link rel="stylesheet" href="<?php echo web_root; ?>admin/dist/animate.css">
  
     </head>
 
@@ -197,6 +204,11 @@
             <i class="fa fa-th-list"></i> <span>Orders</span>  
           </a>
         </li>
+        <li class="<?php echo (currentpage() == 'reservation') ? "active" : false;?>" > 
+          <a href="<?php echo web_root ;?>admin/reservation/">
+            <i class="fa fa-th-list"></i> <span>Reservation Fee</span>  
+          </a>
+        </li>
         
        <!-- <li class="treeview">
           <a href="#">
@@ -306,7 +318,8 @@
       <script type="text/javascript" language="javascript" src="<?php echo web_root; ?>plugins/select2/select2.full.min.js"></script> 
        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
-
+      <script src="<?php echo web_root; ?>admin/dist/sweetalert2.js"></script>
+      <!-- <script src="<?php echo web_root; ?>admin/dist/bootstrap.min.js"></script> -->
 <!-- jQuery 2.1.4 --> 
 
 <script> 
