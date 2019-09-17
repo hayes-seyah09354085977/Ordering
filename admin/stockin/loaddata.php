@@ -25,10 +25,10 @@ $res = $mydb->loadSingleResult();
 		float: left;
 		width: 35%;
 		padding: 5px;
-		color: blue;
+		color: #3c8dbc;
 	}
 	.column-value > input {
-		height: 50px;
+		/* height: 50px; */
 		font-size:   30px;
 	}
 	.row:after{
@@ -42,6 +42,12 @@ $res = $mydb->loadSingleResult();
 	}
 	.pointer {cursor: pointer;}
 	.pointer2 {cursor: pointer;}
+
+	/* variation CSS */
+	.row.w-25 {
+		margin-top: 15px;
+	}
+
 </style>
 <?php  if ($maxrow > 0) {  ?> 
 <form action="controller.php?action=add" method="POST" >
@@ -108,7 +114,7 @@ $res = $mydb->loadSingleResult();
                                 $res  = $mydb->loadResultList();
                                 foreach ($res as $row) {
                                   # code...
-                                  echo '<option value='.$row->varcatid.'>'.$row->variationcat.'</option>';
+                                  echo '<option value='.$row->varcatid.' >'.$row->variationcat.'</option>';
                                 }
                               ?>
                             </select>
@@ -116,6 +122,9 @@ $res = $mydb->loadSingleResult();
                         </div>
 					  </div> 
 		<Br class="breakline">
+				<div class='container _varation'>
+				
+				</div>
 				
 				  
         </div>
@@ -195,7 +204,8 @@ $(".Reeserve").prop('disabled', true);
 	})
 
 	$('#Variationcat').change(()=>{
-		var $option = $('#Variationcat').val();
+		var $option = $('#Variationcat').val(),
+		variationText=$('#Variationcat option:selected').text();
 		
 		$.post('php/lookup.php',{e:'var',id:$option},function(data){
 			$('.VariationCategory').val($option);
@@ -206,9 +216,15 @@ $(".Reeserve").prop('disabled', true);
 			console.log(data[0].varcatid)
 			data2.forEach(function(elem){
 				
-			$('.breakline').after(`<div class="form-group w-25">
-				<label for="example1">`+elem+`</label>
-				<input type="number" class="form-control `+data[0].varcatid+`-cat category22 varriate"  placeholder="pcs" style="width: 55px;" min=1> pcs
+			// $('.breakline').after(`<div class="form-group w-25">
+			// 	<span for="example1">`+elem+`</span>
+			// 	<input type="number" class="form-control `+data[0].varcatid+`-cat category22 varriate"  placeholder="pcs" style="width: 55px;" min=1> pcs
+			// 	</div>`)
+			// })	
+
+				$('.container._varation').append(`<div class="row  w-25">
+					<div class='col-sm-2'>`+variationText+`: `+elem+`</div>
+					<div class='col-sm-3'><input type="number" class="form-control `+data[0].varcatid+`-cat category22 varriate"  min=1 value="1"></div>
 				</div>`)
 			})			
 			
