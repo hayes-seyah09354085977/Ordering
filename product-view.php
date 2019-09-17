@@ -364,7 +364,7 @@ $.ajax({
                 dataType:'json',
                 data: {e:'productWithVariation',vr:a},
                 success: function(data){
-                  console.log(data)
+                  // console.log(data)
                 }
               })
           });
