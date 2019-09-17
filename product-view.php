@@ -219,7 +219,7 @@
             </div>
 
             <div class="row">
-              <div class="col-sm-6">
+              <div class="col-sm-4">
                   <div class="product-checkout">
                     Total Price
                     <div class="product-checkout-total">
@@ -229,10 +229,15 @@
                     </div>
                   </div>
               </div>
-                <div class="col-sm-6">
-                <div class="product-checkout-actions">
-                <button type="submit"  class="btn btn-main btn-next-tab"><i class="fa fa-shopping-cart"></i> Order Now !</button>
+                <div class="col-sm-4">
+                  <div class="product-checkout-actions">
+                  <button type="submit"  class="btn btn-main btn-next-tab"><i class="fa fa-shopping-cart"></i> Order Now !</button>
+                  </div>
                 </div>
+                <div class="col-sm-4">
+                  <div class="product-checkout-actions">
+                  <div class="btn btn-main btn-next-tab reserve"> Reserve Now !</div>
+                  </div>
                 </div>
             </form>
           </div>
@@ -290,10 +295,13 @@ $.ajax({
             var y = data[x]['variation'].split(','),
             z='',
             varname='<div class="col-sm-2 title"> '+data[x]['variationcat']+'</div>'
-
               for(var yy = 0; yy < y.length; yy++){
                 if(yy==0 ||(yy%4) > 0){
-                  z+= '<div class="col-md-2 options '+data[x]["variationcat"].replace(/\s/g, '')+'">'+y[yy]+' </div>'
+                  if(yy==0){
+                    z+= '<div class="col-md-2 options '+data[x]["variationcat"].replace(/\s/g, '')+' activeOpts">'+y[yy]+' </div>'
+                  }else{
+                    z+= '<div class="col-md-2 options '+data[x]["variationcat"].replace(/\s/g, '')+'">'+y[yy]+' </div>'
+                  }
                 }else if (yy!= 0 &&(yy%4) == 0){
                   z+= '<div class="col-md-2 "></div><div class="col-md-2 options '+data[x]["variationcat"].replace(/\s/g, '')+'">'+y[yy]+' </div>'
                 }
