@@ -165,14 +165,19 @@ global $mydb;
 
 ?> 
 <div class="step">
+<?php if($res->Status == 'Pending for Cancellation' || $res->Status == 'Cancelled'){?>
+  <ul>
+    <li class="Processing done">Pending For Cancellation</li>
+    <li class="Cancelled">Cancelled</li>
+</ul>
+<?php }else{?>
   <ul>
     <li class="Processing done">Pending</li>
     <li class="Confirmed">Confirmed</li>
-    <li class="Toship">To Ship</li>
-	<li class="Shipped">Shipped</li>
-	<li class="Todeliver">To Deliver</li>
+	<li class="ForDelivery">For Delivery</li>
 	<li class="Delivered">Delivered</li>
 </ul>
+<?php }?>
 </div>
 
 
@@ -204,6 +209,32 @@ global $mydb;
     </div>
   </div>
 </div>
+<script src="<?php echo web_root; ?>plugins/home-plugins/js/jquery.js"></script>
+<script src="<?php echo web_root; ?>plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="<?php echo web_root; ?>plugins/jQueryUI/jquery-ui.js"></script>
+<script src="<?php echo web_root; ?>plugins/jQueryUI/jquery-ui.min.js"></script>
+<script src="<?php echo web_root; ?>plugins/Image-Magnify/Image-Magnify.js"></script>
+
+<script>
+var status = '<?php echo $res->Status; ?>'
+switch(status){
+  case 'Confirmed':
+  $('.Confirmed').addClass('done')
+  break;
+  case 'For Delivery':
+  $('.Confirmed').addClass('done')
+  $('.ForDelivery').addClass('done')
+  break;
+  case 'Delivered':
+  $('.Confirmed').addClass('done')
+  $('.ForDelivery').addClass('done')
+  $('.Delivered').addClass('done')
+  break
+  case 'Cancelled':
+  $('.Cancelled').addClass('done')
+  break
+}
+</script>
 
 <!-- 
 <div class="col-sm-12 content-header" style="">Product Details</div>

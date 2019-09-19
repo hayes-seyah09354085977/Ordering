@@ -240,6 +240,10 @@
           <a href="<?php echo web_root; ?>admin/user/">
             <i class="fa fa-user"></i> <span>Manage Users</span> </a>
         </li> 
+        <li class="<?php echo (currentpage() == 'customer') ? "active" : false;?>">
+          <a href="<?php echo web_root; ?>admin/customer/">
+            <i class="fa fa-user"></i> <span>Manage Customers</span> </a>
+        </li> 
         <?php } ?>
       </ul>
     </section>

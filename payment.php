@@ -155,7 +155,9 @@ $subtotal = $_GET['st'];
       <select class='remOpts classic'>
         <option value="" Selected>-Select Payment-</option>
         <option value="Full_Payment">Full Payment</option>
+        <?php if($_SESSION['Approved']==1){?>
         <option value="Installment_plan">Installment Plan</option>
+        <?php }?>
       </select>
       <!-- Container for Full Paid -->
       <div class="container FullPaid">
@@ -236,22 +238,26 @@ $subtotal = $_GET['st'];
 
      <!-- <div class="col-sm-3 info-blocks instOrRemit" data-toggle="modal" data-target="#exampleModal">
         <div class="stretch">
-        <img src="<?php echo web_root; ?>Include/Img/installment.png" alt="Watch Ur Toyo">
-        </div>
-        <div class="info-blocks-in">
-            <h3>Installment</h3>
-        </div>
-     </div> -->
-
-     <div class="col-sm-3 info-blocks instOrRemit" data-toggle="modal" data-target="#exampleModal">
-        <div class="stretch">
         <img src="<?php echo web_root; ?>Include/Img/remittance.png" alt="Watch Ur Toyo">
         </div>
         <div class="info-blocks-in">
             <h3>Remittance</h3>
         </div>
      </div>
-
+    <?php if($_SESSION['Approved']==1){?>
+     <div class="col-sm-3 info-blocks instOrRemit" >
+        <div class="stretch">
+        <a href="index.php?q=checkout">
+        <img src="<?php echo web_root; ?>Include/Img/reservation.png" alt="Watch Ur Toyo">
+        </a>
+        </div>
+        <div class="info-blocks-in">
+            <a href="index.php?q=checkout">
+            <h3>Reservation</h3>
+            </a>
+        </div>
+     </div>
+    <?php }?> -->
   </div>
 </div>
 

@@ -1,5 +1,5 @@
  <style>
-  i.fa.fa-eye, span.fa.fa-times.fw-fa {
+  i.fa.fa-eye, span.fa.fa-times.fw-fa,span.fa.fa-check {
     font-size: 25px;
   }
   td.conf {
@@ -88,9 +88,12 @@
                       echo '<td>'. $result->order_type.'</td>';  
                       echo '<td>'. $result->Status.'</td>';  
                      
-                      if ($result->Status=="Cancelled" || $result->Status=="Confirmed" || $result->Status=="Pending for Cancellation") {
+                      if ($result->Status=="Cancelled" || $result->Status=="Confirmed" || $result->Status=="Pending for Cancellation" ||  $result->Status=="Delivered") {
                         # code...
                         echo '<td class="conf" align="center"><a title="View" href="index.php?view=viewproduct&id='.$result->StockoutID.'" class="  ">  <i class="fa fa-eye" aria-hidden="true"></i></a></td>';
+                      }else if($result->Status=="For Delivery"){
+                         echo '<td align="center"><a title="View" href="index.php?view=viewproduct&id='.$result->StockoutID.'" class="  ">  <i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <a title="Delivered" href="controller.php?action=Deilvered&id='.$result->StockoutID.'&ProductID='.$result->pid.'&TransQuantity='.$result->Quantity.'" class=" ">  <span class="fa  fa-check fw-fa "></a></td>';
                       }else{
                         // echo '<td align="center"><a title="View" href="index.php?view=viewproduct&id='.$result->StockoutID.'" class="  ">  <i class="fa fa-eye" aria-hidden="true"></i></a>
                         // <a title="Cancel" href="controller.php?action=cancel&id='.$result->StockoutID.'&ProductID='.$result->pid.'&TransQuantity='.$result->Quantity.'" class=" ">  <span class="fa  fa-times fw-fa "></a></td>';

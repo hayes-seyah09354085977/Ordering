@@ -23,6 +23,10 @@ switch ($action) {
 	doupdateimage();
 	break;
 
+	case 'Deilvered':
+	Deilvered();
+	break;
+
  
 	}
 
@@ -32,13 +36,13 @@ switch ($action) {
 		$type = $_FILES['valid1']['type'];
 		$temp = $_FILES['valid1']['tmp_name'];
 		$myfile =$_FILES['valid1']['name'];
-		$location="photos/".$myfile;
+		$location="photos/ValidIDS/".$myfile;
 		//validID2
 		$errofile2 = $_FILES['valid2']['error'];
 		$type2 = $_FILES['valid2']['type'];
 		$temp2 = $_FILES['valid2']['tmp_name'];
 		$myfile2 =$_FILES['valid2']['name'];
-		$location2="photos/".$myfile2;
+		$location2="photos/ValidIDS/".$myfile2;
 
 
 		if ( $errofile > 0 || $errofile2 > 0 ) {
@@ -60,7 +64,8 @@ switch ($action) {
 				message("Uploaded file is not an image!", "error");
 				redirect(web_root."customer/index.php?view=accounts"); 
 			}else{
-					move_uploaded_file($temp,"photos/" . $myfile);
+					move_uploaded_file($temp,"photos/ValidIDS/" . $myfile);
+					move_uploaded_file($temp2,"photos/ValidIDS/" . $myfile2);
 			
 						$cus = new Customer(); 
 						$cus->CustomerName = $_POST['CustomerName'];
@@ -98,6 +103,17 @@ switch ($action) {
 			message("Please wait for the store manager to verify your request, Thank you.", "success");
 			redirect("index.php");
 	}
+
+	function Deilvered(){
+		global $mydb;
+		$stockoutID = $_GET['id'];
+		$sql = "UPDATE `tblstockout`  SET Status  = 'Delivered' WHERE StockoutID='{$stockoutID}'";
+		$mydb->setQuery($sql);
+		$mydb->executeQuery(); 
+		
+		message("Ordered Product has been Delivered!", "success");
+		redirect("index.php");
+}
    
 	function doupdateimage(){
  

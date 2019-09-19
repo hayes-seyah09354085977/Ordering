@@ -10,7 +10,8 @@
   }
   .slides > li > img {
     width: 100%;
-    height: 480px;
+    /* height: 480px; */
+    height:345px;
   }
   .item > img{
     width: 100%;
@@ -65,12 +66,10 @@ p.currency {
                 </div>
               </li>
               <li>
-                <img src="<?php echo web_root; ?>plugins/home-plugins/img/slides/cover1.jpg" alt="" />
-                <!-- <div class="flex-caption">
-                    <h3 class="pcatcolor">Specialize</h3> 
-          <p class="pcatcolor">Toyo Knows Gshock</p> 
-           
-                </div> -->
+                <img src="<?php echo web_root; ?>plugins/home-plugins/img/slides/home1.jpg" alt="" />
+              </li>
+              <li>
+                <img src="<?php echo web_root; ?>plugins/home-plugins/img/slides/home2.jpg" alt="" />
               </li>
             </ul>
         </div>

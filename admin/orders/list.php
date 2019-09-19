@@ -91,11 +91,15 @@
 						echo '<td>'. $result->DateExpire.'</td>';
 						echo '<td>'. $result->Categories.'</td>';  
 						echo '<td>'. $result->Status.'</td>'; 
-						if ($result->Status=='Confirmed' || $result->Status=='Cancelled') {
+						if ($result->Status=='Delivered' ||$result->Status=='Cancelled') {
 							# code...
 							echo '<td>None</td>';
 						}else if($result->Status=='Pending for Cancellation'){
 							echo '<td align="center"><a onclick="getMessage('.$result->StockoutID.','.$result->pid.','.$result->Quantity.')" title="Confirm" data-toggle="modal" data-target="#exampleModal">  <span class="fa fa-check fw-fa">View Reason</a>'; 
+						}else if($result->Status=='Confirmed'){
+							echo '<td align="center"><a title="Confirm" href="controller.php?action=status&id='.$result->StockoutID.'&OrderStatus=2" class="btn btn-primary btn-xs  ">  <span class="fa fa-check fw-fa">For Delivery</a></td>'; 
+						}else if($result->Status=='For Delivery'){
+							echo '<td align="center"><a title="Confirm" href="controller.php?action=status&id='.$result->StockoutID.'&OrderStatus=3" class="btn btn-primary btn-xs  ">  <span class="fa fa-check fw-fa">Delivered</a></td>'; 
 						}else{
 							echo '<td align="center"><a title="Confirm" href="controller.php?action=confirm&id='.$result->StockoutID.'&ProductID='.$result->pid.'&qty='.$result->Quantity.'" class="btn btn-primary btn-xs  ">  <span class="fa fa-check fw-fa">Confirm</a>
 							<a title="Delete" href="controller.php?action=cancel&id='.$result->StockoutID.'&ProductID='.$result->pid.'&qty='.$result->Quantity.'" class="btn btn-danger btn-xs  ">  <span class="fa  fa-times fw-fa ">Cancel</a></td>'; 

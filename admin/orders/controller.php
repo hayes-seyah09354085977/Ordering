@@ -18,7 +18,10 @@ switch ($action) {
 	case 'cancel' :
 	doCancel();
 	break;
- 
+	
+	case 'status':
+	doUpdateOrder();
+	break;
 
 	}
    
@@ -102,6 +105,34 @@ switch ($action) {
 			$mydb->executeQuery();
 
 			message("Orders has been confirmed!", "success");
+			// redirect("index.php?view=view&id=".$_POST['EMPLOYEEID']);
+			redirect("index.php");
+
+	}
+
+	function doUpdateOrder(){
+		global $mydb;
+
+			$stockoutID = $_GET['id'];
+			$status = $_GET['OrderStatus'];
+			$OrderMessage = '';
+			$message = '';
+			switch($status){
+				case 2:
+					$OrderMessage = 'For Delivery';
+					$message = 'Ordered Product is Ready For Delivery!';
+				break;
+				case 3:
+					$OrderMessage = 'Delivered';
+					$message = 'Ordered has been Delivered to the Customer!';
+				break;
+			}
+
+			$sql = "UPDATE `tblstockout`  SET Status  = '$OrderMessage' WHERE StockoutID='{$stockoutID}'";
+			$mydb->setQuery($sql);
+			$mydb->executeQuery();
+
+			message($message, "success");
 			// redirect("index.php?view=view&id=".$_POST['EMPLOYEEID']);
 			redirect("index.php");
 

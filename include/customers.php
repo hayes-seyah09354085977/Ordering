@@ -35,6 +35,7 @@ class Customer {
 			$_SESSION['Sex']					= $emp_found->Sex;  
 			$_SESSION['CustomerAddress']		= $emp_found->CustomerAddress;  
 			$_SESSION['CustomerContact']		= $emp_found->CustomerContact;  
+			$_SESSION['Approved']				= $emp_found->Approved;  
 		   return true;
 		 }else{
 		 	return false;
