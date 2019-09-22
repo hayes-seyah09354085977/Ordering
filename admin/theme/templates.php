@@ -204,11 +204,7 @@
             <i class="fa fa-th-list"></i> <span>Orders</span>  
           </a>
         </li>
-        <li class="<?php echo (currentpage() == 'reservation') ? "active" : false;?>" > 
-          <a href="<?php echo web_root ;?>admin/reservation/">
-            <i class="fa fa-th-list"></i> <span>Reservation Fee</span>  
-          </a>
-        </li>
+       
         
        <!-- <li class="treeview">
           <a href="#">

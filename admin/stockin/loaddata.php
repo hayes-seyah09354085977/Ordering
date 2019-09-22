@@ -6,6 +6,7 @@ if (!isset($_SESSION['ADMIN_USERID'])){
 }
 $storeID = $_SESSION['ADMIN_USERID'];
 $productID = $_POST['ProductID'];
+// echo $productID.'asdasdsad';
 $sql ="SELECT * FROM tblproduct p, tblcategory c WHERE p.CategoryID=c.CategoryID AND ProductID = '{$productID}' AND p.StoreID='$storeID'";
 $mydb->setQuery($sql);
 $cur = $mydb->executeQuery();
@@ -66,8 +67,8 @@ $res = $mydb->loadSingleResult();
 	<div class="column-value">: <?php echo $res->Price; ?></div>
 	<div class="column-label pointer">Variation</div>
 	<div class="column-value"><input type="checkbox" name="Variationbox"  class="Variation" > </div>
-	<div class="column-label pointer2">Reservation</div>
-	<div class="column-value "><input type="checkbox" name="Reservation" class="Reservation" ></div>
+	<div class="column-label pointer2">Installment</div>
+	<div class="column-value "><input type="checkbox" name="Installment" class="Installment" ></div>
 	<div class="column-label">Quantity</div>
 	<div class="column-value"><input type="number" name="Quantity" id="Quantity" class="form-control" min="1"></div>
 </div> 
@@ -86,7 +87,7 @@ $res = $mydb->loadSingleResult();
 	<div class="column-value">: None</div>
 	<div class="column-label">Variation</div>
 	<div class="column-value">: None</div>
-	<div class="column-label">Reservation</div>
+	<div class="column-label">Installment</div>
 	<div class="column-value">: None</div>
 	<div class="column-label">Quantity</div>
 	<div class="column-value">: None</div>
@@ -231,9 +232,12 @@ $(".Reeserve").prop('disabled', true);
 		})
 	})
 	$('.varclose').click(function(){
+		catval= [];
 		$('.category22').each(function(elem){
 			catval.push(parseInt($(this).val()))
 		})
+		console.log(catval)
+		$('.Variationbracket').val("");
 		$('.Variationbracket').val(catval.toString())
 		$("#Quantity").val("")
 		$("#Quantity").val(catval.reduce((a, b) => a + b, 0))

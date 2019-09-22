@@ -40,7 +40,7 @@ switch ($action) {
 			$Quantity = $_POST['Quantity'];
 			$Bracket = $_POST['Variationbracket'];
 			$VarSwitch = $_POST['Variationbox'];
-			$ReserveSwitch = $_POST['Reservation'];
+			$Installment = $_POST['Installment'];
 			$ReserveID = $_POST['Reservationbracket'];
 			$VariationCategory = $_POST['VariationCategory'];
 
@@ -48,8 +48,8 @@ switch ($action) {
 				$VarSwitch = 'off';
 				$Bracket = 'empty';
 			}
-			if($ReserveSwitch == ""){
-				$ReserveSwitch = 'off';
+			if($Installment == ""){
+				$Installment = 'off';
 				$ReserveID = 'empty';
 			}
 			
@@ -71,8 +71,8 @@ switch ($action) {
 				$sql = "UPDATE `tblinventory` SET `Stocks`= '{$product_quantity}', Remaining =  '{$total_quanity}' WHERE `ProductID`='{$ProductID}'";
 				$mydb->setQuery($sql);
 				$mydb->executeQuery(); 
-				$sql = "INSERT INTO `tblstockin` (`ProductID`, `Quantity`, `DateReceive`,`VariationCategory`,`VariationBracket`,`Variation`,`Reservation`,`Reservevalue`) 
-				VALUES ($ProductID,$Quantity,Now(),'".$VariationCategory."','".$Bracket."','".$VarSwitch."','".$ReserveSwitch."','".$ReserveID."')";
+				$sql = "INSERT INTO `tblstockin` (`ProductID`, `Quantity`, `DateReceive`,`VariationCategory`,`VariationBracket`,`Variation`,`Installment`) 
+				VALUES ($ProductID,$Quantity,Now(),'".$VariationCategory."','".$Bracket."','".$VarSwitch."','".$Installment."')";
 				$mydb->setQuery($sql);
 				$mydb->executeQuery();
 				message("New transaction created successfully!", "success");
@@ -99,7 +99,18 @@ switch ($action) {
 			$StockinID = $_POST['StockinID'];
 			$Trans_Quantity = $_POST['TransQuantity'];
 			$Quantity = $_POST['Quantity'];
-
+			$Variationcat = $_POST['VariationCategory'];
+			$Variationbracket = $_POST['Variationbracket'];
+			$VarSwitch = $_POST['Variationbox'];
+			$Installment = $_POST['Installment'];
+			if($VarSwitch == "" ){
+				$VarSwitch = 'off';
+				$Bracket = 'empty';
+			}
+			if($Installment == ""){
+				$Installment = 'off';
+				$ReserveID = 'empty';
+			}
 
 			$sql = "SELECT * FROM `tblinventory` WHERE `ProductID`='{$ProductID}'";
 		 	$mydb->setQuery($sql);
@@ -118,7 +129,7 @@ switch ($action) {
 				$mydb->setQuery($sql);
 				$mydb->executeQuery(); 
 
-				$sql = "UPDATE `tblstockin` SET `Quantity` ='{$Quantity}' WHERE `StockinID`='{$StockinID}'";
+				$sql = "UPDATE `tblstockin` SET `Quantity` ='{$Quantity}',VariationCategory = '{$VariationCategory}',Installment ='{$Installment}', Variation ='{$VarSwitch}',Variationbracket ='{$Variationbracket}' WHERE `StockinID`='{$StockinID}'";
 				$mydb->setQuery($sql);
 				$mydb->executeQuery();
 

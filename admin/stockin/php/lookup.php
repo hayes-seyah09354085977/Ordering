@@ -10,8 +10,8 @@ switch($cmd){
             $result = $stmt->fetchAll();
             print_r(json_encode($result,true));
         break;
-    case "manageuserpick":
-            $stmt = $conn->prepare(""); 
+    case "value":
+            $stmt = $conn->prepare("SELECT VariationBracket FROM tblstockin WHERE StockinID = ".$_POST['stockid']." "); 
             $stmt->execute();
             $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $result = $stmt->fetchAll();
