@@ -66,7 +66,7 @@
 					<th>Description</th>
 					<th>Price</th>
 					<th>Quantity</th>
-					<th>Expired Date</th> 
+					<th>Order Type</th> 
 					<th>Categories</th>
 					<th>Status</th>
 					<th width="14%" >Action</th> 
@@ -88,7 +88,7 @@
 						echo '<td>' . $result->Description.'</a></td>';
 						echo '<td>' . $result->Price.'</a></td>'; 
 						echo '<td>'. $result->Quantity.'</td>'; 
-						echo '<td>'. $result->DateExpire.'</td>';
+						echo '<td>'. $result->order_type.'</td>';
 						echo '<td>'. $result->Categories.'</td>';  
 						echo '<td>'. $result->Status.'</td>'; 
 						if ($result->Status=='Delivered' ||$result->Status=='Cancelled') {
