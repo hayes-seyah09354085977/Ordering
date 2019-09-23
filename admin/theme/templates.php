@@ -41,7 +41,13 @@
         <!-- <link rel="stylesheet" href="<?php echo web_root;?>plugins/daterangepicker/daterangepicker-bs3.css"> -->
         <!-- bootstrap wysihtml5 - text editor -->
         <link rel="stylesheet" href="<?php echo web_root;?>plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"> 
-        
+        <style>
+          li.mychat {
+          margin-top: 2%;
+          font-size: 31px;
+          cursor: pointer;
+          }
+        </style>
 
 
   <!-- CSS INCLUDE -->        
@@ -71,11 +77,14 @@
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
- 
+          <li class="mychat">
+            <i class="fa fa-user" style="color:white; "></i> 
+          </li>
           <?php
+            $fullname;
               $user = New User();
               $singleuser = $user->single_user($_SESSION['ADMIN_USERID']);
-
+              $fullname =$singleuser->FullName;
           ?>
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu" style="padding-right: 15px;"  >
@@ -85,6 +94,7 @@
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
+              
               <li class="user-header"> 
                 <img data-target="#menuModal"  data-toggle="modal"  src="<?php echo web_root.'admin/user/'. $singleuser->PicLoc;?>" class="img-circle" alt="User Image" />  
               </li> 
@@ -292,7 +302,27 @@
          </section>
  </div>
   <!-- /.content-wrapper -->
-
+  <div class="modal fade" id="chat" role="dialog">
+      <div class="modal-dialog modal-lg">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h3 class="modal-title2" >Chat </h3>
+          </div>
+          <div class="modal-body ">
+            <div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item mychatframe" src="../plugins/mychat/index.php?name=<?php  echo $singleuser->FullName; ?>Store"></iframe></div>
+                
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+     
+      </div>
+    </div>
 
   
 
@@ -448,6 +478,13 @@ $('.date_picker').datetimepicker({
  
                 }
                 });
+                $(document).ready(function(){
+                  $('.mychat').click(function(){
+                    $('#chat').modal('show');
+                  })
+                })
     </script>
+
+   
 </html>
  
