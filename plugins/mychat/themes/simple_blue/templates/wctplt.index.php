@@ -12,10 +12,10 @@ $templates['index'] = '
         <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
         <LINK rel="stylesheet" id="style" href="{INCLUDE_DIR_THEME}style.css?{STYLE_LASTMOD}" type="text/css">
         <script type="text/javascript" src="{INCLUDE_DIR}script.js?{SCRIPT_LASTMOD}"></script>
-        <title>{TITLE}</title>
+        
     </head>
     <body>
-        <h1>{TITLE}</h1>
+
         {CONTENTS}
     </body>
 </html>';

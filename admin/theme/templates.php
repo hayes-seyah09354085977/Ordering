@@ -47,6 +47,9 @@
           font-size: 31px;
           cursor: pointer;
           }
+          .modal-lg {
+              width: 1025px;
+          }
         </style>
 
 
@@ -312,7 +315,7 @@
             <h3 class="modal-title2" >Chat </h3>
           </div>
           <div class="modal-body ">
-            <div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item mychatframe" src="../plugins/mychat/index.php?name=<?php  echo $singleuser->FullName; ?>Store"></iframe></div>
+            <div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item mychatframe" src="<?php echo web_root; ?>/plugins/mychat/index.php?name=<?php  echo $singleuser->FullName; ?>Store"></iframe></div>
                 
             
           </div>
@@ -395,6 +398,9 @@
   });
 
   $(function(){
+    $('.mychat').click(function(){
+                    $('#chat').modal('show');
+                  })
      $('.select2').select2();
   });
   $(function () {
