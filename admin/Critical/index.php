@@ -5,7 +5,7 @@ require_once("../../include/initialize.php");
 }
 
 $view = (isset($_GET['view']) && $_GET['view'] != '') ? $_GET['view'] : '';
- $title="Products Variation"; 
+ $title="Critical Stock Settings"; 
  $header=$view; 
 switch ($view) {
 	case 'list' :

@@ -236,7 +236,6 @@ $(".Reeserve").prop('disabled', true);
 		$('.category22').each(function(elem){
 			catval.push(parseInt($(this).val()))
 		})
-		console.log(catval)
 		$('.Variationbracket').val("");
 		$('.Variationbracket').val(catval.toString())
 		$("#Quantity").val("")

@@ -11,8 +11,8 @@
 }
  
 
-  $product = New Variation();
-  $res = $product->single_variation($id);
+  $product = New Critical();
+  $res = $product->single_critical($id);
 
   $CategoryID = $res->varcatid;
 ?>

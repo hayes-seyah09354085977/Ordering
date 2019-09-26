@@ -235,6 +235,11 @@
           </ul>
         </li> --> 
         <?php if ($_SESSION['ADMIN_ROLE']=='Administrator') { ?> 
+          <li class="<?php echo (currentpage() == 'critical') ? "active" : false;?>" > 
+          <a href="<?php echo web_root ;?>admin/critical/">
+            <i class="fa fa-th-list"></i> <span>Critical Stocks</span>  
+          </a>
+        </li>
           <li class="<?php echo (currentpage() == 'loans') ? "active" : false;?>" > 
           <a href="<?php echo web_root ;?>admin/loans/">
             <i class="fa fa-th-list"></i> <span>Loan Structure</span>  

@@ -6,7 +6,7 @@
 ?> 
 	<div class="row">
     <div class="col-lg-12">
-            <h1 class="page-header">List of Variation   <a href="index.php?view=add" class="btn btn-primary btn-xs  ">  <i class="fa fa-plus-circle fw-fa"></i> Register New Variation</a> </h1>
+            <h1 class="page-header">List of Inventory  </h1>
        		</div>
         	<!-- /.col-lg-12 -->
    		 </div>
@@ -18,26 +18,54 @@
 							  <thead>
 							  	<tr>
 									<!-- <th>Store Name</th> -->
-									<th>Variation</th>
-									<th>Variation Category</th>
+									<th>Product</th>
+									<th>Description</th>
+									<th>Categories</th>
+									<th>Stocks</th>
+									<th>Sold</th>
+									<th>Remaining</th> 
+									<th>Critical Stocks</th>
 									<th width="14%" >Action</th> 
-							  	</tr>	
+							  	</tr>		
 							  </thead> 
 							  <tbody>
-							  	<?php   
-							  		$sql ="SELECT v.varid, v.`variation`, vc.`variationcat` FROM tblvariation v LEFT JOIN tblvarcat vc ON v.`varcatid` = vc.varcatid";
-							  		$mydb->setQuery($sql);
+							  <?php   
+							  		// $mydb->setQuery("SELECT * 
+											// 			FROM  `tblusers` WHERE TYPE != 'Customer'");
+							  	// `ProductID`, `ProductName`, `Description`, `Price`, `DateExpire`,Categories,StoreName
+							  		$mydb->setQuery("SELECT * FROM `tblproduct` p,`tblinventory` i, `tblcategory` c,`tblstore` s WHERE p.`ProductID`=i.`ProductID` AND p.`CategoryID`=c.`CategoryID` AND p.`StoreID`=s.`StoreID`AND s.StoreID=".$_SESSION['ADMIN_USERID']);
 							  		$cur = $mydb->loadResultList();
+
 									foreach ($cur as $result) { 
 							  		echo '<tr>';
-							  		echo '<td>'. $result->variation.'</td>';
-							  		echo '<td>' . $result->variationcat.'</a></td>';
-					  				echo '<td align="center" >     
-					  		              <a title="Edit" href="index.php?view=edit&id='.$result->varid.'"  class="btn btn-info btn-xs  ">
-					  		             <span class="fa fa-edit fw-fa"></span> Edit</a>  
-					  		             <a title="Remove" href="controller.php?action=delete&id='.$result->varid.'"  class="btn btn-danger btn-xs  ">
-					  		             <span class="fa fa-trash-o fw-fa"></span> Remove</a> 
-					  					 </td>';
+							  		// echo '<td width="5%" align="center"></td>';
+							  		// echo '<td>'. $result->StoreName.'</td>';
+							  		echo '<td>'. $result->ProductName.'</td>';
+							  		echo '<td>' . $result->Description.'</a></td>';
+							  		echo '<td>'. $result->Categories.'</td>';  
+							  		echo '<td>' . $result->Stocks.'</a></td>'; 
+							  		echo '<td>' . $result->Sold.'</a></td>'; 
+									echo '<td>'. $result->Remaining.'</td>';
+									echo '<td>'. $result->Critical.'</td>';
+									echo '<td align="center" >     
+									<a title="Edit" href="index.php?view=edit&id='.$result->TransID.'"  class="btn btn-info btn-xs  ">
+								   <span class="fa fa-edit fw-fa"></span> Edit</a>  
+								   
+								   </td>';
+					  				// echo '<td align="center" >    
+					  		  //            <a title="View" href="index.php?view=view&id='.$result->ProductID.'"  class="btn btn-info btn-xs  ">
+					  		  //            <span class="fa fa-info fw-fa"></span> View</a>
+					  		  //             <a title="Edit" href="index.php?view=edit&id='.$result->ProductID.'"  class="btn btn-info btn-xs  ">
+					  		  //            <span class="fa fa-edit fw-fa"></span> Edit</a>  
+					  		  //            <a title="Remove" href="controller.php?action=delete&id='.$result->ProductID.'"  class="btn btn-danger btn-xs  ">
+					  		  //            <span class="fa fa-trash-o fw-fa"></span> Remove</a> 
+					  				// // 	 </td>';
+					  				// echo '<td align="center" >     
+					  		  //             <a title="Edit" href="index.php?view=edit&id='.$result->ProductID.'"  class="btn btn-info btn-xs  ">
+					  		  //            <span class="fa fa-edit fw-fa"></span> Edit</a>  
+					  		  //            <a title="Remove" href="controller.php?action=delete&id='.$result->ProductID.'"  class="btn btn-danger btn-xs  ">
+					  		  //            <span class="fa fa-trash-o fw-fa"></span> Remove</a> 
+					  				// 	 </td>';
 							  		echo '</tr>';
 							  	} 
 							  	?>
