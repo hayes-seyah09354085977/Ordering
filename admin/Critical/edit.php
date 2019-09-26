@@ -14,7 +14,7 @@
   $product = New Critical();
   $res = $product->single_critical($id);
 
-  $CategoryID = $res->varcatid;
+  // $CategoryID = $res->varcatid;
 ?>
      
  
@@ -25,10 +25,10 @@
  
 
   <form class="form-horizontal span6  wow fadeInDown" action="controller.php?action=edit" method="POST" enctype="multipart/form-data">  
-  <input  id="ProductID" name="ProductID" type="hidden" value="<?php echo $res->varid;?>"  >
+  <input  id="TransID" name="TransID" type="hidden" value="<?php echo $res->TransID;?>"  >
 
                      
-    <div class="form-group">
+    <!-- <div class="form-group">
         <div class="col-md-8">
           <label class="col-md-4 control-label" for=
           "Categories">Category:</label>
@@ -56,15 +56,16 @@
             </select>
           </div>
         </div>
-    </div>  
+    </div>   -->
 
                     <div class="form-group">
                       <div class="col-md-8">
                         <label class="col-md-4 control-label" for=
-                        "Description">Description:</label>
+                        "Description">Critical Level:</label>
                         <div class="col-md-8"> 
-                          <textarea  class="form-control input-sm" id="Variation" name="Variation" placeholder=
-                              "Description"    onkeyup="javascript:capitalize(this.id, this.value);" autocomplete="off"><?php echo $res->variation; ?></textarea> 
+                        <input  type="number" class="form-control input-sm" id="Critical" name="Critical" placeholder="Critical Value" value="<?php echo $res->Critical; ?>"
+                           autocomplete="off"> 
+                        
                           </div>
                       </div>
                     </div>

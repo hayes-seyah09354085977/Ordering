@@ -87,14 +87,19 @@ switch ($action) {
 	function doEdit(){
 	if(isset($_POST['save'])){
 
-			$product = New Variation(); 
-			$product->varcatid 		= $_POST['CategoryID'];
-			$product->variation		= $_POST['Variation']; 
-			$product->update($_POST['ProductID']);
-echo"stop";
+		$product = New Critical(); 
+			$product->TransID 		= $_POST['TransID'];
+			$product->Critical		= $_POST['Critical']; 
+	
 
-			message("Variation has been updated!", "success");
-			redirect("index.php?view=edit&id=".$_POST['ProductID']);
+
+
+
+
+			$product->update($_POST['TransID']);
+
+			message("Critical Level Save!", "success");
+			redirect("index.php?view=edit&id=".$_POST['TransID']);
 	     
   	
 	 
