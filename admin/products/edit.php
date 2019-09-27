@@ -67,7 +67,7 @@
                     </div> 
 
 
-                   <div class="form-group">
+                   <!-- <div class="form-group">
                     <div class="col-md-8">
                       <label class="col-md-4 control-label" for=
                       "DateExpire">Expired Date:</label> 
@@ -78,7 +78,7 @@
                        </div>
                       </div>
                     </div>
-                  </div>  
+                  </div>   -->
 
           
         

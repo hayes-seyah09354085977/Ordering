@@ -47,6 +47,9 @@
           font-size: 31px;
           cursor: pointer;
           }
+          .modal-lg {
+              width: 1025px;
+          }
         </style>
 
 
@@ -232,6 +235,11 @@
           </ul>
         </li> --> 
         <?php if ($_SESSION['ADMIN_ROLE']=='Administrator') { ?> 
+          <li class="<?php echo (currentpage() == 'critical') ? "active" : false;?>" > 
+          <a href="<?php echo web_root ;?>admin/critical/">
+            <i class="fa fa-th-list"></i> <span>Critical Stocks</span>  
+          </a>
+        </li>
           <li class="<?php echo (currentpage() == 'loans') ? "active" : false;?>" > 
           <a href="<?php echo web_root ;?>admin/loans/">
             <i class="fa fa-th-list"></i> <span>Loan Structure</span>  
@@ -312,7 +320,7 @@
             <h3 class="modal-title2" >Chat </h3>
           </div>
           <div class="modal-body ">
-            <div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item mychatframe" src="../plugins/mychat/index.php?name=<?php  echo $singleuser->FullName; ?>Store"></iframe></div>
+            <div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item mychatframe" src="<?php echo web_root; ?>/plugins/mychat/index.php?name=<?php  echo $singleuser->FullName; ?>Store"></iframe></div>
                 
             
           </div>
@@ -395,6 +403,9 @@
   });
 
   $(function(){
+    $('.mychat').click(function(){
+                    $('#chat').modal('show');
+                  })
      $('.select2').select2();
   });
   $(function () {

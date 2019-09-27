@@ -84,7 +84,7 @@
 
               ?>
 
-              <p>Expires Product</p>
+              <p>Critical Stocks</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
@@ -138,11 +138,13 @@
             <!-- Tabs within a box -->
             <ul class="nav nav-tabs pull-right"> 
               <li class="active"><a href="#chartjs_pie" data-toggle="tab">Pie</a></li>
+              <li class=""><a href="#a_pie" data-toggle="tab">Critical Stocks</a></li>
               <li class="pull-left header"><i class="fa fa-inbox"></i> Inventory</li>
             </ul>
             <div class="tab-content no-padding">
               <!-- Morris chart - Sales -->
               <canvas class="chart tab-pane active" id="chartjs_pie" style="position: relative; height: 300px;"></canvas> 
+              <canvas class="chart tab-pane active" id="a_pie" style="position: relative; height: 300px;"></canvas> 
             </div>
           </div>
           <!-- /.nav-tabs-custom -->

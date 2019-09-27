@@ -10,6 +10,7 @@
   $singleterms = $termss->single_terms($id);
 
 ?> 
+<script src="../../plugins/ckeditor/ckeditor.js"></script>
  <form class="form-horizontal span6" action="controller.php?action=edit" method="POST">
 
           <fieldset>
@@ -22,12 +23,15 @@
 
                       <div class="col-md-8">
                        <input  id="id" name="id"   type="HIDDEN" value="<?php echo $singleterms->id; ?>">
-                         <input class="form-control input-sm" id="Terms" name="Terms" placeholder=
-                            "Terms" type="text" value="<?php echo $singleterms->Terms; ?>">
+                         <!-- <input class="form-control input-sm" id="Terms" name="Terms" placeholder=
+                            "Terms" type="text" value=""> -->
+                            <textarea name="Terms" id="Terms" rows="10" cols="80">
+                                <?php echo $singleterms->Terms; ?>
+                            </textarea>
                       </div>
                     </div>
                   </div>
-
+                  
 
             
              <div class="form-group">
@@ -70,3 +74,6 @@
 
         </div><!--End of container-->
   
+  <script>
+  CKEDITOR.replace( 'Terms' );
+  </script>
