@@ -65,11 +65,17 @@
 					<th>Product</th>
 					<th>Description</th>
 					<th>Price</th>
+					<th>Initial Payment</th>
+					<th>Monthly Payment</th>
+					<th>Total Price</th>
+					<th>Balance</th>
 					<th>Quantity</th>
 					<th>Order Type</th> 
 					<th>Categories</th>
 					<th>Status</th>
 					<th width="14%" >Action</th> 
+					<th width="14%" >Month</th> 
+
 				  	</tr>	
 				  </thead> 
 				  <tbody>
@@ -85,8 +91,12 @@
 						//    ' . $result->CATEGORIES.'</a></td>';
 						echo '<td>'. $result->CustomerName.'</td>';
 						echo '<td>'. $result->ProductName.'</td>';
-						echo '<td>' . $result->Description.'</a></td>';
-						echo '<td>' . $result->Price.'</a></td>'; 
+						echo '<td>' . $result->Description.'</td>';
+						echo '<td>' . $result->Price.'</td>';
+						echo '<td>' . $result->subtotal.'</td>';
+						echo '<td>' . $result->monthly_payment.'</td>';
+						echo '<td>' . $result->total_price.'</td>';
+						echo '<td>' . round($result->balance).'</td>';
 						echo '<td>'. $result->Quantity.'</td>'; 
 						echo '<td>'. $result->order_type.'</td>';
 						echo '<td>'. $result->Categories.'</td>';  
@@ -103,6 +113,15 @@
 						}else{
 							echo '<td align="center"><a title="Confirm" href="controller.php?action=confirm&id='.$result->StockoutID.'&ProductID='.$result->pid.'&qty='.$result->Quantity.'" class="btn btn-primary btn-xs  ">  <span class="fa fa-check fw-fa">Confirm</a>
 							<a title="Delete" href="controller.php?action=cancel&id='.$result->StockoutID.'&ProductID='.$result->pid.'&qty='.$result->Quantity.'" class="btn btn-danger btn-xs  ">  <span class="fa  fa-times fw-fa ">Cancel</a></td>'; 
+						}
+						if($result->order_type =='Installment'){
+								if(round($result->balance) > 0){
+									echo '<td align="center"><a title="Month Paid" href="controller.php?action=installment&id='.$result->StockoutID.'" class="btn btn-primary btn-xs  ">  <span class="fa fa-check fw-fa">Paid For This Month</a></td>'; 
+								}else{
+									echo '<td></td>';
+								}
+						}else{
+							echo '<td></td>';
 						}
 						echo '</tr>';
 				  	} 

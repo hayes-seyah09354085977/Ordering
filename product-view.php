@@ -191,7 +191,7 @@
     <div class="col-sm-2"> </div>
     <div class="col-sm-6">
     <div class="product-right">
-      <form action="cartcontroller.php?action=add" method="POST">
+      <form class='forms' action="cartcontroller.php?action=add" method="POST">
               <div class="product-info">
                   <div class="product-manufacturer"><?php echo $result->StoreName ;?></div>
                   <div class="product-title"><?php echo strtoupper($result->ProductName) ;?></div>
@@ -258,113 +258,96 @@ $cnt+=1;
 <script src="<?php echo web_root; ?>plugins/jQueryUI/jquery-ui.min.js"></script>
 <script src="<?php echo web_root; ?>plugins/Image-Magnify/Image-Magnify.js"></script>
 <script>
-var ProductID = '<?php echo $pid;?>',
-variationCategories,variation = [],variationQty=[];
+  var ProductID = '<?php echo $pid;?>',
+  variationCategories,variation = [],variationQty=[];
 
-$('.product-quantity-add, .product-quantity-subtract').click(function(){
-  var qty = $('#product-quantity-input'),
-    qtyMax=parseInt(qty.attr('max')),qtyVal = parseInt(qty.val()),
-    newVal;
-  var ProductPrice = "<?php echo $productPrice;?>";
-    switch(this.className){
-      case 'product-quantity-add':
-          newVal=qtyVal+1
-          if(newVal <= qtyMax){
-            qty.val(newVal)
-            $('.product-checkout-total-amount').text('₱'+ProductPrice*newVal)
-          }
-        break;
-      case 'product-quantity-subtract':
-          newVal=qtyVal-1
-          if(newVal >= 1){
-            qty.val(newVal)
-            $('.product-checkout-total-amount').text('₱'+ProductPrice*newVal)
-          }
-        break;
-    }
-})
-$('.imgmini').click(function(){
-  var frontsrc = $(this).attr('src')
-  $('.magnifiedImg').attr('src',frontsrc)
-})
-
-$.ajax({
-      type: "POST",
-      url: "ajaxSession.php",
-      dataType:'json',
-      data: {e:'getvariation',pid:ProductID},
-      success: function(data){
-        variationCategories = data[0]['variationcat']
-        variation = data[0]['variation'].split(',')
-        variationQty = data[0]['VariationBracket'].split(',')
-
-        var z='',varname='<div class="col-sm-2 title"> '+variationCategories+'</div>'
-
-          for(var y = 0; y < variation.length; y++){
-              if(y==0 ||(y%4) > 0){
-                if(y==0){
-                  z+= '<div class="col-md-2 options '+variationCategories.replace(/\s/g, '')+' '+y+' activeOpts">'+variation[y]+' </div>'
-                }else{
-                  z+= '<div class="col-md-2 options '+variationCategories.replace(/\s/g, '')+' '+y+'">'+variation[y]+' </div>'
-                }
-              }else if (y!= 0 &&(y%4) == 0){
-                z+= '<div class="col-md-2 "></div><div class="col-md-2 options '+variationCategories.replace(/\s/g, '')+' '+y+'">'+variation[y]+' </div>'
-              }
+  $('.product-quantity-add, .product-quantity-subtract').click(function(){
+    var qty = $('#product-quantity-input'),
+      qtyMax=parseInt(qty.attr('max')),qtyVal = parseInt(qty.val()),
+      newVal;
+    var ProductPrice = "<?php echo $productPrice;?>";
+      switch(this.className){
+        case 'product-quantity-add':
+            newVal=qtyVal+1
+            if(newVal <= qtyMax){
+              qty.val(newVal)
+              $('.product-checkout-total-amount').text('₱'+ProductPrice*newVal)
             }
-          $('.variation').append(`
-                <div class="row">
-                `+varname+`
-                `+z+`
-                </div>
-                `)
-
-          // for(var x =0; x < data.length; x++){
-          //   var y = data[x]['variation'].split(','),
-          //   z='',
-          //   varname='<div class="col-sm-2 title"> '+data[x]['variationcat']+'</div>'
-          //     for(var yy = 0; yy < y.length; yy++){
-          //       if(yy==0 ||(yy%4) > 0){
-          //         if(yy==0){
-          //           z+= '<div class="col-md-2 options '+data[x]["variationcat"].replace(/\s/g, '')+' activeOpts">'+y[yy]+' </div>'
-          //         }else{
-          //           z+= '<div class="col-md-2 options '+data[x]["variationcat"].replace(/\s/g, '')+'">'+y[yy]+' </div>'
-          //         }
-          //       }else if (yy!= 0 &&(yy%4) == 0){
-          //         z+= '<div class="col-md-2 "></div><div class="col-md-2 options '+data[x]["variationcat"].replace(/\s/g, '')+'">'+y[yy]+' </div>'
-          //       }
-          //     }
-          //       $('.variation').append(`
-          //       <div class="row">
-          //       `+varname+`
-          //       `+z+`
-          //       </div>
-          //   `)
-          // }
-
-          $(".options").click(function() {
-            var opts = $(this),
-            vcat = opts.attr('class').split(' ')[2],
-            a,
-            vqty = opts.attr('class').split(' ')[3]
-            $("."+vcat).removeClass('activeOpts')
-            opts.addClass('activeOpts')
-            a=$('.activeOpts').text()
-
-            $('input.remqty').val(variationQty[vqty])
-            $('#product-quantity-input').attr('max',variationQty[vqty])
-            $('#product-quantity-input').val(1)
-
-              $.ajax({
-                type: "POST",
-                url: "ajaxSession.php",
-                dataType:'json',
-                data: {e:'productWithVariation',vr:a},
-                success: function(data){
-                  // console.log(data)
-                }
-              })
-          });
+          break;
+        case 'product-quantity-subtract':
+            newVal=qtyVal-1
+            if(newVal >= 1){
+              qty.val(newVal)
+              $('.product-checkout-total-amount').text('₱'+ProductPrice*newVal)
+            }
+          break;
       }
-  });
+  })
+  $('.imgmini').click(function(){
+    var frontsrc = $(this).attr('src')
+    $('.magnifiedImg').attr('src',frontsrc)
+  })
+
+  $.ajax({
+        type: "POST",
+        url: "ajaxSession.php",
+        dataType:'json',
+        data: {e:'getvariation',pid:ProductID},
+        success: function(data){
+          console.log(data)
+        
+
+          for(var x =0; x < data.length; x++){
+              variationCategories = data[x]['variationcat']
+              variation = data[x]['variation'].split(',')
+              variationQty = data[x]['VariationBracket'].split(',')
+              var z='',varname='<div class="col-sm-2 title"> '+variationCategories+'</div>'
+
+            for(var y = 0; y < variation.length; y++){
+                if(y==0 ||(y%4) > 0){
+                  if(y==0){
+                    z+= '<div class="col-md-2 options '+variationCategories.replace(/\s/g, '')+' '+y+' activeOpts">'+variation[y]+' </div>'
+                  }else{
+                    z+= '<div class="col-md-2 options '+variationCategories.replace(/\s/g, '')+' '+y+'">'+variation[y]+' </div>'
+                  }
+                }else if (y!= 0 &&(y%4) == 0){
+                  z+= '<div class="col-md-2 "></div><div class="col-md-2 options '+variationCategories.replace(/\s/g, '')+' '+y+'">'+variation[y]+' </div>'
+                }
+              }
+
+            $('.variation').append(`
+                  <div class="row">
+                  `+varname+`
+                  `+z+`
+                  </div>
+                  `)
+          }
+          var ss =$('.activeOpts').text().replace(' ','-')
+          $('.forms').attr('action','cartcontroller.php?action=add&vr='+ss)
+            $(".options").click(function() {
+              var opts = $(this),
+              vcat = opts.attr('class').split(' ')[2],
+              a,
+              vqty = opts.attr('class').split(' ')[3]
+              $("."+vcat).removeClass('activeOpts')
+              opts.addClass('activeOpts')
+              a=$('.activeOpts').text().replace(' ','-')
+
+              $('input.remqty').val(variationQty[vqty])
+              $('#product-quantity-input').attr('max',variationQty[vqty])
+              $('#product-quantity-input').val(1)
+              $('.forms').attr('action','cartcontroller.php?action=add&vr='+a)
+                $.ajax({
+                  type: "POST",
+                  url: "ajaxSession.php",
+                  dataType:'json',
+                  data: {e:'productWithVariation',vr:a},
+                  success: function(data){
+                     console.log(data)
+                  }
+                })
+            });
+        }
+    });
 
 </script>

@@ -8,6 +8,7 @@ switch($e){
         $_SESSION['mp'] = $_POST['mp'];
         $_SESSION['pi'] = $_POST['pi'];
         $_SESSION['inp'] = $_POST['inp'];
+        $_SESSION['total_payment']=$_POST['total_payment'];
         echo 'success';
     break;
     case 'orders':
@@ -43,6 +44,22 @@ switch($e){
     case 'productWithVariation':
         $_SESSION['varieties'] = $_POST['vr'];
         echo $_SESSION['varieties'];
+    break;
+    case 'getCart':
+    $count_cart = count($_SESSION['gcCart']); 
+    $products = array();
+    for ($i=0; $i < $count_cart  ; $i++) { 
+        array_push($products,$_SESSION['gcCart'][$i]);
+    } 
+        print_r(json_encode($products));
+    break;
+    case 'check_for_installment':
+        global $mydb;
+            $sql = "SELECT distinct ProductID,Installment FROM `tblstockin` st where Installment='on'" ;
+            $mydb->setQuery($sql);
+            $cur = $mydb->executeQuery();
+            $res = $cur->fetch_all(MYSQLI_ASSOC);
+            print_r(json_encode($res));
     break;
 }
 

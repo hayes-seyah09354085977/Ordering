@@ -23,6 +23,10 @@ switch ($action) {
 	doUpdateOrder();
 	break;
 
+	case 'installment':
+	doInstallments();
+	break;
+
 	}
    
 	function doInsert(){
@@ -95,14 +99,27 @@ switch ($action) {
 			$remaining = $row->Remaining - $qty;
 			$sold = $row->Sold + $qty; 
 
+			$sql2="SELECT * FROM `tblstockout` WHERE `StockoutID`='{$stockoutID}'"; 
+			$mydb->setQuery($sql2);
+			$row2 = $mydb->loadSingleResult();
 
-			$sql = "UPDATE `tblstockout`  SET Status  = 'Confirmed' WHERE StockoutID='{$stockoutID}'";
+			$orderno=$row2->OrderNo;
+			$productID=$row2->ProductID;
+			$qty=$row2->Quantity;
+			$balance = $row2->total_price - $row2->subtotal;
+
+
+			$sql = "UPDATE `tblstockout`  SET Status  = 'Confirmed',balance = '$balance' WHERE StockoutID='{$stockoutID}'";
 			$mydb->setQuery($sql);
 			$mydb->executeQuery();
 
 			$sql ="UPDATE `tblinventory` SET  `Sold`='{$sold}'  WHERE `ProductID`='{$productID}'";
 			$mydb->setQuery($sql);
 			$mydb->executeQuery();
+
+			$sql3 = "INSERT INTO tblhistory (`orderid`,`productorder`,`quantity`,`orderstatus`) VALUES('{$orderno}','{$productID}','{$qty}','Confirmed')";
+			$mydb->setQuery($sql3);
+			$mydb->executeQuery(); 
 
 			message("Orders has been confirmed!", "success");
 			// redirect("index.php?view=view&id=".$_POST['EMPLOYEEID']);
@@ -132,6 +149,17 @@ switch ($action) {
 			$mydb->setQuery($sql);
 			$mydb->executeQuery();
 
+			$sql2 = $sql2="SELECT * FROM `tblstockout` WHERE `StockoutID`='{$stockoutID}'"; 
+			$mydb->setQuery($sql2);
+			$row2 = $mydb->loadSingleResult();
+			$orderno=$row2->OrderNo;
+			$productID=$row2->ProductID;
+			$qty=$row2->Quantity;
+
+			$sql3 = "INSERT INTO tblhistory (`orderid`,`productorder`,`quantity`,`orderstatus`) VALUES('{$orderno}','{$productID}','{$qty}','$OrderMessage')";
+			$mydb->setQuery($sql3);
+			$mydb->executeQuery(); 
+
 			message($message, "success");
 			// redirect("index.php?view=view&id=".$_POST['EMPLOYEEID']);
 			redirect("index.php");
@@ -160,6 +188,28 @@ switch ($action) {
 			$mydb->executeQuery(); 
 
 			message("Orders has been cancelled!", "success");
+			// redirect("index.php?view=view&id=".$_POST['EMPLOYEEID']);
+			redirect("index.php");
+
+	}
+	function doInstallments(){
+		global $mydb;
+
+			$stockoutID = $_GET['id'];
+
+
+			$sql2="SELECT * FROM `tblstockout` WHERE `StockoutID`='{$stockoutID}'"; 
+			$mydb->setQuery($sql2);
+			$row2 = $mydb->loadSingleResult();
+
+			$balance = ($row2->balance - $row2->monthly_payment);
+
+
+			$sql = "UPDATE `tblstockout`  SET balance = '$balance' WHERE StockoutID='{$stockoutID}'";
+			$mydb->setQuery($sql);
+			$mydb->executeQuery();
+
+			message("Orders has been confirmed!", "success");
 			// redirect("index.php?view=view&id=".$_POST['EMPLOYEEID']);
 			redirect("index.php");
 

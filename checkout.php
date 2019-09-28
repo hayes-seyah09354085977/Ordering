@@ -97,7 +97,7 @@ if(isset($_GET['ct'])){
 			  $count_cart=0;
 			  $monthlyPayment=0;
 			  if(isset($_GET['ct'])=='IR'){
-				$subtotal = $_SESSION['inp'];;
+				$subtotal = $_SESSION['inp'];
 				$monthlyPayment = $_SESSION['mp'];
 				// echo $subtotal;
 			  }

@@ -22,7 +22,8 @@ switch ($action) {
 } 
 
 function addProduct(){
-global $mydb;
+	   $varieties = $_GET['vr'];
+	global $mydb;
     $productID = $_POST['ProductID'];
 	$sql ="SELECT * FROM tblproduct p, tblcategory c WHERE p.CategoryID=c.CategoryID AND ProductID = '{$productID}'";
 	$mydb->setQuery($sql);
@@ -34,15 +35,15 @@ global $mydb;
 		$res = $mydb->loadSingleResult(); 
 
 		$pid = $res->ProductID;
-		$product = $res->ProductName . ' | ' . $res->Description . ' | '.$res->Categories;
+		$product = $res->ProductName . ' | ' . $res->Description . ' | '.$res->Categories.'|'.$varieties;
 		$price = $res->Price;
 		$q = $_POST['QTY'.$pid];
 		$stocks = $_POST['REMQTY'.$pid];
 		$subtotal = $price * $q;
-		addtocart($pid,$product,$price,$q,$subtotal,$stocks);
+		 addtocart($pid,$product,$price,$q,$subtotal,$stocks);
 	}
 
-	redirect("index.php?q=cart");
+	   redirect("index.php?q=cart");
 	
 }
 function doSubmitOrder(){
@@ -72,13 +73,23 @@ function doSubmitOrder(){
 				$sqlupdate = "UPDATE `tblinventory` SET `Remaining` = $remaining WHERE `ProductID`='{$productID}'";
 				$mydb->setQuery($sqlupdate);
 				$mydb->executeQuery(); 
-
-
-				$sql = "INSERT INTO `tblstockout`  (`CustomerID`, `ProductID`, `Quantity`, `DateSold`,OrderNO,HView,order_type) VALUES('{$customerID}','{$productID}','{$qty}',Now(),'{$orderno}',1,'{$orderType}')";
+				
+				if($orderType=='Installment'){
+					$subtotal=$_SESSION['inp'];
+					$total_payment=$_SESSION['total_payment'];
+					$monthly_payment = $_SESSION['mp'];
+					$sql = "INSERT INTO `tblstockout`  (`CustomerID`, `ProductID`, `Quantity`, `DateSold`,OrderNO,HView,order_type,subtotal,balance,total_price,monthly_payment) VALUES('{$customerID}','{$productID}','{$qty}',Now(),'{$orderno}',1,'{$orderType}','{$subtotal}','{$total_payment}','{$total_payment}','{$monthly_payment}')";
+				}else{
+					$sql = "INSERT INTO `tblstockout`  (`CustomerID`, `ProductID`, `Quantity`, `DateSold`,OrderNO,HView,order_type) VALUES('{$customerID}','{$productID}','{$qty}',Now(),'{$orderno}',1,'{$orderType}')";
+				}
 				$mydb->setQuery($sql);
 				$mydb->executeQuery(); 
 
 				$totalamount += $_SESSION['gcCart'][$i]['subtotal'];
+
+				$sql2 = "INSERT INTO tblhistory (`orderid`,`productorder`,`quantity`,`orderstatus`) VALUES('{$orderno}','{$productID}','{$qty}','Pending')";
+				$mydb->setQuery($sql2);
+				$mydb->executeQuery(); 
 
 			}
 
