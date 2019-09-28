@@ -21,7 +21,7 @@ switch ($action) {
 function doInsert() {
 	if (isset($_POST['btnRegister'])) {   
 		$customer = new Customer();
-		$res = $customer->VerifyEmailExists($_POST['Email']);
+		$res = $customer->VerifyEmailExists($_POST['Email'],$_POST['Customer_Username']);
 
 			// $autonum = New Autonumber();
 			// $auto = $autonum->set_autonumber('APPLICANT');
@@ -34,7 +34,7 @@ function doInsert() {
 			}else{
 				switch($res){
 					case '1':
-					   message("Email is Already Taken","error");
+					   message("Username or Email is Already Taken","error");
 					   redirect("index.php?q=register/customer");
 					break;
 					case '0':

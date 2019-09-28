@@ -41,9 +41,9 @@ class Customer {
 		 	return false;
 		 }
 	}
-	function VerifyEmailExists($email){
+	function VerifyEmailExists($email,$username){
 		global $mydb;
-		$mydb->setQuery("SELECT count(*) as cnt FROM `tblcustomer` WHERE `Email`='".$email."' ");
+		$mydb->setQuery("SELECT count(*) as cnt FROM `tblcustomer` WHERE `Email`='".$email."' or Customer_Username='".$username."' ");
 		$cur = $mydb->executeQuery();
 		if($cur==false){
 			die(mysql_error());
