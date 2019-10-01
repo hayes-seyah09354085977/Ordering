@@ -176,48 +176,80 @@
           <a href="<?php echo web_root ;?>admin/">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>  
           </a> 
-        </li> 
-        <li class="<?php echo (currentpage() == 'category') ? "active" : false;?>" > 
-          <a href="<?php echo web_root ;?>admin/category/">
-            <i class="fa fa-list"></i> <span>Category</span>  
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i>
+            <span>Categories</span>
+            <i class="fa fa-angle-left pull-right"></i>
           </a>
-        </li> 
-        <li class="<?php echo (currentpage() == 'variationcategory') ? "active" : false;?>" > 
-          <a href="<?php echo web_root ;?>admin/variationcategory/">
-            <i class="fa fa-list"></i> <span>Variation Category</span>  
+          <ul class="treeview-menu"> 
+            <li class="<?php echo (currentpage() == 'category') ? "active" : false;?>" > 
+              <a href="<?php echo web_root ;?>admin/category/">
+                <i class="fa fa-list"></i> <span>Category</span>  
+              </a>
+            </li> 
+            <li class="<?php echo (currentpage() == 'variationcategory') ? "active" : false;?>" > 
+              <a href="<?php echo web_root ;?>admin/variationcategory/">
+                <i class="fa fa-list"></i> <span>Variation Category</span>  
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i>
+            <span>Products</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">  
+            <li class="<?php echo (currentpage() == 'variation') ? "active" : false;?>" > 
+              <a href="<?php echo web_root ;?>admin/variation/">
+                <i class="fa fa-list"></i> <span>Variation</span>  
+              </a>
+            </li>
+            <!-- <li class="<?php echo (currentpage() == 'store') ? "active" : false;?>" >
+              <a href="<?php echo web_root ;?>admin/store/">
+                <i class="fa fa-building"></i> <span>Store</span> 
+              </a>
+            </li> -->
+            <li class="<?php echo (currentpage() == 'products') ? "active" : false;?>" >
+              <a href="<?php echo web_root ;?>admin/products/">
+                <i class="fa fa-suitcase"></i> <span>Products</span> 
+              </a>
+            </li> 
+            <li class="<?php echo (currentpage() == 'inventory') ? "active" : false;?>">
+              <a href="<?php echo web_root; ?>admin/inventory/">
+                <i class="fa fa-list-alt"></i> <span>Inventory</span> </a>
+            </li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i>
+            <span>Transaction</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">  
+            <li class="<?php echo (currentpage() == 'stockin') ? "active" : false;?>" > 
+              <a href="<?php echo web_root ;?>admin/stockin/">
+                <i class="fa fa-th"></i> <span>Stock-in</span>  
+              </a>
+            </li> 
+            
+            
+            <li class="<?php echo (currentpage() == 'orders') ? "active" : false;?>" > 
+              <a href="<?php echo web_root ;?>admin/orders/">
+                <i class="fa fa-th-list"></i> <span>Orders</span>  
+              </a>
+            </li>
+            <li class="<?php echo (currentpage() == 'critical') ? "active" : false;?>" > 
+          <a href="<?php echo web_root ;?>admin/critical/">
+            <i class="fa fa-th-list"></i> <span>Critical Stocks</span>  
           </a>
         </li>
-        <li class="<?php echo (currentpage() == 'variation') ? "active" : false;?>" > 
-          <a href="<?php echo web_root ;?>admin/variation/">
-            <i class="fa fa-list"></i> <span>Variation</span>  
-          </a>
+          </ul>
         </li>
-        <!-- <li class="<?php echo (currentpage() == 'store') ? "active" : false;?>" >
-          <a href="<?php echo web_root ;?>admin/store/">
-            <i class="fa fa-building"></i> <span>Store</span> 
-          </a>
-        </li> -->
-        <li class="<?php echo (currentpage() == 'products') ? "active" : false;?>" >
-          <a href="<?php echo web_root ;?>admin/products/">
-            <i class="fa fa-suitcase"></i> <span>Products</span> 
-          </a>
-        </li> 
-        <li class="<?php echo (currentpage() == 'stockin') ? "active" : false;?>" > 
-          <a href="<?php echo web_root ;?>admin/stockin/">
-            <i class="fa fa-th"></i> <span>Stock-in</span>  
-          </a>
-        </li> 
-         
-        <li class="<?php echo (currentpage() == 'inventory') ? "active" : false;?>">
-          <a href="<?php echo web_root; ?>admin/inventory/">
-            <i class="fa fa-list-alt"></i> <span>Inventory</span> </a>
-        </li>
-        <li class="<?php echo (currentpage() == 'orders') ? "active" : false;?>" > 
-          <a href="<?php echo web_root ;?>admin/orders/">
-            <i class="fa fa-th-list"></i> <span>Orders</span>  
-          </a>
-        </li>
-       
         
        <!-- <li class="treeview">
           <a href="#">
@@ -231,20 +263,22 @@
             <li><a href="<?php echo web_root ;?>pages/UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
             <li><a href="<?php echo web_root ;?>pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
             <li><a href="<?php echo web_root ;?>pages/UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
-            <li><a href="<?php echo web_root ;?>pages/UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
-          </ul>
-        </li> --> 
+            <li><a href="<?php echo web_root ;?>pages/UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>-->
+         
         <?php if ($_SESSION['ADMIN_ROLE']=='Administrator') { ?> 
-          <li class="<?php echo (currentpage() == 'critical') ? "active" : false;?>" > 
-          <a href="<?php echo web_root ;?>admin/critical/">
-            <i class="fa fa-th-list"></i> <span>Critical Stocks</span>  
-          </a>
-        </li>
-          <li class="<?php echo (currentpage() == 'loans') ? "active" : false;?>" > 
+          
+          <!-- <li class="<?php echo (currentpage() == 'loans') ? "active" : false;?>" > 
           <a href="<?php echo web_root ;?>admin/loans/">
             <i class="fa fa-th-list"></i> <span>Loan Structure</span>  
           </a>
-        </li>
+        </li> -->
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i>
+            <span>Store Management</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">  
         <li class="<?php echo (currentpage() == 'terms') ? "active" : false;?>" > 
           <a href="<?php echo web_root ;?>admin/terms/">
             <i class="fa fa-th-list"></i> <span>Terms And Condition</span>  
@@ -258,6 +292,26 @@
           <a href="<?php echo web_root; ?>admin/customer/">
             <i class="fa fa-user"></i> <span>Manage Customers</span> </a>
         </li> 
+         
+        </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i>
+            <span>Reports</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu"> 
+          <li class="<?php echo (currentpage() == 'transactionrep') ? "active" : false;?>">
+            <a href="<?php echo web_root; ?>admin/transactionrep/">
+              <i class="fa fa-user"></i> <span>Transaction Report </span> </a>
+          </li>
+          <li class="<?php echo (currentpage() == 'inventoryrep') ? "active" : false;?>">
+            <a href="<?php echo web_root; ?>admin/inventoryrep/">
+              <i class="fa fa-user"></i> <span>Inventory Report</span> </a>
+          </li>
+        </ul>
+        </li>
         <?php } ?>
       </ul>
     </section>
