@@ -547,9 +547,21 @@ $('.date_picker').datetimepicker({
                   $('.mychat').click(function(){
                     $('#chat').modal('show');
                   })
+                  let nnum = "<?php echo $nnum;?>";
+                  
+                  if(nnum != 0){
+                    alert('yey')
+                    var $div2blink = $("#divtoBlink"); // Save reference, only look this item up once, then save
+                    var backgroundInterval = setInterval(function(){
+                        $div2blink.toggleClass("backgroundRed");
+                    },1500)
+                  }
+                  else{
+                    alert('asd')
+                  }
                 })
     </script>
 
-   
+
 </html>
  
