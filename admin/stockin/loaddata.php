@@ -225,7 +225,7 @@ $(".Reeserve").prop('disabled', true);
 
 				$('.container._varation').append(`<div class="row  w-25">
 					<div class='col-sm-2'>`+variationText+`: `+elem+`</div>
-					<div class='col-sm-3'><input type="number" class="form-control `+data[0].varcatid+`-cat category22 varriate"  min=1 value="1"></div>
+					<div class='col-sm-3'><input type="number" class="form-control `+data[0].varcatid+`-cat category22 varriate"  min=0 value="0"></div>
 				</div>`)
 			})			
 			

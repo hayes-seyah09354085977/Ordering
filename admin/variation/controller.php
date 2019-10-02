@@ -91,8 +91,6 @@ switch ($action) {
 			$product->varcatid 		= $_POST['CategoryID'];
 			$product->variation		= $_POST['Variation']; 
 			$product->update($_POST['ProductID']);
-echo"stop";
-
 			message("Variation has been updated!", "success");
 			redirect("index.php?view=edit&id=".$_POST['ProductID']);
 	     

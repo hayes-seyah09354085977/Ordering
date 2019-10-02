@@ -53,7 +53,7 @@ switch ($action) {
 			$termss->Terms	= $_POST['Terms'];
 			$termss->update($_POST['id']);
 
-			message("[". $_POST['Terms'] ."] has been updated!", "success");
+			message("Terms and Condition has been updated!", "success");
 			redirect("index.php");
 		}
 
