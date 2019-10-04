@@ -19,7 +19,7 @@
      
  
        <div class="center wow fadeInDown">
-             <h2 class="page-header">Update Product</h2>
+             <h2 class="page-header">Update Variation</h2>
             <!-- <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p> -->
         </div>
  
@@ -61,7 +61,7 @@
                     <div class="form-group">
                       <div class="col-md-8">
                         <label class="col-md-4 control-label" for=
-                        "Description">Description:</label>
+                        "Description">Variation: (Separate using Comma(",") ):</label>
                         <div class="col-md-8"> 
                           <textarea  class="form-control input-sm" id="Variation" name="Variation" placeholder=
                               "Description"    onkeyup="javascript:capitalize(this.id, this.value);" autocomplete="off"><?php echo $res->variation; ?></textarea> 
