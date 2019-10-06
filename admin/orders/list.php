@@ -16,7 +16,9 @@
 	 if(!isset($_SESSION['ADMIN_USERID'])){
       redirect(web_root."admin/index.php");
      }
-
+$reason = array();
+$image= array();
+$i = 0;
 ?> 
 
 <!-- Modal -->
@@ -84,6 +86,8 @@
 				  		$mydb->setQuery("SELECT *,s.ProductID as pid FROM `tblproduct` p,`tblcategory` c,`tblstockout` s,tblcustomer cs WHERE p.`CategoryID`=c.`CategoryID` AND p.`ProductID`=s.`ProductID` AND s.CustomerID=cs.CustomerID AND p.StoreID=".$_SESSION['ADMIN_USERID']);
 				  		$cur = $mydb->loadResultList(); 
 						foreach ($cur as $result) {
+						$reason[] =  $result->Remarks;
+						$image[] = $result->Ret_pic;
 				  		  echo '<tr>';
 			              // echo '<td width="5%" align="center"></td>';
 			              // echo '<td>
@@ -100,7 +104,16 @@
 						echo '<td>'. $result->Quantity.'</td>'; 
 						echo '<td>'. $result->order_type.'</td>';
 						echo '<td>'. $result->Categories.'</td>';  
-						echo '<td>'. $result->Status.'</td>'; 
+						echo '<td>'; 
+						if($result->Status != 'Return/Refund'){
+							echo $result->Status;
+						}
+						else{
+							echo 
+							'<a href="#" class="ModalReRe" data-arr="'.$i.'" data-pic="">'.$result->Status.'</a>';
+						}
+						$i++;
+						echo '</td>'; 
 						if ($result->Status=='Delivered' ||$result->Status=='Cancelled') {
 							# code...
 							echo '<td>None</td>';
@@ -110,7 +123,10 @@
 							echo '<td align="center"><a title="Confirm" href="controller.php?action=status&id='.$result->StockoutID.'&OrderStatus=2" class="btn btn-primary btn-xs  ">  <span class="fa fa-check fw-fa">For Delivery</a></td>'; 
 						}else if($result->Status=='For Delivery'){
 							echo '<td align="center"><a title="Confirm" href="controller.php?action=status&id='.$result->StockoutID.'&OrderStatus=3" class="btn btn-primary btn-xs  ">  <span class="fa fa-check fw-fa">Delivered</a></td>'; 
-						}else{
+						}else if($result->Status=='Return/Refund'){
+							echo '<td align="center"><a title="Confirm" href="controller.php?action=status&id='.$result->StockoutID.'&OrderStatus=3" class="btn btn-primary btn-xs  ">  <span class="fa fa-check fw-fa">Accept Return</a></td>'; 
+						}
+						else{
 							echo '<td align="center"><a title="Confirm" href="controller.php?action=confirm&id='.$result->StockoutID.'&ProductID='.$result->pid.'&qty='.$result->Quantity.'" class="btn btn-primary btn-xs  ">  <span class="fa fa-check fw-fa">Confirm</a>
 							<a title="Delete" href="controller.php?action=cancel&id='.$result->StockoutID.'&ProductID='.$result->pid.'&qty='.$result->Quantity.'" class="btn btn-danger btn-xs  ">  <span class="fa  fa-times fw-fa ">Cancel</a></td>'; 
 						}
@@ -124,7 +140,9 @@
 							echo '<td></td>';
 						}
 						echo '</tr>';
-				  	} 
+					  } 
+					  
+					//   echo $reason;
 				  	?>
 				  </tbody>
 					
@@ -132,7 +150,23 @@
 			</div>
 	 
 							</form>
-							
+	<div class="modal fade" id="Rere" role="dialog">
+      	<div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h3 class="modal-title" > </h3>
+				</div>
+				<div class="modal-body ">
+					
+				</div>
+			<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+        </div>
+      	</div>
+    </div>							
 <script src="<?php echo web_root; ?>plugins/home-plugins/js/jquery.js"></script>
 <script src="<?php echo web_root; ?>plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <script src="<?php echo web_root; ?>plugins/jQueryUI/jquery-ui.js"></script>
@@ -156,6 +190,22 @@ function getMessage(id,pid,qty){
 	$('.proceed').attr('href','controller.php?action=cancel&id='+id+'&ProductID='+pid+'&qty='+qty);
 
 }
+$(document).ready(function(){
+	$(".ModalReRe").click(function(){
+		$('#Rere').modal('show');
+		$('.modal-title').html("")
+		$('.modal-body').html("")
+		let temp = '<?php echo(json_encode($reason,true));?>';
+		let imagess = '<?php echo(json_encode($image,true));?>';
+		data = $.parseJSON(temp);
+		data66 = $.parseJSON(imagess);
+		let ar = $(this).data('arr')
+		$('.modal-title').html(data[ar])
+		console.log(data66)
+
+		$('.modal-body').append("<img src='photo/"+data66[ar]+"'>")
+	})
+})
 </script>
        
                  
