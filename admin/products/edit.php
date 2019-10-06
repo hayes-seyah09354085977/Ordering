@@ -16,6 +16,7 @@
 
   $DateExpire = date_format(date_create($res->DateExpire),'m/d/Y'); 
   $CategoryID = $res->CategoryID;
+  $Supplier = $res->Supplier;
 ?>
      
  
@@ -52,6 +53,19 @@
                           </div>
                       </div>
                     </div>
+
+                    <div class="form-group">
+                      <div class="col-md-8">
+                        <label class="col-md-4 control-label" for=
+                        "Price">P.O. :</label>
+
+                        <div class="col-md-8">
+                          <input name="deptid" type="hidden" value="">
+                          <input  class="form-control input-sm" id="PO" name="PO" placeholder=
+                              "P.O."    onkeyup="javascript:capitalize(this.id, this.value);" autocomplete="off" value="<?php echo $res->PO ?>"> 
+                        </div>
+                      </div>
+                    </div> 
 
                     <div class="form-group">
                       <div class="col-md-8">
@@ -112,7 +126,35 @@
                         </div>
                       </div>  
  
+                      <div class="form-group">
+                        <div class="col-md-8">
+                          <label class="col-md-4 control-label" for=
+                          "Categories">Supplier :</label>
 
+                          <div class="col-md-8">
+                            <select class="form-control input-sm" id="Supplier" name="Supplier">
+                              <option value="None">Select</option>
+                              <?php 
+                                $sql ="Select * from tblsupplier";
+                                $mydb->setQuery($sql);
+                                $res  = $mydb->loadResultList();
+                                foreach ($res as $row) {
+                                  # code...
+                               
+                                  if ($Supplier == $row->sup_id) {
+                                    # code...
+                                     echo '<option SELECTED value='.$row->sup_id.'>'.$row->Supplier.'</option>';
+                                  }else{
+                                    echo '<option  value='.$row->sup_id.'>'.$row->Supplier.'</option>';
+
+                                  }
+                                }
+
+                              ?>
+                            </select>
+                          </div>
+                        </div>
+                      </div> 
 
                   <div class="form-group">
                     <div class="col-md-8">

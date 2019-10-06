@@ -43,60 +43,24 @@ switch ($action) {
 	
 		global $mydb;
 		if(isset($_POST['save'])){
- 		    
- 		    $filename = UploadImage("Image1");
-			$Image1 = "photos/". $filename ;
-
-			$filename = UploadImage("Image2");
-			$Image2 = "photos/". $filename ;
-
-			$filename = UploadImage("Image3");
-			$Image3 = "photos/". $filename ;
-
-
-
-
-					// @$DateExpire = date_format(date_create($_POST['DateExpire']),'Y-m-d');
-
-					$product = New Product(); 
-					$product->ProductName 		= $_POST['ProductName'];
-					$product->Description		= $_POST['Description']; 
-					$product->Price				= $_POST['Price'];  
-					$product->PO				= $_POST['PO']; 
-					$product->Supplier				= $_POST['Supplier'];   
+ 		 
+					$product = New Supplier(); 
+					$product->Supplier	= $_POST['Supplier']; 
+					$product->sup_address	= $_POST['address']; 
+					$product->sup_contacts	= $_POST['Contact']; 
 					// $product->DateExpire		=  @$DateExpire;
-					$product->CategoryID		= $_POST['CategoryID'];
-					$product->StoreID			= $_SESSION['ADMIN_USERID'];
-					$product->Image1			=  $Image1;
-					$product->Image2			=  $Image2;
-					$product->Image3			=  $Image3;
-					
-					
-					$checkProductName = checkExistingProduct($_POST['ProductName']);
-					switch($checkProductName){
-						case '0':
-							$product->create(); 
-							$productID = $mydb->insert_id();
-							$sql ="INSERT INTO `tblinventory` (`ProductID`) VALUES ('{$productID}')";
-							$mydb->setQuery($sql);
-							$mydb->executeQuery();
+					$product->create(); 				
 		
-							message("New Product created successfully!", "success");
+							message("New Supplier created successfully!", "success");
 							redirect("index.php");
-						break;
-						case '1':
-							message("Product Name Exist! Please Use Other Product Names.", "error");
-							redirect("index.php?view=add");
-						break;
-
-					}
+					
 					
  
 		 }
  } 
  function checkExistingProduct($productName){
 	global $mydb;
-	$mydb->setQuery("SELECT count(*)as cnt FROM `tblproduct` WHERE `ProductName`='".$productName."'");
+	$mydb->setQuery("SELECT count(*)as cnt FROM `tblvariation` WHERE `varcatid`='".$productName."'");
 	$cur = $mydb->executeQuery();
 	if($cur==false){
 		die(mysql_error());
@@ -115,70 +79,12 @@ switch ($action) {
 	function doEdit(){
 	if(isset($_POST['save'])){
 
-			// $filename = UploadImage("Attachment1");
-			// $attachment1 = "photos/". $filename ;
-
-			// $filename = UploadImage("Attachment2");
-			// $attachment2 = "photos/". $filename ;
-
-			// $filename = UploadImage("Attachment3");
-			// $attachment3 = "photos/". $filename ;
-		
- 		    $filename = UploadImage("Image1");
-			$Image1 = "photos/". $filename ;
-
-			$filename = UploadImage("Image2");
-			$Image2 = "photos/". $filename ;
-
-			$filename = UploadImage("Image3");
-			$Image3 = "photos/". $filename ;
-
-		
-
-
-		 
-
-			@$DateExpire = date_format(date_create($_POST['DateExpire']),'Y-m-d');
-
-
-			$product = New Product(); 
-			$product->ProductName 		= $_POST['ProductName'];
-			$product->Description		= $_POST['Description']; 
-			$product->Price				= $_POST['Price'];  
-			$product->PO				= $_POST['PO'];  
-			$product->Supplier			= $_POST['Supplier'];  
-			$product->DateExpire		=  @$DateExpire;
-			$product->CategoryID		= $_POST['CategoryID'];
-			$product->StoreID			= $_SESSION['ADMIN_USERID']; 
-			if ($Image1=='' || $Image1=='photos/') {
-			# code...
-			}else{
-				
-				$product->Image1			=  $Image1;
-
-			}
-			if ($Image2=='' || $Image2=='photos/') {
-			# code...
-			}else{ 
-				$product->Image2			=  $Image2;
-
-			}
-			if ($Image3=='' || $Image3=='photos/') {
-			# code...
-			}else{ 
-				$product->Image3			=  $Image3;
-
-			}
-
-
-
-
-
+		$product = New Supplier(); 
+		$product->Supplier	= $_POST['Supplier']; 
+		$product->sup_address	= $_POST['address']; 
+		$product->sup_contacts	= $_POST['Contact']; 
 			$product->update($_POST['ProductID']);
-
-
-			message("Product has been updated!", "success");
-			// redirect("index.php?view=view&id=".$_POST['EMPLOYEEID']);
+			message("Supplier has been updated!", "success");
 			redirect("index.php?view=edit&id=".$_POST['ProductID']);
 	     
   	
@@ -188,47 +94,11 @@ switch ($action) {
 } 
 	function doDelete(){
 		global $mydb;
-		
-		// if (isset($_POST['selector'])==''){
-		// message("Select the records first before you delete!","error");
-		// redirect('index.php');
-		// }else{
-
-		// $id = $_POST['selector'];
-		// $key = count($id);
-
-		// for($i=0;$i<$key;$i++){
-
-		// 	$subj = New Student();
-		// 	$subj->delete($id[$i]);
-
-		
-				$id = 	$_GET['id'];
-
-				$product = New Product();
-	 		 	$product->delete($id);
-
-	 		 	$sql = "DELETE FROM tblinventory WHERE ProductID=".$id;
-	 		 	$mydb->setQuery($sql);
-	 		 	$mydb->executeQuery();
-
-
-	 		 	$sql = "DELETE FROM `tblstockin`  WHERE ProductID=".$id;
-				$mydb->setQuery($sql);
-				$mydb->executeQuery();
-
-				$sql = "DELETE FROM `tblstockout`  WHERE ProductID=".$id;
-				$mydb->setQuery($sql);
-				$mydb->executeQuery();
-
-			 
-		
-		// }
-			message("Product already Deleted!","success");
+			$id = 	$_GET['id'];
+			$product = New Supplier();
+	 		$product->delete($id);
+			message("Supplier already Deleted!","success");
 			redirect('index.php');
-		// }
-
-		
 	}
 
 	function UploadImage($imgname=""){

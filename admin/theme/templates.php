@@ -194,6 +194,11 @@
                 <i class="fa fa-list"></i> <span>Variation Category</span>  
               </a>
             </li>
+            <li class="<?php echo (currentpage() == 'supplier') ? "active" : false;?>" > 
+              <a href="<?php echo web_root ;?>admin/supplier/">
+                <i class="fa fa-list"></i> <span>Suppliers</span>  
+              </a>
+            </li>
           </ul>
         </li>
         <li class="treeview">

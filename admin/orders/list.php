@@ -127,7 +127,7 @@ $i = 0;
 						}else if($result->Status=='For Delivery'){
 							echo '<td align="center"><a title="Confirm" href="controller.php?action=status&id='.$result->StockoutID.'&OrderStatus=3" class="btn btn-primary btn-xs  ">  <span class="fa fa-check fw-fa">Delivered</a></td>'; 
 						}else if($result->Status=='Return/Refund'){
-							echo '<td align="center"><a title="Confirm" href="controller.php?action=money&id='.$result->StockoutID.'&OrderStatus=3" class="btn btn-primary btn-xs  ">  <span class="fa fa-check fw-fa">Accept Return</a></td>'; 
+							echo '<td align="center"><a title="Confirm" href="controller.php?action=return&id='.$result->StockoutID.'&OrderStatus=3" class="btn btn-primary btn-xs  ">  <span class="fa fa-check fw-fa">Accept Return</a></td>'; 
 						}
 						else if($result->Status=='Return Accepted'){
 							echo '<td align="center"><a title="Confirm" href="controller.php?action=return2&id='.$result->StockoutID.'&OrderStatus=3" class="btn btn-primary btn-xs  ">  <span class="fa fa-check fw-fa">Return Money</a></td>'; 

@@ -48,6 +48,19 @@
                     <div class="form-group">
                       <div class="col-md-8">
                         <label class="col-md-4 control-label" for=
+                        "ProductName">P.O. :</label>
+
+                        <div class="col-md-8">
+                          <input name="deptid" type="hidden" value="">
+                           <input class="form-control input-sm" id="PO" name="PO" placeholder=
+                              "Product Name" type="text" value=""  onkeyup="javascript:capitalize(this.id, this.value);" autocomplete="off">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="col-md-8">
+                        <label class="col-md-4 control-label" for=
                         "Price">Price:</label>
 
                         <div class="col-md-8">
@@ -90,6 +103,29 @@
                                 foreach ($res as $row) {
                                   # code...
                                   echo '<option value='.$row->CategoryID.'>'.$row->Categories.'</option>';
+                                }
+
+                              ?>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="col-md-8">
+                          <label class="col-md-4 control-label" for=
+                          "Categories">Supplier:</label>
+
+                          <div class="col-md-8">
+                            <select class="form-control input-sm" id="Supplier" name="Supplier">
+                              <option value="None">Select</option>
+                              <?php 
+                                $sql ="Select * From tblsupplier";
+                                $mydb->setQuery($sql);
+                                $res  = $mydb->loadResultList();
+                                foreach ($res as $row) {
+                                  # code...
+                                  echo '<option value='.$row->sup_id.'>'.$row->Supplier.'</option>';
                                 }
 
                               ?>

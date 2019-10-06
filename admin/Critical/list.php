@@ -21,6 +21,7 @@
 									<th>Product</th>
 									<th>Description</th>
 									<th>Categories</th>
+									<th>Supplier</th>
 									<th>Stocks</th>
 									<th>Sold</th>
 									<th>Remaining</th> 
@@ -33,7 +34,7 @@
 							  		// $mydb->setQuery("SELECT * 
 											// 			FROM  `tblusers` WHERE TYPE != 'Customer'");
 							  	// `ProductID`, `ProductName`, `Description`, `Price`, `DateExpire`,Categories,StoreName
-							  		$mydb->setQuery("SELECT * FROM `tblproduct` p,`tblinventory` i, `tblcategory` c,`tblstore` s WHERE p.`ProductID`=i.`ProductID` AND p.`CategoryID`=c.`CategoryID` AND p.`StoreID`=s.`StoreID`AND s.StoreID=".$_SESSION['ADMIN_USERID']);
+							  		$mydb->setQuery("SELECT *,ss.Supplier as Sip FROM `tblproduct` p,`tblinventory` i, `tblcategory` c,`tblstore` s,tblsupplier ss WHERE p.`ProductID`=i.`ProductID` AND p.`CategoryID`=c.`CategoryID` AND p.`StoreID`=s.`StoreID`AND p.`Supplier`=ss.`sup_id` AND s.StoreID=".$_SESSION['ADMIN_USERID']);
 							  		$cur = $mydb->loadResultList();
 
 									foreach ($cur as $result) { 
@@ -42,7 +43,8 @@
 							  		// echo '<td>'. $result->StoreName.'</td>';
 							  		echo '<td>'. $result->ProductName.'</td>';
 							  		echo '<td>' . $result->Description.'</a></td>';
-							  		echo '<td>'. $result->Categories.'</td>';  
+									  echo '<td>'. $result->Categories.'</td>';
+									  echo '<td>'. $result->Sip.'</td>';  
 							  		echo '<td>' . $result->Stocks.'</a></td>'; 
 							  		echo '<td>' . $result->Sold.'</a></td>'; 
 									echo '<td>'. $result->Remaining.'</td>';

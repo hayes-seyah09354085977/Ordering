@@ -11,8 +11,8 @@
 }
  
 
-  $product = New Variation();
-  $res = $product->single_variation($id);
+  $product = New Supplier();
+  $res = $product->single_supplier($id);
 
   $CategoryID = $res->varcatid;
 ?>

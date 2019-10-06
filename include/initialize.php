@@ -25,7 +25,8 @@ require_once(LIB_PATH.DS."loan.php");
 require_once(LIB_PATH.DS."variation.php"); 
 require_once(LIB_PATH.DS."variationcategory.php");   
 // require_once(LIB_PATH.DS."orders.php");  
-require_once(LIB_PATH.DS."customers.php");  
+require_once(LIB_PATH.DS."customers.php");
+require_once(LIB_PATH.DS."supplier.php");  
 require_once(LIB_PATH.DS."reservationfee.php");  
 
 require_once(LIB_PATH.DS."database.php");
