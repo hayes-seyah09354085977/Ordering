@@ -27,6 +27,10 @@ switch ($action) {
 	doInstallments();
 	break;
 
+	case 'return':
+	doReturn();
+	break;
+
 	}
    
 	function doInsert(){
@@ -214,4 +218,18 @@ switch ($action) {
 			redirect("index.php");
 
 	}
+
+	function doReturn(){
+		global $mydb;
+		$stockoutID = $_GET['id'];
+		echo $stockoutID;
+		$sql = "UPDATE `tblstockout`  SET `Status` = 'Return Accepted' WHERE StockoutID=$stockoutID";
+		$mydb->setQuery($sql);
+		$mydb->executeQuery();
+		message("Return Has Been Accepted!", "success");
+			// redirect("index.php?view=view&id=".$_POST['EMPLOYEEID']);
+			redirect("index.php");
+	}
+
+
 ?>
