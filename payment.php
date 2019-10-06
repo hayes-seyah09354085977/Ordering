@@ -214,7 +214,7 @@ $subtotal = $_GET['st'];
      <div class="col-sm-3 info-blocks col-md-offset-2" >
         <div class="stretch">
         <a href="index.php?q=checkout">
-        <img src="<?php echo web_root; ?>Include/Img/COD.png" alt="Watch Ur Toyo">
+        <img src="<?php echo web_root; ?>include/Img/COD.png" alt="Watch Ur Toyo">
         </a>
         </div>
         <div class="info-blocks-in">
@@ -235,7 +235,7 @@ $subtotal = $_GET['st'];
     <?php if($_SESSION['Approved']==1){?>
       <div class="col-sm-3 info-blocks instOrRemit" data-toggle="modal" data-target="#exampleModal">
         <div class="stretch">
-        <img src="<?php echo web_root; ?>Include/Img/remittance.png" alt="Watch Ur Toyo">
+        <img src="<?php echo web_root; ?>include/Img/remittance.png" alt="Watch Ur Toyo">
         </div>
         <div class="info-blocks-in">
             <h3>Installment</h3>
