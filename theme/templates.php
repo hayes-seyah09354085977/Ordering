@@ -61,7 +61,7 @@
           <div class="container">
             <div class="row">
               <div class="col-md-12">      
-                <p class="pull-left hidden-xs"><i class="fa fa-phone"></i>Tel No. (+001) 123-456-789</p>
+                <p class="pull-left hidden-xs"><i class="fa fa-phone"></i>Mobile No. 0917 662 1582</p>
                  <div class="pull-right login">
                 <?php
 
@@ -199,8 +199,8 @@
           <h5 class="widgetheading">Our Contact</h5>
           <address>
           <strong>Our Company</strong><br>
-          JC Main Road, Near Silnile tower<br>
-           Pin-21542 NewYork US.</address>
+          M.D Consuelo Bldg. Unit 1B Costa Verde Subd.,<br>
+          Brgy. Tejeros Convention, Rosario, Cavite (Besides SM Rosario).</address>
           <p>
             <i class="icon-phone"></i> 0917-662-1582 / 505-7537<br>
             <i class="icon-envelope-alt"></i> watchurtoyo@gmail.com

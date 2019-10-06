@@ -15,6 +15,11 @@ switch($e){
         $_SESSION['reason'] = $_POST['reason'];
         echo 'success';
     break;
+    case 'return_order':
+    $_SESSION['reason'] = $_POST['reason'];
+    $_SESSION['ret_pic'] = $_POST['ret_pic'];
+    echo 'success';
+    break;
     case 'getMessage':
         global $mydb;
         $id = $_POST['id'];

@@ -22,7 +22,10 @@ switch ($action) {
 } 
 
 function addProduct(){
-	   $varieties = $_GET['vr'];
+	$varieties ='';
+    if(isset($_GET['vr'])){
+         $varieties = $_GET['vr'];
+    }
 	global $mydb;
     $productID = $_POST['ProductID'];
 	$sql ="SELECT * FROM tblproduct p, tblcategory c WHERE p.CategoryID=c.CategoryID AND ProductID = '{$productID}'";

@@ -12,13 +12,13 @@ img {
 		<div class="container">
 			<div class="row showcase-section">
 				<div class="col-md-6">
-					<img src="<?php echo web_root; ?>Include/Img/logo.jpg" alt="Watch Ur Toyo">
+					<img src="<?php echo web_root; ?>include/Img/logo.jpg" alt="Watch Ur Toyo">
 				</div>
 				<div class="col-md-6">
 					<div class="about-text">
-						<h3>Lorem Ipsum Dolor sit</h3>
-						<p>Sed ut perspiciaatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Vivamus suscipit tortor eget felis porttitor volutpat. Cras ultricies ligula sed magna dictum porta. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar.</p>
-						 <p>Sed ut perspiciaatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo..</p>
+						<h3>Mabuhay! Welcome to Watch Ur Toyo.</h3>
+						<p>We sell authentic watches such as G-shock, Baby-G and Casio vintage watches. Cheaper compared to those sold in the malls but same quality.</p>
+						<p>Can’t pay in full? Don’t worry, because if you are Watch Ur Toyo’s returning customer you can avail the item for installment. Yes, you read it right! Watch Ur Toyo offers installment for the returning customers with a minimum purchase of P4000. So what are you waiting for? Shop now at Watch Ur Toyo!</p>
 					</div>
 				</div>
 			</div>
@@ -35,77 +35,9 @@ img {
 								<div class="block-heading-two">
 									<h3><span>Why Choose Us?</span></h3>
 								</div>
-								<p>Sed ut perspiciaatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur. <br/><br/>Sed ut perspiciaatis iste natus error sit voluptatem probably haven't heard of them accusamus.</p>
+									<p>Watch Ur Toyo guarantee that all the watches are 100% original, so buy with confidence! Watch Ur Toyo also sells Kain Pepe clothing, authentic quality bags, original shoes and more. </p>
 							</div>
-							<div class="col-md-4">
-								<div class="block-heading-two">
-									<h3><span>Our Solution</span></h3>
-								</div>		
-								<!-- Accordion starts -->
-								<div class="panel-group" id="accordion-alt3">
-								 <!-- Panel. Use "panel-XXX" class for different colors. Replace "XXX" with color. -->
-								  <div class="panel">	
-									<!-- Panel heading -->
-									 <div class="panel-heading">
-										<h4 class="panel-title">
-										  <a data-toggle="collapse" data-parent="#accordion-alt3" href="#collapseOne-alt3">
-											<i class="fa fa-angle-right"></i> Accordion Heading Text Item # 1
-										  </a>
-										</h4>
-									 </div>
-									 <div id="collapseOne-alt3" class="panel-collapse collapse">
-										<!-- Panel body -->
-										<div class="panel-body">
-										  Sed ut perspiciaatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas
-										</div>
-									 </div>
-								  </div>
-								  <div class="panel">
-									 <div class="panel-heading">
-										<h4 class="panel-title">
-										  <a data-toggle="collapse" data-parent="#accordion-alt3" href="#collapseTwo-alt3">
-											<i class="fa fa-angle-right"></i> Accordion Heading Text Item # 2
-										  </a>
-										</h4>
-									 </div>
-									 <div id="collapseTwo-alt3" class="panel-collapse collapse">
-										<div class="panel-body">
-										  Sed ut perspiciaatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas
-										</div>
-									 </div>
-								  </div>
-								  <div class="panel">
-									 <div class="panel-heading">
-										<h4 class="panel-title">
-										  <a data-toggle="collapse" data-parent="#accordion-alt3" href="#collapseThree-alt3">
-											<i class="fa fa-angle-right"></i> Accordion Heading Text Item # 3
-										  </a>
-										</h4>
-									 </div>
-									 <div id="collapseThree-alt3" class="panel-collapse collapse">
-										<div class="panel-body">
-										  Sed ut perspiciaatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas
-										</div>
-									 </div>
-								  </div>
-								  <div class="panel">
-									 <div class="panel-heading">
-										<h4 class="panel-title">
-										  <a data-toggle="collapse" data-parent="#accordion-alt3" href="#collapseFour-alt3">
-											<i class="fa fa-angle-right"></i> Accordion Heading Text Item # 4
-										  </a>
-										</h4>
-									 </div>
-									 <div id="collapseFour-alt3" class="panel-collapse collapse">
-										<div class="panel-body">
-										  Sed ut perspiciaatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas
-										</div>
-									 </div>
-								  </div>
-								</div>
-								<!-- Accordion ends -->
-								
-							</div>
+						
 							
 							<div class="col-md-4">
 								<div class="block-heading-two">
@@ -161,8 +93,8 @@ img {
 										<!-- Image -->
 										<img class="img-responsive" src="img/team1.jpg" alt="">
 										<!-- Name -->
-										<h4>Johne Doe</h4>
-										<span class="deg">Creative</span> 
+										<h4>Michael Godfrey V. Ricafort </h4>
+										<span class="deg">Lead Programmer</span> 
 									</div>
 								</div>
 								<div class="col-md-3 col-sm-6">
@@ -171,8 +103,8 @@ img {
 										<!-- Image -->
 										<img class="img-responsive" src="img/team2.jpg" alt="">
 										<!-- Name -->
-										<h4>Jennifer</h4>
-										<span class="deg">Programmer</span> 
+										<h4>Josh M. Del Rosario</h4>
+										<span class="deg">Project Manager</span> 
 									</div>
 								</div>
 								<div class="col-md-3 col-sm-6">
@@ -181,8 +113,8 @@ img {
 										<!-- Image -->
 										<img class="img-responsive" src="img/team3.jpg" alt="">
 										<!-- Name -->
-										<h4>Christean</h4>
-										<span class="deg">CEO</span> 
+										<h4>Alonzo Christian C. Fabia</h4>
+										<span class="deg"> Systems Analyst</span> 
 									</div>
 								</div>
 								<div class="col-md-3 col-sm-6">
@@ -191,8 +123,8 @@ img {
 										<!-- Image -->
 										<img class="img-responsive" src="img/team4.jpg" alt="">
 										<!-- Name -->
-										<h4>Kerinele rase</h4>
-										<span class="deg">Manager</span> 
+										<h4>Madelene G. Angeles</h4>
+										<span class="deg">Quality Assurance</span> 
 									</div>
 								</div>
 							</div>

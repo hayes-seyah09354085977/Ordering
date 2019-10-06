@@ -146,6 +146,7 @@
     padding: 0px 0px 15px 0px;
   }
 </style>
+
 <?php 
 global $mydb;
 	$stockoutID = isset($_GET['id']) ? $_GET['id'] : '';
@@ -155,12 +156,18 @@ global $mydb;
 	$mydb->executeQuery();
 	
  	$totalamount = 0;
-
+  //  SELECT * FROM tblcategory c inner JOIN
+  //  tblproduct p on c.CategoryID=p.CategoryID
+  //  inner join tblstore st on st.StoreID=p.StoreID
+  //  inner JOIN `tblstockout` s on p.ProductID=s.ProductID 
+  //  inner join tblcustomer cmer on cmer.CustomerID=s.CustomerID
+  //  where s.StockoutID = '33'
+  
 	$sql = "SELECT * FROM tblcategory c,tblStore st,`tblproduct` p , `tblstockout` s,tblcustomer cmer WHERE c.CategoryID=p.CategoryID AND st.StoreID=p.StoreID AND p.`ProductID`=s.`ProductID` AND cmer.`CustomerID`=s.`CustomerID`  and `StockoutID`=" .$stockoutID;
 	$mydb->setQuery($sql);
 	$res = $mydb->loadSingleResult();
 
-	$totalamount = $res->Price * $res->Quantity;
+  $totalamount = $res->Price * $res->Quantity;
 
 
 ?> 

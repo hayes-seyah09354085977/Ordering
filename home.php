@@ -204,5 +204,32 @@ p.currency {
       <span class="sr-only">Next</span>
     </a>
   </div>
+  <?php 	if (isset($_SESSION['CustomerID'])) {
+    ?>
+  <div class="col-md-2 pcat" style="font-size:15px;padding:10px" data-toggle="modal" data-target="#chat">Chat</div>
+  <!-- chat -->
+  <div class="modal fade" id="chat" role="dialog">
+    <div class="modal-dialog modal-lg">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title2" >Chat </h3>
+        </div>
+        <div class="modal-body ">
+          <div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item mychatframe" src="<?php echo web_root; ?>/plugins/mychat/index.php?name=<?php  echo $_SESSION['CustomerName']; ?>Store"></iframe></div>
+              
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <?php }
+    ?>
+
 </section>
   
