@@ -1,4 +1,17 @@
+<?php
+$nnum;
+?>
+<style>
+.backgroundRed{
+        background: #F00;
+    }
 
+  #divtoBlink{
+        -webkit-transition: background 1.0s ease-in-out;
+        -ms-transition:     background 1.0s ease-in-out;
+        transition:         background 1.0s ease-in-out;
+    }
+</style>
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -46,7 +59,8 @@
                 $sql = "SELECT COUNT(*) as NUM FROM `tblproduct` WHERE StoreID=".$_SESSION['ADMIN_USERID'];
                 $mydb->setQuery($sql); 
                 $product = $mydb->loadSingleResult();
-                echo '<h3>'.$product->NUM.'</h3>';
+                $nnum = $product->NUM;
+                echo '<h3>'.$nnum.'</h3>';
 
               ?>
               <p>All Products</p>
@@ -60,7 +74,7 @@
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-yellow">
+          <div class="small-box bg-yellow" id="divtoBlink">
             <div class="inner">
               <?php
 
@@ -77,9 +91,10 @@
                 // }
                 // echo "Remaining Days ".$diff->format("%R%a days");
  
-                $sql = "SELECT COUNT(*) as NUM FROM `tblproduct` WHERE DATE(DateExpire)<=DATE(NOW()) AND StoreID=".$_SESSION['ADMIN_USERID'];
+                $sql = "SELECT COUNT(TransID)as NUM FROM tblinventory WHERE Critical >= Stocks";
                 $mydb->setQuery($sql); 
                 $product = $mydb->loadSingleResult();
+                $nnum = $product->NUM;
                 echo '<h3>'.$product->NUM.'</h3>';
 
               ?>
@@ -157,5 +172,5 @@
 
     </section>
     <!-- /.content -->
-  
+
   

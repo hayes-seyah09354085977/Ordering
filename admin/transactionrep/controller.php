@@ -40,58 +40,55 @@ switch ($action) {
 	}
    
 	function doInsert(){
-	
 		global $mydb;
 		if(isset($_POST['save'])){
- 		 
-					$product = New Variation(); 
-					$product->variation	= $_POST['Variation']; 
-					// $product->DateExpire		=  @$DateExpire;
-					$product->varcatid		= $_POST['CategoryID'];
-					$checkProductName = checkExistingProduct($_POST['CategoryID']);
-					switch($checkProductName){
-						case '0':
-							$product->create(); 				
-		
-							message("New Variation created successfully!", "success");
-							redirect("index.php");
-						break;
-						case '1':
-							message("Variation Category Already Used Create new Category or Use Another", "error");
-							redirect("index.php?view=add");
-						break;
+ 
 
-					}
-					
+					@$DateExpire = date_format(date_create($_POST['DATEHIRED']),'Y-m-d');
+
+					$product = New Product(); 
+					$product->ProductName 		= $_POST['ProductName'];
+					$product->Description		= $_POST['Description']; 
+					$product->Price				= $_POST['Price'];  
+					$product->DateExpire		=  @$DateExpire;
+					$product->CategoryID		= $_POST['CategoryID'];
+					$product->StoreID			= $_SESSION['ADMIN_USERID'];
+					$product->create(); 
+
+					$productID = $mydb->insert_id();
+
+					$sql ="INSERT INTO `tblinventory` (`ProductID`) VALUES ('{$productID}')";
+					$mydb->setQuery($sql);
+					$mydb->executeQuery();
+ 
+
+					message("New Product created successfully!", "success");
+					redirect("index.php");
  
 		 }
  } 
- function checkExistingProduct($productName){
-	global $mydb;
-	$mydb->setQuery("SELECT count(*)as cnt FROM `tblvariation` WHERE `varcatid`='".$productName."'");
-	$cur = $mydb->executeQuery();
-	if($cur==false){
-		die(mysql_error());
-	}
-
-	$res = mysqli_fetch_assoc($cur);
-	if ($res['cnt'] == 1){
-		return '1';
-	}else{
-		return '0';
-	}
-	 
- }
 
 
 	function doEdit(){
 	if(isset($_POST['save'])){
 
-			$product = New Variation(); 
-			$product->varcatid 		= $_POST['CategoryID'];
-			$product->variation		= $_POST['Variation']; 
+		 
+
+			@$DateExpire = date_format(date_create($_POST['DATEHIRED']),'Y-m-d');
+
+
+			$product = New Product(); 
+			$product->ProductName 		= $_POST['ProductName'];
+			$product->Description		= $_POST['Description']; 
+			$product->Price				= $_POST['Price'];  
+			$product->DateExpire		=  @$DateExpire;
+			$product->CategoryID		= $_POST['CategoryID'];
+			$product->StoreID			= $_SESSION['ADMIN_USERID'];
 			$product->update($_POST['ProductID']);
-			message("Variation has been updated!", "success");
+
+
+			message("Product has been updated!", "success");
+			// redirect("index.php?view=view&id=".$_POST['EMPLOYEEID']);
 			redirect("index.php?view=edit&id=".$_POST['ProductID']);
 	     
   	
@@ -101,52 +98,71 @@ switch ($action) {
 } 
 	function doDelete(){
 		global $mydb;
-			$id = 	$_GET['id'];
-			$product = New Variation();
-	 		$product->delete($id);
-			message("Variation already Deleted!","success");
+		
+		// if (isset($_POST['selector'])==''){
+		// message("Select the records first before you delete!","error");
+		// redirect('index.php');
+		// }else{
+
+		// $id = $_POST['selector'];
+		// $key = count($id);
+
+		// for($i=0;$i<$key;$i++){
+
+		// 	$subj = New Student();
+		// 	$subj->delete($id[$i]);
+
+		
+				$id = 	$_GET['id'];
+
+				$product = New Product();
+	 		 	$product->delete($id);
+
+	 		 	$sql = "DELETE FROM tblinventory WHERE ProductID=".$id;
+	 		 	$mydb->setQuery($sql);
+	 		 	$mydb->executeQuery();
+
+
+	 		 	$sql = "DELETE FROM `tblstockin`  WHERE ProductID=".$id;
+				$mydb->setQuery($sql);
+				$mydb->executeQuery();
+
+				$sql = "DELETE FROM `tblstockout`  WHERE ProductID=".$id;
+				$mydb->setQuery($sql);
+				$mydb->executeQuery();
+
+			 
+		
+		// }
+			message("Product already Deleted!","success");
 			redirect('index.php');
+		// }
+
+		
 	}
 
-	function UploadImage($imgname=""){
-			$target_dir = "photos/";
-		    $target_file = $target_dir  . basename($_FILES[$imgname]["name"]);
+ 
+ 
+  function UploadImage(){
+			$target_dir = "../../employee/photos/";
+			$target_file = $target_dir . date("dmYhis") . basename($_FILES["picture"]["name"]);
 			$uploadOk = 1;
 			$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 			
 			
 			if($imageFileType != "jpg" || $imageFileType != "png" || $imageFileType != "jpeg"
-				|| $imageFileType != "gif" || $imageFileType != "docs" || $imageFileType != "mp4") {
-				 if (move_uploaded_file($_FILES[$imgname]["tmp_name"], $target_file)) {
-					return   basename($_FILES[$imgname]["name"]);
+		|| $imageFileType != "gif" ) {
+				 if (move_uploaded_file($_FILES["picture"]["tmp_name"], $target_file)) {
+					return  date("dmYhis") . basename($_FILES["picture"]["name"]);
 				}else{
-					// echo "Error Uploading File";
-					// exit;
+					echo "Error Uploading File";
+					exit;
 				}
 			}else{
-					// echo "File Not Supported";
-					// exit;
-	 }
-}
- 
-//   function UploadImage(){
-// 			$target_dir = "photos/";
-// 			$target_file = $target_dir . date("dmYhis") . basename($_FILES["picture"]["name"]);
-// 			$uploadOk = 1;
-// 			$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-			
-			
-// 			if($imageFileType != "jpg" || $imageFileType != "png" || $imageFileType != "jpeg"
-// 		|| $imageFileType != "gif" ) {
-// 				 if (move_uploaded_file($_FILES["picture"]["tmp_name"], $target_file)) {
-// 					return  date("dmYhis") . basename($_FILES["picture"]["name"]);
-// 				}else{
-// 					echo "Error Uploading File"; 
-// 				}
-// 			}else{
-// 					echo "File Not Supported"; 
-// 				}
-// } 
+					echo "File Not Supported";
+					exit;
+				}
+} 
 
 	function doupdateimage(){
  
