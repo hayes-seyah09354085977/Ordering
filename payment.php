@@ -313,8 +313,8 @@ var zz = $.extend(Calc.prototype, {
                         for (var bb = 0; bb<res.length; bb++){
                           if(res[bb]['ProductID'] == ProductID[b]['productID']){
                             if(res[bb]['Installment']=='on'){
-                              product = ProductID[b]['product']
-                              $('.remOpts').append(`<option value="`+b+`">`+product+`</option>`)
+                              product = ProductID[b]['product'].split('|')
+                              $('.remOpts').append(`<option value="`+b+`">`+product[0]+`</option>`)
                             }
                           }
                         }
