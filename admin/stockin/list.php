@@ -65,7 +65,6 @@
 					<th>Description</th>
 					<th>Price</th>
 					<th>Quantity</th>
-					<th>Expired Date</th> 
 					<th>Categories</th>
 					<th width="14%" >Action</th> 
 				  	</tr>	
@@ -85,7 +84,7 @@
 			              echo '<td>' . $result->Description.'</a></td>';
 			              echo '<td>' . $result->Price.'</a></td>'; 
 			              echo '<td>'. $result->Quantity.'</td>'; 
-			              echo '<td>'. $result->DateExpire.'</td>';
+			            //   echo '<td>'. $result->DateExpire.'</td>';
 			              echo '<td>'. $result->Categories.'</td>';  
 			              echo '<td align="center"><a title="Edit" href="index.php?view=edit&id='.$result->StockinID.'" class="btn btn-primary btn-xs  ">  <span class="fa fa-edit fw-fa"></a>
 			              <a title="Delete" href="controller.php?action=delete&id='.$result->StockinID.'&ProductID='.$result->pid.'&TransQuantity='.$result->Quantity.'" class="btn btn-danger btn-xs  ">  <span class="fa  fa-trash-o fw-fa "></a></td>';
