@@ -2,10 +2,44 @@
 section#inner-headline {
     background: #37393c !important;
 }
+.modal-dialog {
+    width: 50%;
+}
+
 </style>
+<!-- modal start -->
+<div class="modal fade" id="termsandconditions" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Terms And Conditions</h5>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 termbody">
+			•	The price of Watch Ur Toyo merchandise is as quoted on the site from time to time. <br>
+			•	Prices include VAT but exclude delivery costs, which will be automatically added (at the cost shown ) to the total amount due when you view the items in your shopping cart and have selected your chosen different delivery method. <br>
+			•	Prices and shipping costs are liable to change at any time, but changes will not affect orders in respect of which we have already sent you a Dispatch Confirmation. <br>
+			•	Seven (7) days replacement for clothing.<br>
+			•	One year warranty for watches. Coverage is for mechanism and batteries only.<br>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- End Container -->
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+</div>
+<!-- end modal -->
 <section id="content">
     <div class="container content">    
-     <p> <?php check_message();?></p>      
+     <p> <?php check_message();?></p>     
 		<form class="row form-horizontal span6  wow fadeInDown" action="process.php?action=register" method="POST">
 		<h2 class=" ">Customer Information</h2>
 		<div class="row"> 
@@ -113,7 +147,7 @@ section#inner-headline {
 			      ""></label>  
 
 			      <div class="col-md-8"> 
-			      		<label><input id="terms" type="checkbox"> By Sign up you are agree with our <a href="#">terms and condition</a></label>
+			      		<label><input id="terms" type="checkbox"> By Sign up you are agree with our <a data-toggle="modal" data-target="#termsandconditions">terms and condition</a></label>
 			     </div>
 			    </div>
 			</div>    
