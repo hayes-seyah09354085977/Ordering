@@ -68,7 +68,7 @@ $res = $mydb->loadSingleResult();
 	<div class="column-label pointer">Variation</div>
 	<div class="column-value"><input type="checkbox" name="Variationbox"  class="Variation" > </div>
 	<div class="column-label pointer2">Installment</div>
-	<div class="column-value "><input type="checkbox" name="Installment" class="Installment" ></div>
+	<div class="column-value "><input type="checkbox" name="Installment" class="Installment"  class="Installment"></div>
 	<div class="column-label">Quantity</div>
 	<div class="column-value"><input type="number" name="Quantity" id="Quantity" class="form-control" min="1"></div>
 </div> 
@@ -142,24 +142,24 @@ $res = $mydb->loadSingleResult();
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Reservation</h4>
+          <h4 class="modal-title">Installment</h4>
         </div>
         <div class="modal-body">
 		<div class="form-group">
                         <div class="col-md-8">
                           <label class="col-md-4 control-label" for=
-                          "Categories">Reservation :</label>
+                          "Categories">Interest :</label>
 
                           <div class="col-md-8">
-                            <select class="form-control input-sm Reeserve" id="Resserver" name="Resserver">
+                            <select class="form-control input-sm Reeserve" id="Percentage" name="Percentage">
                               <option value="None">Select</option>
                               <?php 
-                                $sql ="SELECT * FROM tblreservation r LEFT JOIN percentage p ON r.`reservevalue` = p.`id`";
+                                $sql ="SELECT * FROM percentage ";
                                 $mydb->setQuery($sql);
                                 $res  = $mydb->loadResultList();
                                 foreach ($res as $row) {
                                   # code...
-                                  echo '<option value='.$row->reserveid.' data-name="'.$row->percentage.'">'.$row->reservename.' '.$row->percentage.'</option>';
+                                  echo '<option value='.$row->id.' data-name="'.$row->percentage.'">'.$row->percentage.'</option>';
                                 }
                               ?>
                             </select>
@@ -259,9 +259,9 @@ $(".Reeserve").prop('disabled', true);
 
 	$('.pointer2').click(function(){
 		$('#myModal2').modal('show'); 
-		if ($('.Reservation').is(":checked"))
+		if ($('.Installment').is(":checked"))
 		{
-			
+			alert('asd')
 		}
 		else{
 			console.log('not ok')
@@ -270,8 +270,8 @@ $(".Reeserve").prop('disabled', true);
 		}
 	})
 	// Reeserve
-	$('.Reservation').change(()=>{
-		if ($('.Reservation').is(":checked"))
+	$('.Installment').change(()=>{
+		if ($('.Installment').is(":checked"))
 		{
 			$('#myModal2').modal('show'); 		
 			$(".Reeserve").prop('disabled', false);	
@@ -281,9 +281,11 @@ $(".Reeserve").prop('disabled', true);
 			$(".Reeserve").prop('disabled', true);
 		}
 	})
-	$('#Resserver').change(function(){
-		var $option = $('#Resserver').val();
-		let dataname = $('#Resserver option:selected').attr('data-name');
+	$('#Percentage').change(function(){
+		
+		var $option = $('#Percentage').val();
+		let dataname = $('#Percentage option:selected').attr('data-name');
+		// alert($option)
 		console.log($option,dataname)
 		$('.yey').remove();
 		$('.breakline2').after(`<label class='yey'>Selected Percentag : `+dataname+`</label>`)

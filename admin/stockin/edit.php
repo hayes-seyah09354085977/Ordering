@@ -68,8 +68,9 @@ if($switch2 !='off'){
 <?php  if ($maxrow > 0) {  ?> 
 <form action="controller.php?action=edit" method="POST" >
 <div class="row">
-<input type="text" name="VariationCategory"  class="VariationCategory" value="<?php echo $res->VariationCategory; ?>">
-	<input type="text" name="Variationbracket"  class="Variationbracket" >
+<input type="hidden" name="VariationCategory"  class="VariationCategory" value="<?php echo $res->VariationCategory; ?>">
+	<input type="hidden" name="Variationbracket"  class="Variationbracket" >
+  <input type="hidden" name="Reservationbracket"  class="Reservationbracket" >
   <input type="hidden" name="ProductID" value="<?php echo $res->ProductID; ?>">
   <input type="hidden" name="TransQuantity" value="<?php echo $res->Quantity; ?>">
   <input type="hidden" name="StockinID" value="<?php echo $res->StockinID; ?>">
@@ -226,6 +227,48 @@ if($switch2 !='off'){
       
     </div>
 </div>
+<div class="modal fade varmodal" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Installment</h4>
+        </div>
+        <div class="modal-body">
+		<div class="form-group">
+                        <div class="col-md-8">
+                          <label class="col-md-4 control-label" for=
+                          "Categories">Interest :</label>
+
+                          <div class="col-md-8">
+                            <select class="form-control input-sm Reeserve" id="Percentage" name="Percentage">
+                              <option value="None">Select</option>
+                              <?php 
+                                $sql ="SELECT * FROM percentage ";
+                                $mydb->setQuery($sql);
+                                $res  = $mydb->loadResultList();
+                                foreach ($res as $row) {
+                                  # code...
+                                  echo '<option value='.$row->id.' data-name="'.$row->percentage.'">'.$row->percentage.'</option>';
+                                }
+                              ?>
+                            </select>
+						  </div>
+						  <Br class="breakline2">
+						</div>
+						
+					  </div> 
+	
+				  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default reserveclose" >Close</button>
+        </div>
+      </div>
+      
+    </div>
+</div>
+
 <script type="text/javascript" src="<?php echo web_root; ?>plugins/jQuery/jQuery-2.1.4.min.js"> </script>
 <script>
 $(document).ready(function(){
@@ -297,7 +340,33 @@ let cattotal;
   else{
     console.log('off')
   }
-
+  $('.Installment').change(()=>{
+		if ($('.Installment').is(":checked"))
+		{
+			$('#myModal2').modal('show'); 		
+			$(".Reeserve").prop('disabled', false);	
+		}
+		else{
+			console.log('not ok')
+			$(".Reeserve").prop('disabled', true);
+		}
+	})
+	$('#Percentage').change(function(){
+		
+		var $option = $('#Percentage').val();
+		let dataname = $('#Percentage option:selected').attr('data-name');
+		// alert($option)
+		console.log($option,dataname)
+		$('.yey').remove();
+		$('.breakline2').after(`<label class='yey'>Selected Percentag : `+dataname+`</label>`)
+		$('.Reservationbracket').val($option)
+		
+	})
+         
+	$('.reserveclose').click(function(){
+		$('#myModal2').modal('hide'); 
+	})
+  //end
   $('.pointer').click(function(){
 		$('#myModal').modal('show'); 
 		if ($('.Variation').is(":checked"))

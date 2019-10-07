@@ -71,8 +71,8 @@ switch ($action) {
 				$sql = "UPDATE `tblinventory` SET `Stocks`= '{$product_quantity}', Remaining =  '{$total_quanity}' WHERE `ProductID`='{$ProductID}'";
 				$mydb->setQuery($sql);
 				$mydb->executeQuery(); 
-				$sql = "INSERT INTO `tblstockin` (`ProductID`, `Quantity`, `DateReceive`,`VariationCategory`,`VariationBracket`,`Variation`,`Installment`) 
-				VALUES ($ProductID,$Quantity,Now(),'".$VariationCategory."','".$Bracket."','".$VarSwitch."','".$Installment."')";
+				$sql = "INSERT INTO `tblstockin` (`ProductID`, `Quantity`, `DateReceive`,`VariationCategory`,`VariationBracket`,`Variation`,`Installment`,`Percentage`) 
+				VALUES ($ProductID,$Quantity,Now(),'".$VariationCategory."','".$Bracket."','".$VarSwitch."','".$Installment."','".$ReserveID."')";
 				$mydb->setQuery($sql);
 				$mydb->executeQuery();
 				message("New transaction created successfully!", "success");
@@ -103,6 +103,7 @@ switch ($action) {
 			$Variationbracket = $_POST['Variationbracket'];
 			$VarSwitch = $_POST['Variationbox'];
 			$Installment = $_POST['Installment'];
+			$ReserveID = $_POST['Reservationbracket'];
 			if($VarSwitch == "" ){
 				$VarSwitch = 'off';
 				$Bracket = 'empty';
@@ -129,7 +130,7 @@ switch ($action) {
 				$mydb->setQuery($sql);
 				$mydb->executeQuery(); 
 
-				$sql = "UPDATE `tblstockin` SET `Quantity` ='{$Quantity}',VariationCategory = '{$VariationCategory}',Installment ='{$Installment}', Variation ='{$VarSwitch}',Variationbracket ='{$Variationbracket}' WHERE `StockinID`='{$StockinID}'";
+				$sql = "UPDATE `tblstockin` SET `Quantity` ='{$Quantity}',VariationCategory = '{$VariationCategory}',Installment ='{$Installment}', Variation ='{$VarSwitch}',Variationbracket ='{$Variationbracket}', `Percentage`='{$ReserveID}' WHERE `StockinID`='{$StockinID}'";
 				$mydb->setQuery($sql);
 				$mydb->executeQuery();
 
