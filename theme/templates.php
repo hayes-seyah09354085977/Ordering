@@ -58,9 +58,9 @@
     width:100%;
     height:570px;
   }
-  .modal-content{
+  /* .modal-content{
     height: 800px !important;
-  }
+  } */
 </style>
 
 </head>

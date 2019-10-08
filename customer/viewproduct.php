@@ -145,15 +145,116 @@
   .product-checkout {
     padding: 0px 0px 15px 0px;
   }
+  td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 12px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+/* attachements */
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile + label {
+    max-width: 80%;
+    font-size: 1.25rem;
+    /* 20px */
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0.625rem 1.25rem;
+    /* 10px 20px */
+}
+
+.inputfile:focus + label,
+.inputfile.has-focus + label {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+.inputfile + label i,
+.inputfile + label svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    margin-top: -0.25em;
+    /* 4px */
+    margin-right: 0.25em;
+    /* 4px */
+}
+
+.inputfile + label {
+    color: #004ca8;
+    border: 2px solid currentColor;
+}
+
+.inputfile:focus + label,
+.inputfile.has-focus + label,
+.inputfile + label:hover {
+    color: #599EFF;
+}
+
+/* modal */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 </style>
 
 <?php 
 global $mydb;
 	$stockoutID = isset($_GET['id']) ? $_GET['id'] : '';
 
-	$sql = "UPDATE tblstockout SET HView=0 WHERE StockoutID='{$stockoutID}'";
-	$mydb->setQuery($sql);
-	$mydb->executeQuery();
+	// $sql = "UPDATE tblstockout SET HView=0 WHERE StockoutID='{$stockoutID}'";
+	// $mydb->setQuery($sql);
+	// $mydb->executeQuery();
 	
  	$totalamount = 0;
   //  SELECT * FROM tblcategory c inner JOIN
@@ -163,8 +264,15 @@ global $mydb;
   //  inner join tblcustomer cmer on cmer.CustomerID=s.CustomerID
   //  where s.StockoutID = '33'
   
-	$sql = "SELECT * FROM tblcategory c,tblStore st,`tblproduct` p , `tblstockout` s,tblcustomer cmer WHERE c.CategoryID=p.CategoryID AND st.StoreID=p.StoreID AND p.`ProductID`=s.`ProductID` AND cmer.`CustomerID`=s.`CustomerID`  and `StockoutID`=" .$stockoutID;
-	$mydb->setQuery($sql);
+	// $sql = "SELECT * FROM tblcategory c,tblStore st,`tblproduct` p , `tblstockout` s,tblcustomer cmer WHERE c.CategoryID=p.CategoryID AND st.StoreID=p.StoreID AND p.`ProductID`=s.`ProductID` AND cmer.`CustomerID`=s.`CustomerID`  and `StockoutID`=" .$stockoutID;
+	$sql = "SELECT * FROM tblcategory c inner JOIN
+  tblproduct p on c.CategoryID=p.CategoryID
+  inner join tblstore st on st.StoreID=p.StoreID
+  inner JOIN `tblstockout` s on p.ProductID=s.ProductID 
+  inner join tblcustomer cmer on cmer.CustomerID=s.CustomerID
+  where s.StockoutID =".$stockoutID;
+  
+  $mydb->setQuery($sql);
 	$res = $mydb->loadSingleResult();
 
   $totalamount = $res->Price * $res->Quantity;
@@ -193,7 +301,7 @@ global $mydb;
   <div class="row">
   <div class="col-sm-4">
       <div class="product-image">
-        <img class="magnifiedImg" src="<?php echo web_root.'admin/products/'. $res->Image1 ?>" />
+        <img src="<?php echo web_root.'admin/products/'. $res->Image1 ?>" />
       </div>
     </div>
     <div class="col-sm-5">
@@ -209,38 +317,137 @@ global $mydb;
     <div class="row">
       <div class="col-sm-12">
           <div class="product-checkout">Delivery Address: &nbsp; <?php echo $res->CustomerAddress; ?></div>
-          <div class="product-checkout-total">Order Type: &nbsp; Cash On Delivery</div>
+          <div class="product-checkout-total">Order Type: &nbsp; <?php echo $res->order_type; ?></div>
           <div class="product-checkout-total-amount">Order Status: &nbsp;<b> <?php echo $res->Status; ?></b></div>
         </div>
       </div>
     </div>
   </div>
 </div>
+<div>
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <img class="magnifiedImg" src="#"/>
+  </div>
+</div>
+<!-- installment -->
+<?php if($res->order_type == 'Installment'){ 
+  	$sql2 = "SELECT * FROM tblInstallments c 
+    where c.StockoutID =".$stockoutID;
+    
+    $mydb->setQuery($sql2);
+    $cur = $mydb->executeQuery();
+    $res2 = $cur->fetch_all(MYSQLI_ASSOC);
+  ?>
+<form  method="POST" action="controller.php?action=update_payment&id=<?php echo $stockoutID; ?>" enctype="multipart/form-data"> 
+<div class="box">
+  <input type="file" name="pay_rec" id="pay_rec" class="inputfile inputfile-2">
+  <label for="pay_rec"><i class="fa fa-paperclip"></i><span>Upload Payment Receipt</span></label>
+</div>
+<button class="btn btn-primary btn-sm" name="submit" type="submit">Submit</button>
+</form>
+
+<table>
+  <tr>
+    <th>Payment Receipts</th>
+  </tr>
+  <?php 
+  foreach($res2 as $data){
+    $pay_rec = $data['pay_receipt'];
+    //  echo '<tr><td><img class="magnifiedImg" src="'.$pay_rec.'"/></td></tr>';
+    echo '<tr><td class="pay_img" data="'.$pay_rec.'">View Image</td></tr>';
+  }
+  ?>
+  
+</table>
+<?php } ?>
+</div>
+
 <script src="<?php echo web_root; ?>plugins/home-plugins/js/jquery.js"></script>
 <script src="<?php echo web_root; ?>plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <script src="<?php echo web_root; ?>plugins/jQueryUI/jquery-ui.js"></script>
 <script src="<?php echo web_root; ?>plugins/jQueryUI/jquery-ui.min.js"></script>
-<script src="<?php echo web_root; ?>plugins/Image-Magnify/Image-Magnify.js"></script>
 
 <script>
-var status = '<?php echo $res->Status; ?>'
-switch(status){
-  case 'Confirmed':
-  $('.Confirmed').addClass('done')
-  break;
-  case 'For Delivery':
-  $('.Confirmed').addClass('done')
-  $('.ForDelivery').addClass('done')
-  break;
-  case 'Delivered':
-  $('.Confirmed').addClass('done')
-  $('.ForDelivery').addClass('done')
-  $('.Delivered').addClass('done')
-  break
-  case 'Cancelled':
-  $('.Cancelled').addClass('done')
-  break
-}
+  var status = '<?php echo $res->Status; ?>'
+  switch(status){
+    case 'Confirmed':
+    $('.Confirmed').addClass('done')
+    break;
+    case 'For Delivery':
+    $('.Confirmed').addClass('done')
+    $('.ForDelivery').addClass('done')
+    break;
+    case 'Delivered':
+    $('.Confirmed').addClass('done')
+    $('.ForDelivery').addClass('done')
+    $('.Delivered').addClass('done')
+    break
+    case 'Cancelled':
+    $('.Cancelled').addClass('done')
+    break
+  }
+
+  $(function() { 
+    $('.pay_img').click(function(){
+      var pay_data=$(this).attr('data')
+      $('.magnifiedImg').attr('src',pay_data)
+      modal.style.display = "block";
+
+    })
+
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal 
+      
+     
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+   });
+
+  'use strict';
+
+  ;( function ( document, window, index )
+  {
+    var inputs = document.querySelectorAll( '.inputfile' );
+    Array.prototype.forEach.call( inputs, function( input )
+    {
+      var label	 = input.nextElementSibling,
+        labelVal = label.innerHTML;
+
+      input.addEventListener( 'change', function( e )
+      {
+        var fileName = '';
+        if( this.files && this.files.length > 1 )
+          fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+        else
+          fileName = e.target.value.split( '\\' ).pop();
+
+        if( fileName )
+          label.querySelector( 'span' ).innerHTML = fileName;
+        else
+          label.innerHTML = labelVal;
+      });
+
+      // Firefox bug fix
+      input.addEventListener( 'focus', function(){ input.classList.add( 'has-focus' ); });
+      input.addEventListener( 'blur', function(){ input.classList.remove( 'has-focus' ); });
+    });
+  }( document, window, 0 ));
+
 </script>
 
 <!-- 

@@ -102,8 +102,14 @@
 
               <div class="form-group">
                 <div class="col-md-7">
+                  <label class="form-control">*Note : Please Upload 1 Valid ID with Address.</label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-md-7">
                   <label class="col-md-4 control-label" for=
-                  "valid_ID1">Valid ID 1:</label>
+                  "valid_ID1">Valid ID including the Customer:</label>
 
                   <div class="col-md-8"> 
                       <input type=
@@ -117,7 +123,7 @@
               <div class="form-group">
                 <div class="col-md-7">
                   <label class="col-md-4 control-label" for=
-                  "Valid_ID2">Valid ID 2:</label>
+                  "Valid_ID2">Valid ID With Address:</label>
 
                   <div class="col-md-8"> 
                         <input name="MAX_FILE_SIZE" type=

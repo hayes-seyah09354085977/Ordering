@@ -31,6 +31,10 @@ switch ($action) {
 	Deilvered();
 	break;
 
+	case 'update_payment':
+	doUpdatePay();
+	break;
+
  
 	}
 
@@ -192,7 +196,43 @@ switch ($action) {
 					}
 			}
 			 
+	}
+	function doUpdatePay(){
+
+		$stockoutID = $_GET['id'];
+
+		$errofile = $_FILES['pay_rec']['error'];
+		$type = $_FILES['pay_rec']['type'];
+		$temp = $_FILES['pay_rec']['tmp_name'];
+		$myfile =$_FILES['pay_rec']['name'];
+		$location="photos/pay_rec/".$myfile;
+
+
+	if ( $errofile > 0) {
+			message("No Image Selected!", "error");
+			redirect("index.php?view=view&id=". $_GET['id']);
+	}else{
+
+			@$file=$_FILES['pay_rec']['tmp_name'];
+			@$image= addslashes(file_get_contents($_FILES['pay_rec']['tmp_name']));
+			@$image_name= addslashes($_FILES['pay_rec']['name']); 
+			@$image_size= getimagesize($_FILES['pay_rec']['tmp_name']);
+
+		if ($image_size==FALSE ) {
+			message("Uploaded file is not an image!", "error");
+			redirect("index.php?view=view&id=". $_GET['id']);
+		}else{
+				//uploading the file
+				move_uploaded_file($temp,"photos/pay_rec/" . $myfile);
+				global $mydb;
+				$sql = "INSERT INTO tblInstallments (StockoutID,pay_receipt) Values($stockoutID,'$location')";
+				$mydb->setQuery($sql);
+				$mydb->executeQuery(); 
+				redirect("index.php?view=viewproduct&id=".$stockoutID);
+				}
 		}
+			
+	}
 
  
 function UploadImage(){
