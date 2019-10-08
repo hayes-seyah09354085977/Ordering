@@ -60,7 +60,7 @@ switch($e){
     break;
     case 'check_for_installment':
         global $mydb;
-            $sql = "SELECT distinct ProductID,Installment FROM `tblstockin` st where Installment='on'" ;
+            $sql = "SELECT distinct ProductID,Installment,Percentage FROM `tblstockin` st where Installment='on' Group by ProductID" ;
             $mydb->setQuery($sql);
             $cur = $mydb->executeQuery();
             $res = $cur->fetch_all(MYSQLI_ASSOC);

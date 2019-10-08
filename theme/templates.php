@@ -49,6 +49,18 @@
     color: #fff;
     padding:0px;
   }
+  .fa-comments{
+    color:white;
+    cursor:pointer;
+    font-size:17px;
+  }
+  .mychatframe{
+    width:100%;
+    height:570px;
+  }
+  .modal-content{
+    height: 800px !important;
+  }
 </style>
 
 </head>
@@ -88,7 +100,7 @@
                     $showMsg = $mydb->loadSingleResult();
                     $msg =isset($showMsg->COUNT) ? $showMsg->COUNT : 0; 
 
-                    echo '<a title="View Message(s)" href="'.web_root.'customer/index.php?view=notification"> <i class="fa fa-bell-o"></i> <span class="label label-success">'.$msg.'</span></a> | <a title="View Profile" href="'.web_root.'customer/"> <i class="fa fa-user"></i> Welcome, '. $cus->CustomerName .' </a> | <a href="'.web_root.'logout.php">  <i class="fa fa-sign-out"> </i>Logout</a> ';
+                    echo '<i class="fa fa-comments" data-toggle="modal" data-target="#chat"></i>  | <a title="View Message(s)" href="'.web_root.'customer/index.php?view=notification"> <i class="fa fa-bell-o"></i> <span class="label label-success">'.$msg.'</span></a> | <a title="View Profile" href="'.web_root.'customer/"> <i class="fa fa-user"></i> Welcome, '. $cus->CustomerName .' </a> | <a href="'.web_root.'logout.php">  <i class="fa fa-sign-out"> </i>Logout</a> ';
 
                     }else{ ?> 
                       <!-- <p   class="login"><a href="index.php?q=register/store"> <i class="fa fa-building-o"></i> Register Store </a></p> | -->
@@ -162,6 +174,35 @@
                 </div>
             </div>
         </div>
+  <?php 	if (isset($_SESSION['CustomerID'])) {
+     $customer = new Customer();
+     $cus  = $customer->single_customer($_SESSION['CustomerID']);
+     $stripped = str_replace(' ', '', $cus->CustomerName);
+    ?>
+  <!-- <div class="col-md-2 pcat" style="font-size:15px;padding:10px" data-toggle="modal" data-target="#chat">Chat</div> -->
+  <!-- chat -->
+  <div class="modal fade" id="chat" role="dialog">
+    <div class="modal-dialog modal-lg">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title2" >Chat </h3>
+        </div>
+        <div class="modal-body ">
+          <div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item mychatframe" src="<?php echo web_root; ?>/plugins/mychat/index.php?name=<?php  echo  $stripped; ?>Store"></iframe></div>
+              
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <?php }
+    ?>
   </header>
   <!-- end header -->  
 

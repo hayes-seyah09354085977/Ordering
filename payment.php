@@ -167,7 +167,7 @@ $subtotal = $_GET['st'];
               <table>
               <tr><td ><h3>Total Ordered Price:&nbsp;₱<?php echo $subtotal;?></span> </h3></td></tr>
                 <tr><td class="total_price" value="1000"><h3>Product Price:&nbsp;₱<span class='pr_price'></span> </h3></td></tr>
-                <tr><td class="product_interest" value="10"><h4>Product Interest:&nbsp;10%</h4></td></tr>
+                <tr><td class="product_interest" value="10"><h4>Product Interest:&nbsp;<span class='percent'>10</span></h4></td></tr>
 
               </table>
             </div>
@@ -303,6 +303,7 @@ var zz = $.extend(Calc.prototype, {
               var ProductID =response,
               product=''
               datas = response
+              console.log(datas)
               $.ajax({
                     type: "POST",
                     dataType:'json',
@@ -312,6 +313,8 @@ var zz = $.extend(Calc.prototype, {
                       for(var b =0; b<ProductID.length;b++){
                         for (var bb = 0; bb<res.length; bb++){
                           if(res[bb]['ProductID'] == ProductID[b]['productID']){
+                            datas[b]['Percentage']=res[bb]['Percentage']
+                            console.log(datas)
                             if(res[bb]['Installment']=='on'){
                               product = ProductID[b]['product'].split('|')
                               $('.remOpts').append(`<option value="`+b+`">`+product[0]+`</option>`)
@@ -332,6 +335,8 @@ var zz = $.extend(Calc.prototype, {
         $('.proceed').attr('href','#')
       }else{
           $('.installment').show()
+        $('.percent').text(datas[remittanceOptions]['Percentage'])
+        $('.product_interest').attr('value',datas[remittanceOptions]['Percentage'])
          $('.pr_price').text(datas[remittanceOptions]['subtotal'])
          $('.total_price').attr('value',datas[remittanceOptions]['subtotal'])
          $('.initial_payment').attr('max',datas[remittanceOptions]['subtotal'])
