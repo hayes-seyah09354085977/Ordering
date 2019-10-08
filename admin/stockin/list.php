@@ -64,7 +64,7 @@
 					<th>Product</th>
 					<th>Description</th>
 					<th>Price</th>
-					<th>Quantity</th>
+					<th>Remaining Quantity</th>
 					<th>Categories</th>
 					<th width="14%" >Action</th> 
 				  	</tr>	
@@ -72,7 +72,15 @@
 				  <tbody>
 				  	<?php 
 				  	 // `COMPANYID`, `OCCUPATIONTITLE`, `REQ_NO_EMPLOYEES`, `SALARIES`, `DURATION_EMPLOYEMENT`, `QUALIFICATION_WORKEXPERIENCE`, `JOBDESCRIPTION`, `PREFEREDSEX`, `SECTOR_VACANCY`, `JOBSTATUS`
-				  		$mydb->setQuery("SELECT *,s.ProductID as pid FROM `tblproduct` p,`tblcategory` c,`tblstockin` s WHERE p.`CategoryID`=c.`CategoryID` AND p.`ProductID`=s.`ProductID` AND p.StoreID=".$_SESSION['ADMIN_USERID']);
+						  // $mydb->setQuery("SELECT *,s.ProductID as pid FROM `tblproduct` p,`tblcategory` c,`tblstockin` s WHERE p.`CategoryID`=c.`CategoryID` AND p.`ProductID`=s.`ProductID` AND p.StoreID=".$_SESSION['ADMIN_USERID']);
+						  $mydb->setQuery("SELECT S.`StockinID`,S.ProductID as pid,P.`ProductName`,
+						  P.`Description`,
+						  P.`Price`, 
+						  C.`Categories`,
+						  I.`Remaining` AS Quantity
+						  FROM tblstockin S LEFT JOIN tblproduct P ON S.`ProductID` = P.`ProductID`
+						  LEFT JOIN `tblcategory` C ON C.`CategoryID` = P.`CategoryID`
+						  LEFT JOIN tblinventory I ON I.`ProductID` = P.`ProductID`");
 				  		$cur = $mydb->loadResultList(); 
 						foreach ($cur as $result) {
 				  		  echo '<tr>';

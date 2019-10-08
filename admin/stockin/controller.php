@@ -57,27 +57,47 @@ switch ($action) {
 			// echo $product_quantity.' '.$total_quanity.' '.$ProductID;
 		 	
 			$sql = "SELECT  * FROM `tblinventory` WHERE `ProductID`='{$ProductID}'";
-			 $mydb->setQuery($sql);
+			$mydb->setQuery($sql);
 
 			 $cur = $mydb->executeQuery(); 
 			// print_r($cur);
 		 	$maxrow = $mydb->num_rows($cur);
 		 	if ($maxrow > 0) {
-				
+				 
 		 		$row  = $mydb->loadSingleResult();
 		 	    $total_quanity = $row->Stocks + $Quantity;
-		 		$product_quantity = $row->Remaining + $Quantity;
+				$product_quantity = $row->Remaining + $Quantity;
+				//  echo $row->Remaining.'  quantity ='. $Quantity.'       total_quanity = '. $total_quanity;
 		 		# code...
-				$sql = "UPDATE `tblinventory` SET `Stocks`= '{$product_quantity}', Remaining =  '{$total_quanity}' WHERE `ProductID`='{$ProductID}'";
-				$mydb->setQuery($sql);
-				$mydb->executeQuery(); 
-				$sql = "INSERT INTO `tblstockin` (`ProductID`, `Quantity`, `DateReceive`,`VariationCategory`,`VariationBracket`,`Variation`,`Installment`,`Percentage`) 
-				VALUES ($ProductID,$Quantity,Now(),'".$VariationCategory."','".$Bracket."','".$VarSwitch."','".$Installment."','".$ReserveID."')";
+				$sql = "UPDATE `tblinventory` SET `Remaining`= '{$product_quantity}',  Stocks=  '{$total_quanity}' WHERE `ProductID`='{$ProductID}'";
 				$mydb->setQuery($sql);
 				$mydb->executeQuery();
-				message("New transaction created successfully!", "success");
-				redirect("index.php");
-		 	}
+				$sql = "SELECT  * FROM `tblstockin` WHERE `ProductID`='{$ProductID}'";
+				$mydb->setQuery($sql);
+				$cur2 = $mydb->executeQuery(); 
+				// print_r($cur2);
+				$maxrow2 = $mydb->num_rows($cur2);	
+				if($maxrow2 > 0){
+					// echo '      Updating     '.$VariationCategory;
+					$sql = "UPDATE `tblstockin` SET `Quantity` ='{$product_quantity}',VariationCategory = {$VariationCategory},Installment ='{$Installment}', Variation ='{$VarSwitch}',Variationbracket ='{$Variationbracket}', `Percentage`='{$ReserveID}' WHERE `StockinID`='{$StockinID}'";
+					$mydb->setQuery($sql);
+					$mydb->executeQuery();
+					message("New transaction created successfully!", "success");
+					redirect("index.php");
+				}
+				else{
+					// echo 'Inserting';
+					$sql = "INSERT INTO `tblstockin` (`ProductID`, `Quantity`, `DateReceive`,`VariationCategory`,`VariationBracket`,`Variation`,`Installment`,`Percentage`) 
+					VALUES ($ProductID,$Quantity,Now(),'".$VariationCategory."','".$Bracket."','".$VarSwitch."','".$Installment."','".$ReserveID."')";
+					$mydb->setQuery($sql);
+					$mydb->executeQuery();
+					message("New transaction created successfully!", "success");
+					redirect("index.php");
+				}
+		 	}else{
+				 echo '<br> else';
+				
+			 }
 			
 		}
 		}
