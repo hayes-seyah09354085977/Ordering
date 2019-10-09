@@ -212,7 +212,7 @@ switch ($action) {
 		$ProductID = $_GET['ProductID'];
 		$StockinID = $_GET['id'];
 		$Trans_Quantity = $_GET['TransQuantity']; 
-
+		
 		$sql = "SELECT * FROM `tblinventory` WHERE `ProductID`='{$ProductID}'";
 		$mydb->setQuery($sql);
 		$cur = $mydb->executeQuery(); 
@@ -223,8 +223,19 @@ switch ($action) {
 			 $total_quanity = $row->Remaining - $Trans_Quantity;    
 
 			 $product_quantity = $row->Stocks - $Trans_Quantity; 
+			//  echo $row->Variation;
+			 $array = array();
+			 $normal;
+			 $normal =  $row->Variation;
+				$normal = explode(',',$normal);
+				$normal = sizeof($normal);
+				for($x = 0; $x<$normal; $x++){
+					$array[] = '0,';
+				}
+				// print_r($array);
+				$normal = substr(implode($array),0,-1);
 			# code...
-		$sql = "UPDATE `tblinventory` SET `Stocks`= '{$product_quantity}',Remaining='{$total_quanity}' WHERE `ProductID`='{$ProductID}'";
+		$sql = "UPDATE `tblinventory` SET `Stocks`= '{$product_quantity}',Remaining='{$total_quanity}',Variation='".$normal."' WHERE `ProductID`='{$ProductID}'";
 		$mydb->setQuery($sql);
 		$mydb->executeQuery(); 
 

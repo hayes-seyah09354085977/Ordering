@@ -91,7 +91,7 @@ $res = $mydb->loadSingleResult();
 <form action="controller.php?action=add" method="POST" >
 <div class="row">
     <input type="hidden" name="VariationCategory"  class="VariationCategory" value="<?php echo $res->varcatid; ?>">
-	<input type="hidden" name="Variationbracket"  class="Variationbracket" value="<?php echo substr(implode($array),0,-1); ?>">
+	<input type="text" name="Variationbracket"  class="Variationbracket" value="<?php echo substr(implode($array),0,-1); ?>">
 	<input type="hidden" name="Reservationbracket"  class="Reservationbracket" >
 	<input type="hidden" name="ProductID" value="<?php echo $res->ProductID; ?>">
 	<div class="column-label">Product</div>
