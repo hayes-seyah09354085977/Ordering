@@ -44,7 +44,7 @@ switch ($action) {
 		$normal;
 		global $mydb;
 		if(isset($_POST['save']) ){
- 		    if($_POST['ProductName'] == "" && $_POST['Description'] == "" && $_POST['Price'] == "" && $_POST['PO'] == "" && $_POST['Supplier'] == "" && $_POST['CategoryID'] == "" && ){
+ 		    if($_POST['ProductName'] == "" && $_POST['Description'] == "" && $_POST['Price'] == "" && $_POST['PO'] == "" && $_POST['Supplier'] == "" && $_POST['CategoryID'] == ""  ){
 
 			 }else{
 				$filename = UploadImage("Image1");
