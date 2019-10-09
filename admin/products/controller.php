@@ -44,76 +44,73 @@ switch ($action) {
 		$normal;
 		global $mydb;
 		if(isset($_POST['save']) ){
- 		    if($_POST['ProductName'] == "" && $_POST['Description'] == "" && $_POST['Price'] == "" && $_POST['PO'] == "" && $_POST['Supplier'] == "" && $_POST['CategoryID'] == ""  ){
+ 		    $filename = UploadImage("Image1");
+			$Image1 = "photos/". $filename ;
 
-			 }else{
-				$filename = UploadImage("Image1");
-				$Image1 = "photos/". $filename ;
-	
-				$filename = UploadImage("Image2");
-				$Image2 = "photos/". $filename ;
-	
-				$filename = UploadImage("Image3");
-				$Image3 = "photos/". $filename ;
-	
-	
-	
-	
-						// @$DateExpire = date_format(date_create($_POST['DateExpire']),'Y-m-d');
-	
-						$product = New Product(); 
-						$product->ProductName 		= $_POST['ProductName'];
-						$product->Description		= $_POST['Description']; 
-						$product->Price				= $_POST['Price'];  
-						$product->PO				= $_POST['PO']; 
-						$product->Supplier			= $_POST['Supplier'];   
-						$product->VarcatID			= $_POST['Variation'];
-						// $product->DateExpire		=  @$DateExpire;
-						$product->CategoryID		= $_POST['CategoryID'];
-						$product->StoreID			= $_SESSION['ADMIN_USERID'];
-						$product->Image1			=  $Image1;
-						$product->Image2			=  $Image2;
-						$product->Image3			=  $Image3;
-						
-						$sql ="SELECT * FROM tblvariation where varcatid = '".$_POST['Variation']."'";
-						$mydb->setQuery($sql);
-						$cur = $mydb->loadResultList();
-						// print_r($cur); echo'<br><br><br>';
-						foreach ($cur as $result) { 
-							$normal = $result->variation;
-						}
-	
-						$normal = sizeof(explode(',',$normal));
-						// echo $normal;
-						for($x = 0; $x<$normal; $x++){
-							$array[] = '0,';
-						}
-						// print_r($array);	
-						$normal = substr(implode($array),0,-1);
-						// echo '<br>'.$normal;
-						
-						$checkProductName = checkExistingProduct($_POST['ProductName']);
-						switch($checkProductName){
-							case '0':
-								$product->create(); 
-								$productID = $mydb->insert_id();
-								$sql ="INSERT INTO `tblinventory` (`ProductID`,`Variation`) VALUES ('{$productID}','{$normal}')";
-								$mydb->setQuery($sql);
-								$mydb->executeQuery();
-			
-								message("New Product created successfully!", "success");
-								redirect("index.php");
-							break;
-							case '1':
-								message("Product Name Exist! Please Use Other Product Names.", "error");
-								redirect("index.php?view=add");
-							break;
-	
-						}
-			 }
- 		    
-		}
- 	} 
+			$filename = UploadImage("Image2");
+			$Image2 = "photos/". $filename ;
+
+			$filename = UploadImage("Image3");
+			$Image3 = "photos/". $filename ;
+
+
+
+
+					// @$DateExpire = date_format(date_create($_POST['DateExpire']),'Y-m-d');
+
+					$product = New Product(); 
+					$product->ProductName 		= $_POST['ProductName'];
+					$product->Description		= $_POST['Description']; 
+					$product->Price				= $_POST['Price'];  
+					$product->PO				= $_POST['PO']; 
+					$product->Supplier			= $_POST['Supplier'];   
+					$product->VarcatID			= $_POST['Variation'];
+					// $product->DateExpire		=  @$DateExpire;
+					$product->CategoryID		= $_POST['CategoryID'];
+					$product->StoreID			= $_SESSION['ADMIN_USERID'];
+					$product->Image1			=  $Image1;
+					$product->Image2			=  $Image2;
+					$product->Image3			=  $Image3;
+					
+					$sql ="SELECT * FROM tblvariation where varcatid = '".$_POST['Variation']."'";
+					$mydb->setQuery($sql);
+					$cur = $mydb->loadResultList();
+					// print_r($cur); echo'<br><br><br>';
+					foreach ($cur as $result) { 
+						$normal = $result->variation;
+					}
+
+					$normal = sizeof(explode(',',$normal));
+					// echo $normal;
+					for($x = 0; $x<$normal; $x++){
+						$array[] = '0,';
+					}
+					// print_r($array);	
+					$normal = substr(implode($array),0,-1);
+					// echo '<br>'.$normal;
+					
+					$checkProductName = checkExistingProduct($_POST['ProductName']);
+					switch($checkProductName){
+						case '0':
+							$product->create(); 
+							$productID = $mydb->insert_id();
+							$sql ="INSERT INTO `tblinventory` (`ProductID`,`Variation`) VALUES ('{$productID}','{$normal}')";
+							$mydb->setQuery($sql);
+							$mydb->executeQuery();
+		
+							message("New Product created successfully!", "success");
+							redirect("index.php");
+						break;
+						case '1':
+							message("Product Name Exist! Please Use Other Product Names.", "error");
+							redirect("index.php?view=add");
+						break;
+
+					}
+					
+ 
+		 }
+ } 
  function checkExistingProduct($productName){
 	global $mydb;
 	$mydb->setQuery("SELECT count(*)as cnt FROM `tblproduct` WHERE `ProductName`='".$productName."'");

@@ -28,7 +28,7 @@
                         <div class="col-md-8">
                           <input name="deptid" type="hidden" value="">
                            <input class="form-control input-sm" id="ProductName" name="ProductName" placeholder=
-                              "Product Name" type="text" value=""  onkeyup="javascript:capitalize(this.id, this.value);" autocomplete="off">
+                              "Product Name" type="text" value=""  onkeyup="javascript:capitalize(this.id, this.value);" autocomplete="off" required>
                         </div>
                       </div>
                     </div>
@@ -40,7 +40,7 @@
 
                         <div class="col-md-8"> 
                           <textarea  class="form-control input-sm" id="Description" name="Description" placeholder=
-                              "Description"    onkeyup="javascript:capitalize(this.id, this.value);" autocomplete="off"></textarea> 
+                              "Description"    onkeyup="javascript:capitalize(this.id, this.value);" autocomplete="off" ></textarea> 
                           </div>
                       </div>
                     </div>
@@ -53,7 +53,7 @@
                         <div class="col-md-8">
                           <input name="deptid" type="hidden" value="">
                            <input class="form-control input-sm" id="Price" name="PO" placeholder=
-                              "P.O #" type="number" min="0"  onkeyup="javascript:capitalize(this.id, this.value);" autocomplete="off">
+                              "P.O #" type="number" min="0"  onkeyup="javascript:capitalize(this.id, this.value);" autocomplete="off" required>
                         </div>
                       </div>
                     </div>
@@ -66,7 +66,7 @@
                         <div class="col-md-8">
                           <input name="deptid" type="hidden" value="">
                           <input  class="form-control input-sm" id="Price" name="Price" placeholder=
-                              "Price"  type="number" min="0"  onkeyup="javascript:capitalize(this.id, this.value);" autocomplete="off"> 
+                              "Price"  type="number" min="0"  onkeyup="javascript:capitalize(this.id, this.value);" autocomplete="off" required> 
                         </div>
                       </div>
                     </div> 
@@ -94,8 +94,8 @@
                           "Categories">Category:</label>
 
                           <div class="col-md-8">
-                            <select class="form-control input-sm" id="CategoryID" name="CategoryID">
-                              <option value="None">Select</option>
+                            <select required class="form-control input-sm required" id="CategoryID" name="CategoryID" >
+                              <option value="">Select</option>
                               <?php 
                                 $sql ="Select * From tblcategory WHERE StoreID=".$_SESSION['ADMIN_USERID'];
                                 $mydb->setQuery($sql);
@@ -117,8 +117,8 @@
                           "Categories">Supplier:</label>
 
                           <div class="col-md-8">
-                            <select class="form-control input-sm" id="Supplier" name="Supplier">
-                              <option value="None">Select</option>
+                            <select  required class="form-control input-sm" id="Supplier" name="Supplier">
+                              <option value="">Select</option>
                               <?php 
                                 $sql ="Select * From tblsupplier";
                                 $mydb->setQuery($sql);

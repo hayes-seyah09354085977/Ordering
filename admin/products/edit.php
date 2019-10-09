@@ -38,7 +38,7 @@
                         <div class="col-md-8">
                           <input name="deptid" type="hidden" value="">
                            <input class="form-control input-sm" id="ProductName" name="ProductName" placeholder=
-                              "Product Name" type="text"  onkeyup="javascript:capitalize(this.id, this.value);" autocomplete="off" value="<?php echo $res->ProductName; ?>">
+                              "Product Name" type="text"  onkeyup="javascript:capitalize(this.id, this.value);" autocomplete="off" value="<?php echo $res->ProductName; ?>" required>
                         </div>
                       </div>
                     </div>
@@ -63,7 +63,7 @@
                         <div class="col-md-8">
                           <input name="deptid" type="hidden" value="">
                           <input  class="form-control input-sm" id="PO" name="PO" placeholder=
-                              "P.O."    onkeyup="javascript:capitalize(this.id, this.value);" autocomplete="off" value="<?php echo $res->PO ?>"> 
+                              "P.O."    onkeyup="javascript:capitalize(this.id, this.value);" autocomplete="off" value="<?php echo $res->PO ?>" required> 
                         </div>
                       </div>
                     </div> 
@@ -76,7 +76,7 @@
                         <div class="col-md-8">
                           <input name="deptid" type="hidden" value="">
                           <input  class="form-control input-sm" id="Price" name="Price" placeholder=
-                              "Price"    onkeyup="javascript:capitalize(this.id, this.value);" autocomplete="off" value="<?php echo $res->Price ?>"> 
+                              "Price"    onkeyup="javascript:capitalize(this.id, this.value);" autocomplete="off" value="<?php echo $res->Price ?>" required> 
                         </div>
                       </div>
                     </div> 
