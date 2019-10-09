@@ -40,7 +40,8 @@ switch ($action) {
 	}
    
 	function doInsert(){
-	
+		$array = array();
+		$normal;
 		global $mydb;
 		if(isset($_POST['save'])){
  		    
@@ -64,6 +65,7 @@ switch ($action) {
 					$product->Price				= $_POST['Price'];  
 					$product->PO				= $_POST['PO']; 
 					$product->Supplier				= $_POST['Supplier'];   
+					$product->VarcatID				= $_POST['Variation'];
 					// $product->DateExpire		=  @$DateExpire;
 					$product->CategoryID		= $_POST['CategoryID'];
 					$product->StoreID			= $_SESSION['ADMIN_USERID'];
@@ -71,13 +73,29 @@ switch ($action) {
 					$product->Image2			=  $Image2;
 					$product->Image3			=  $Image3;
 					
+					$sql ="SELECT * FROM tblvariation where varcatid = '".$_POST['Variation']."'";
+					$mydb->setQuery($sql);
+					$cur = $mydb->loadResultList();
+					// print_r($cur); echo'<br><br><br>';
+					foreach ($cur as $result) { 
+						$normal = $result->variation;
+					}
+
+					$normal = sizeof(explode(',',$normal));
+					// echo $normal;
+					for($x = 0; $x<$normal; $x++){
+						$array[] = '0,';
+					}
+					// print_r($array);	
+					$normal = substr(implode($array),0,-1);
+					// echo '<br>'.$normal;
 					
 					$checkProductName = checkExistingProduct($_POST['ProductName']);
 					switch($checkProductName){
 						case '0':
 							$product->create(); 
 							$productID = $mydb->insert_id();
-							$sql ="INSERT INTO `tblinventory` (`ProductID`) VALUES ('{$productID}')";
+							$sql ="INSERT INTO `tblinventory` (`ProductID`,`Variation`) VALUES ('{$productID}','{$normal}')";
 							$mydb->setQuery($sql);
 							$mydb->executeQuery();
 		
@@ -146,6 +164,7 @@ switch ($action) {
 			$product->Description		= $_POST['Description']; 
 			$product->Price				= $_POST['Price'];  
 			$product->PO				= $_POST['PO'];  
+			$product->VarcatID			= $_POST['Variation'];
 			$product->Supplier			= $_POST['Supplier'];  
 			$product->DateExpire		=  @$DateExpire;
 			$product->CategoryID		= $_POST['CategoryID'];

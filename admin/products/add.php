@@ -134,6 +134,29 @@
                         </div>
                       </div> 
 
+                      <div class="form-group">
+                        <div class="col-md-8">
+                          <label class="col-md-4 control-label" for=
+                          "Categories">Variation: </label>
+
+                          <div class="col-md-8">
+                            <select class="form-control input-sm" id="Variation" name="Variation">
+                              <option value="0">Select</option>
+                              <?php 
+                                $sql ="Select * From tblvarcat";
+                                $mydb->setQuery($sql);
+                                $res  = $mydb->loadResultList();
+                                foreach ($res as $row) {
+                                  # code...
+                                  echo '<option value='.$row->varcatid.'>'.$row->variationcat.'</option>';
+                                }
+
+                              ?>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
                       <!-- <div class="form-group">
                         <div class="col-md-8">
                           <label class="col-md-4 control-label" for=

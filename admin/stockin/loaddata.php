@@ -1,17 +1,19 @@
 <?php
 require_once("../../include/initialize.php");
 //checkAdmin();
+$varcatt;
 if (!isset($_SESSION['ADMIN_USERID'])){
 	redirect(web_root."admin/index.php");
 }
 $storeID = $_SESSION['ADMIN_USERID'];
 $productID = $_POST['ProductID'];
 // echo $productID.'asdasdsad';
-$sql ="SELECT * FROM tblproduct p, tblcategory c WHERE p.CategoryID=c.CategoryID AND ProductID = '{$productID}' AND p.StoreID='$storeID'";
+$sql ="SELECT * FROM tblproduct p, tblcategory c, tblvarcat v WHERE p.`VarcatID` = v.`varcatid` AND p.CategoryID=c.CategoryID AND ProductID = '{$productID}' AND p.StoreID='$storeID'";
 $mydb->setQuery($sql);
 $cur = $mydb->executeQuery();
 $maxrow = $mydb->num_rows($cur);
 $res = $mydb->loadSingleResult(); 
+
 ?> 
 <style type="text/css"> 
 	.column-label {
@@ -66,7 +68,8 @@ $res = $mydb->loadSingleResult();
 	<div class="column-label">Price</div>
 	<div class="column-value">: <?php echo $res->Price; ?></div>
 	<div class="column-label pointer">Variation</div>
-	<div class="column-value"><input type="checkbox" name="Variationbox"  class="Variation" > </div>
+	<div class="column-value">: <a href="#"  class="Variation" data-id='<?php echo $res->varcatid; ?>' data-name=' <?php echo $res->variationcat; ?>'>  <?php echo $res->variationcat; ?></a></div>
+	<!-- <div class="column-value"><input type="checkbox" name="Variationbox"  class="Variation" > </div> -->
 	<div class="column-label pointer2">Installment</div>
 	<div class="column-value "><input type="checkbox" name="Installment" class="Installment"  class="Installment"></div>
 	<div class="column-label">Quantity</div>
@@ -102,25 +105,7 @@ $res = $mydb->loadSingleResult();
         </div>
         <div class="modal-body">
 		<div class="form-group">
-                        <div class="col-md-8">
-                          <label class="col-md-4 control-label" for=
-                          "Categories">Variation:</label>
-
-                          <div class="col-md-8">
-                            <select class="form-control input-sm varriate" id="Variationcat" name="Variationcat">
-                              <option value="None">Select</option>
-                              <?php 
-                                $sql ="Select * From tblvarcat";
-                                $mydb->setQuery($sql);
-                                $res  = $mydb->loadResultList();
-                                foreach ($res as $row) {
-                                  # code...
-                                  echo '<option value='.$row->varcatid.' >'.$row->variationcat.'</option>';
-                                }
-                              ?>
-                            </select>
-                          </div>
-                        </div>
+                        
 					  </div> 
 		<Br class="breakline">
 				<div class='container _varation'>
@@ -183,25 +168,42 @@ $res = $mydb->loadSingleResult();
 $(document).ready(function(){
 let catval = [];
 let cattotal;
+let tis =$('.Variation').data('id')
+
+if(tis == 0 ){
+	
+}else{
+	$('#Quantity').focus(function(e) {
+    $(this).blur();
+});
+}
 
 $(".varriate").prop('disabled', true);
 $(".Reeserve").prop('disabled', true);
-	$('.Variation').change(()=>{
-		if ($('.Variation').is(":checked"))
-		{
+	$('.Variation').click(()=>{
 			$('#myModal').modal('show'); 
 			$("#Quantity").val(0)
 			// $("input#Quantity").prop('disabled', true);
 			$(".varriate").prop('disabled', false);
+			let $option = $('.Variation').data('id'),
+			variationText=$('.Variation').data('name');
+		
+		$.post('php/lookup.php',{e:'var',id:$option},function(data){
+			$('.VariationCategory').val($option);
+			data = $.parseJSON(data)
+			console.log(data)
+			data2 = data[0].variation
+			data2 = data2.split(',')
+			$('.w-25').remove()
+			console.log(data[0].varcatid)
+			data2.forEach(function(elem){
+				$('.container._varation').append(`<div class="row  w-25">
+					<div class='col-sm-2'>`+variationText+`: `+elem+`</div>
+					<div class='col-sm-3'><input type="number" class="form-control `+data[0].varcatid+`-cat category22 varriate"  min=0 value="0"></div>
+				</div>`)
+			})			
 			
-		}
-		else{
-			console.log('not ok')
-			$('.Variationbracket').val("")
-			$("#Quantity").val("")
-			$("input#Quantity").prop('disabled', false);
-			
-		}
+		})
 	})
 
 	$('#Variationcat').change(()=>{
@@ -216,13 +218,6 @@ $(".Reeserve").prop('disabled', true);
 			$('.w-25').remove()
 			console.log(data[0].varcatid)
 			data2.forEach(function(elem){
-				
-			// $('.breakline').after(`<div class="form-group w-25">
-			// 	<span for="example1">`+elem+`</span>
-			// 	<input type="number" class="form-control `+data[0].varcatid+`-cat category22 varriate"  placeholder="pcs" style="width: 55px;" min=1> pcs
-			// 	</div>`)
-			// })	
-
 				$('.container._varation').append(`<div class="row  w-25">
 					<div class='col-sm-2'>`+variationText+`: `+elem+`</div>
 					<div class='col-sm-3'><input type="number" class="form-control `+data[0].varcatid+`-cat category22 varriate"  min=0 value="0"></div>
