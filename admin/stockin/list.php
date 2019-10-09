@@ -94,10 +94,10 @@
 			              echo '<td>'. $result->Quantity.'</td>'; 
 			            //   echo '<td>'. $result->DateExpire.'</td>';
 			              echo '<td>'. $result->Categories.'</td>';  
-			              echo '<td align="center"><a title="Edit" href="index.php?view=edit&id='.$result->StockinID.'" class="btn btn-primary btn-xs  ">  <span class="fa fa-edit fw-fa"></a>
+			              echo '<td align="center">
 			              <a title="Delete" href="controller.php?action=delete&id='.$result->StockinID.'&ProductID='.$result->pid.'&TransQuantity='.$result->Quantity.'" class="btn btn-danger btn-xs  ">  <span class="fa  fa-trash-o fw-fa "></a></td>';
 			              echo '</tr>';
-				  	} 
+				  	} //<a title="Edit" href="index.php?view=edit&id='.$result->StockinID.'" class="btn btn-primary btn-xs  ">  <span class="fa fa-edit fw-fa"></a>
 				  	?>
 				  </tbody>
 					

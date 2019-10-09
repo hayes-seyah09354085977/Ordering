@@ -2,13 +2,20 @@
 require_once("../../include/initialize.php");
 //checkAdmin();
 $varcatt;
+$check;
 if (!isset($_SESSION['ADMIN_USERID'])){
 	redirect(web_root."admin/index.php");
 }
 $storeID = $_SESSION['ADMIN_USERID'];
 $productID = $_POST['ProductID'];
 // echo $productID.'asdasdsad';
-$sql ="SELECT * FROM tblproduct p, tblcategory c, tblvarcat v WHERE p.`VarcatID` = v.`varcatid` AND p.CategoryID=c.CategoryID AND ProductID = '{$productID}' AND p.StoreID='$storeID'";
+$sql ="SELECT *
+FROM tblproduct p 
+LEFT JOIN tblcategory c ON c.CategoryID = p.`CategoryID`
+LEFT JOIN tblvarcat v ON v.VarcatID = p.`VarcatID`
+LEFT JOIN tblinventory i ON i.`ProductID` = p.`ProductID`
+
+WHERE p.ProductID = '{$productID}'";
 $mydb->setQuery($sql);
 $cur = $mydb->executeQuery();
 $maxrow = $mydb->num_rows($cur);
@@ -52,11 +59,32 @@ $res = $mydb->loadSingleResult();
 	}
 
 </style>
-<?php  if ($maxrow > 0) {  ?> 
+<?php  if ($maxrow > 0) { 
+	$array = array();
+	
+	$normal =  $res->Variation;
+	$normal = explode(',',$normal);
+	$normal = sizeof($normal);
+	for($x = 0; $x<$normal; $x++){
+		$array[] = '0,';
+	}
+
+	$sql3 ="SELECT * FROM tblstockin WHERE ProductID = '{$productID}'";
+    $mydb->setQuery($sql3);
+	$cur3 = $mydb->executeQuery();
+	$res2 = $mydb->loadSingleResult(); 
+	// echo $res2->Installment;
+	if($res2->Installment =="off"){
+		$check="";
+	}else{
+		$check="CHECKED";
+	}
+				
+?> 
 <form action="controller.php?action=add" method="POST" >
 <div class="row">
-    <input type="hidden" name="VariationCategory"  class="VariationCategory" >
-	<input type="hidden" name="Variationbracket"  class="Variationbracket" >
+    <input type="hidden" name="VariationCategory"  class="VariationCategory" value="<?php echo $res->varcatid; ?>">
+	<input type="hidden" name="Variationbracket"  class="Variationbracket" value="<?php echo substr(implode($array),0,-1); ?>">
 	<input type="hidden" name="Reservationbracket"  class="Reservationbracket" >
 	<input type="hidden" name="ProductID" value="<?php echo $res->ProductID; ?>">
 	<div class="column-label">Product</div>
@@ -71,9 +99,9 @@ $res = $mydb->loadSingleResult();
 	<div class="column-value">: <a href="#"  class="Variation" data-id='<?php echo $res->varcatid; ?>' data-name=' <?php echo $res->variationcat; ?>'>  <?php echo $res->variationcat; ?></a></div>
 	<!-- <div class="column-value"><input type="checkbox" name="Variationbox"  class="Variation" > </div> -->
 	<div class="column-label pointer2">Installment</div>
-	<div class="column-value "><input type="checkbox" name="Installment" class="Installment"  class="Installment"></div>
+	<div class="column-value "><input type="checkbox" name="Installment" class="Installment"  class="Installment" <?php echo $check; ?> ></div>
 	<div class="column-label">Quantity</div>
-	<div class="column-value"><input type="number" name="Quantity" id="Quantity" class="form-control" min="1"></div>
+	<div class="column-value"><input type="number" name="Quantity" id="Quantity" class="form-control" min="0" ></div>
 </div> 
 <div class="row">
 	<input type="submit" name="btnSubmit" value="Save" class="btn-primary btn btn-md">
@@ -176,6 +204,7 @@ if(tis == 0 ){
 	$('#Quantity').focus(function(e) {
     $(this).blur();
 });
+$('#Quantity').val('0')
 }
 
 $(".varriate").prop('disabled', true);

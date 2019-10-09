@@ -35,7 +35,7 @@ switch ($action) {
 		$total_quanity=0;
 
 		if(isset($_POST['btnSubmit'])){ 
-		if ( $_POST['Quantity'] == "" || $_POST['Quantity'] == 0) {
+		if ( $_POST['Quantity'] == "") {
 			$messageStats = false;
 			message("All field is required!","error");
 			redirect('index.php');
@@ -61,6 +61,7 @@ switch ($action) {
 				$Installment = 'off';
 				$ReserveID = 'empty';
 			}
+			// echo $Installment.' '.$ReserveID;
 			
 			// echo $Bracket.' '. $VarSwitch.' '.$Quantity.' '.$ProductID.'<br>';
 			// echo $product_quantity.' '.$total_quanity.' '.$ProductID;
@@ -98,7 +99,7 @@ switch ($action) {
 					$maxrow2 = $mydb->num_rows($cur2);	
 					if($maxrow2 > 0){
 						// echo '      Updating     '.$VariationCategory;
-						$sql = "UPDATE `tblstockin` SET `Quantity` ='{$product_quantity}',VariationCategory = {$VariationCategory},Installment ='{$Installment}', Variation ='{$VarSwitch}',Variationbracket ='{$todb}', `Percentage`='{$ReserveID}' WHERE `ProductID`='{$ProductID}'";
+						$sql = "UPDATE `tblstockin` SET `Quantity` ='{$product_quantity}',VariationCategory = '{$VariationCategory}',Installment ='".$Installment."', Variation ='{$VarSwitch}',Variationbracket ='{$todb}', `Percentage`='".$ReserveID."' WHERE `ProductID`='{$ProductID}'";
 						$mydb->setQuery($sql);
 						$mydb->executeQuery();
 						// echo $sql;
