@@ -75,15 +75,15 @@ $res = $mydb->loadSingleResult();
 	$maxrow2 = $mydb->num_rows($cur3);
 	$res2 = $mydb->loadSingleResult(); 
 	// echo $maxrow2;
-	if ($maxrow != 0) { 
-		// echo $res2->Installment;
-		
-	}else{
+	if ($maxrow2 != 0) { 
 		if($res2->Installment =="off"){
 			$check="";
 		}else{
 			$check="CHECKED";
 		}
+		
+	}else{
+		
 	}
    
 				
