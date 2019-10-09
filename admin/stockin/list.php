@@ -64,6 +64,9 @@
 					<th>Product</th>
 					<th>Description</th>
 					<th>Price</th>
+					<th>Variation Category</th>
+					<th>VAriation</th>
+					<th>Variation Quantity</th>
 					<th>Remaining Quantity</th>
 					<th>Categories</th>
 					<th width="14%" >Action</th> 
@@ -73,14 +76,19 @@
 				  	<?php 
 				  	 // `COMPANYID`, `OCCUPATIONTITLE`, `REQ_NO_EMPLOYEES`, `SALARIES`, `DURATION_EMPLOYEMENT`, `QUALIFICATION_WORKEXPERIENCE`, `JOBDESCRIPTION`, `PREFEREDSEX`, `SECTOR_VACANCY`, `JOBSTATUS`
 						  // $mydb->setQuery("SELECT *,s.ProductID as pid FROM `tblproduct` p,`tblcategory` c,`tblstockin` s WHERE p.`CategoryID`=c.`CategoryID` AND p.`ProductID`=s.`ProductID` AND p.StoreID=".$_SESSION['ADMIN_USERID']);
-						  $mydb->setQuery("SELECT S.`StockinID`,S.ProductID as pid,P.`ProductName`,
+						  $mydb->setQuery("SELECT S.`StockinID`,S.ProductID AS pid,P.`ProductName`,
 						  P.`Description`,
 						  P.`Price`, 
 						  C.`Categories`,
+						  I.`Variation`,
+						  VC.`variationcat`,
+						  VR.`variation` as full,
 						  I.`Remaining` AS Quantity
 						  FROM tblstockin S LEFT JOIN tblproduct P ON S.`ProductID` = P.`ProductID`
 						  LEFT JOIN `tblcategory` C ON C.`CategoryID` = P.`CategoryID`
-						  LEFT JOIN tblinventory I ON I.`ProductID` = P.`ProductID`");
+						  LEFT JOIN tblinventory I ON I.`ProductID` = P.`ProductID`
+						  LEFT JOIN tblvarcat VC ON VC.`varcatid` = P.`VarcatID`
+						  LEFT JOIN tblvariation VR ON VR.`varcatid` = VC.`varcatid`");
 				  		$cur = $mydb->loadResultList(); 
 						foreach ($cur as $result) {
 				  		  echo '<tr>';
@@ -90,7 +98,10 @@
 			              //    ' . $result->CATEGORIES.'</a></td>';
 			              echo '<td>'. $result->ProductName.'</td>';
 			              echo '<td>' . $result->Description.'</a></td>';
-			              echo '<td>' . $result->Price.'</a></td>'; 
+						  echo '<td>' . $result->Price.'</a></td>'; 
+						  echo '<td>' . $result->variationcat.'</a></td>';
+						  echo '<td>' . $result->full.'</a></td>';
+						  echo '<td>' . $result->Variation.'</a></td>'; 
 			              echo '<td>'. $result->Quantity.'</td>'; 
 			            //   echo '<td>'. $result->DateExpire.'</td>';
 			              echo '<td>'. $result->Categories.'</td>';  

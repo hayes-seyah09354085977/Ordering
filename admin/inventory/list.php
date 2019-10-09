@@ -22,6 +22,7 @@
 									<th>Description</th>
 									<th>Categories</th>
 									<th>Stocks</th>
+									<th>Variation Quantity</th>
 									<th>Sold</th>
 									<th>Remaining</th> 
 									<!-- <th width="14%" >Action</th>  -->
@@ -42,7 +43,8 @@
 							  		echo '<td>'. $result->ProductName.'</td>';
 							  		echo '<td>' . $result->Description.'</a></td>';
 							  		echo '<td>'. $result->Categories.'</td>';  
-							  		echo '<td>' . $result->Stocks.'</a></td>'; 
+									  echo '<td>' . $result->Stocks.'</a></td>'; 
+									  echo '<td>' . $result->Variation.'</a></td>'; 
 							  		echo '<td>' . $result->Sold.'</a></td>'; 
 							  		echo '<td>'. $result->Remaining.'</td>';  
 					  				// echo '<td align="center" >    
