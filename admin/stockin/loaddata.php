@@ -2,7 +2,7 @@
 require_once("../../include/initialize.php");
 //checkAdmin();
 $varcatt;
-$check;
+$check = "";
 if (!isset($_SESSION['ADMIN_USERID'])){
 	redirect(web_root."admin/index.php");
 }
@@ -70,15 +70,22 @@ $res = $mydb->loadSingleResult();
 	}
 
 	$sql3 ="SELECT * FROM tblstockin WHERE ProductID = '{$productID}'";
-    $mydb->setQuery($sql3);
+	$mydb->setQuery($sql3);
 	$cur3 = $mydb->executeQuery();
+	$maxrow2 = $mydb->num_rows($cur3);
 	$res2 = $mydb->loadSingleResult(); 
-	// echo $res2->Installment;
-	if($res2->Installment =="off"){
-		$check="";
+	// echo $maxrow2;
+	if ($maxrow != 0) { 
+		// echo $res2->Installment;
+		
 	}else{
-		$check="CHECKED";
+		if($res2->Installment =="off"){
+			$check="";
+		}else{
+			$check="CHECKED";
+		}
 	}
+   
 				
 ?> 
 <form action="controller.php?action=add" method="POST" >
