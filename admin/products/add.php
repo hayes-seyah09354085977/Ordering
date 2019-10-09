@@ -52,8 +52,8 @@
 
                         <div class="col-md-8">
                           <input name="deptid" type="hidden" value="">
-                           <input class="form-control input-sm" id="PO" name="PO" placeholder=
-                              "Product Name" type="text" value=""  onkeyup="javascript:capitalize(this.id, this.value);" autocomplete="off">
+                           <input class="form-control input-sm" id="Price" name="PO" placeholder=
+                              "P.O #" type="number" min="0"  onkeyup="javascript:capitalize(this.id, this.value);" autocomplete="off">
                         </div>
                       </div>
                     </div>
@@ -66,7 +66,7 @@
                         <div class="col-md-8">
                           <input name="deptid" type="hidden" value="">
                           <input  class="form-control input-sm" id="Price" name="Price" placeholder=
-                              "Price"    onkeyup="javascript:capitalize(this.id, this.value);" autocomplete="off"> 
+                              "Price"  type="number" min="0"  onkeyup="javascript:capitalize(this.id, this.value);" autocomplete="off"> 
                         </div>
                       </div>
                     </div> 
