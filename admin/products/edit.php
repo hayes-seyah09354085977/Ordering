@@ -104,8 +104,8 @@
                           "Categories">Category:</label>
 
                           <div class="col-md-8">
-                            <select class="form-control input-sm" id="CategoryID" name="CategoryID">
-                              <option value="None">Select</option>
+                            <select required class="form-control input-sm" id="CategoryID" name="CategoryID">
+                              <option value="">Select</option>
                               <?php 
                                 $sql ="Select * From tblcategory WHERE StoreID=".$_SESSION['ADMIN_USERID'];
                                 $mydb->setQuery($sql);
@@ -133,8 +133,8 @@
                           "Categories">Supplier :</label>
 
                           <div class="col-md-8">
-                            <select class="form-control input-sm" id="Supplier" name="Supplier">
-                              <option value="None">Select</option>
+                            <select required class="form-control input-sm" id="Supplier" name="Supplier">
+                              <option value="">Select</option>
                               <?php 
                                 $sql ="Select * from tblsupplier";
                                 $mydb->setQuery($sql);
