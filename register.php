@@ -8,32 +8,29 @@ section#inner-headline {
 
 </style>
 <!-- modal start -->
-<div class="modal fade" id="termsandconditions" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Terms And Conditions</h5>
-      </div>
-      <div class="modal-body">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6 termbody">
-			•	The price of Watch Ur Toyo merchandise is as quoted on the site from time to time. <br>
-			•	Prices include VAT but exclude delivery costs, which will be automatically added (at the cost shown ) to the total amount due when you view the items in your shopping cart and have selected your chosen different delivery method. <br>
-			•	Prices and shipping costs are liable to change at any time, but changes will not affect orders in respect of which we have already sent you a Dispatch Confirmation. <br>
-			•	Seven (7) days replacement for clothing.<br>
-			•	One year warranty for watches. Coverage is for mechanism and batteries only.<br>
-
-            </div>
-          </div>
+<div class="modal fade varmodal" id="termsandconditions" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Terms And Condition</h4>
         </div>
-
-      </div>
-      <!-- End Container -->
+        <div class="modal-body">
+		<?php
+			$sql3 ="SELECT * FROM `tblterms`";
+			$mydb->setQuery($sql3);
+			$cur3 = $mydb->executeQuery();
+			$maxrow2 = $mydb->num_rows($cur3);
+			$res2 = $mydb->loadSingleResult(); 
+			echo $res2->Terms;
+			?>
+				  
         </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-default TermClose" >Close</button> -->
+        </div>
       </div>
+      
     </div>
 </div>
 <!-- end modal -->
@@ -147,7 +144,8 @@ section#inner-headline {
 			      ""></label>  
 
 			      <div class="col-md-8"> 
-			      		<label><input id="terms" type="checkbox"> By Sign up you are agree with our <a data-toggle="modal" data-target="#termsandconditions">terms and condition</a></label>
+				  		<input id="terms" type="checkbox" hidden> 
+			      		<label>By Sign up you are agree with our <a data-toggle="modal" data-target="#termsandconditions" id="tterms">terms and condition</a></label>
 			     </div>
 			    </div>
 			</div>    
@@ -186,6 +184,9 @@ section#inner-headline {
     } 
     $(document).ready(function() {
         initialize();
+		$('#tterms').click(function(){
+			$('#terms').click();
+		})
     });
 
 	function setInputFilter(textbox, inputFilter) {
