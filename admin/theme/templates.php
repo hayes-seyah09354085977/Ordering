@@ -289,6 +289,11 @@
             <i class="fa fa-th-list"></i> <span>Terms And Condition</span>  
           </a>
         </li>
+        <li class="<?php echo (currentpage() == 'faq') ? "active" : false;?>" > 
+          <a href="<?php echo web_root ;?>admin/faq/">
+            <i class="fa fa-th-list"></i> <span>FAQ</span>  
+          </a>
+        </li>
           <li class="<?php echo (currentpage() == 'user') ? "active" : false;?>">
           <a href="<?php echo web_root; ?>admin/user/">
             <i class="fa fa-user"></i> <span>Manage Users</span> </a>
