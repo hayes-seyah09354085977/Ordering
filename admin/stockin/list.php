@@ -65,7 +65,7 @@
 					<th>Description</th>
 					<th>Price</th>
 					<th>Variation Category</th>
-					<th>VAriation</th>
+					<th>Variation</th>
 					<th>Variation Quantity</th>
 					<th>Remaining Quantity</th>
 					<th>Categories</th>
