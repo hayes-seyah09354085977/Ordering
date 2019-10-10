@@ -44,7 +44,7 @@ function doInsert() {
 					   $customer->CustomerAddress 		= $_POST['CustomerAddress'];
 					   $customer->Sex 					= $_POST['optionsRadios']; 
 					   $customer->Customer_Username	= $_POST['Customer_Username'];
-					   $customer->Customer_Password 	= sha1($_POST['Customer_Password']);
+					   $customer->Customer_Password 	= $_POST['Customer_Password'];
 					   $customer->CustomerContact 		= $_POST['CustomerContact']; 
 					   $customer->create(); 
 					   message("You are successfully registered to the site. You can login now!","success");
@@ -97,7 +97,7 @@ function doLogin(){
 	
 	$email = trim($_POST['USERNAME']);
 	$upass  = trim($_POST['PASS']);
-	$h_upass = sha1($upass);
+	$h_upass = $upass;
  
   //it creates a new objects of member
     $customer = new Customer();

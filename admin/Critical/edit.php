@@ -63,7 +63,7 @@
                         <label class="col-md-4 control-label" for=
                         "Description">Critical Level:</label>
                         <div class="col-md-8"> 
-                        <input  type="number" class="form-control input-sm" id="Critical" name="Critical" placeholder="Critical Value" value="<?php echo $res->Critical; ?>"
+                        <input  type="number" class="form-control input-sm" id="Critical" name="Critical" min="0" placeholder="Critical Value" value="<?php echo $res->Critical; ?>"
                            autocomplete="off"> 
                         
                           </div>
