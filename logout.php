@@ -18,6 +18,8 @@ unset($_SESSION['CustomerName']);
 unset($_SESSION['Sex']);				 
 unset($_SESSION['CustomerAddress']);		 
 unset($_SESSION['CustomerContact']);	 
+
+unset($_SESSION['gcCart']);
 // 4. Destroy the session
 // session_destroy();
 redirect(web_root."index.php");
