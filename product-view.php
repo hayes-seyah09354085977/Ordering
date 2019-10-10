@@ -282,6 +282,15 @@ $cnt+=1;
             }
           break;
       }
+      $.ajax({
+        type: "POST",
+        url: "ajaxSession.php",
+        data: {e:'productQTY',qty:qty.val()},
+        success: function(data){
+            console.log(data)
+        }
+      })
+     
   })
   $('.imgmini').click(function(){
     var frontsrc = $(this).attr('src')
@@ -332,7 +341,6 @@ $cnt+=1;
               $("."+vcat).removeClass('activeOpts')
               opts.addClass('activeOpts')
               a=$('.activeOpts').text().replace(' ','-')
-
               $('input.remqty').val(variationQty[vqty])
               $('#product-quantity-input').attr('max',variationQty[vqty])
               $('#product-quantity-input').val(1)
@@ -340,8 +348,7 @@ $cnt+=1;
                 $.ajax({
                   type: "POST",
                   url: "ajaxSession.php",
-                  dataType:'json',
-                  data: {e:'productWithVariation',vr:a},
+                  data: {e:'productWithVariation',vr:a,optIndex:vqty},
                   success: function(data){
                      console.log(data)
                   }
@@ -349,5 +356,7 @@ $cnt+=1;
             });
         }
     });
+
+
 
 </script>

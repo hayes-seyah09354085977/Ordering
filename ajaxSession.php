@@ -35,6 +35,7 @@ switch($e){
         
         $pid = $_POST['pid'];
 
+
         // $sql="SELECT * FROM `tblvarcat` vc  left join `tblvariation` vation on vc.varcatid = vation.varcatid"; 
             $sql = "SELECT * FROM `tblstockin` st
             left join tblvarcat vc on vc.varcatid = st.VariationCategory
@@ -44,11 +45,18 @@ switch($e){
             $mydb->setQuery($sql);
             $cur = $mydb->executeQuery();
             $res = $cur->fetch_all(MYSQLI_ASSOC);
+            $_SESSION['VariationBracket']=$res[0]['VariationBracket'];
+            $_SESSION['StockinID'] = $res[0]['StockinID'];
             print_r(json_encode($res));
     break;
     case 'productWithVariation':
         $_SESSION['varieties'] = $_POST['vr'];
-        echo $_SESSION['varieties'];
+        $_SESSION['optIndex']=$_POST['optIndex'];
+        echo $_SESSION['optIndex'];
+    break;
+    case 'productQTY':
+        $_SESSION['productQTY'] = $_POST['qty'];
+        echo $_SESSION['productQTY'];
     break;
     case 'getCart':
     $count_cart = count($_SESSION['gcCart']); 

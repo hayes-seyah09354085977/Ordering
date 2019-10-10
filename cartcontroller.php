@@ -51,7 +51,6 @@ function addProduct(){
 }
 function doSubmitOrder(){
 	global $mydb;
-
 		$autonum = New Autonumber();
 		$res = $autonum->set_autonumber('ORDERNO');
 		$orderno = $res->AUTO;
@@ -95,6 +94,15 @@ function doSubmitOrder(){
 				$mydb->executeQuery(); 
 
 			}
+			$pids = $_SESSION['StockinID'];
+			$variation = explode(",", $_SESSION['VariationBracket']);
+			$optsIndex = $_SESSION['optIndex'];
+			$variation[$optsIndex] = $_SESSION['productQTY'];
+			$uVariation = implode(",",$variation);
+
+			$sqlupdate2 = "UPDATE `tblstockin` SET `VariationBracket` = '".$uVariation."' WHERE `StockinID`='{$pids}'";
+			$mydb->setQuery($sqlupdate2);
+			$mydb->executeQuery(); 
 
 				$sql = "INSERT INTO `tblsummary` (`OrderNo`, `TotalAmount`, `TransDate`) VALUES ('{$orderno}','{$totalamount}',NOW())";
 				$mydb->setQuery($sql);
