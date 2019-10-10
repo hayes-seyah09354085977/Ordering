@@ -84,6 +84,12 @@ $(document).ready(function(){
   $('#Forgotpass').click(function(){
     $.post('forgotten.php',{e:'var',user_email:$('#user_email222').val()},function(data){
       console.log(data)
+      if(data =='ok'){
+        alert('Your Password Has Been Sent to Your Email');
+      }
+      else if (data=='NoRecord'){
+        alert('No Record Found')
+      }
     })
   })
 })
