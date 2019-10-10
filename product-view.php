@@ -313,6 +313,7 @@ $cnt+=1;
               var z='',varname='<div class="col-sm-2 title"> '+variationCategories+'</div>'
 
             for(var y = 0; y < variation.length; y++){
+              if(variationQty[y]>0){
                 if(y==0 ||(y%4) > 0){
                   if(y==0){
                     z+= '<div class="col-md-2 options '+variationCategories.replace(/\s/g, '')+' '+y+' activeOpts">'+variation[y]+' </div>'
@@ -323,6 +324,7 @@ $cnt+=1;
                   z+= '<div class="col-md-2 "></div><div class="col-md-2 options '+variationCategories.replace(/\s/g, '')+' '+y+'">'+variation[y]+' </div>'
                 }
               }
+            }
 
             $('.variation').append(`
                   <div class="row">
