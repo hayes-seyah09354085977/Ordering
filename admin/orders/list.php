@@ -1,4 +1,7 @@
 <style>
+.modal{
+	top: -182px !important;
+}
 .modal-dialog {
     margin-top: 315px;
 }
@@ -10,6 +13,10 @@
     line-height: 2;
 	font-size: 24px;
     text-indent: 13px;
+}
+.responsive {
+  max-width: 100%;
+  height: auto;
 }
 </style>
 <?php
@@ -86,7 +93,7 @@ $i = 0;
         <div class="container">
           <div class="row">
             <div class="col-md-6 editor1">
-		 						<img class='disp_rec' src="#" />
+		 						<img class='disp_rec responsive' src="#" />
             </div>
           </div>
         </div>
@@ -364,6 +371,7 @@ $(document).ready(function(){
 	$('.view_rec').click(function(){
 		$('.rec_here').children().remove()
 		var sID = $(this).attr('data')
+		$('.rec_here').html('')
 		$.ajax({
 				type: "POST",
 				url: "../../ajaxSession.php",
