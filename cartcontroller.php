@@ -97,7 +97,7 @@ function doSubmitOrder(){
 			$pids = $_SESSION['StockinID'];
 			$variation = explode(",", $_SESSION['VariationBracket']);
 			$optsIndex = $_SESSION['optIndex'];
-			$variation[$optsIndex] = $_SESSION['productQTY'];
+			$variation[$optsIndex] -= $_SESSION['productQTY'];
 			$uVariation = implode(",",$variation);
 
 			$sqlupdate2 = "UPDATE `tblstockin` SET `VariationBracket` = '".$uVariation."' WHERE `StockinID`='{$pids}'";

@@ -317,6 +317,8 @@ $cnt+=1;
                 if(y==0 ||(y%4) > 0){
                   if(y==0){
                     z+= '<div class="col-md-2 options '+variationCategories.replace(/\s/g, '')+' '+y+' activeOpts">'+variation[y]+' </div>'
+                    $('input.remqty').val(variationQty[y])
+                    $('#product-quantity-input').attr('max',variationQty[y])
                   }else{
                     z+= '<div class="col-md-2 options '+variationCategories.replace(/\s/g, '')+' '+y+'">'+variation[y]+' </div>'
                   }
