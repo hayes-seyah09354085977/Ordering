@@ -34,7 +34,10 @@ switch ($action) {
 	case 'update_payment':
 	doUpdatePay();
 	break;
-
+	
+	case 'rem_no':
+	doUpdates();
+	break;
  
 	}
 
@@ -141,6 +144,42 @@ switch ($action) {
 				
 						$sql = "UPDATE `tblstockout`  SET Status  = 'Returning Product Ordered',
 								Remarks='".$reason."',Ret_pic='".$location."' WHERE StockoutID='{$stockoutID}'";
+						$mydb->setQuery($sql);
+						$mydb->executeQuery(); 
+
+							message("Pending To Return Order!", "success");
+							redirect(web_root."customer/index.php?view=orders"); 
+								
+						}
+				}
+	}
+	function doUpdates(){
+		global $mydb;
+		$stockoutID = $_GET['id'];
+			//validID1
+			$errofile = $_FILES['ret_image']['error'];
+			$type = $_FILES['ret_image']['type'];
+			$temp = $_FILES['ret_image']['tmp_name'];
+			$myfile =$_FILES['ret_image']['name'];
+			$location="photos/ret_pics/".$myfile;
+	
+			if ( $errofile > 0 ) {
+					message("No Image Selected!", "error");
+					redirect(web_root."customer/index.php?view=orders"); 
+			}else{
+		
+					@$file=$_FILES['ret_image']['tmp_name'];
+					@$image= addslashes(file_get_contents($_FILES['ret_image']['tmp_name']));
+					@$image_name= addslashes($_FILES['ret_image']['name']); 
+					@$image_size= getimagesize($_FILES['ret_image']['tmp_name']);
+	
+				if ($image_size==FALSE ) {
+					message("Uploaded file is not an image!", "error");
+					redirect(web_root."customer/index.php?view=orders"); 
+				}else{
+						move_uploaded_file($temp,"photos/ret_pics/" . $myfile);
+				
+						$sql = "UPDATE `tblstockout`  SET Ret_pic='".$location."' WHERE StockoutID='{$stockoutID}'";
 						$mydb->setQuery($sql);
 						$mydb->executeQuery(); 
 
