@@ -344,7 +344,7 @@ var zz = $.extend(Calc.prototype, {
         $('.proceed').attr('href','#')
       }else{
           $('.installment').show()
-        $('.percent').text(datas[remittanceOptions]['Percentage'])
+        $('.percent').text(datas[remittanceOptions]['Percentage']+'%')
         $('.product_interest').attr('value',datas[remittanceOptions]['Percentage'])
          $('.pr_price').text(datas[remittanceOptions]['subtotal'])
          $('.total_price').attr('value',datas[remittanceOptions]['subtotal'])

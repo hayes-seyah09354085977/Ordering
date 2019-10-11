@@ -48,6 +48,59 @@ $i = 0;
     </div>
 </div>
 <!-- end modal -->
+<!-- Receipts -->
+<div class="modal fade" id="View_Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><b>View Receipts</b></h5>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 editor1">
+              <table class='rec_here'>
+						
+							</table>
+            </div>
+          </div>
+        </div>
+
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+      <!-- End Container -->
+      </div>
+    </div>
+</div>
+<!-- end modal -->
+<!-- Receipts Image -->
+<div class="modal fade" id="v_receipt" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><b>View Receipts</b></h5>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 editor1">
+		 						<img class='disp_rec' src="#" />
+            </div>
+          </div>
+        </div>
+
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+      <!-- End Container -->
+      </div>
+    </div>
+</div>
+<!-- end modal -->
+
 	<div class="row">
     <div class="col-lg-12">
             <h1 class="page-header">List of Orders  <a href="index.php?view=add" class="btn btn-primary btn-xs  ">  <i class="fa fa-plus-circle fw-fa"></i> Add New Orders</a>  </h1>
@@ -100,7 +153,12 @@ $i = 0;
 						echo '<td>' . $result->subtotal.'</td>';
 						echo '<td>' . $result->monthly_payment.'</td>';
 						echo '<td>' . $result->total_price.'</td>';
-						echo '<td>' . round($result->balance).'</td>';
+						if(round($result->balance) <0){
+							echo '<td>0</td>';
+
+						}else{
+							echo '<td>' . round($result->balance).'</td>';
+						}
 						echo '<td>'. $result->Quantity.'</td>'; 
 						echo '<td>'. $result->order_type.'</td>';
 						echo '<td>'. $result->Categories.'</td>';  
@@ -138,7 +196,7 @@ $i = 0;
 						}
 						if($result->order_type =='Installment'){
 								if(round($result->balance) > 0){
-									echo '<td align="center"><a title="Month Paid" href="controller.php?action=installment&id='.$result->StockoutID.'" class="btn btn-primary btn-xs  ">  <span class="fa fa-check fw-fa">Paid For This Month</a></td>'; 
+									echo '<td align="center"><a title="Month Paid" href="controller.php?action=installment&id='.$result->StockoutID.'" class="btn btn-primary btn-xs  ">  <span class="fa fa-check fw-fa">Paid For This Month</a><a id="view_rec" data="'.$result->StockoutID.'" href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#View_Modal">View Receipts</a></td>'; 
 								}else{
 									echo '<td></td>';
 									
@@ -211,6 +269,28 @@ $(document).ready(function(){
 		console.log(data66)
 
 		$('.modal-body').append("<img src='photo/"+data66[ar]+"'>")
+	})
+	$('#view_rec').click(function(){
+		var sID = $(this).attr('data')
+		$.ajax({
+				type: "POST",
+				url: "../../ajaxSession.php",
+				dataType:'JSON',
+				data: {e:'getReceipts',sID:sID},
+				success: function(data){
+					console.log(data)
+					var receipts = '<tr><th>Receipts</th></tr>'
+						for(var a = 0; a <data.length;a++){
+							receipts +="<tr><td class='get_rec' data='../../customer/"+data[a]['pay_receipt']+"' data-toggle='modal' data-target='#v_receipt'>View Receipts<td></tr>"
+						}
+						$('.rec_here').append(receipts)
+
+						$('.get_rec').click(function(){
+							var v_data =$(this).attr('data')
+							$('.disp_rec').attr('src',v_data)
+						})
+				}
+			})
 	})
 })
 </script>
