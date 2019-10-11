@@ -47,6 +47,7 @@ switch($e){
             $res = $cur->fetch_all(MYSQLI_ASSOC);
             $_SESSION['VariationBracket']=$res[0]['VariationBracket'];
             $_SESSION['StockinID'] = $res[0]['StockinID'];
+            $_SESSION['ProductID'] = $res[0]['ProductID'];
             print_r(json_encode($res));
     break;
     case 'productWithVariation':

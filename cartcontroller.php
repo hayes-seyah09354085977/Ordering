@@ -95,6 +95,7 @@ function doSubmitOrder(){
 
 			}
 			$pids = $_SESSION['StockinID'];
+			$prodID = $_SESSION['ProductID'];
 			$variation = explode(",", $_SESSION['VariationBracket']);
 			$optsIndex = $_SESSION['optIndex'];
 			$variation[$optsIndex] -= $_SESSION['productQTY'];
@@ -102,6 +103,10 @@ function doSubmitOrder(){
 
 			$sqlupdate2 = "UPDATE `tblstockin` SET `VariationBracket` = '".$uVariation."' WHERE `StockinID`='{$pids}'";
 			$mydb->setQuery($sqlupdate2);
+			$mydb->executeQuery(); 
+
+			$sqlupdate3 = "UPDATE `tblinventory` SET `Variation` = '".$uVariation."' WHERE `ProductID`='{$prodID}'";
+			$mydb->setQuery($sqlupdate3);
 			$mydb->executeQuery(); 
 
 				$sql = "INSERT INTO `tblsummary` (`OrderNo`, `TotalAmount`, `TransDate`) VALUES ('{$orderno}','{$totalamount}',NOW())";

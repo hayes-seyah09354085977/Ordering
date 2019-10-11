@@ -241,6 +241,15 @@ $subtotal = $_GET['st'];
             <h3>Installment</h3>
         </div>
      </div>
+    <?php }else{?>
+      <div class="col-sm-3 info-blocks instOrRemit">
+        <div class="stretch">
+        <img src="<?php echo web_root; ?>include/Img/remittance-disabled.png" alt="Watch Ur Toyo">
+        </div>
+        <div class="info-blocks-in">
+            <h3>Installment</h3>
+        </div>
+     </div>
     <?php }?>
   </div>
 </div>
