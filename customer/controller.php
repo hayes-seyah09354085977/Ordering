@@ -264,7 +264,7 @@ switch ($action) {
 				//uploading the file
 				move_uploaded_file($temp,"photos/pay_rec/" . $myfile);
 				global $mydb;
-				$sql = "INSERT INTO tblInstallments (StockoutID,pay_receipt) Values($stockoutID,'$location')";
+				$sql = "INSERT INTO tblinstallments (StockoutID,pay_receipt) Values($stockoutID,'$location')";
 				$mydb->setQuery($sql);
 				$mydb->executeQuery(); 
 				redirect("index.php?view=viewproduct&id=".$stockoutID);
