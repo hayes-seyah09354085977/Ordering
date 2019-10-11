@@ -95,7 +95,7 @@
 
                           <div class="col-md-8">
                             <select required class="form-control input-sm required" id="CategoryID" name="CategoryID" >
-                              <option value="">Select</option>
+                              <option value="0">Select</option>
                               <?php 
                                 $sql ="Select * From tblcategory WHERE StoreID=".$_SESSION['ADMIN_USERID'];
                                 $mydb->setQuery($sql);
