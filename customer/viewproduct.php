@@ -15,6 +15,10 @@
     min-height: 350px;
     /*border-bottom: 1px solid #ddd;*/
   }
+  .responsive {
+  max-width: 100%;
+  height: auto;
+}
   .content-body >p {
     padding:10px;
     font-size: 12px;
@@ -325,13 +329,34 @@ global $mydb;
   </div>
 </div>
 <div>
-<div id="myModal" class="modal">
-  <!-- Modal content -->
+<!-- <div id="myModal" class="modal">
+  <!-- Modal content 
   <div class="modal-content">
     <span class="close">&times;</span>
-    <img class="magnifiedImg" src="#"/>
+    <img class="magnifiedImg responsive" src="#"/>
   </div>
-</div>
+</div> -->
+
+<div class="modal" id="myModal" role="dialog">
+      	<div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+				<button type="button" class="close asaran" data-dismiss="#myModal">&times;</button>
+				<h3 class="modal-title" > </h3>
+				</div>
+				<div class="modal-body ">
+           <img class="magnifiedImg responsive" src="#"/>
+				</div>
+			<div class="modal-footer">
+			<button type="button" class="btn btn-default asaran" data-dismiss="#myModal">Close</button>
+			</div>
+        </div>
+      	</div>
+    </div>
+
+
+
 <!-- installment -->
 <?php if($res->order_type == 'Installment'){ 
   	$sql2 = "SELECT * FROM tblInstallments c 
@@ -371,7 +396,16 @@ global $mydb;
 <script src="<?php echo web_root; ?>plugins/jQueryUI/jquery-ui.min.js"></script>
 
 <script>
+$(document).ready(function(){
+  $('.asaran').click(function(){
+    $('#myModal').toggle('hide')
+  })
+})
+
+
+
   var status = '<?php echo $res->Status; ?>'
+
   switch(status){
     case 'Confirmed':
     $('.Confirmed').addClass('done')
