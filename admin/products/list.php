@@ -37,7 +37,10 @@
 							  	// 	# code...
 							  	// 	$sql ="SELECT * FROM `tblproduct` p,`tblinventory` i, `tblcategory` c,`tblstore` s WHERE p.`ProductID`=i.`ProductID` AND p.`CategoryID`=c.`CategoryID` AND p.`StoreID`=s.`StoreID`";
 							  	// }else{
-							  		$sql ="SELECT * FROM `tblproduct` p,`tblinventory` i, `tblcategory` c,`tblstore` s, `tblvarcat` v WHERE v.`varcatid` = p.`Varcatid` AND p.`ProductID`=i.`ProductID` AND p.`CategoryID`=c.`CategoryID` AND p.`StoreID`=s.`StoreID` AND p.`StoreID`=".$_SESSION['ADMIN_USERID'];
+							  		$sql ="SELECT * FROM tblproduct p
+									  LEFT JOIN tblvarcat v ON p.`VarcatID`= v.`varcatid`
+									  LEFT JOIN tblcategory c ON p.`CategoryID` = c.`CategoryID`
+									  LEFT JOIN tblinventory i ON p.`ProductID` = i.`ProductID`";
 							  	// }
 							  		$mydb->setQuery($sql);
 							  		$cur = $mydb->loadResultList();
@@ -50,7 +53,9 @@
 							  		echo '<td>' . $result->Description.'</a></td>';
 							  		echo '<td>' . $result->Price.'</a></td>'; 
 							  		echo '<td>'. $result->Remaining.'</td>'; 
-							  		echo '<td>'. $result->variationcat.'</td>';
+									echo '<td>'; 
+									if($result->variationcat == ""){ echo 'None';}else{echo $result->variationcat;}
+									echo '</td>';
 							  		echo '<td>'. $result->Categories.'</td>';  
 
 									// $expiry_date = $result->DateExpire;
