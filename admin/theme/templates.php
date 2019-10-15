@@ -223,6 +223,11 @@
                 <i class="fa fa-suitcase"></i> <span>Products</span> 
               </a>
             </li> 
+            <li class="<?php echo (currentpage() == 'installment') ? "active" : false;?>" >
+              <a href="<?php echo web_root ;?>admin/installment/">
+                <i class="fa fa-suitcase"></i> <span>Installment</span> 
+              </a>
+            </li> 
             <li class="<?php echo (currentpage() == 'inventory') ? "active" : false;?>">
               <a href="<?php echo web_root; ?>admin/inventory/">
                 <i class="fa fa-list-alt"></i> <span>Inventory</span> </a>

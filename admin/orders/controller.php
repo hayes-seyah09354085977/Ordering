@@ -31,6 +31,10 @@ switch ($action) {
 	doReturn();
 	break;
 
+	case 'v_money':
+	doReturnMoney();
+	break;
+
 	}
    
 	function doInsert(){
@@ -229,6 +233,42 @@ switch ($action) {
 		message("Return Has Been Accepted!", "success");
 			// redirect("index.php?view=view&id=".$_POST['EMPLOYEEID']);
 			redirect("index.php");
+	}
+	function doReturnMoney(){
+		global $mydb;
+		$stockoutID = $_GET['id'];
+			//validID1
+			$errofile = $_FILES['ret_image']['error'];
+			$type = $_FILES['ret_image']['type'];
+			$temp = $_FILES['ret_image']['tmp_name'];
+			$myfile =$_FILES['ret_image']['name'];
+			$location="photos/ret_pics/".$myfile;
+	
+			if ( $errofile > 0 ) {
+					message("No Image Selected!", "error");
+					redirect("index.php");
+			}else{
+		
+					@$file=$_FILES['ret_image']['tmp_name'];
+					@$image= addslashes(file_get_contents($_FILES['ret_image']['tmp_name']));
+					@$image_name= addslashes($_FILES['ret_image']['name']); 
+					@$image_size= getimagesize($_FILES['ret_image']['tmp_name']);
+	
+				if ($image_size==FALSE ) {
+					message("Uploaded file is not an image!", "error");
+					redirect("index.php");
+				}else{
+						move_uploaded_file($temp,"../../customer/photos/ret_pics/" . $myfile);
+				
+						$sql = "UPDATE `tblstockout`  SET Status = 'Money Returned',Ret_pic='".$location."' WHERE StockoutID='{$stockoutID}'";
+						$mydb->setQuery($sql);
+						$mydb->executeQuery(); 
+
+							message("Success To Money Return Order!", "success");
+							redirect("index.php");
+								
+						}
+				}
 	}
 
 

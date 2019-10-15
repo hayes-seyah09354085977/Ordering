@@ -28,6 +28,7 @@ require_once(LIB_PATH.DS."variationcategory.php");
 require_once(LIB_PATH.DS."customers.php");
 require_once(LIB_PATH.DS."supplier.php");  
 require_once(LIB_PATH.DS."faq.php");
+require_once(LIB_PATH.DS."installment.php");
 require_once(LIB_PATH.DS."reservationfee.php");  
 
 require_once(LIB_PATH.DS."database.php");

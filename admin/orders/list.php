@@ -1,4 +1,7 @@
 <style>
+.modal{
+	top: -182px !important;
+}
 .modal-dialog {
     margin-top: 315px;
 }
@@ -10,6 +13,10 @@
     line-height: 2;
 	font-size: 24px;
     text-indent: 13px;
+}
+.responsive {
+  max-width: 100%;
+  height: auto;
 }
 </style>
 <?php
@@ -48,6 +55,148 @@ $i = 0;
     </div>
 </div>
 <!-- end modal -->
+<!-- Receipts -->
+<div class="modal fade" id="View_Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><b>View Receipts</b></h5>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 editor1">
+              <table class='rec_here'>
+						
+							</table>
+            </div>
+          </div>
+        </div>
+
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+      <!-- End Container -->
+      </div>
+    </div>
+</div>
+<!-- end modal -->
+<!-- Receipts Image -->
+<div class="modal fade" id="v_receipt" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><b>View Receipts</b></h5>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 editor1">
+		 						<img class='disp_rec responsive' src="#" />
+            </div>
+          </div>
+        </div>
+
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+      <!-- End Container -->
+      </div>
+    </div>
+</div>
+<!-- end modal -->
+
+<!-- View Reason Image -->
+<div class="modal fade" id="view_image" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><b>View Reason for Return of Order</b></h5>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+		 						<img class='rec_pec' src="#" />
+            </div>
+          </div>
+					<div class='row'>
+						<div class="col-md-6 ">
+		 						Reason: <b class="v_reason"></b>
+						</div>
+					</div>
+        </div>
+
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+      <!-- End Container -->
+      </div>
+    </div>
+</div>
+<!-- end modal -->
+
+<!-- View Remittance No -->
+<div class="modal fade" id="view_remittance" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><b>View Remittance No</b></h5>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+		 						<img class='rec_pec2' src="#" />
+            </div>
+          </div>
+        </div>
+
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+      <!-- End Container -->
+      </div>
+    </div>
+</div>
+<!-- end modal -->
+
+<!-- Modal Money Back -->
+<div class="modal fade" id="v_moneyback" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Upload Money Remittance Number</h5>
+      </div>
+      <form class="form-horizontal proc_ro" method="POST" action="#" enctype="multipart/form-data">
+          <div class="modal-body">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-8"> 
+                          <input type=
+                            "hidden" value="1000000"> <input id=
+                            "ret_image" name="ret_image" type=
+                            "file">
+                        </div>
+              </div>
+            </div>
+
+          </div>
+          <!-- End Container -->
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary" name="submit" type="submit" >Submit</button>
+          </div>
+      </form>
+    </div>
+</div>
+<!-- end modal -->
+
 	<div class="row">
     <div class="col-lg-12">
             <h1 class="page-header">List of Orders  <a href="index.php?view=add" class="btn btn-primary btn-xs  ">  <i class="fa fa-plus-circle fw-fa"></i> Add New Orders</a>  </h1>
@@ -76,7 +225,7 @@ $i = 0;
 					<th>Categories</th>
 					<th>Status</th>
 					<th width="14%" >Action</th> 
-					<th width="14%" >Month</th> 
+					<th width="14%" ></th> 
 
 				  	</tr>	
 				  </thead> 
@@ -100,7 +249,12 @@ $i = 0;
 						echo '<td>' . $result->subtotal.'</td>';
 						echo '<td>' . $result->monthly_payment.'</td>';
 						echo '<td>' . $result->total_price.'</td>';
-						echo '<td>' . round($result->balance).'</td>';
+						if(round($result->balance) <0){
+							echo '<td>0</td>';
+
+						}else{
+							echo '<td>' . round($result->balance).'</td>';
+						}
 						echo '<td>'. $result->Quantity.'</td>'; 
 						echo '<td>'. $result->order_type.'</td>';
 						echo '<td>'. $result->Categories.'</td>';  
@@ -117,7 +271,7 @@ $i = 0;
 						}
 						$i++;
 						echo '</td>'; 
-						if ($result->Status=='Delivered' ||$result->Status=='Cancelled') {
+						if ($result->Status=='Delivered' ||$result->Status=='Cancelled' || $result->Status=='Money Returned') {
 							# code...
 							echo '<td>None</td>';
 						}else if($result->Status=='Pending for Cancellation'){
@@ -126,11 +280,13 @@ $i = 0;
 							echo '<td align="center"><a title="Confirm" href="controller.php?action=status&id='.$result->StockoutID.'&OrderStatus=2" class="btn btn-primary btn-xs  ">  <span class="fa fa-check fw-fa">For Delivery</a></td>'; 
 						}else if($result->Status=='For Delivery'){
 							echo '<td align="center"><a title="Confirm" href="controller.php?action=status&id='.$result->StockoutID.'&OrderStatus=3" class="btn btn-primary btn-xs  ">  <span class="fa fa-check fw-fa">Delivered</a></td>'; 
-						}else if($result->Status=='Return/Refund'){
+						}else if($result->Status=='Returning Product Ordered'){
 							echo '<td align="center"><a title="Confirm" href="controller.php?action=return&id='.$result->StockoutID.'&OrderStatus=3" class="btn btn-primary btn-xs  ">  <span class="fa fa-check fw-fa">Accept Return</a></td>'; 
+							echo '<td><a data="../../customer/'.$result->Ret_pic.'" data-reason="'.$result->Remarks.'" href="#" class="btn btn-primary btn-xs v_image" data-toggle="modal" data-target="#view_image">View Return Reason</a></td>';
 						}
 						else if($result->Status=='Return Accepted'){
-							echo '<td align="center"><a title="Confirm" href="controller.php?action=return2&id='.$result->StockoutID.'&OrderStatus=3" class="btn btn-primary btn-xs  ">  <span class="fa fa-check fw-fa">Return Money</a></td>'; 
+							echo '<td align="center"><a data-id="'.$result->StockoutID.'" title="Confirm" href="#" class="btn btn-primary btn-xs v_image3" data-toggle="modal" data-target="#v_moneyback">  <span class="fa fa-check fw-fa">Return Money</a></td>'; 
+							echo '<td><a data="../../customer/'.$result->Ret_pic.'" href="#" class="btn btn-primary btn-xs v_image2" data-toggle="modal" data-target="#view_remittance">View Remittance No.</a></td>';
 						}
 						else{
 							echo '<td align="center"><a title="Confirm" href="controller.php?action=confirm&id='.$result->StockoutID.'&ProductID='.$result->pid.'&qty='.$result->Quantity.'" class="btn btn-primary btn-xs  ">  <span class="fa fa-check fw-fa">Confirm</a>
@@ -138,7 +294,7 @@ $i = 0;
 						}
 						if($result->order_type =='Installment'){
 								if(round($result->balance) > 0){
-									echo '<td align="center"><a title="Month Paid" href="controller.php?action=installment&id='.$result->StockoutID.'" class="btn btn-primary btn-xs  ">  <span class="fa fa-check fw-fa">Paid For This Month</a></td>'; 
+									echo '<td align="center"><a title="Month Paid" href="controller.php?action=installment&id='.$result->StockoutID.'" class="btn btn-primary btn-xs  ">  <span class="fa fa-check fw-fa">Paid For This Month</a><a data="'.$result->StockoutID.'" href="#" class="btn btn-primary btn-xs view_rec" data-toggle="modal" data-target="#View_Modal">View Receipts</a></td>'; 
 								}else{
 									echo '<td></td>';
 									
@@ -211,6 +367,47 @@ $(document).ready(function(){
 		console.log(data66)
 
 		$('.modal-body').append("<img src='photo/"+data66[ar]+"'>")
+	})
+	$('.view_rec').click(function(){
+		$('.rec_here').children().remove()
+		var sID = $(this).attr('data')
+		$('.rec_here').html('')
+		$.ajax({
+				type: "POST",
+				url: "../../ajaxSession.php",
+				dataType:'JSON',
+				data: {e:'getReceipts',sID:sID},
+				success: function(data){
+					console.log(data)
+					var receipts = '<tr><th>Receipts</th></tr>'
+						for(var a = 0; a <data.length;a++){
+							receipts +="<tr><td class='get_rec' data='../../customer/"+data[a]['pay_receipt']+"' data-toggle='modal' data-target='#v_receipt'>View Receipts</td></tr>"
+						}
+						$('.rec_here').append(receipts)
+
+						$('.get_rec').click(function(){
+							var v_data =$(this).attr('data')
+							$('.disp_rec').attr('src',v_data)
+						})
+				}
+			})
+	})
+
+	$('.v_image').click(function(){
+		var ret_pic = $(this).attr('data')
+		var reason = $(this).attr('data-reason')
+		console.log(reason)
+		$('.rec_pec').attr('src',ret_pic)
+		$('.v_reason').text(reason)
+	})
+	$('.v_image2').click(function(){
+		var ret_pic2 = $(this).attr('data')
+		$('.rec_pec2').attr('src',ret_pic2)
+	})
+
+	$('.v_image3').click(function(){
+		var stockID = $(this).attr('data-id')
+		$('.proc_ro').attr('action',"controller.php?action=v_money&id="+stockID);
 	})
 })
 </script>

@@ -1,5 +1,5 @@
  <style>
-  i.fa.fa-eye, span.fa.fa-times.fw-fa,span.fa.fa-check {
+  i.fa.fa-eye, span.fa.fa-times.fw-fa,span.fa.fa-check,.fa-upload {
     font-size: 25px;
   }
   td.conf {
@@ -73,6 +73,67 @@
     </div>
 </div>
 <!-- end modal -->
+
+<!-- Modal Uplaod Image -->
+<div class="modal fade" id="v_image" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Upload Remittance Number</h5>
+      </div>
+      <form class="form-horizontal proc_ro" method="POST" action="#" enctype="multipart/form-data">
+          <div class="modal-body">
+            <div class="alert-danger" style="height:30px;text-align:center;padding:5px;margin: 12px;">Please Add Reason To Cancel Order, Thank You.</div>
+
+            <div class="container">
+              <div class="row">
+                <div class="col-md-8"> 
+                          <input type=
+                            "hidden" value="1000000"> <input id=
+                            "ret_image" name="ret_image" type=
+                            "file">
+                        </div>
+              </div>
+            </div>
+
+          </div>
+          <!-- End Container -->
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary" name="submit" type="submit" >Submit</button>
+          </div>
+      </form>
+    </div>
+</div>
+<!-- end modal -->
+
+<!-- View Money Remittance -->
+<div class="modal fade" id="v_image2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><b>View Money Remittance No</b></h5>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+		 						<img class='col-md-6 rec_pec2' src="#" />
+            </div>
+          </div>
+        </div>
+
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+      <!-- End Container -->
+      </div>
+    </div>
+</div>
+<!-- end modal -->
+
  <!-- Content Wrapper. Cont
  ains page content -->
   <div class="content-wrapper"> 
@@ -135,7 +196,13 @@
                       }else if($result->Status=="Delivered"){
                          echo '<td align="center"><a title="View" href="index.php?view=viewproduct&id='.$result->StockoutID.'" class="  ">  <i class="fa fa-eye" aria-hidden="true"></i></a>
                         <a onclick="modifypath('.$result->StockoutID.')" title="Cancel"  data-toggle="modal" data-target="#returnModal">  <span class="fa  fa-times fw-fa "></a></td>';
-                      }else{
+                      }else if($result->Status=="Return Accepted"){
+                        echo '<td align="center"><a title="View" href="index.php?view=viewproduct&id='.$result->StockoutID.'" class="  ">  <i class="fa fa-eye" aria-hidden="true"></i></a>
+                       <a class ="sub_ro" data="'.$result->StockoutID.'" title="Send Tracking No."  data-toggle="modal" data-target="#v_image">  <span class="fa  fa-upload fw-fa "></a></td>';
+                     }else if($result->Status=="Money Returned"){
+                      echo '<td align="center"><a title="View" href="#" class="v_tracking" data="'.$result->Ret_pic.'" data-toggle="modal" data-target="#v_image2"> View Remittance Number</a></td>';
+                      }
+                      else{
                         // echo '<td align="center"><a title="View" href="index.php?view=viewproduct&id='.$result->StockoutID.'" class="  ">  <i class="fa fa-eye" aria-hidden="true"></i></a>
                         // <a title="Cancel" href="controller.php?action=cancel&id='.$result->StockoutID.'&ProductID='.$result->pid.'&TransQuantity='.$result->Quantity.'" class=" ">  <span class="fa  fa-times fw-fa "></a></td>';
                         echo '<td align="center"><a title="View" href="index.php?view=viewproduct&id='.$result->StockoutID.'" class="  ">  <i class="fa fa-eye" aria-hidden="true"></i></a>
@@ -202,6 +269,14 @@
   $('.proceed_ro').click(function(){
     var id = $('.proceed_ro').attr('data')
       $('.proceed').attr('action',"controller.php?action=return_order&id="+id);
+  })
+  $('.sub_ro').click(function(){
+    var id = $(this).attr('data')
+      $('.proc_ro').attr('action',"controller.php?action=rem_no&id="+id);
+  })
+  $('.v_tracking').click(function(){
+    var img_data = $(this).attr('data')
+    $('.rec_pec2').attr('src',img_data)
   })
 
 </script>

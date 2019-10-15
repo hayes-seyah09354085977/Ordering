@@ -75,6 +75,15 @@ switch($e){
             $res = $cur->fetch_all(MYSQLI_ASSOC);
             print_r(json_encode($res));
     break;
+    case 'getReceipts':
+    global $mydb;
+    $stockoutID = $_POST['sID'];
+    $sql = "SELECT pay_receipt FROM `tblinstallments` where StockoutID=$stockoutID" ;
+    $mydb->setQuery($sql);
+    $cur = $mydb->executeQuery();
+    $res = $cur->fetch_all(MYSQLI_ASSOC);
+    print_r(json_encode($res));
+    break;
 }
 
 
