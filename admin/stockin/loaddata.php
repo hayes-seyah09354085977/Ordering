@@ -103,7 +103,7 @@ $res = $mydb->loadSingleResult();
 	<div class="column-label">Price</div>
 	<div class="column-value">: <?php echo $res->Price; ?></div>
 	<div class="column-label pointer">Variation</div>
-	<div class="column-value">: <a href="#"  class="Variation" data-id='<?php echo $res->varcatid; ?>' data-name=' <?php echo $res->variationcat; ?>'>  <?php echo $res->variationcat; ?></a></div>
+	<div class="column-value">: <a href="#"  class="Variation" data-id='<?php echo $res->varcatid; ?>' data-name=' <?php echo $res->variationcat; ?>'>  <?php if($res->variationcat!=""){echo $res->variationcat;}else{ echo 'No Variation';} ?></a></div>
 	<!-- <div class="column-value"><input type="checkbox" name="Variationbox"  class="Variation" > </div> -->
 	<div class="column-label pointer2">Installment</div>
 	<div class="column-value "><input type="checkbox" name="Installment" class="Installment"  class="Installment" <?php echo $check; ?> ></div>

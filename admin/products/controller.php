@@ -72,22 +72,28 @@ switch ($action) {
 					$product->Image2			=  $Image2;
 					$product->Image3			=  $Image3;
 					
-					$sql ="SELECT * FROM tblvariation where varcatid = '".$_POST['Variation']."'";
-					$mydb->setQuery($sql);
-					$cur = $mydb->loadResultList();
-					// print_r($cur); echo'<br><br><br>';
-					foreach ($cur as $result) { 
-						$normal = $result->variation;
+					if($_POST['Variation'] !='0'){
+						// echo $_POST['Variation'];
+						$sql ="SELECT * FROM tblvariation where varcatid = '".$_POST['Variation']."'";
+						$mydb->setQuery($sql);
+						$cur = $mydb->loadResultList();
+						// print_r($cur); echo'<br><br><br>';
+						foreach ($cur as $result) { 
+							$normal = $result->variation;
+						}
+	
+						$normal = sizeof(explode(',',$normal));
+						// echo $normal;
+						for($x = 0; $x<$normal; $x++){
+							$array[] = '0,';
+						}
+						// print_r($array);	
+						$normal = substr(implode($array),0,-1);
+						// echo '<br>'.$normal;
+					}else{
+						$normal = '0';
 					}
-
-					$normal = sizeof(explode(',',$normal));
-					// echo $normal;
-					for($x = 0; $x<$normal; $x++){
-						$array[] = '0,';
-					}
-					// print_r($array);	
-					$normal = substr(implode($array),0,-1);
-					// echo '<br>'.$normal;
+					
 					
 					$checkProductName = checkExistingProduct($_POST['ProductName']);
 					switch($checkProductName){

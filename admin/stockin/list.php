@@ -99,9 +99,9 @@
 			              echo '<td>'. $result->ProductName.'</td>';
 			              echo '<td>' . $result->Description.'</a></td>';
 						  echo '<td>' . $result->Price.'</a></td>'; 
-						  echo '<td>' . $result->variationcat.'</a></td>';
-						  echo '<td>' . $result->full.'</a></td>';
-						  echo '<td>' . $result->Variation.'</a></td>'; 
+						  echo '<td>' ; if($result->variationcat != ""){echo $result->variationcat; }else{ echo 'No Variation';}  echo '</a></td>';
+						  echo '<td>' ; if( $result->full != ""){echo  $result->full; }else{ echo 'No Variation';} echo '</a></td>';
+						  echo '<td>'; if( $result->Variation != ""){echo $result->Variation; }else{ echo 'No Variation';} echo '</a></td>'; 
 			              echo '<td>'. $result->Quantity.'</td>'; 
 			            //   echo '<td>'. $result->DateExpire.'</td>';
 			              echo '<td>'. $result->Categories.'</td>';  
