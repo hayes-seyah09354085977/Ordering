@@ -42,7 +42,7 @@ function doInsert() {
 					   $customer->CustomerName 		= $_POST['CustomerName']; 
 					   $customer->Email 				= $_POST['Email'];
 					   $customer->CustomerAddress 		= $_POST['CustomerAddress'];
-					   $customer->Sex 					= $_POST['optionsRadios']; 
+					//    $customer->Sex 					= $_POST['optionsRadios']; 
 					   $customer->Customer_Username	= $_POST['Customer_Username'];
 					   $customer->Customer_Password 	= $_POST['Customer_Password'];
 					   $customer->CustomerContact 		= $_POST['CustomerContact']; 
