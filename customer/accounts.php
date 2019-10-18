@@ -52,29 +52,6 @@
                 </div>
               </div> 
 
-              <div class="form-group">
-                <div class="col-md-7">
-                  <label class="col-md-4 control-label" for=
-                  "Gender">Sex:</label>
-
-                  <div class="col-md-8">
-                   <div class="col-lg-5">
-                      <div class="radio">
-                        <label><input <?php echo ($cus->Sex=="Famale") ? "Checked" : ""; ?>  id="optionsRadios1" checked="True" name="optionsRadios" type="radio" value="Female">Female</label>
-                      </div>
-                    </div>
-
-                    <div class="col-lg-4">
-                      <div class="radio">
-                        <label><input <?php echo ($cus->Sex=="Male") ? "Checked" : ""; ?> id="optionsRadios2"   name="optionsRadios" type="radio" value="Male"> Male</label>
-                      </div>
-                    </div> 
-                   
-                  </div>
-                </div>
-              </div> 
- 
-
                <div class="form-group">
                 <div class="col-md-7">
                   <label class="col-md-4 control-label" for=

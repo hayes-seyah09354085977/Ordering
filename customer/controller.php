@@ -82,7 +82,6 @@ switch ($action) {
 						$cus->CustomerName = $_POST['CustomerName'];
 						$cus->Email = $_POST['Email'];
 						$cus->CustomerAddress = $_POST['CustomerAddress']; 
-						$cus->Sex = $_POST['optionsRadios'];
 						$cus->CustomerContact = $_POST['CustomerContact']; 
 						$cus->Customer_Username = $_POST['Customer_Username']; 
 						$cus->valid1 = $location;

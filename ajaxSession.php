@@ -69,7 +69,9 @@ switch($e){
     break;
     case 'check_for_installment':
         global $mydb;
-            $sql = "SELECT distinct ProductID,Installment,Percentage FROM `tblstockin` st where Installment='on' Group by ProductID" ;
+        $stmt = $_POST['stmt'];
+            // $sql = "SELECT distinct ProductID,Installment,Percentage FROM `tblstockin` st where Installment='on' Group by ProductID" ;
+            $sql = "SELECT I.pid,I.planname,I.months,P.percentage FROM `tblinstallment` I join percentage P on P.id = I.percentageid where $stmt";
             $mydb->setQuery($sql);
             $cur = $mydb->executeQuery();
             $res = $cur->fetch_all(MYSQLI_ASSOC);

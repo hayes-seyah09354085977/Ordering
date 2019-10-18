@@ -200,7 +200,6 @@
               <div class="product-price"> ₱<?php echo $result->Price ;?></div>
               <div>In-Stocks: &nbsp;<input type="text" class="remqty" name="REMQTY<?php echo $result->ProductID ;?>" value="<?php echo $result->Remaining ;?>" readonly></div>
               <div class='variation'>
-
               </div>
 
               <div class="product-quantity">

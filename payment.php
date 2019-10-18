@@ -263,7 +263,9 @@ $subtotal = $_GET['st'];
 <script>
 $(function() {
 var datas =[],
-subtotal = '<?php echo $subtotal; ?>';
+subtotal = '<?php echo $subtotal; ?>',
+stmt='',
+ProductList=[];
 var Calc = function(options) {
   $.extend(this, options, {
     currency: ' ₽',
@@ -312,25 +314,33 @@ var zz = $.extend(Calc.prototype, {
               var ProductID =response,
               product=''
               datas = response
+              for(var aa = 0; aa <datas.length; aa++){
+                stmt += 'pid='+datas[aa]['productID']+' OR '
+              }
+              stmt = stmt.slice(0,-4)
+              console.log(stmt)
               console.log(datas)
               $.ajax({
                     type: "POST",
                     dataType:'json',
                     url: "ajaxSession.php",
-                    data: {e:'check_for_installment'},
+                    data: {e:'check_for_installment',stmt:stmt},
                     success: function(res){
+                      console.log(res)
                       for(var b =0; b<ProductID.length;b++){
                         for (var bb = 0; bb<res.length; bb++){
-                          if(res[bb]['ProductID'] == ProductID[b]['productID']){
-                            datas[b]['Percentage']=res[bb]['Percentage']
-                            console.log(datas)
-                            if(res[bb]['Installment']=='on'){
+                          if(res[bb]['pid'] == ProductID[b]['productID']){
+                            datas[b]['Percentage']=res[bb]['percentage']
+                            var plist=ProductID[b]['productID']
+                          if(ProductList.indexOf(ProductID[b]['productID'])<0){
                               product = ProductID[b]['product'].split('|')
                               $('.remOpts').append(`<option value="`+b+`">`+product[0]+`</option>`)
-                            }
+                            ProductList.push(plist)
                           }
+                          console.log(ProductList)
                         }
                       }
+                    }
                     }
                   });
            }
@@ -344,7 +354,7 @@ var zz = $.extend(Calc.prototype, {
         $('.proceed').attr('href','#')
       }else{
           $('.installment').show()
-        $('.percent').text(datas[remittanceOptions]['Percentage']+'%')
+        $('.percent').text(datas[remittanceOptions]['Percentage'])
         $('.product_interest').attr('value',datas[remittanceOptions]['Percentage'])
          $('.pr_price').text(datas[remittanceOptions]['subtotal'])
          $('.total_price').attr('value',datas[remittanceOptions]['subtotal'])
