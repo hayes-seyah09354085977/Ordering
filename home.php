@@ -126,7 +126,7 @@ p.currency {
                       <h3><?php echo $row->ProductName;?></h3>
                     </a>
                       <!-- <p>Description :&nbsp; <?php echo $row->Description;?></p> -->
-                      <p class='currency'>₱<?php echo $row->Price;?></p>
+                      <p class='currency'>₱<?php echo $row->Price;?>.00</p>
                     </div>
                   </div>
               </div>

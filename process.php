@@ -22,7 +22,7 @@ function doInsert() {
 	if (isset($_POST['btnRegister'])) {   
 		$customer = new Customer();
 		$res = $customer->VerifyEmailExists($_POST['Email'],$_POST['Customer_Username']);
-
+		$confPass = $_POST['Customer_ConfirmPassword'];
 			// $autonum = New Autonumber();
 			// $auto = $autonum->set_autonumber('APPLICANT');
 			 
@@ -32,24 +32,29 @@ function doInsert() {
 				message("Your Email Address is not Valid Please Try Again","error");
 				redirect("index.php?q=register/customer");
 			}else{
-				switch($res){
-					case '1':
-					   message("Username or Email is Already Taken","error");
-					   redirect("index.php?q=register/customer");
-					break;
-					case '0':
-					   $customer =New Customer(); 
-					   $customer->CustomerName 		= $_POST['CustomerName']; 
-					   $customer->Email 				= $_POST['Email'];
-					   $customer->CustomerAddress 		= $_POST['CustomerAddress'];
-					//    $customer->Sex 					= $_POST['optionsRadios']; 
-					   $customer->Customer_Username	= $_POST['Customer_Username'];
-					   $customer->Customer_Password 	= $_POST['Customer_Password'];
-					   $customer->CustomerContact 		= $_POST['CustomerContact']; 
-					   $customer->create(); 
-					   message("You are successfully registered to the site. You can login now!","success");
-					   redirect("index.php?q=success");
-					break;
+				if($confPass === $_POST['Customer_Password']){
+					switch($res){
+						case '1':
+						message("Username or Email is Already Taken","error");
+						redirect("index.php?q=register/customer");
+						break;
+						case '0':
+						$customer =New Customer(); 
+						$customer->CustomerName 		= $_POST['CustomerName']; 
+						$customer->Email 				= $_POST['Email'];
+						$customer->CustomerAddress 		= $_POST['CustomerAddress'];
+						//    $customer->Sex 					= $_POST['optionsRadios']; 
+						$customer->Customer_Username	= $_POST['Customer_Username'];
+						$customer->Customer_Password 	= $_POST['Customer_Password'];
+						$customer->CustomerContact 		= $_POST['CustomerContact']; 
+						$customer->create(); 
+						message("You are successfully registered to the site. You can login now!","success");
+						redirect("index.php?q=success");
+						break;
+					}
+				}else{
+					message("Password Mismatch","error");
+					redirect("index.php?q=register/customer");
 				}
 			}
 			

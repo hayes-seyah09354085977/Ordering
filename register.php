@@ -139,6 +139,17 @@ section#inner-headline {
 			  </div>
 			</div>  
 			<div class="form-group">
+			  <div class="col-md-8">
+			    <label class="col-md-4 control-label" for=
+			    "Customer_ConfirmPassword">Confirm Password:</label>
+
+			    <div class="col-md-8"> 
+			      <input  class="form-control input-sm" id="Customer_ConfirmPassword" name="Customer_ConfirmPassword" placeholder=
+			          "Confirm Password" type="password" autocomplete="off"> 
+			    </div>
+			  </div>
+			</div> 
+			<div class="form-group">
 			    <div class="col-md-8">
 			      <label class="col-md-4 control-label" for=
 			      ""></label>  
