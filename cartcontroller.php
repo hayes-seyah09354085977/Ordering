@@ -72,8 +72,12 @@ function doSubmitOrder(){
 				$remaining = $row->Remaining - $qty;
 				$sold = $row->Sold + $qty; 
 
-				$sqlupdate = "UPDATE `tblinventory` SET `Remaining` = $remaining WHERE `ProductID`='{$productID}'";
+				$sqlupdate = "UPDATE `tblinventory` SET `Remaining` = $remaining,`Sold` = $sold WHERE `ProductID`='{$productID}'";
 				$mydb->setQuery($sqlupdate);
+				$mydb->executeQuery(); 
+
+				$sqlstockinUpdate = "UPDATE `tblstockin` SET `Quantity` = $remaining WHERE `ProductID`='{$productID}'";
+				$mydb->setQuery($sqlstockinUpdate);
 				$mydb->executeQuery(); 
 				
 				if($orderType=='Installment'){

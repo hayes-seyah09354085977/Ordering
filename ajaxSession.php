@@ -32,7 +32,7 @@ switch($e){
     break;
     case 'getvariation':
         global $mydb;
-        
+        $_SESSION['productQTY'] = 1;
         $pid = $_POST['pid'];
 
 

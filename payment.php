@@ -159,35 +159,22 @@ $subtotal = $_GET['st'];
         <option value="Installment_plan">Installment Plan</option>
         <?php }?> -->
       </select>
+      <select class='planname classic'>
+        <option value="" Selected>-Select Plan-</option>
+      </select>
       
       <!-- Container -->
         <div class="container installment">
           <div class="row">
             <div class="col-md-6">
               <table>
-              <tr><td ><h3>Total Ordered Price:&nbsp;₱<?php echo $subtotal;?></span> </h3></td></tr>
                 <tr><td class="total_price" value="1000"><h3>Product Price:&nbsp;₱<span class='pr_price'></span> </h3></td></tr>
                 <tr><td class="product_interest" value="10"><h4>Product Interest:&nbsp;<span class='percent'>10</span></h4></td></tr>
-
+                <tr><td><h4 class="rangevalue">Months To Pay: 10</h4><span class="slider monthpcr" value="3"></td></tr>
+                
               </table>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-6">
-              <table>
-                <tr><td><h4 class="payvalue">Initial Payment: 10</h4></td></tr>
-                <tr class="monthpcker"><td> <input class="slider initial_payment" type="range" min="1" max="5000" value="1"></td></tr>
-              </table>
-            </div>
-           </div>
-          <div class="row">
-            <div class="col-md-6">
-              <table>
-                <tr><td><h4 class="rangevalue">Months To Pay: 10</h4></td></tr>
-                <tr class="monthpcker"><td> <input class="slider monthpcr" type="range" min="1" max="36" value="10"></td></tr>
-              </table>
-            </div>
-           </div>
            <div class="row">
             <div class="col-md-6">
               <table>
@@ -261,11 +248,15 @@ $subtotal = $_GET['st'];
 <script src="<?php echo web_root; ?>plugins/jQueryUI/jquery-ui.min.js"></script>
 
 <script>
+$(function(){
+  $('.instOrRemit').hide()
+})
 $(function() {
 var datas =[],
 subtotal = '<?php echo $subtotal; ?>',
 stmt='',
-ProductList=[];
+ProductList=[],
+planList=[];
 var Calc = function(options) {
   $.extend(this, options, {
     currency: ' ₽',
@@ -273,6 +264,7 @@ var Calc = function(options) {
   });
 
   $('.installment').hide()
+  $('.planname').hide()
   this.defaultModal();
   return this;
 };
@@ -285,20 +277,16 @@ var zz = $.extend(Calc.prototype, {
     this.$total_price = parseInt($('.total_price').attr('value'));
     this.$product_interest = parseInt($('.product_interest').attr('value'));
     this.$totalpayment = $('.totalpayment');
-    this.$initial_payment =$('.initial_payment');
     this.$monthlypayment = $('.monthlypayment');
     this.$resultTP = 0;
     this.$monthlyPayment = 0;
     this.$subtotal = subtotal - parseInt($('.total_price').attr('value'))
-    $('.initial_payment').attr('min',this.$subtotal)
   },
   bind: function() {
     // this.defaultModal();
     this.getMonths();
     this.getInitPayment()
-    this.$slider.on('input', $.proxy(this.getMonths, this));
-    this.$initial_payment.on('input', $.proxy(this.getInitPayment, this));
-    this.$resultTP= ((((this.$product_interest/100)*this.$total_price))+this.$total_price)-this.$initial_payment.val()
+    this.$resultTP= (((this.$product_interest/100)*this.$total_price))+this.$total_price
     this.$totalpayment.text('Total Price: ₱'+this.$resultTP)
 
     
@@ -318,52 +306,81 @@ var zz = $.extend(Calc.prototype, {
                 stmt += 'pid='+datas[aa]['productID']+' OR '
               }
               stmt = stmt.slice(0,-4)
-              console.log(stmt)
-              console.log(datas)
               $.ajax({
                     type: "POST",
                     dataType:'json',
                     url: "ajaxSession.php",
                     data: {e:'check_for_installment',stmt:stmt},
                     success: function(res){
-                      console.log(res)
-                      for(var b =0; b<ProductID.length;b++){
-                        for (var bb = 0; bb<res.length; bb++){
-                          if(res[bb]['pid'] == ProductID[b]['productID']){
-                            datas[b]['Percentage']=res[bb]['percentage']
-                            var plist=ProductID[b]['productID']
-                          if(ProductList.indexOf(ProductID[b]['productID'])<0){
-                              product = ProductID[b]['product'].split('|')
-                              $('.remOpts').append(`<option value="`+b+`">`+product[0]+`</option>`)
-                            ProductList.push(plist)
+                      if(res.length !=0){
+                        $('.instOrRemit').show()
+                      planList=res
+                          for(var b =0; b<ProductID.length;b++){
+                            for (var bb = 0; bb<res.length; bb++){
+                              if(res[bb]['pid'] == ProductID[b]['productID']){
+                                datas[b]['Percentage']=res[bb]['percentage']
+                                var plist=ProductID[b]['productID']
+                              if(ProductList.indexOf(ProductID[b]['productID'])<0){
+                                  product = ProductID[b]['product'].split('|')
+                                  var pids = res[bb]['pid']
+                                  $('.remOpts').append(`<option id="`+pids+`" value="`+b+`">`+product[0]+`</option>`)
+                                ProductList.push(plist)
+                              }
+                            }
                           }
-                          console.log(ProductList)
                         }
                       }
-                    }
                     }
                   });
            }
       });
 
       $('.remOpts').change(function(){
-      var remittanceOptions = $('.remOpts').find(":selected").attr('value')
-      console.log(remittanceOptions)
-      if(remittanceOptions == 'null'){
+      var remittanceOptions = $(this).val()
+      if(remittanceOptions == ''){
         $('.FullPaid').hide()
         $('.proceed').attr('href','#')
+        $('.installment').hide()
+        $('.planname').hide()
       }else{
-          $('.installment').show()
-        $('.percent').text(datas[remittanceOptions]['Percentage'])
-        $('.product_interest').attr('value',datas[remittanceOptions]['Percentage'])
-         $('.pr_price').text(datas[remittanceOptions]['subtotal'])
-         $('.total_price').attr('value',datas[remittanceOptions]['subtotal'])
-         $('.initial_payment').attr('max',datas[remittanceOptions]['subtotal'])
+        $('.planname').children().remove()
+        $('.planname').append(`<option value="" Selected>-Select Plan-</option>`)
+        $('.installment').hide()
+        var ProdSelected = $('.remOpts option:selected').attr('id')
+        $('.planname').show()
+        for(var a = 0; a < planList.length; a++){
+          if(planList[a]['pid']==ProdSelected){
+            var pname = planList[a]['planname']
+            $('.planname').append(`<option value="`+a+`">`+pname+`</option>`)
+          }
+        }
+      }
+        
+    })
+
+    $('.planname').change(function(){
+      var planValue = $(this).val(),
+      optsVal = $('.remOpts option:selected').val()
+      if(planValue == ''){
+        $('.installment').hide()
+      }else{
+        console.log(planList[planValue])
+        console.log(datas)
+        var percent = planList[planValue]['percentage'].replace('%','');
+        console.log(planList[planValue]['months'])
+
+        $('.installment').show()
+        $('.percent').text(planList[planValue]['percentage'])
+        $('.product_interest').attr('value',percent)
+        $('.pr_price').text(datas[optsVal]['subtotal']+'.00')
+        $('.total_price').attr('value',datas[optsVal]['subtotal'])
+        $('.rangevalue').text('Months To Pay: '+planList[planValue]['months'])
+        //  $('.initial_payment').attr('max',datas[remittanceOptions]['subtotal'])
         $('.proceed').attr('href','index.php?q=checkout&ct=IR')
         zz.cache();
         zz.bind()
       }
-        
+     
     })
    
    
@@ -371,36 +388,32 @@ var zz = $.extend(Calc.prototype, {
 
   },
   getMonths: function(){
-    this.$slider.attr('max', this.months);
-    this.$rangeValue.text('Months To Pay: '+this.$slider.val());
-    this.$resultTP = ((((this.$product_interest/100)*this.$total_price))+this.$total_price)-this.$initial_payment.val()
-    this.$monthlyPayment = (this.$resultTP/this.$slider.val()).toFixed(2)
+    this.$resultTP = (((this.$product_interest/100)*this.$total_price))+this.$total_price
+    this.$monthlyPayment = (this.$resultTP/this.$slider.attr('value')).toFixed(2)
     this.$monthlypayment.text('Monthly Payment: ₱'+this.$monthlyPayment)
-
+    console.log(this.$monthlyPayment)
     $.ajax({
            type: "POST",
            url: "ajaxSession.php",
-           data: {e:'payment',tp:this.$resultTP,mtp:this.$slider.val(),mp:this.$monthlyPayment,pi:this.$product_interest,inp:this.$initial_payment.val()},
+           data: {e:'payment',tp:this.$resultTP,mtp:this.$slider.attr('value'),inp:this.$monthlyPayment,mp:this.$monthlyPayment,pi:this.$product_interest},
            success: function(data){
             //  console.log('success')
            }
          });
   },
   getInitPayment:function(){
-    // this.$initial_payment.attr('max', this.months);
-    this.$payvalue.text('Initial Payment: '+this.$initial_payment.val());
 
-    this.$resultTP = ((((this.$product_interest/100)*this.$total_price))+this.$total_price)-parseInt(this.$initial_payment.val())
+    this.$resultTP = (((this.$product_interest/100)*this.$total_price))+this.$total_price
     this.$totalpayment.text('Balance: ₱'+(this.$resultTP+this.$subtotal))
-    this.$monthlyPayment = (this.$resultTP/this.$slider.val()).toFixed(2)
-    this.$monthlypayment.text('Monthly Payment: ₱'+this.$monthlyPayment)
+    this.$monthlyPayment = (this.$resultTP/this.$slider.attr('value')).toFixed(2)
+    // this.$monthlypayment.text('Monthly Payment: ₱'+this.$monthlyPayment)
     
     var total_payment = (this.$total_price*0.10)+this.$total_price
     console.log(total_payment)
     $.ajax({
            type: "POST",
            url: "ajaxSession.php",
-           data: {e:'payment',tp:this.$resultTP,mtp:this.$slider.val(),mp:this.$monthlyPayment,pi:this.$product_interest,inp:this.$initial_payment.val(),total_payment:total_payment},
+           data: {e:'payment',tp:this.$resultTP,mtp:this.$slider.attr('value'),inp:this.$monthlyPayment,mp:this.$monthlyPayment,pi:this.$product_interest,total_payment:total_payment},
            success: function(data){
             //  console.log('success')
            }
