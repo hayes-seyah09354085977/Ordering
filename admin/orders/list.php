@@ -18,6 +18,14 @@
   max-width: 100%;
   height: auto;
 }
+.get_rec{
+	font-size: 20px;
+    padding: 5px;
+    cursor: pointer;
+}
+td.get_rec:hover {
+    color: blue;
+}
 </style>
 <?php
 	 if(!isset($_SESSION['ADMIN_USERID'])){
@@ -90,12 +98,9 @@ $i = 0;
         <h5 class="modal-title" id="exampleModalLabel"><b>View Receipts</b></h5>
       </div>
       <div class="modal-body">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6 editor1">
-		 						<img class='disp_rec responsive' src="#" />
-            </div>
-          </div>
+        <!-- <div class="container"> -->
+				<img class='disp_rec responsive' src="#" />
+          <!-- </div> -->
         </div>
 
         </div>
@@ -381,7 +386,7 @@ $(document).ready(function(){
 					console.log(data)
 					var receipts = '<tr><th>Receipts</th></tr>'
 						for(var a = 0; a <data.length;a++){
-							receipts +="<tr><td class='get_rec' data='../../customer/"+data[a]['pay_receipt']+"' data-toggle='modal' data-target='#v_receipt'>View Receipts</td></tr>"
+							receipts +="<tr class='rec_pt'><td class='get_rec' data='../../customer/"+data[a]['pay_receipt']+"' data-toggle='modal' data-target='#v_receipt'>View Receipts</td></tr>"
 						}
 						$('.rec_here').append(receipts)
 
