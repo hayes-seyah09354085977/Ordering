@@ -173,6 +173,7 @@
        echo '<div class="row">';
      }
      $productPrice=$result->Price;
+     $_SESSION['pqty'] = $result->Remaining;
      
   ?>  
     <div class="col-sm-4">
@@ -340,7 +341,8 @@ $cnt+=1;
               var opts = $(this),
               vcat = opts.attr('class').split(' ')[2],
               a,
-              vqty = opts.attr('class').split(' ')[3]
+              vqty = opts.attr('class').split(' ')[3],
+              pqty = variationQty[vqty]
               $("."+vcat).removeClass('activeOpts')
               opts.addClass('activeOpts')
               a=$('.activeOpts').text().replace(' ','-')
@@ -351,7 +353,7 @@ $cnt+=1;
                 $.ajax({
                   type: "POST",
                   url: "ajaxSession.php",
-                  data: {e:'productWithVariation',vr:a,optIndex:vqty},
+                  data: {e:'productWithVariation',vr:a,optIndex:vqty,pqty:pqty},
                   success: function(data){
                      console.log(data)
                   }

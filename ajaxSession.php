@@ -53,7 +53,8 @@ switch($e){
     case 'productWithVariation':
         $_SESSION['varieties'] = $_POST['vr'];
         $_SESSION['optIndex']=$_POST['optIndex'];
-        echo $_SESSION['optIndex'];
+        $_SESSION['pqty'] = $_POST['pqty'];
+        echo  $_SESSION['pqty'];
     break;
     case 'productQTY':
         $_SESSION['productQTY'] = $_POST['qty'];

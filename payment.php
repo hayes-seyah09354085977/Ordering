@@ -135,6 +135,10 @@
   outline: 0;
   }
 
+.hdn{
+  display:none;
+}
+
 </style>
 <?php 
 $subtotal = $_GET['st'];
@@ -220,7 +224,7 @@ $subtotal = $_GET['st'];
         </div>
      </div> -->
     <?php if($_SESSION['Approved']==1){?>
-      <div class="col-sm-3 info-blocks instOrRemit" data-toggle="modal" data-target="#exampleModal">
+      <div class="col-sm-3 info-blocks instOrRemit hdn" data-toggle="modal" data-target="#exampleModal">
         <div class="stretch">
         <img src="<?php echo web_root; ?>include/Img/remittance.png" alt="Watch Ur Toyo">
         </div>
@@ -229,7 +233,7 @@ $subtotal = $_GET['st'];
         </div>
      </div>
     <?php }else{?>
-      <div class="col-sm-3 info-blocks instOrRemit">
+      <div class="col-sm-3 info-blocks instOrRemit hdn">
         <div class="stretch">
         <img src="<?php echo web_root; ?>include/Img/remittance-disabled.png" alt="Watch Ur Toyo">
         </div>
@@ -248,9 +252,6 @@ $subtotal = $_GET['st'];
 <script src="<?php echo web_root; ?>plugins/jQueryUI/jquery-ui.min.js"></script>
 
 <script>
-$(function(){
-  $('.instOrRemit').hide()
-})
 $(function() {
 var datas =[],
 subtotal = '<?php echo $subtotal; ?>',
@@ -313,7 +314,7 @@ var zz = $.extend(Calc.prototype, {
                     data: {e:'check_for_installment',stmt:stmt},
                     success: function(res){
                       if(res.length !=0){
-                        $('.instOrRemit').show()
+                        $('.instOrRemit').removeClass('hdn')
                       planList=res
                           for(var b =0; b<ProductID.length;b++){
                             for (var bb = 0; bb<res.length; bb++){
