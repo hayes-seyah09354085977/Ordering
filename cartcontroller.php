@@ -114,6 +114,9 @@ function doSubmitOrder(){
 				$sqlupdate3 = "UPDATE `tblinventory` SET `Variation` = '".$uVariation."' WHERE `ProductID`='{$prodID}'";
 				$mydb->setQuery($sqlupdate3);
 				$mydb->executeQuery(); 
+
+				unset($_SESSION['optIndex']);
+
 			}
 			
 
