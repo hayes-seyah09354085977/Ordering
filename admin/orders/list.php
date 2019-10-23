@@ -226,7 +226,8 @@ $i = 0;
 					<th>Total Price</th>
 					<th>Balance</th>
 					<th>Quantity</th>
-					<th>Order Type</th> 
+					<th>Order Type</th>
+					<th>Due Date</th> 
 					<th>Categories</th>
 					<th>Status</th>
 					<th width="14%" >Action</th> 
@@ -262,6 +263,7 @@ $i = 0;
 						}
 						echo '<td>'. $result->Quantity.'</td>'; 
 						echo '<td>'. $result->order_type.'</td>';
+						echo '<td>'. $result->due_date.'</td>';
 						echo '<td>'. $result->Categories.'</td>';  
 						echo '<td>'; 
 						if($result->Status != 'Return/Refund'){

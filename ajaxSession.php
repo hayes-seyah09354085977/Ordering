@@ -8,6 +8,7 @@ switch($e){
         $_SESSION['mp'] = $_POST['mp'];
         $_SESSION['pi'] = $_POST['pi'];
         $_SESSION['inp'] = $_POST['inp'];
+        $_SESSION['due_date'] = $_POST['due_date'];
         $_SESSION['total_payment']=$_POST['total_payment'];
         echo 'success';
     break;

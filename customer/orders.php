@@ -162,6 +162,9 @@
                     <th>Quantity</th>
                     <th>Address</th> 
                     <th>Order Type</th>
+                    <th>Balance</th>
+                    <th>Monthly Payment</th>
+                    <th>Due Date</th>
                     <th>Status</th>
 
                     <th width="14%" >Action</th> 
@@ -184,7 +187,10 @@
                       echo '<td>' . $result->Price.'</a></td>'; 
                       echo '<td>'. $result->Quantity.'</td>'; 
                       echo '<td>'. $result->CustomerAddress.'</td>';
-                      echo '<td>'. $result->order_type.'</td>';  
+                      echo '<td>'. $result->order_type.'</td>';
+                      echo '<td>'. $result->balance.'</td>';
+                      echo '<td>'. $result->monthly_payment.'</td>';
+                      echo '<td>'. $result->due_date.'</td>';
                       echo '<td>'. $result->Status.'</td>';  
                      
                       if ($result->Status=="Cancelled" || $result->Status=="Confirmed" || $result->Status=="Pending for Cancellation" || $result->Status=="Returning Product Ordered" ) {

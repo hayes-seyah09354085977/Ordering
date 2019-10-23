@@ -84,7 +84,8 @@ function doSubmitOrder(){
 					$subtotal=$_SESSION['inp'];
 					$total_payment=$_SESSION['total_payment'];
 					$monthly_payment = $_SESSION['mp'];
-					$sql = "INSERT INTO `tblstockout`  (`CustomerID`, `ProductID`, `Quantity`, `DateSold`,OrderNO,HView,order_type,subtotal,balance,total_price,monthly_payment) VALUES('{$customerID}','{$productID}','{$qty}',Now(),'{$orderno}',1,'{$orderType}','{$subtotal}','{$total_payment}','{$total_payment}','{$monthly_payment}')";
+					$due_date = $_SESSION['due_date'];
+					$sql = "INSERT INTO `tblstockout`  (`CustomerID`, `ProductID`, `Quantity`, `DateSold`,OrderNO,HView,order_type,subtotal,balance,total_price,monthly_payment,due_date) VALUES('{$customerID}','{$productID}','{$qty}',Now(),'{$orderno}',1,'{$orderType}','{$subtotal}','{$total_payment}','{$total_payment}','{$monthly_payment}','{$due_date}')";
 				}else{
 					$sql = "INSERT INTO `tblstockout`  (`CustomerID`, `ProductID`, `Quantity`, `DateSold`,OrderNO,HView,order_type) VALUES('{$customerID}','{$productID}','{$qty}',Now(),'{$orderno}',1,'{$orderType}')";
 				}

@@ -362,6 +362,7 @@ var zz = $.extend(Calc.prototype, {
     $('.planname').change(function(){
       var planValue = $(this).val(),
       optsVal = $('.remOpts option:selected').val()
+
       if(planValue == ''){
         $('.installment').hide()
       }else{
@@ -376,6 +377,7 @@ var zz = $.extend(Calc.prototype, {
         $('.pr_price').text(datas[optsVal]['subtotal']+'.00')
         $('.total_price').attr('value',datas[optsVal]['subtotal'])
         $('.rangevalue').text('Months To Pay: '+planList[planValue]['months'])
+        $('.monthpcr').attr('value',planList[planValue]['months']) //dag dag ka
         //  $('.initial_payment').attr('max',datas[remittanceOptions]['subtotal'])
         $('.proceed').attr('href','index.php?q=checkout&ct=IR')
         zz.cache();
@@ -392,7 +394,6 @@ var zz = $.extend(Calc.prototype, {
     this.$resultTP = (((this.$product_interest/100)*this.$total_price))+this.$total_price
     this.$monthlyPayment = (this.$resultTP/this.$slider.attr('value')).toFixed(2)
     this.$monthlypayment.text('Monthly Payment: ₱'+this.$monthlyPayment)
-    console.log(this.$monthlyPayment)
     $.ajax({
            type: "POST",
            url: "ajaxSession.php",
@@ -410,11 +411,16 @@ var zz = $.extend(Calc.prototype, {
     // this.$monthlypayment.text('Monthly Payment: ₱'+this.$monthlyPayment)
     
     var total_payment = (this.$total_price*0.10)+this.$total_price
-    console.log(total_payment)
+
+    var days = this.$slider.attr('value') * 30 //count days for due date
+    var due_dates = new Date(new Date().getTime()+(120*24*days*31*1000)).toISOString().substr(0, 10) //due date
+    console.log(due_dates)
+    console.log(days)
+
     $.ajax({
            type: "POST",
            url: "ajaxSession.php",
-           data: {e:'payment',tp:this.$resultTP,mtp:this.$slider.attr('value'),inp:this.$monthlyPayment,mp:this.$monthlyPayment,pi:this.$product_interest,total_payment:total_payment},
+           data: {e:'payment',tp:this.$resultTP,mtp:this.$slider.attr('value'),inp:this.$monthlyPayment,mp:this.$monthlyPayment,pi:this.$product_interest,total_payment:total_payment,due_date:due_dates},
            success: function(data){
             //  console.log('success')
            }
