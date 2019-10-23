@@ -239,6 +239,7 @@ $subtotal = $_GET['st'];
         </div>
         <div class="info-blocks-in">
             <h3>Installment</h3>
+            <h4>*Note: Please upload valid IDs in your account setting or you can <a href="customer/index.php?view=accounts">click here</a></h4>
         </div>
      </div>
     <?php }?>
