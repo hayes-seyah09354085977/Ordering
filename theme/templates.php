@@ -61,6 +61,12 @@
   /* .modal-content{
     height: 800px !important;
   } */
+
+  i.fa.fa-search {
+    font-size: 28px;
+    margin-left: 5px;
+    color: #01bcd4;
+}
 </style>
 
 </head>
@@ -127,6 +133,8 @@
                 </div>
                 <div class="navbar-collapse collapse ">
                     <ul class="nav navbar-nav">
+                    <!-- search bx -->
+                        <li><a><input type='text' id="prd" placeholder='Search Product'><i class="fa fa-search"></i></a></li>
                         <li class="<?php echo !isset($_GET['q'])? 'active' :''?>"><a href="<?php echo web_root; ?>index.php">Home</a></li> 
                         <li class="dropdown">
                           <!-- <a href="#" data-toggle="dropdown" class="dropdown-toggle">Search <b class="caret"></b></a>
@@ -446,6 +454,12 @@ $(function(){
       // $('#loaddata').fadeIn(); 
       $('#loaddata').html(xmlhttp.responseText);   
   });
+
+  $('.fa-search').click(function(){
+    var product = $('#prd').val() 
+    window.location.href ='../../Ordering/index.php?q=searchProduct&product='+product
+
+  })
 
 
 

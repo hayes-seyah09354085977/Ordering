@@ -3,7 +3,8 @@ require_once("include/initialize.php");
 
 if (isset($_POST['updateCart'])) {
 	# code...  
-	$productID=$_POST['ProductID']; 
+  $productID=$_POST['ProductID']; 
+  $_SESSION['productQTY'] = $_POST['QTY'];
 	$qty=intval(isset($_POST['QTY']) ? $_POST['QTY'] : "");  
 	editproduct($productID,$qty); 
       
